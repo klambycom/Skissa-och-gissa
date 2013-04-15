@@ -12,8 +12,7 @@ var set = function (obj) { Object.keys(obj).forEach(function (s) { app.set(s, ob
 
 // All environments
 app.configure(function () {
-	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
-					   .forEach(function (c) { app.set(c, config[c]); });
+	set(Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; }));
 });
 
 // Development only
