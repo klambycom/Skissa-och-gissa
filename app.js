@@ -5,6 +5,7 @@ var express = require('express'),
 	app = express(),
 	controllers = require('./controllers').controllers,
 	config = require('./configure.json'),
+	flash = require('connect-flash'),
 	server;
 
 // Configure
@@ -15,7 +16,11 @@ var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
 app.configure(function () {
 	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
 					   .forEach(set(config));
+
 	app.use(express['static'](app.get('public folder') || 'public'));
+	app.use(express.bodyParser());
+	app.use(express.cookieParser(app.get('cookie secret')));
+	app.use(flash());
 });
 
 // Development only
