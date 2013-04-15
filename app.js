@@ -7,6 +7,9 @@ var express = require('express'),
 	config = require('./configure.json'),
 	server;
 
+// Configure
+var set = function (obj) { Object.keys(obj).forEach(function (s) { app.set(s, obj[s]); }); };
+
 // All environments
 app.configure(function () {
 	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
@@ -15,12 +18,12 @@ app.configure(function () {
 
 // Development only
 app.configure('development', function () {
-	Object.keys(config.development).forEach(function (c) { app.set(c, config.development[c]); });
+	set(config.development);
 });
 
 // Production only
 app.configure('production', function () {
-	Object.keys(config.production).forEach(function (c) { app.set(c, config.production[c]); });
+	set(config.production);
 });
 
 // Controllers or routes
