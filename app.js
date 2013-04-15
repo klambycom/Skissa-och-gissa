@@ -15,6 +15,7 @@ var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
 app.configure(function () {
 	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
 					   .forEach(set(config));
+	app.use(express['static'](app.get('public folder') || 'public'));
 });
 
 // Development only
