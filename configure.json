@@ -1,5 +1,6 @@
 {
 	"title": "Skissa och gissa",
+	"view engine": "hbs",
 	"development": {
 		"port": 3000
 	},

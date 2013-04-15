@@ -6,5 +6,9 @@ var save = function (v) { return function (r, f) { exports.controllers.push({ ve
 	app = { get: save('get'), post: save('post'), param: save('param') };
 
 app.get('/', function (req, res) {
+	res.render('index', { text: 'World' });
+});
+
+app.get('/gm', function (req, res) {
 	res.send('Hello, World!');
 });
