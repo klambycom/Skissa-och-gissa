@@ -8,21 +8,28 @@ var express = require('express'),
 	server;
 
 // Configure
-var set = function (obj) { Object.keys(obj).forEach(function (s) { app.set(s, obj[s]); }); };
+var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
+	setAll = function (obj) { Object.keys(obj).forEach(set(obj)); };
 
 // All environments
 app.configure(function () {
-	set(Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; }));
+	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
+					   .forEach(set(config));
 });
 
 // Development only
 app.configure('development', function () {
-	set(config.development);
+	setAll(config.development);
+
+	app.use(function (req, res, next) {
+		console.log('%s %s', req.method, req.url);
+		next();
+	});
 });
 
 // Production only
 app.configure('production', function () {
-	set(config.production);
+	setAll(config.production);
 });
 
 // Controllers or routes
