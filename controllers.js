@@ -9,6 +9,6 @@ app.get('/', function (req, res) {
 	res.render('index', { text: 'World' });
 });
 
-app.get('/gm', function (req, res) {
-	res.send('Hello, World!');
+app.get('/channel.html', function (req, res) {
+	res.render('channel');
 });

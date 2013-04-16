@@ -6,5 +6,64 @@
 </head>
 <body>
   {{{body}}}
+
+  <script src="/shared/Player.js"></script>
+  <div id="fb-root"></div>
+  <script>
+    function login() {
+      FB.login(function (response) {
+        if (response.authResponse) {
+          // Connected
+          testAPI();
+        } else {
+          // Cancelled
+        }
+      });
+    }
+
+    function testAPI() {
+      console.log('Welcome! Fetching your information.... ');
+      FB.api('/me?fields=id,name,first_name,username,picture,locale,link,friends.fields(id,name,picture)', function (response) {
+        console.log('Good to see you, ' + response.name + '.');
+        console.log(response);
+        window.tdata = response;
+      });
+    }
+
+    // Additional JS functions here
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId      : '539892936062898', //App ID
+        channelUrl : '//localhost:3000/channel.html', // Channel File
+        status     : true, // Check login status
+        cookie     : true, // Enable cookies to allow the server to access the session
+        xfbml      : true // Parse XFBML
+      });
+      // Additional init code here
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          // Connected
+          console.log('connected');
+        } else if (response.status === 'not_authorized') {
+          // Not authorized
+          console.log('not authorized');
+          login();
+        } else {
+          // Not logged in
+          console.log('not logged in');
+          login();
+        }
+      });
+    };
+
+    // Load the SDK Asynchronously
+    (function (d) {
+      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      ref.parentNode.insertBefore(js, ref);
+    }(document));
+  </script>
 </body>
 </html>
