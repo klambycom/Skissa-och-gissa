@@ -44,3 +44,6 @@ controllers.forEach(function (c) { app[c.verb](c.route, c.fn); });
 // Start server
 server = app.listen(app.get('port'));
 console.log('Listening on port %d in %s mode...', app.get('port'), app.get('env'));
+
+// WebSocket
+require('./websockets').listen(server);
