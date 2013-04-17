@@ -21,7 +21,7 @@ exports.listen = function (app) {
 		// Player sends message
 		user.on('user-message', function (data) {
 			// Send the message to all player in room
-			room.emit('user-message', { text: data });
+			room.emit('user-message', { text: data, player: player.get('all') });
 		});
 
 		// Player disconnect
