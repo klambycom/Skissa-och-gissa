@@ -4,7 +4,7 @@
 window.onload = function () {
 	'use strict';
 	var room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
-		player = new SOG.browser.Player({ name: 'Christian Nilsson' });
+		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' });
 
 	player.join(room);
 
@@ -12,8 +12,8 @@ window.onload = function () {
 		console.log('>> ' + text);
 	});
 
-	room.onServerMessage(function (data) {
-		console.log('# ' + data);
+	room.onServerMessage(function (type, text) {
+		console.log('# ' + text);
 	});
 
 	window.testSendMsg = function (msg) {
