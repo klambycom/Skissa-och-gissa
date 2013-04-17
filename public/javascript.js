@@ -9,7 +9,7 @@ window.onload = function () {
 	player.join(room);
 
 	room.onUserMessage(function (from, text) {
-		console.log(from.get('name') + ' >> ' + text);
+		console.log(from.getFullName() + ' >> ' + text);
 	});
 
 	room.onServerMessage(function (type, text) {

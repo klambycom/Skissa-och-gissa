@@ -26,13 +26,13 @@ exports.listen = function (app) {
 			players.push(player);
 
 			// Welcome player
-			user.emit('server-message', { text: 'Välkommen ' + player.get('name') + '!' });
+			user.emit('server-message', { text: 'Välkommen ' + player.getFullName() + '!' });
 		});
 
 		// Player sends message
 		user.on('user-message', function (data) {
 			// Send the message to all player in room
-			room.emit('user-message', { text: data, player: player.get('all') });
+			room.emit('user-message', { text: data, player: player.getAllData() });
 		});
 
 		// Player disconnect
