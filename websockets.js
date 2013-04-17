@@ -2,19 +2,30 @@
 'use strict';
 
 var Player = require('./lib/server/Player').Player,
-	player;
+	players = [];
 
 exports.listen = function (app) {
 	var io = require('socket.io').listen(app),
 		room = io.of('/room');
 
 	room.on('connection', function (user) {
+		var player;
+
 		// Player joins room
 		user.emit('identify-player', { id: user.id });
+
+		// Browser send player data
 		user.on('identify-player', function (data) {
 			// Create player with new data
 			player = new Player(data);
-			console.log(player.get('all'));
+
+			// Remove player from array
+			players = players.filter(function (p) { return p.getSocketID !== user.id; });
+
+			// Add player to array
+			players.push(player);
+
+			// Welcome player
 			user.emit('server-message', { text: 'Välkommen ' + player.get('name') + '!' });
 		});
 
@@ -26,7 +37,7 @@ exports.listen = function (app) {
 
 		// Player disconnect
 		user.on('disconnect', function () {
-			room.emit('server-message', { text: player.get('name') + ' har lämnat spelet.' });
+			room.emit('server-message', { text: player.getFullName() + ' har lämnat spelet.' });
 		});
 	});
 
