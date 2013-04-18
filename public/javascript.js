@@ -3,6 +3,7 @@
 
 window.onload = function () {
 	'use strict';
+	/*
 	var room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
 		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' });
 
@@ -19,4 +20,7 @@ window.onload = function () {
 	window.testSendMsg = function (msg) {
 		player.sendMessage(msg);
 	};
+	*/
+
+	SOG.browser.artboard.init(document.querySelector('#artboard'));
 };

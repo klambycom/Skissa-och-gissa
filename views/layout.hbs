@@ -7,8 +7,14 @@
 <body>
   {{{body}}}
 
+  <canvas id="artboard" width="490" height="220"></canvas>
+
   <!-- Socket.io -->
   <script src="/socket.io/socket.io.js"></script>
+  <!-- Artboard -->
+  <script src="/browser/Point.js"></script>
+  <script src="/browser/points.js"></script>
+  <script src="/browser/artboard.js"></script>
   <!-- Player -->
   <script src="/shared/Player.js"></script>
   <script src="/browser/Player.js"></script>
@@ -20,6 +26,7 @@
 
   <div id="fb-root"></div>
   <script>
+    /*
     function login() {
       FB.login(function (response) {
         if (response.authResponse) {
@@ -74,6 +81,7 @@
       js.src = "//connect.facebook.net/en_US/all.js";
       ref.parentNode.insertBefore(js, ref);
     }(document));
+    */
   </script>
 </body>
 </html>
