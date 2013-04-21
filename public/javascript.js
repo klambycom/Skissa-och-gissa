@@ -23,4 +23,11 @@ window.onload = function () {
 	*/
 
 	SOG.browser.artboard.init(document.querySelector('#artboard'));
+
+	SOG.utils.mediator.subscribe('wat', function (data) {
+		console.log(data.msg);
+	});
+	window.testSendMsg = function (msg) {
+		SOG.utils.mediator.publish('wat', { msg: msg });
+	};
 };
