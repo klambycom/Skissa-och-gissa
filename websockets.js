@@ -20,7 +20,7 @@ exports.listen = function (app) {
 			player = new Player(data);
 
 			// Remove player from array
-			players = players.filter(function (p) { return p.getSocketID !== user.id; });
+			players = players.filter(function (p) { return p.getSocketID() !== user.id; });
 
 			// Add player to array
 			players.push(player);
