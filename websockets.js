@@ -29,6 +29,10 @@ exports.listen = function (app) {
 			user.emit('server-message', { text: 'Välkommen ' + player.getFullName() + '!' });
 		});
 
+		user.on('update-player-data', function (data) {
+			room.emit('server-message', { text: data.name + ' har bytt namn.' });
+		});
+
 		// Player sends message
 		user.on('user-message', function (data) {
 			// Send the message to all player in room
