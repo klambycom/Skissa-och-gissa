@@ -1,0 +1,33 @@
+body {
+  background-color: rgba(168, 168, 168, .15);
+  font-family: sans-serif;
+}
+
+header {
+  width: 1000px;
+  margin: 20px auto;
+
+  h1 {
+    font-size: 3em;
+  }
+
+  p {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+}
+
+#main {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}

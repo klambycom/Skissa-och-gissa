@@ -1,0 +1,44 @@
+#sidebar {
+  width: 390px;
+  float: right;
+  margin-left: 10px;
+}
+
+#facebook {
+  min-height: 50px;
+  padding: 10px;
+  background-color: rgba(59,89,152,1);
+  color: white;
+
+  a {
+    color: white;
+  }
+}
+
+#highscore {
+  h1 {
+    font-size: 2em;
+    margin: 20px 0 10px 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+
+    &:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+
+    .name {
+      font-size: 1.5em;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    img {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+}

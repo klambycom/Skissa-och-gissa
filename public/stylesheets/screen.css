@@ -1,0 +1,207 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, ../../scss/_main.scss */
+body {
+  background-color: rgba(168, 168, 168, 0.15);
+  font-family: sans-serif;
+}
+
+/* line 6, ../../scss/_main.scss */
+header {
+  width: 1000px;
+  margin: 20px auto;
+}
+/* line 10, ../../scss/_main.scss */
+header h1 {
+  font-size: 3em;
+}
+/* line 14, ../../scss/_main.scss */
+header p {
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+/* line 20, ../../scss/_main.scss */
+#main {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+/* line 28, ../../scss/_main.scss */
+#main:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+/* line 1, ../../scss/_games.scss */
+#games {
+  width: 600px;
+  float: left;
+}
+/* line 6, ../../scss/_games.scss */
+#games .game:not(:last-child) {
+  margin-bottom: 20px;
+}
+/* line 10, ../../scss/_games.scss */
+#games .game h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+/* line 15, ../../scss/_games.scss */
+#games .game img {
+  float: left;
+  margin-right: 10px;
+}
+/* line 20, ../../scss/_games.scss */
+#games .game:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* line 1, ../../scss/_sidebar.scss */
+#sidebar {
+  width: 390px;
+  float: right;
+  margin-left: 10px;
+}
+
+/* line 7, ../../scss/_sidebar.scss */
+#facebook {
+  min-height: 50px;
+  padding: 10px;
+  background-color: #3b5998;
+  color: white;
+}
+/* line 13, ../../scss/_sidebar.scss */
+#facebook a {
+  color: white;
+}
+
+/* line 19, ../../scss/_sidebar.scss */
+#highscore h1 {
+  font-size: 2em;
+  margin: 20px 0 10px 0;
+}
+/* line 24, ../../scss/_sidebar.scss */
+#highscore li {
+  margin-bottom: 10px;
+}
+/* line 27, ../../scss/_sidebar.scss */
+#highscore li:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+/* line 33, ../../scss/_sidebar.scss */
+#highscore li .name {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 5px;
+}
+/* line 39, ../../scss/_sidebar.scss */
+#highscore li img {
+  float: left;
+  margin-right: 5px;
+}
+
+/* line 1, ../../scss/_artboard.scss */
+#artboard {
+  border: 1px solid black;
+}
+
+/* line 5, ../../scss/_artboard.scss */
+.red_crayon {
+  cursor: url(../red.png), auto;
+}
+
+/* line 9, ../../scss/_artboard.scss */
+.blue_crayon {
+  cursor: url(../blue.png), auto;
+}
+
+/* line 13, ../../scss/_artboard.scss */
+.green_crayon {
+  cursor: url(../green.png), auto;
+}
+
+/* line 17, ../../scss/_artboard.scss */
+.pink_crayon {
+  cursor: url(../pink.png), auto;
+}
+
+/* line 21, ../../scss/_artboard.scss */
+.yellow_crayon {
+  cursor: url(../yellow.png), auto;
+}
