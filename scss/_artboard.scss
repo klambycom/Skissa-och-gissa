@@ -1,5 +1,12 @@
 #artboard {
-  border: 1px solid black;
+  background-color: white;
+  border: 5px solid rgba(0, 0, 0, .1);
+  -webkit-transition: border .5s;
+
+  &.focus {
+    border: 5px solid rgb(136,178,216);
+    -webkit-transition: border .5s;
+  }
 }
 
 .red_crayon {

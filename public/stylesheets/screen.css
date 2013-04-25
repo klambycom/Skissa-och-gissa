@@ -295,30 +295,37 @@ header p {
 
 /* line 1, ../../scss/_artboard.scss */
 #artboard {
-  border: 1px solid black;
+  background-color: white;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  -webkit-transition: border .5s;
+}
+/* line 6, ../../scss/_artboard.scss */
+#artboard.focus {
+  border: 5px solid #88b2d8;
+  -webkit-transition: border .5s;
 }
 
-/* line 5, ../../scss/_artboard.scss */
+/* line 12, ../../scss/_artboard.scss */
 .red_crayon {
   cursor: url(../red.png), auto;
 }
 
-/* line 9, ../../scss/_artboard.scss */
+/* line 16, ../../scss/_artboard.scss */
 .blue_crayon {
   cursor: url(../blue.png), auto;
 }
 
-/* line 13, ../../scss/_artboard.scss */
+/* line 20, ../../scss/_artboard.scss */
 .green_crayon {
   cursor: url(../green.png), auto;
 }
 
-/* line 17, ../../scss/_artboard.scss */
+/* line 24, ../../scss/_artboard.scss */
 .pink_crayon {
   cursor: url(../pink.png), auto;
 }
 
-/* line 21, ../../scss/_artboard.scss */
+/* line 28, ../../scss/_artboard.scss */
 .yellow_crayon {
   cursor: url(../yellow.png), auto;
 }
