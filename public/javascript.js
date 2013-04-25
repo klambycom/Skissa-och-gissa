@@ -17,7 +17,8 @@ window.onload = function () {
 	'use strict';
 
 	var room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
-		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' });
+		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
+		gameplan = document.querySelector('#gameplan');
 
 	player.join(room);
 
@@ -37,7 +38,7 @@ window.onload = function () {
 		player.sendMessage(msg);
 	};
 
-//	//SOG.browser.artboard.init(document.querySelector('#artboard'));
+	SOG.browser.artboard.init(document.querySelector('#artboard'), gameplan.offsetLeft, gameplan.offsetTop);
 //
 //	function signedIn() {
 //		console.log('inloggad');
