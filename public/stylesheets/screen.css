@@ -291,41 +291,44 @@ header p {
   width: 75%;
   background-color: #f2f2f2;
   right: 0;
+  text-align: center;
+  line-height: 650px;
 }
 
 /* line 1, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
+  vertical-align: middle;
   border: 5px solid rgba(0, 0, 0, 0.1);
   -webkit-transition: border .5s;
 }
-/* line 6, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #artboard.focus {
   border: 5px solid #88b2d8;
   -webkit-transition: border .5s;
 }
 
-/* line 12, ../../scss/_artboard.scss */
+/* line 13, ../../scss/_artboard.scss */
 .red_crayon {
   cursor: url(../red.png), auto;
 }
 
-/* line 16, ../../scss/_artboard.scss */
+/* line 17, ../../scss/_artboard.scss */
 .blue_crayon {
   cursor: url(../blue.png), auto;
 }
 
-/* line 20, ../../scss/_artboard.scss */
+/* line 21, ../../scss/_artboard.scss */
 .green_crayon {
   cursor: url(../green.png), auto;
 }
 
-/* line 24, ../../scss/_artboard.scss */
+/* line 25, ../../scss/_artboard.scss */
 .pink_crayon {
   cursor: url(../pink.png), auto;
 }
 
-/* line 28, ../../scss/_artboard.scss */
+/* line 29, ../../scss/_artboard.scss */
 .yellow_crayon {
   cursor: url(../yellow.png), auto;
 }
