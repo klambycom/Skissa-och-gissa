@@ -147,33 +147,150 @@ header p {
 /* line 13, ../../scss/_sidebar.scss */
 #facebook a {
   color: white;
+  text-decoration: none;
+}
+/* line 17, ../../scss/_sidebar.scss */
+#facebook a:hover {
+  text-decoration: underline;
+}
+/* line 23, ../../scss/_sidebar.scss */
+#facebook #fb-user-data img {
+  float: left;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+/* line 30, ../../scss/_sidebar.scss */
+#facebook #fb-user-data h1 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
-/* line 19, ../../scss/_sidebar.scss */
+/* line 38, ../../scss/_sidebar.scss */
 #highscore h1 {
   font-size: 2em;
   margin: 20px 0 10px 0;
 }
-/* line 24, ../../scss/_sidebar.scss */
+/* line 43, ../../scss/_sidebar.scss */
 #highscore li {
   margin-bottom: 10px;
 }
-/* line 27, ../../scss/_sidebar.scss */
+/* line 46, ../../scss/_sidebar.scss */
 #highscore li:after {
   display: block;
   content: "";
   clear: both;
 }
-/* line 33, ../../scss/_sidebar.scss */
+/* line 52, ../../scss/_sidebar.scss */
 #highscore li .name {
   font-size: 1.5em;
   display: block;
   margin-bottom: 5px;
 }
-/* line 39, ../../scss/_sidebar.scss */
+/* line 58, ../../scss/_sidebar.scss */
 #highscore li img {
   float: left;
   margin-right: 5px;
+}
+
+/* line 1, ../../scss/_game-user-info.scss */
+#game-user-info {
+  height: 40px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 6, ../../scss/_game-user-info.scss */
+#game-user-info h1 {
+  display: block;
+  float: left;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 5px;
+}
+/* line 14, ../../scss/_game-user-info.scss */
+#game-user-info .players {
+  float: right;
+  margin-right: 5px;
+}
+/* line 18, ../../scss/_game-user-info.scss */
+#game-user-info .players img {
+  width: 40px;
+}
+/* line 21, ../../scss/_game-user-info.scss */
+#game-user-info .players img.you {
+  border: 3px solid #88b2d8;
+  width: 34px;
+}
+
+/* line 29, ../../scss/_game-user-info.scss */
+.line {
+  height: 2px;
+  background: #ff4949;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ff4949), color-stop(16%, #f3f722), color-stop(21%, #f3f722), color-stop(31%, #22f730), color-stop(43%, #22eff9), color-stop(49%, #22eff9), color-stop(67%, #5850f4), color-stop(83%, #f722f0), color-stop(100%, #e2391f));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* IE10+ */
+  background: linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4949', endColorstr='#e2391f',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
+}
+
+/* line 1, ../../scss/_chat.scss */
+#chat {
+  background-color: white;
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  width: 25%;
+}
+/* line 8, ../../scss/_chat.scss */
+#chat #chat-input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+}
+/* line 15, ../../scss/_chat.scss */
+#chat #chat-input img {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+/* line 21, ../../scss/_chat.scss */
+#chat #chat-input input {
+  height: 34px;
+  font-size: 25px;
+  position: absolute;
+  right: 5px;
+  left: 60px;
+  padding: 5px;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  -webkit-transition: border .5s;
+}
+/* line 31, ../../scss/_chat.scss */
+#chat #chat-input input:focus {
+  outline: 0;
+  border: 3px solid #88b2d8;
+  -webkit-transition: border .5s;
+}
+
+/* line 1, ../../scss/_gameplan.scss */
+#gameplan {
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  width: 75%;
+  background-color: #f2f2f2;
+  right: 0;
 }
 
 /* line 1, ../../scss/_artboard.scss */

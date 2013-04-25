@@ -1,0 +1,38 @@
+#chat {
+  background-color: white;
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  width: 25%;
+
+  #chat-input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 5px;
+
+    img {
+      height: 50px;
+      width: 50px;
+      float: left;
+    }
+
+    input {
+      height: 34px;
+      font-size: 25px;
+      position: absolute;
+      right: 5px;
+      left: 60px;
+      padding: 5px;
+      border: 3px solid rgba(0, 0, 0, .15);
+      -webkit-transition: border .5s;
+
+      &:focus {
+        outline: 0;
+        border: 3px solid rgb(136,178,216);
+        -webkit-transition: border .5s;
+      }
+    }
+  }
+}

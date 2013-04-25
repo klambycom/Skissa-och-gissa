@@ -1,0 +1,40 @@
+#game-user-info {
+  height: 40px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, .1);
+
+  h1 {
+    display: block;
+    float: left;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .players {
+    float: right;
+    margin-right: 5px;
+
+    img {
+      width: 40px;
+
+      &.you {
+        border: 3px solid rgb(136,178,216);
+        width: 34px;
+      }
+    }
+  }
+}
+
+.line {
+  height: 2px;
+
+  background: #ff4949; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ff4949), color-stop(16%,#f3f722), color-stop(21%,#f3f722), color-stop(31%,#22f730), color-stop(43%,#22eff9), color-stop(49%,#22eff9), color-stop(67%,#5850f4), color-stop(83%,#f722f0), color-stop(100%,#e2391f)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #ff4949 0%,#f3f722 16%,#f3f722 21%,#22f730 31%,#22eff9 43%,#22eff9 49%,#5850f4 67%,#f722f0 83%,#e2391f 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #ff4949 0%,#f3f722 16%,#f3f722 21%,#22f730 31%,#22eff9 43%,#22eff9 49%,#5850f4 67%,#f722f0 83%,#e2391f 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #ff4949 0%,#f3f722 16%,#f3f722 21%,#22f730 31%,#22eff9 43%,#22eff9 49%,#5850f4 67%,#f722f0 83%,#e2391f 100%); /* IE10+ */
+  background: linear-gradient(135deg, #ff4949 0%,#f3f722 16%,#f3f722 21%,#22f730 31%,#22eff9 43%,#22eff9 49%,#5850f4 67%,#f722f0 83%,#e2391f 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4949', endColorstr='#e2391f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}

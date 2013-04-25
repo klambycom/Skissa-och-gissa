@@ -9,6 +9,10 @@ app.get('/', function (req, res) {
 	res.render('index', { text: 'World' });
 });
 
+app.get('/room', function (req, res) {
+	res.render('room', { text: 'World' });
+});
+
 app.get('/channel.html', function (req, res) {
 	res.render('channel');
 });
