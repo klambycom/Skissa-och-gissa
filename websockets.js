@@ -33,6 +33,12 @@ exports.listen = function (app) {
 			room.emit('server-message', { text: data.name + ' har bytt namn.' });
 		});
 
+		// Get drawing-points from player, and send to the others
+		user.on('canvas', function (data) {
+			//room.emit('canvas', data);
+			user.broadcast.emit('canvas', data);
+		});
+
 		// Player sends message
 		user.on('user-message', function (data) {
 			// Send the message to all player in room

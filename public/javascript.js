@@ -38,7 +38,12 @@ window.onload = function () {
 		player.sendMessage(msg);
 	};
 
-	SOG.browser.artboard.init(document.querySelector('#artboard'), gameplan.offsetLeft + 5, gameplan.offsetTop + 5);
+	SOG.browser.artboard.init({
+		canvas: document.querySelector('#artboard'),
+		x: gameplan.offsetLeft + 5,
+		y: gameplan.offsetTop + 5,
+		room: room
+	});
 //
 //	function signedIn() {
 //		console.log('inloggad');
