@@ -18,25 +18,26 @@ window.onload = function () {
 
 	var room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
 		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
-		gameplan = document.querySelector('#gameplan');
+		gameplan = document.querySelector('#gameplan'),
+		chatInputField = document.querySelector('#chat-input input'),
+		chatMessages = document.querySelector('#chat-messages'),
+		chat = SOG.browser.chat;
 
+	// Init chat
+	chat.init({ input: chatInputField, messages: chatMessages, player: player });
+
+	// Join room
 	player.join(room);
 
 	player.onDataChanged(function (p) {
 		console.log(p);
 	});
 
-	room.onUserMessage(function (from, text) {
-		console.log(from.getFullName() + ' >> ' + text);
-	});
+	// Show messages in chat sent by users
+	room.onUserMessage(chat.createMessage);
 
-	room.onServerMessage(function (type, text) {
-		console.log('# ' + text);
-	});
-
-	window.testSendMsg = function (msg) {
-		player.sendMessage(msg);
-	};
+	// Show messages in chat sent by server
+	room.onServerMessage(chat.createMessage);
 
 	SOG.browser.artboard.init({
 		canvas: document.querySelector('#artboard'),
@@ -44,7 +45,8 @@ window.onload = function () {
 		y: gameplan.offsetTop + 5,
 		room: room
 	});
-//
+
+
 //	function signedIn() {
 //		console.log('inloggad');
 //		FB.api('/me?fields=id,name,first_name,username,picture,link,friends.fields(id,name,picture)', function (d) {

@@ -1,4 +1,4 @@
-/*jslint node: true */
+/*jslint node: true, es5: true */
 'use strict';
 
 var Player = require('./lib/server/Player').Player,
@@ -70,7 +70,7 @@ exports.listen = function (app) {
 		// Player sends message
 		socket.on('user-message', function (data) {
 			// Send the message to all player in room
-			socket.broadcast.to(socket.room).emit('user-message', { text: data, player: socket.player.getAllData() });
+			io.sockets.in(socket.room).emit('user-message', { text: data, player: socket.player.getAllData() });
 		});
 	});
 
