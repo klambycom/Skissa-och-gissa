@@ -69,12 +69,29 @@ exports.listen = function (app) {
 
 		// Player sends message
 		socket.on('user-message', function (data) {
+			// Is the guess correct?
+			var correct = data === 'korrekt';
+
 			// Send the message to all player in room
 			io.sockets.in(socket.room).emit('user-message', {
 				text: data,
 				player: socket.player.getAllData(),
-				win: (data === 'korrekt')
+				win: correct
 			});
+
+			// Let next person draw
+			if (correct) {
+				// TODO Pick next person in que
+
+				// Tell all players that correct word is guessed and send word to next person
+				io.sockets.in(socket.room).emit('correct-word', {
+					word: 'korrekt',
+					next: {
+						draw: true,
+						player: '' // TODO Send name of next drawing person
+					}
+				});
+			}
 		});
 	});
 

@@ -8,3 +8,53 @@
   text-align: center;
   line-height: 650px; // TODO Set with javascript
 }
+
+#word-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(128, 128, 128, .5);
+  z-index: 1000;
+
+  #word {
+    background-color: rgba(0, 184, 255, .5);
+    color: white;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin-top: 200px;
+
+    .text {
+      font-weight: lighter;
+    }
+
+    .word {
+      font-size: 3em;
+      font-weight: bolder;
+      display: block;
+    }
+  }
+
+  &.small {
+    bottom: auto;
+    background-color: rgba(0, 0, 0, 0);
+
+    #word {
+      font-size: .5em;
+      font-weight: lighter;
+      padding: 5px;
+      width: 250px;
+      margin: 0 auto;
+      margin-top: -8px;
+
+      -webkit-transition: all .5s;
+
+      .text {
+        font-size: 0;
+        -webkit-transition: all .5s;
+      }
+    }
+  }
+}

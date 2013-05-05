@@ -21,7 +21,8 @@ window.onload = function () {
 		gameplan = document.querySelector('#gameplan'),
 		chatInputField = document.querySelector('#chat-input input'),
 		chatMessages = document.querySelector('#chat-messages'),
-		chat = SOG.browser.chat;
+		chat = SOG.browser.chat,
+		artboard = SOG.browser.artboard;
 
 	// Init chat
 	chat.init({ input: chatInputField, messages: chatMessages, player: player });
@@ -39,11 +40,18 @@ window.onload = function () {
 	// Show messages in chat sent by server
 	room.onServerMessage(chat.createMessage);
 
-	SOG.browser.artboard.init({
+	// Init artboard
+	artboard.init({
 		canvas: document.querySelector('#artboard'),
 		x: gameplan.offsetLeft + 5,
 		y: gameplan.offsetTop + 5,
 		room: room
+	});
+
+	// Correct word
+	room.onCorrectWordGuessed(function (data) {
+		console.log(data);
+		console.log('correct word: ' + data.word);
 	});
 
 

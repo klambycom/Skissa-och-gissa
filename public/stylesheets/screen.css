@@ -322,6 +322,56 @@ header p {
   line-height: 650px;
 }
 
+/* line 12, ../../scss/_gameplan.scss */
+#word-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 1000;
+}
+/* line 21, ../../scss/_gameplan.scss */
+#word-wrapper #word {
+  background-color: rgba(0, 184, 255, 0.5);
+  color: white;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  margin-top: 200px;
+}
+/* line 29, ../../scss/_gameplan.scss */
+#word-wrapper #word .text {
+  font-weight: lighter;
+}
+/* line 33, ../../scss/_gameplan.scss */
+#word-wrapper #word .word {
+  font-size: 3em;
+  font-weight: bolder;
+  display: block;
+}
+/* line 40, ../../scss/_gameplan.scss */
+#word-wrapper.small {
+  bottom: auto;
+  background-color: rgba(0, 0, 0, 0);
+}
+/* line 44, ../../scss/_gameplan.scss */
+#word-wrapper.small #word {
+  font-size: .5em;
+  font-weight: lighter;
+  padding: 5px;
+  width: 250px;
+  margin: 0 auto;
+  margin-top: -8px;
+  -webkit-transition: all .5s;
+}
+/* line 54, ../../scss/_gameplan.scss */
+#word-wrapper.small #word .text {
+  font-size: 0;
+  -webkit-transition: all .5s;
+}
+
 /* line 1, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
