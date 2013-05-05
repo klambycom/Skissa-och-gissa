@@ -18,14 +18,45 @@ window.onload = function () {
 
 	var player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
 		room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
-		gameplan = document.querySelector('#gameplan'),
-		chatInputField = document.querySelector('#chat-input input'),
-		chatMessages = document.querySelector('#chat-messages'),
-		chat = SOG.browser.chat,
-		artboard = SOG.browser.artboard;
+		startGame,
+		showErrorMessage;
 
-	// Init chat
-	chat.init({ input: chatInputField, messages: chatMessages, player: player });
+	// Start game
+	startGame = function () {
+		var gameplan = document.querySelector('#gameplan'),
+			chatInputField = document.querySelector('#chat-input input'),
+			chatMessages = document.querySelector('#chat-messages'),
+			chat = SOG.browser.chat,
+			artboard = SOG.browser.artboard;
+
+		// Init chat
+		chat.init({ input: chatInputField, messages: chatMessages, player: player });
+
+		// Show messages in chat sent by users
+		room.onUserMessage(chat.createMessage);
+
+		// Show messages in chat sent by server
+		room.onServerMessage(chat.createMessage);
+
+		// Init artboard
+		artboard.init({
+			canvas: document.querySelector('#artboard'),
+			x: gameplan.offsetLeft + 5,
+			y: gameplan.offsetTop + 5,
+			room: room
+		});
+
+		// Correct word
+		room.onCorrectWordGuessed(function (data) {
+			console.log(data);
+			console.log('correct word: ' + data.word);
+		});
+	};
+
+	// Show error message
+	showErrorMessage = function (message) {
+		console.log('An error occured: ' + message);
+	};
 
 	// Join room
 	player.join(room);
@@ -34,35 +65,8 @@ window.onload = function () {
 		console.log(p);
 	});
 
-	// Show messages in chat sent by users
-	room.onUserMessage(chat.createMessage);
-
-	// Show messages in chat sent by server
-	room.onServerMessage(chat.createMessage);
-
-	// Init artboard
-	artboard.init({
-		canvas: document.querySelector('#artboard'),
-		x: gameplan.offsetLeft + 5,
-		y: gameplan.offsetTop + 5,
-		room: room
-	});
-
-	// Correct word
-	room.onCorrectWordGuessed(function (data) {
-		console.log(data);
-		console.log('correct word: ' + data.word);
-	});
-
 	window.changeRoom = function (r) {
-		room.changeTo(r, {
-			success: function () {
-				console.log('room joined');
-			},
-			fail: function (message) {
-				console.log(message || 'fail');
-			}
-		});
+		room.changeTo(r, { success: startGame, fail: showErrorMessage });
 	};
 
 
