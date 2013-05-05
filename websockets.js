@@ -28,23 +28,34 @@ exports.listen = function (app) {
 
 		// Join a game
 		socket.on('join-room', function (room) {
-			// Leave the current room (stored in session)
-			socket.leave(socket.room);
-			//rooms[socket.room] = rooms[socket.room].filter(function (p) { return p.getSocketID() !== socket.id; });
+			var temp = 5;
+			if (temp <= 10) {
+				// Leave the current room (stored in session)
+				socket.leave(socket.room);
+				//rooms[socket.room] = rooms[socket.room].filter(function (p) { return p.getSocketID() !== socket.id; });
 
-			// Send message to old room
-			socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getFullName() + ' har lämnat spelet.' });
+				// Send message to old room
+				socket.broadcast.to(socket.room).emit('server-message', {
+					text: socket.player.getFullName() + ' har lämnat spelet.'
+				});
 
-			// Join new room
-			socket.join(room);
-			socket.room = room;
-			//rooms[room].push(socket.player);
+				// Join new room
+				socket.join(room);
+				socket.room = room;
+				//rooms[room].push(socket.player);
 
-			// Echo to the room that a player has connected to their room
-			socket.broadcast.to(room).emit('server-message', { text: socket.player.getFullName() + ' har anslutet!' });
+				// Echo to the room that a player has connected to their room
+				socket.broadcast.to(room).emit('server-message', { text: socket.player.getFullName() + ' har anslutet!' });
 
-			// TODO Echo to client some information about the room (who is drawing, when its my turn, etc.)
-			//socket.emit('server-message', { text: 'Välkommen ' + socket.player.getFullName() + '!' });
+				// TODO Echo to client some information about the room (who is drawing, when its my turn, etc.)
+				//socket.emit('server-message', { text: 'Välkommen ' + socket.player.getFullName() + '!' });
+
+				// Tell browser it worked
+				socket.emit('join-room', { success: true });
+			} else {
+				// Tell browser it didn't worked
+				socket.emit('join-room', { success: false, message: 'Rummet är fullt!' });
+			}
 		});
 
 		// Player disconnect

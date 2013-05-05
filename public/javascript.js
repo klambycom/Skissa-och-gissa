@@ -16,8 +16,8 @@
 window.onload = function () {
 	'use strict';
 
-	var room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
-		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
+	var player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
+		room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
 		gameplan = document.querySelector('#gameplan'),
 		chatInputField = document.querySelector('#chat-input input'),
 		chatMessages = document.querySelector('#chat-messages'),
@@ -53,6 +53,17 @@ window.onload = function () {
 		console.log(data);
 		console.log('correct word: ' + data.word);
 	});
+
+	window.changeRoom = function (r) {
+		room.changeTo(r, {
+			success: function () {
+				console.log('room joined');
+			},
+			fail: function (message) {
+				console.log(message || 'fail');
+			}
+		});
+	};
 
 
 //	function signedIn() {
