@@ -48,6 +48,13 @@ window.onload = function () {
 
 		// Correct word
 		room.onCorrectWordGuessed(function (data) {
+			var word = SOG.utils.html('div', {
+				id: 'word-wrapper',
+				text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">Cyckel</span>',
+				to: document.body
+			});
+			setTimeout(function () { word.classList.add('small'); }, 2000);
+
 			console.log(data);
 			console.log('correct word: ' + data.word);
 		});
