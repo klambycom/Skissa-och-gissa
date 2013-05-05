@@ -70,7 +70,11 @@ exports.listen = function (app) {
 		// Player sends message
 		socket.on('user-message', function (data) {
 			// Send the message to all player in room
-			io.sockets.in(socket.room).emit('user-message', { text: data, player: socket.player.getAllData() });
+			io.sockets.in(socket.room).emit('user-message', {
+				text: data,
+				player: socket.player.getAllData(),
+				win: (data === 'korrekt')
+			});
 		});
 	});
 
