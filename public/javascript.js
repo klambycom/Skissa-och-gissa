@@ -18,11 +18,15 @@ window.onload = function () {
 
 	var player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
 		room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
+		gamesList = [].slice.call(document.querySelectorAll('#games .game')),
 		startGame,
 		showErrorMessage;
 
 	// Start game
 	startGame = function () {
+		// Html for game
+		document.getElementById('page-wrapper').innerHTML = Handlebars.templates['room.hbs']({});
+
 		var gameplan = document.querySelector('#gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
 			chatMessages = document.querySelector('#chat-messages'),
@@ -72,9 +76,13 @@ window.onload = function () {
 		console.log(p);
 	});
 
-	window.changeRoom = function (r) {
-		room.changeTo(r, { success: startGame, fail: showErrorMessage });
-	};
+	// Change room
+	gamesList.forEach(function (game) {
+		game.addEventListener('click', function (e) {
+			room.changeTo(game.dataset.name, { success: startGame, fail: showErrorMessage });
+			e.preventDefault();
+		});
+	});
 
 
 //	function signedIn() {
