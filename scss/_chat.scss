@@ -35,4 +35,33 @@
       }
     }
   }
+
+  #chat-messages {
+    .message {
+      margin: 10px 5px;
+
+      img {
+        float: left;
+        padding-right: 5px;
+      }
+
+      p {
+        background-color: rgba(128, 128, 128, .05);
+        line-height: 30px;
+        margin-left: 35px;
+        padding-left: 5px;
+      }
+
+      &.win p {
+        background-color: rgba(0, 255, 0, .15);
+      }
+    }
+
+    .server-message {
+      margin: 10px 5px;
+      font-size: .75em;
+      color: gray;
+      font-weight: lighter;
+    }
+  }
 }

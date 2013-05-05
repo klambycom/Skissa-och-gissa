@@ -282,6 +282,33 @@ header p {
   border: 3px solid #88b2d8;
   -webkit-transition: border .5s;
 }
+/* line 40, ../../scss/_chat.scss */
+#chat #chat-messages .message {
+  margin: 10px 5px;
+}
+/* line 43, ../../scss/_chat.scss */
+#chat #chat-messages .message img {
+  float: left;
+  padding-right: 5px;
+}
+/* line 48, ../../scss/_chat.scss */
+#chat #chat-messages .message p {
+  background-color: rgba(128, 128, 128, 0.05);
+  line-height: 30px;
+  margin-left: 35px;
+  padding-left: 5px;
+}
+/* line 55, ../../scss/_chat.scss */
+#chat #chat-messages .message.win p {
+  background-color: rgba(0, 255, 0, 0.15);
+}
+/* line 60, ../../scss/_chat.scss */
+#chat #chat-messages .server-message {
+  margin: 10px 5px;
+  font-size: .75em;
+  color: gray;
+  font-weight: lighter;
+}
 
 /* line 1, ../../scss/_gameplan.scss */
 #gameplan {
