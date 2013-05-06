@@ -74,6 +74,11 @@ window.onload = function () {
 			console.log(data);
 			console.log('correct word: ' + data.word);
 		});
+
+
+		window.testSaveImage = function () {
+			player.saveImage(artboard.getImage());
+		};
 	};
 
 	// Show error message

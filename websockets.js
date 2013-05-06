@@ -4,6 +4,7 @@
 var Player = require('./lib/server/Player').Player,
 	dictionaries = require('./dictionary.json'),
 	sugar = require('sugar'),
+	fs = require('fs'),
 	randomWordFrom = function (c) { return dictionaries[c].words.sample(); },
 	rooms = {};
 
@@ -107,6 +108,30 @@ exports.listen = function (app) {
 					}
 				});
 			}
+		});
+
+		// Save image to server
+		socket.on('save-image', function (data) {
+			// TODO Check if it really was players turn to draw
+
+			// Strip off the url prefix to get just the base64-encoded bytes
+			var image = data.replace(/^data:image\/\w+;base64,/, ''),
+				path = 'public/images/',
+				// TODO Change socket.id to a database id
+				// TODO Change word to right word
+				filename = socket.id + '-' + 'word' + '-' + Date.now() + '.png';
+
+			// Save image
+			fs.writeFile(path + filename, image, 'base64', function (err) {
+				if (err) {
+					// Something went wrong
+					console.log(err);
+				} else {
+					// The image was saved
+					console.log('Image saved');
+					// TODO Send message to player and ask to tell facebook?
+				}
+			});
 		});
 	});
 
