@@ -66,7 +66,7 @@ window.onload = function () {
 			setTimeout(function () { wordNode.classList.add('small'); }, 2000);
 			// Save drawing in chat
 			chat.createMessage({
-				img: artboard.saveToImg(),
+				img: artboard.getImage(),
 				word: data.word
 			});
 
