@@ -1,0 +1,55 @@
+{
+	"general": {
+		"name": "Allmän",
+		"description": "",
+		"difficulty": "moderate",
+		"time": 2,
+		"points": {
+			"max": 100,
+			"one_line": 300,
+			"many_lines": 400
+		},
+		"words": [
+			"robot",
+			"krita",
+			"gris",
+			"apa",
+			"telefon",
+			"tidning",
+			"fluga",
+			"skog",
+			"popcorn",
+			"hjärna",
+			"torktumlare",
+			"spindelmannen",
+			"ljus",
+			"gym",
+			"hår",
+			"pizza",
+			"pris",
+			"grönsak",
+			"liten",
+			"konversation",
+			"musik",
+			"flagga",
+			"mus"
+		]
+	},
+	"sport": {
+		"name": "Sport",
+		"description": "",
+		"difficulty": "easy",
+		"time": 1,
+		"points": {
+			"max": 100,
+			"one_line": 100,
+			"many_lines": 100
+		},
+		"words": [
+			"fotboll",
+			"ishockey",
+			"golf",
+			"boxning"
+		]
+	}
+}

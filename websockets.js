@@ -2,6 +2,9 @@
 'use strict';
 
 var Player = require('./lib/server/Player').Player,
+	dictionaries = require('./dictionary.json'),
+	sugar = require('sugar'),
+	randomWordFrom = function (c) { return dictionaries[c].words.sample(); },
 	rooms = {};
 
 exports.listen = function (app) {
@@ -98,7 +101,8 @@ exports.listen = function (app) {
 				io.sockets.in(socket.room).emit('correct-word', {
 					word: 'korrekt',
 					next: {
-						draw: true,
+						draw: true, // TODO Should only be true if its players turn to draw
+						word: randomWordFrom('general'), // TODO Should only be sent if users turn to draw
 						player: '' // TODO Send name of next drawing person
 					}
 				});

@@ -19,6 +19,7 @@ window.onload = function () {
 	var player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
 		room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
 		gamesList = [].slice.call(document.querySelectorAll('#games .game')),
+		wordNode,
 		startGame,
 		showErrorMessage;
 
@@ -52,13 +53,18 @@ window.onload = function () {
 
 		// Correct word
 		room.onCorrectWordGuessed(function (data) {
-			var word = SOG.utils.html('div', {
+			// Remove old word
+			if (typeof wordNode !== 'undefined') {
+				document.body.removeChild(wordNode);
+			}
+			// Show new word
+			wordNode = SOG.utils.html('div', {
 				id: 'word-wrapper',
-				text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">Cyckel</span>',
+				text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">' + data.next.word + '</span>',
 				to: document.body
 			});
-			setTimeout(function () { word.classList.add('small'); }, 2000);
-
+			setTimeout(function () { wordNode.classList.add('small'); }, 2000);
+			// Debugging, TODO remove
 			console.log(data);
 			console.log('correct word: ' + data.word);
 		});
