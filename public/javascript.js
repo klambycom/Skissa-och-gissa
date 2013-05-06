@@ -64,6 +64,12 @@ window.onload = function () {
 				to: document.body
 			});
 			setTimeout(function () { wordNode.classList.add('small'); }, 2000);
+			// Save drawing in chat
+			chat.createMessage({
+				img: artboard.saveToImg(),
+				word: data.word
+			});
+
 			// Debugging, TODO remove
 			console.log(data);
 			console.log('correct word: ' + data.word);

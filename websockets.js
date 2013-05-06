@@ -102,7 +102,7 @@ exports.listen = function (app) {
 					word: 'korrekt',
 					next: {
 						draw: true, // TODO Should only be true if its players turn to draw
-						word: randomWordFrom('general'), // TODO Should only be sent if users turn to draw
+						word: randomWordFrom('general-easy'), // TODO Should only be sent if users turn to draw
 						player: '' // TODO Send name of next drawing person
 					}
 				});
