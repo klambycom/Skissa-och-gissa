@@ -1,55 +1,38 @@
 {
-	"general": {
+	"general-easy": {
+		"name": "Allmän",
+		"description": "",
+		"difficulty": "easy",
+		"time": 2,
+		"points": {
+			"max": 200,
+			"one_line": 300,
+			"many_lines": 400
+		},
+		"words": [ "krita", "gris", "apa", "telefon", "fluga", "träd", "ljus", "tomat", "mus", "flygplan", "svans", "fotboll", "mun", "burk", "öra", "spindel", "glad", "arm", "bok", "ballong", "mjölk", "glass", "blomma", "dörr", "huvud", "glasögon", "stol", "sax", "fot" ]
+	},
+	"general-moderate": {
 		"name": "Allmän",
 		"description": "",
 		"difficulty": "moderate",
 		"time": 2,
 		"points": {
-			"max": 100,
+			"max": 400,
 			"one_line": 300,
 			"many_lines": 400
 		},
-		"words": [
-			"robot",
-			"krita",
-			"gris",
-			"apa",
-			"telefon",
-			"tidning",
-			"fluga",
-			"skog",
-			"popcorn",
-			"hjärna",
-			"torktumlare",
-			"spindelmannen",
-			"ljus",
-			"gym",
-			"hår",
-			"pizza",
-			"pris",
-			"grönsak",
-			"liten",
-			"konversation",
-			"musik",
-			"flagga",
-			"mus"
-		]
+		"words": [ "robot", "krita", "telefon", "tidning", "skog", "popcorn", "hjärna", "torktumlare", "spindelmannen", "ljus", "gym", "hår", "pizza", "pris", "grönsak", "liten", "konversation", "musik", "flagga", "solglasögon", "tår", "armbåge", "rollerblade", "sommar", "ko", "snöboll", "gitarr", "väckarklocka", "regn", "blind", "guldfisk", "snöre" ]
 	},
-	"sport": {
-		"name": "Sport",
+	"general-hard": {
+		"name": "Allmän",
 		"description": "",
-		"difficulty": "easy",
-		"time": 1,
+		"difficulty": "hard",
+		"time": 2,
 		"points": {
-			"max": 100,
-			"one_line": 100,
-			"many_lines": 100
+			"max": 800,
+			"one_line": 300,
+			"many_lines": 400
 		},
-		"words": [
-			"fotboll",
-			"ishockey",
-			"golf",
-			"boxning"
-		]
+		"words": [ "gräsklippare", "vindkraftverk", "sand", "fläck", "svärdfisk", "fest", "skiftnyckel", "nyckelpiga", "resa", "cowboy", "korg", "torktummlare", "företag", "sudd", "rolig", "fälla", "liten", "konversation", "gift", "diska", "mardröm", "vegetarisk", "polis", "ö", "smulor", "dotter", "fjäder", "vinst", "kärlek" ]
 	}
 }
