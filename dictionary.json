@@ -1,7 +1,7 @@
 {
 	"general-easy": {
 		"name": "Allmän",
-		"description": "",
+		"description": "Beskrivning för enkel. Alltså beskrivningen är inte för enkel, det är spelet som är enkelt.",
 		"difficulty": "easy",
 		"time": 2,
 		"points": {
@@ -13,7 +13,7 @@
 	},
 	"general-moderate": {
 		"name": "Allmän",
-		"description": "",
+		"description": "Jajafanplease",
 		"difficulty": "moderate",
 		"time": 2,
 		"points": {
@@ -25,7 +25,7 @@
 	},
 	"general-hard": {
 		"name": "Allmän",
-		"description": "",
+		"description": "...",
 		"difficulty": "hard",
 		"time": 2,
 		"points": {

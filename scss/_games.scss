@@ -10,6 +10,30 @@
     h1 {
       font-size: 2em;
       margin-bottom: 5px;
+
+      &.hard-tag:after, &.moderate-tag:after, &.easy-tag:after {
+        font-size: .4em;
+        position: absolute;
+        margin: 8px 10px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        color: white;
+      }
+
+      &.hard-tag:after {
+        background-color: rgb(241, 127, 127);
+        content: 'svår';
+      }
+      
+      &.moderate-tag:after {
+        background-color: #4D94AA;
+        content: 'medel';
+      }
+
+      &.easy-tag:after {
+        background-color: #40964E;
+        content: 'lätt';
+      }
     }
 
     img {

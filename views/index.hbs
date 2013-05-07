@@ -5,35 +5,13 @@
 
 <main id="main">
   <div id="games">
-    <article class="game" data-name="spelikategori0">
-      <img src="http://lorempixel.com/100/100" alt="En kategori">
-      <h1>En kategori</h1>
-      <p>2 runder spelade.</p>
+    {{#each rooms}}
+    <article class="game" data-name="{{id}}">
+      <img src="gfx/{{type}}.png" alt="{{name}}">
+      <h1 class="{{difficulty}}-tag">{{name}}</h1>
+      <p>{{description}} 2 runder spelade.</p>
     </article>
-  
-    <article class="game" data-name="spelikategori1">
-      <img src="http://lorempixel.com/100/100" alt="En kategori">
-      <h1>En kategori</h1>
-      <p>2 runder spelade.</p>
-    </article>
-  
-    <article class="game" data-name="spelikategori2">
-      <img src="http://lorempixel.com/100/100" alt="En kategori">
-      <h1>En kategori</h1>
-      <p>2 runder spelade.</p>
-    </article>
-  
-    <article class="game" data-name="spelikategori3">
-      <img src="http://lorempixel.com/100/100" alt="En kategori">
-      <h1>En kategori</h1>
-      <p>2 runder spelade.</p>
-    </article>
-  
-    <article class="game" data-name="spelikategori4">
-      <img src="http://lorempixel.com/100/100" alt="En kategori">
-      <h1>En kategori</h1>
-      <p>2 runder spelade.</p>
-    </article>
+    {{/each}}
   </div>
 
   <aside id="sidebar">

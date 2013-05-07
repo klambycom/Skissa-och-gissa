@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
@@ -118,12 +119,36 @@ header p {
   font-size: 2em;
   margin-bottom: 5px;
 }
-/* line 15, ../../scss/_games.scss */
+/* line 14, ../../scss/_games.scss */
+#games .game h1.hard-tag:after, #games .game h1.moderate-tag:after, #games .game h1.easy-tag:after {
+  font-size: .4em;
+  position: absolute;
+  margin: 8px 10px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: white;
+}
+/* line 23, ../../scss/_games.scss */
+#games .game h1.hard-tag:after {
+  background-color: #f17f7f;
+  content: 'svår';
+}
+/* line 28, ../../scss/_games.scss */
+#games .game h1.moderate-tag:after {
+  background-color: #4D94AA;
+  content: 'medel';
+}
+/* line 33, ../../scss/_games.scss */
+#games .game h1.easy-tag:after {
+  background-color: #40964E;
+  content: 'lätt';
+}
+/* line 39, ../../scss/_games.scss */
 #games .game img {
   float: left;
   margin-right: 10px;
 }
-/* line 20, ../../scss/_games.scss */
+/* line 44, ../../scss/_games.scss */
 #games .game:after {
   content: "";
   display: block;
