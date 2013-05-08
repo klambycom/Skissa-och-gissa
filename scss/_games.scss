@@ -2,7 +2,7 @@
   width: 600px;
   float: left;
 
-  .hard-difficulty h1:after, .moderate-difficulty h1:after, .easy-difficulty h1:after {
+  .hard h1:after, .moderate h1:after, .easy h1:after {
     font-size: .4em;
     position: absolute;
     margin: 8px 10px;
@@ -11,17 +11,17 @@
     color: white;
   }
 
-  .hard-difficulty h1:after {
+  .hard h1:after {
     background-color: rgb(241, 127, 127);
     content: 'svår';
   }
   
-  .moderate-difficulty h1:after {
+  .moderate h1:after {
     background-color: #4D94AA;
     content: 'medel';
   }
 
-  .easy-difficulty h1:after {
+  .easy h1:after {
     background-color: #40964E;
     content: 'lätt';
   }
