@@ -110,17 +110,8 @@ header p {
   width: 600px;
   float: left;
 }
-/* line 6, ../../scss/_games.scss */
-#games .game:not(:last-child) {
-  margin-bottom: 20px;
-}
-/* line 10, ../../scss/_games.scss */
-#games .game h1 {
-  font-size: 2em;
-  margin-bottom: 5px;
-}
-/* line 14, ../../scss/_games.scss */
-#games .game h1.hard-tag:after, #games .game h1.moderate-tag:after, #games .game h1.easy-tag:after {
+/* line 5, ../../scss/_games.scss */
+#games .hard-difficulty h1:after, #games .moderate-difficulty h1:after, #games .easy-difficulty h1:after {
   font-size: .4em;
   position: absolute;
   margin: 8px 10px;
@@ -128,20 +119,29 @@ header p {
   border-radius: 3px;
   color: white;
 }
-/* line 23, ../../scss/_games.scss */
-#games .game h1.hard-tag:after {
+/* line 14, ../../scss/_games.scss */
+#games .hard-difficulty h1:after {
   background-color: #f17f7f;
   content: 'svår';
 }
-/* line 28, ../../scss/_games.scss */
-#games .game h1.moderate-tag:after {
+/* line 19, ../../scss/_games.scss */
+#games .moderate-difficulty h1:after {
   background-color: #4D94AA;
   content: 'medel';
 }
-/* line 33, ../../scss/_games.scss */
-#games .game h1.easy-tag:after {
+/* line 24, ../../scss/_games.scss */
+#games .easy-difficulty h1:after {
   background-color: #40964E;
   content: 'lätt';
+}
+/* line 30, ../../scss/_games.scss */
+#games .game:not(:last-child) {
+  margin-bottom: 20px;
+}
+/* line 34, ../../scss/_games.scss */
+#games .game h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
 }
 /* line 39, ../../scss/_games.scss */
 #games .game img {

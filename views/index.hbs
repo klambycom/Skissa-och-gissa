@@ -6,10 +6,10 @@
 <main id="main">
   <div id="games">
     {{#each rooms}}
-    <article class="game" data-name="{{id}}">
+    <article class="game {{nrOfPlayers}}-players {{difficulty}}-difficulty" data-name="{{id}}">
       <img src="gfx/{{type}}.png" alt="{{name}}">
-      <h1 class="{{difficulty}}-tag">{{name}}</h1>
-      <p>{{description}} 2 runder spelade.</p>
+      <h1>{{name}}</h1>
+      <p>{{description}} <span class="nr-of-players">{{nrOfPlayers}} spelare.</span> 2 runder spelade.</p>
     </article>
     {{/each}}
   </div>

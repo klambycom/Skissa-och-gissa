@@ -3,12 +3,11 @@
 
 var Player = require('./lib/server/Player').Player,
 	dictionaries = require('./dictionary.json'),
-	room = require('./lib/server/room').room,
 	sugar = require('sugar'),
 	fs = require('fs'),
 	randomWordFrom = function (c) { return dictionaries[c].words.sample(); };
 
-exports.listen = function (app) {
+exports.listen = function (app, room) {
 	var io = require('socket.io').listen(app);
 
 	io.sockets.on('connection', function (socket) {

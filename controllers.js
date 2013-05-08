@@ -3,8 +3,7 @@
 
 exports.controllers = [];
 var save = function (v) { return function (r, f) { exports.controllers.push({ verb: v, route: r, fn: f }); }; },
-	app = { get: save('get'), post: save('post'), param: save('param') },
-	room = require('./lib/server/room').room;
+	app = { get: save('get'), post: save('post'), param: save('param') };
 
 var fs = require('fs'),
 	getDictionary = function (type) {
@@ -14,18 +13,19 @@ var fs = require('fs'),
 	};
 
 app.get('/', function (req, res) {
-	var r = room.all();
-
 	res.render('index', {
 		text: 'World',
-		rooms: Object.keys(r).map(function (a) {
-			var dict = getDictionary(r[a].type);
+		rooms: Object.keys(req.rooms).map(function (a) {
+			var room = req.rooms[a],
+				dict = getDictionary(room.type),
+				players = Object.keys(room.players).map(function (p) { return room.players[p].facebook; });
 			return {
-				id: r[a].id,
-				type: r[a].type,
+				id: req.rooms[a].id,
+				type: req.rooms[a].type,
 				name: dict.name,
 				description: dict.description,
-				difficulty: dict.difficulty
+				difficulty: dict.difficulty,
+				nrOfPlayers: players.length
 			};
 		})
 	});
