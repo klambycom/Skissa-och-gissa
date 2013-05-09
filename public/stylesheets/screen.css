@@ -320,7 +320,7 @@ header p {
 }
 /* line 50, ../../scss/_chat.scss */
 #chat-container #crayons #sizes a.selected {
-  background-color: 10px;
+  background-color: #88b2d8;
   -webkit-transition: all .5s;
 }
 /* line 56, ../../scss/_chat.scss */
