@@ -268,30 +268,141 @@ header p {
   /* IE6-9 fallback on horizontal gradient */
 }
 
-/* line 1, ../../scss/_chat.scss */
-#chat {
-  background-color: white;
+/* line 3, ../../scss/_chat.scss */
+#page-wrapper.draw #chat-container #crayons {
+  width: 50px;
+  -webkit-transition: all .5s .3s;
+}
+/* line 8, ../../scss/_chat.scss */
+#page-wrapper.draw #chat-container #chat {
+  right: 50px;
+  -webkit-transition: all .5s .3s;
+}
+
+/* line 15, ../../scss/_chat.scss */
+#chat-container {
   position: absolute;
   top: 52px;
   bottom: 0;
   width: 25%;
 }
-/* line 8, ../../scss/_chat.scss */
-#chat #chat-input {
+/* line 21, ../../scss/_chat.scss */
+#chat-container #crayons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0px;
+  background-color: #e5e5e5;
+  -webkit-transition: all .5s .3s;
+}
+/* line 30, ../../scss/_chat.scss */
+#chat-container #crayons h1 {
+  text-align: center;
+  width: 50px;
+  font-weight: bolder;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: .6em;
+}
+/* line 39, ../../scss/_chat.scss */
+#chat-container #crayons #sizes {
+  margin-bottom: 30px;
+}
+/* line 42, ../../scss/_chat.scss */
+#chat-container #crayons #sizes a {
+  background-color: black;
+  display: block;
+  border-radius: 2px;
+  width: 30px;
+  margin: 10px;
+  -webkit-transition: all .5s;
+}
+/* line 50, ../../scss/_chat.scss */
+#chat-container #crayons #sizes a.selected {
+  background-color: 10px;
+  -webkit-transition: all .5s;
+}
+/* line 56, ../../scss/_chat.scss */
+#chat-container #crayons #sizes li.size-5 a {
+  height: 5px;
+}
+/* line 60, ../../scss/_chat.scss */
+#chat-container #crayons #sizes li.size-10 a {
+  height: 10px;
+}
+/* line 64, ../../scss/_chat.scss */
+#chat-container #crayons #sizes li.size-15 a {
+  height: 15px;
+}
+/* line 68, ../../scss/_chat.scss */
+#chat-container #crayons #sizes li.size-20 a {
+  height: 20px;
+}
+/* line 74, ../../scss/_chat.scss */
+#chat-container #crayons #colors a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin: 7px;
+  border: 3px solid #e5e5e5;
+  -webkit-transition: all .5s;
+}
+/* line 82, ../../scss/_chat.scss */
+#chat-container #crayons #colors a.selected {
+  border: 3px solid #88b2d8;
+  -webkit-transition: all .5s;
+}
+/* line 88, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.white a {
+  background-color: white;
+}
+/* line 92, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.red a {
+  background-color: #ec2b2b;
+}
+/* line 96, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.green a {
+  background-color: #0caa0c;
+}
+/* line 100, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.blue a {
+  background-color: #00adff;
+}
+/* line 104, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.yellow a {
+  background-color: #f5f551;
+}
+/* line 108, ../../scss/_chat.scss */
+#chat-container #crayons #colors li.pink a {
+  background-color: pink;
+}
+/* line 114, ../../scss/_chat.scss */
+#chat-container #chat {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  -webkit-transition: all .5s .3s;
+}
+/* line 123, ../../scss/_chat.scss */
+#chat-container #chat #chat-input {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 5px;
 }
-/* line 15, ../../scss/_chat.scss */
-#chat #chat-input img {
+/* line 130, ../../scss/_chat.scss */
+#chat-container #chat #chat-input img {
   height: 50px;
   width: 50px;
   float: left;
 }
-/* line 21, ../../scss/_chat.scss */
-#chat #chat-input input {
+/* line 136, ../../scss/_chat.scss */
+#chat-container #chat #chat-input input {
   height: 34px;
   font-size: 25px;
   position: absolute;
@@ -301,34 +412,34 @@ header p {
   border: 3px solid rgba(0, 0, 0, 0.15);
   -webkit-transition: border .5s;
 }
-/* line 31, ../../scss/_chat.scss */
-#chat #chat-input input:focus {
+/* line 146, ../../scss/_chat.scss */
+#chat-container #chat #chat-input input:focus {
   outline: 0;
   border: 3px solid #88b2d8;
   -webkit-transition: border .5s;
 }
-/* line 40, ../../scss/_chat.scss */
-#chat #chat-messages .message {
+/* line 155, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages .message {
   margin: 10px 5px;
 }
-/* line 43, ../../scss/_chat.scss */
-#chat #chat-messages .message img {
+/* line 158, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
 }
-/* line 48, ../../scss/_chat.scss */
-#chat #chat-messages .message p {
+/* line 163, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding-left: 5px;
 }
-/* line 55, ../../scss/_chat.scss */
-#chat #chat-messages .message.win p {
+/* line 170, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 60, ../../scss/_chat.scss */
-#chat #chat-messages .server-message {
+/* line 175, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;
   color: gray;
@@ -397,40 +508,41 @@ header p {
   -webkit-transition: all .5s;
 }
 
-/* line 1, ../../scss/_artboard.scss */
+/* line 2, ../../scss/_artboard.scss */
+#page-wrapper.draw #artboard {
+  border: 5px solid #88b2d8;
+  -webkit-transition: border .5s;
+}
+
+/* line 8, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
   vertical-align: middle;
   border: 5px solid rgba(0, 0, 0, 0.1);
   -webkit-transition: border .5s;
 }
-/* line 7, ../../scss/_artboard.scss */
-#artboard.focus {
-  border: 5px solid #88b2d8;
-  -webkit-transition: border .5s;
-}
 
-/* line 13, ../../scss/_artboard.scss */
+/* line 15, ../../scss/_artboard.scss */
 .red_crayon {
   cursor: url(../red.png), auto;
 }
 
-/* line 17, ../../scss/_artboard.scss */
+/* line 19, ../../scss/_artboard.scss */
 .blue_crayon {
   cursor: url(../blue.png), auto;
 }
 
-/* line 21, ../../scss/_artboard.scss */
+/* line 23, ../../scss/_artboard.scss */
 .green_crayon {
   cursor: url(../green.png), auto;
 }
 
-/* line 25, ../../scss/_artboard.scss */
+/* line 27, ../../scss/_artboard.scss */
 .pink_crayon {
   cursor: url(../pink.png), auto;
 }
 
-/* line 29, ../../scss/_artboard.scss */
+/* line 31, ../../scss/_artboard.scss */
 .yellow_crayon {
   cursor: url(../yellow.png), auto;
 }
