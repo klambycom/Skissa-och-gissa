@@ -67,6 +67,20 @@ room.addPlayer(player1, r);
 room.addPlayer(player2, r);
 room.addPlayer(player3, r);
 
+var currying = require('./lib/utils/currying'),
+	playerIsNext = currying(room.playerIsNext, player1),
+	isPlayerNext = currying(room.playerIsNext, player1, r);
+
+console.log('========');
+console.log(playerIsNext(r));
+console.log(playerIsNext(r));
+console.log(playerIsNext(r));
+console.log(playerIsNext(r));
+console.log(playerIsNext(r));
+console.log(isPlayerNext());
+console.log(isPlayerNext());
+console.log('========');
+
 // Save rooms to every page load
 app.use(function (req, res, next) {
 	req.rooms = room.all();
