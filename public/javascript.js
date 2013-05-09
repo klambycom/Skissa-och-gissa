@@ -75,9 +75,19 @@ window.onload = function () {
 			console.log('correct word: ' + data.word);
 		});
 
+		// Panel for crayon
+		SOG.browser.crayons.init({
+			sizes: [].slice.call(document.querySelectorAll('#sizes a')),
+			colors: [].slice.call(document.querySelectorAll('#colors a'))
+		});
+
 
 		window.testSaveImage = function () {
 			player.saveImage(artboard.getImage());
+		};
+
+		window.testToggleDraw = function () {
+			document.querySelector('#page-wrapper').classList.toggle('draw');
 		};
 	};
 
