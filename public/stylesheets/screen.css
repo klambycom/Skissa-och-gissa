@@ -418,27 +418,34 @@ header p {
   border: 3px solid #88b2d8;
   -webkit-transition: border .5s;
 }
-/* line 155, ../../scss/_chat.scss */
+/* line 154, ../../scss/_chat.scss */
+#chat-container #chat #chat-messages {
+  position: absolute;
+  top: 0;
+  bottom: 60px;
+  overflow: auto;
+}
+/* line 160, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message {
   margin: 10px 5px;
 }
-/* line 158, ../../scss/_chat.scss */
+/* line 163, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
 }
-/* line 163, ../../scss/_chat.scss */
+/* line 168, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding-left: 5px;
 }
-/* line 170, ../../scss/_chat.scss */
+/* line 175, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 175, ../../scss/_chat.scss */
+/* line 180, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;

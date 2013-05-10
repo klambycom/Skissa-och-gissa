@@ -152,6 +152,11 @@
     }
 
     #chat-messages {
+      position: absolute;
+      top: 0;
+      bottom: 60px;
+      overflow: auto;
+
       .message {
         margin: 10px 5px;
 
