@@ -1,0 +1,9 @@
+{
+	"name": "Skissa och gissa",
+	"description": "Senare...",
+	"version": "1.0",
+	"options": {
+		"paths": "./lib",
+		"outdir": "./docs"
+	}
+}
