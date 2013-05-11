@@ -55,13 +55,13 @@ window.onload = function () {
 		room.onCorrectWordGuessed(function (data) {
 			// Remove old word
 			if (typeof wordNode !== 'undefined') {
-				document.body.removeChild(wordNode);
+				gameplan.removeChild(wordNode);
 			}
 			// Show new word
 			wordNode = SOG.utils.html('div', {
 				id: 'word-wrapper',
 				text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">' + data.next.word + '</span>',
-				to: document.body
+				to: gameplan
 			});
 			setTimeout(function () { wordNode.classList.add('small'); }, 2000);
 			// Save drawing in chat

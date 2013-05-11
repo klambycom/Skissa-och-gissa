@@ -220,11 +220,16 @@ header p {
 
 /* line 1, ../../scss/_game-user-info.scss */
 #game-user-info {
-  height: 40px;
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: gray;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
 }
-/* line 6, ../../scss/_game-user-info.scss */
+/* line 12, ../../scss/_game-user-info.scss */
 #game-user-info h1 {
   display: block;
   float: left;
@@ -232,40 +237,27 @@ header p {
   font-weight: bold;
   margin-top: 5px;
 }
-/* line 14, ../../scss/_game-user-info.scss */
+/* line 20, ../../scss/_game-user-info.scss */
 #game-user-info .players {
   float: right;
   margin-right: 5px;
 }
-/* line 18, ../../scss/_game-user-info.scss */
+/* line 24, ../../scss/_game-user-info.scss */
 #game-user-info .players img {
   width: 40px;
 }
-/* line 21, ../../scss/_game-user-info.scss */
+/* line 27, ../../scss/_game-user-info.scss */
 #game-user-info .players img.you {
   border: 3px solid #88b2d8;
   width: 34px;
 }
-
-/* line 29, ../../scss/_game-user-info.scss */
-.line {
-  height: 2px;
-  background: #ff4949;
-  /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ff4949), color-stop(16%, #f3f722), color-stop(21%, #f3f722), color-stop(31%, #22f730), color-stop(43%, #22eff9), color-stop(49%, #22eff9), color-stop(67%, #5850f4), color-stop(83%, #f722f0), color-stop(100%, #e2391f));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* IE10+ */
-  background: linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4949', endColorstr='#e2391f',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
+/* line 34, ../../scss/_game-user-info.scss */
+#game-user-info .your-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 5px 5px 2px 5px;
+  background-color: #5f81a0;
 }
 
 /* line 3, ../../scss/_chat.scss */
@@ -282,7 +274,7 @@ header p {
 /* line 15, ../../scss/_chat.scss */
 #chat-container {
   position: absolute;
-  top: 52px;
+  top: 0;
   bottom: 0;
   width: 25%;
 }
@@ -383,7 +375,7 @@ header p {
   top: 0;
   bottom: 0;
   right: 0;
-  left: 0;
+  left: 60px;
   background-color: white;
   -webkit-transition: all .5s .3s;
 }
@@ -394,58 +386,63 @@ header p {
   right: 0;
   bottom: 0;
   padding: 5px;
+  height: 50px;
+  background-color: #d6e5f3;
 }
-/* line 130, ../../scss/_chat.scss */
+/* line 132, ../../scss/_chat.scss */
 #chat-container #chat #chat-input img {
   height: 50px;
   width: 50px;
   float: left;
 }
-/* line 136, ../../scss/_chat.scss */
+/* line 138, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input {
   height: 34px;
   font-size: 25px;
   position: absolute;
   right: 5px;
-  left: 60px;
+  left: 5px;
+  bottom: 5px;
   padding: 5px;
   border: 3px solid rgba(0, 0, 0, 0.15);
   -webkit-transition: border .5s;
 }
-/* line 146, ../../scss/_chat.scss */
+/* line 149, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus {
   outline: 0;
   border: 3px solid #88b2d8;
   -webkit-transition: border .5s;
 }
-/* line 154, ../../scss/_chat.scss */
+/* line 157, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages {
   position: absolute;
   top: 0;
   bottom: 60px;
+  left: 0;
+  right: 0;
   overflow: auto;
 }
-/* line 160, ../../scss/_chat.scss */
+/* line 165, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message {
   margin: 10px 5px;
 }
-/* line 163, ../../scss/_chat.scss */
+/* line 168, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
 }
-/* line 168, ../../scss/_chat.scss */
+/* line 173, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding-left: 5px;
 }
-/* line 175, ../../scss/_chat.scss */
+/* line 180, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 180, ../../scss/_chat.scss */
+/* line 185, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;
@@ -456,13 +453,13 @@ header p {
 /* line 1, ../../scss/_gameplan.scss */
 #gameplan {
   position: absolute;
-  top: 52px;
+  top: 0;
   bottom: 0;
   width: 75%;
   background-color: #f2f2f2;
   right: 0;
   text-align: center;
-  line-height: 650px;
+  overflow: auto;
 }
 
 /* line 12, ../../scss/_gameplan.scss */
@@ -496,10 +493,12 @@ header p {
 }
 /* line 40, ../../scss/_gameplan.scss */
 #word-wrapper.small {
-  bottom: auto;
+  height: 50px;
+  bottom: 0;
+  top: auto;
   background-color: rgba(0, 0, 0, 0);
 }
-/* line 44, ../../scss/_gameplan.scss */
+/* line 46, ../../scss/_gameplan.scss */
 #word-wrapper.small #word {
   font-size: .5em;
   font-weight: lighter;
@@ -509,7 +508,7 @@ header p {
   margin-top: -8px;
   -webkit-transition: all .5s;
 }
-/* line 54, ../../scss/_gameplan.scss */
+/* line 56, ../../scss/_gameplan.scss */
 #word-wrapper.small #word .text {
   font-size: 0;
   -webkit-transition: all .5s;
@@ -522,34 +521,94 @@ header p {
 }
 
 /* line 8, ../../scss/_artboard.scss */
+#artboard-wrapper {
+  padding: 20px;
+}
+
+/* line 12, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
-  vertical-align: middle;
   border: 5px solid rgba(0, 0, 0, 0.1);
   -webkit-transition: border .5s;
 }
 
-/* line 15, ../../scss/_artboard.scss */
+/* line 18, ../../scss/_artboard.scss */
 .red_crayon {
   cursor: url(../red.png), auto;
 }
 
-/* line 19, ../../scss/_artboard.scss */
+/* line 22, ../../scss/_artboard.scss */
 .blue_crayon {
   cursor: url(../blue.png), auto;
 }
 
-/* line 23, ../../scss/_artboard.scss */
+/* line 26, ../../scss/_artboard.scss */
 .green_crayon {
   cursor: url(../green.png), auto;
 }
 
-/* line 27, ../../scss/_artboard.scss */
+/* line 30, ../../scss/_artboard.scss */
 .pink_crayon {
   cursor: url(../pink.png), auto;
 }
 
-/* line 31, ../../scss/_artboard.scss */
+/* line 34, ../../scss/_artboard.scss */
 .yellow_crayon {
   cursor: url(../yellow.png), auto;
+}
+
+@-webkit-keyframes PROGRESS {
+  /* line 2, ../../scss/_timer.scss */
+  0% {
+    width: 0%;
+  }
+
+  /* line 3, ../../scss/_timer.scss */
+  100% {
+    width: 100%;
+  }
+}
+
+/* line 6, ../../scss/_timer.scss */
+#timer {
+  background-color: rgba(196, 196, 196, 0.2);
+  height: 32px;
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+/* line 13, ../../scss/_timer.scss */
+#timer #timer-progress {
+  background-color: red;
+  height: 12px;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 3px;
+  background: #ff4949;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ff4949), color-stop(16%, #f3f722), color-stop(21%, #f3f722), color-stop(31%, #22f730), color-stop(43%, #22eff9), color-stop(49%, #22eff9), color-stop(67%, #5850f4), color-stop(83%, #f722f0), color-stop(100%, #e2391f));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* IE10+ */
+  background: linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4949', endColorstr='#e2391f',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
+}
+/* line 31, ../../scss/_timer.scss */
+#timer #timer-progress:after {
+  content: '';
+  background-color: rgba(231, 231, 231, 0.8);
+  border-radius: 0 2px 2px 0;
+  height: 12px;
+  float: right;
+  -webkit-animation: PROGRESS 60s infinite;
 }

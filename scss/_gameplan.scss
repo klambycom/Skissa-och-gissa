@@ -1,12 +1,12 @@
 #gameplan {
   position: absolute;
-  top: 52px;
+  top: 0;
   bottom: 0;
   width: 75%;
   background-color: rgba(242,242,242,1);
   right: 0;
   text-align: center;
-  line-height: 650px; // TODO Set with javascript
+  overflow: auto;
 }
 
 #word-wrapper {
@@ -38,7 +38,9 @@
   }
 
   &.small {
-    bottom: auto;
+    height: 50px;
+    bottom: 0;
+    top: auto;
     background-color: rgba(0, 0, 0, 0);
 
     #word {
