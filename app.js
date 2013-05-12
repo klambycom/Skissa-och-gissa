@@ -1,6 +1,8 @@
 /*jslint node: true */
 'use strict';
 
+require('./lib/utils/functional');
+
 var express = require('express'),
 	app = express(),
 	controllers = require('./controllers').controllers,
@@ -62,10 +64,13 @@ var Player = require('./lib/server/Player').Player,
 		picture: { data: { url: 'johanna' } }
 	}),
 	r = Object.keys(room.all())[0],
+	addToFirstRoom = room.addPlayer.flip().curry(r),
 	rData = room.get(r);
 room.addPlayer(player1, r);
 room.addPlayer(player2, r);
-room.addPlayer(player3, r);
+addToFirstRoom(player3);
+
+console.log(room.all());
 
 var currying = require('./lib/utils/currying'),
 	playerIsNext = currying(room.playerIsNext, player1),
