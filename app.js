@@ -47,29 +47,39 @@ room.create(['general-easy', 'general-moderate', 'general-hard']);
 var Player = require('./lib/server/Player').Player,
 	player1 = new Player({
 		name: 'Christian Nilsson',
-		socket: 'christian',
-		id: 'christian',
+		socket: 'christian-s',
+		id: 'christian-i',
 		picture: { data: { url: 'christian' } }
 	}),
 	player2 = new Player({
 		name: 'Iver Nilsson',
-		socket: 'ivar',
-		id: 'ivar',
+		socket: 'ivar-s',
+		id: 'ivar-i',
 		picture: { data: { url: 'ivar' } }
 	}),
 	player3 = new Player({
 		name: 'Johanna Nilsson',
-		socket: 'johanna',
-		id: 'johanna',
+		socket: 'johanna-s',
+		id: 'johanna-i',
 		picture: { data: { url: 'johanna' } }
 	}),
 	r = Object.keys(room.all())[0],
+	r2 = Object.keys(room.all())[1],
 	addToFirstRoom = room.addPlayer.flip().curry(r),
 	rData = room.get(r);
 room.addPlayer(player1, r);
 room.addPlayer(player2, r);
 addToFirstRoom(player3);
 
+console.log(room.all());
+console.log('----------');
+room.removePlayer(player2, r);
+console.log(room.all());
+console.log('----------');
+room.addPlayer(player2, r2);
+console.log(room.all());
+console.log('----------');
+room.change(player2, r2, r);
 console.log(room.all());
 
 var currying = require('./lib/utils/currying'),
