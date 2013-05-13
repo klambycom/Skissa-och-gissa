@@ -31,6 +31,7 @@ window.onload = function () {
 		var gameplan = document.querySelector('#gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
 			chatMessages = document.querySelector('#chat-messages'),
+			pageWrapper = document.querySelector('#page-wrapper'),
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard;
 
@@ -56,14 +57,27 @@ window.onload = function () {
 			// Remove old word
 			if (typeof wordNode !== 'undefined') {
 				gameplan.removeChild(wordNode);
+				pageWrapper.classList.remove('draw');
 			}
-			// Show new word
-			wordNode = SOG.utils.html('div', {
-				id: 'word-wrapper',
-				text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">' + data.next.word + '</span>',
-				to: gameplan
-			});
-			setTimeout(function () { wordNode.classList.add('small'); }, 2000);
+
+			if (data.next.draw) {
+				// Show new word
+				wordNode = SOG.utils.html('div', {
+					id: 'word-wrapper',
+					text: '<div id="word"><span class="text">Din tur att rita</span><span class="word">' + data.next.word + '</span>',
+					to: gameplan
+				});
+				setTimeout(function () {
+					// Minimize word
+					wordNode.classList.add('small');
+
+					// Show crayons
+					pageWrapper.classList.add('draw');
+
+					// TODO Disable input field
+				}, 2000);
+			}
+
 			// Save drawing in chat
 			chat.createMessage({
 				img: artboard.getImage(),

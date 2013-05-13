@@ -7,7 +7,7 @@ var Player = require('./lib/server/Player').Player,
 	fs = require('fs'),
 	randomWordFrom = function (c) { return dictionaries[c].words.sample(); };
 
-exports.listen = function (app, room) {
+exports.listen = function (app, Room) {
 	var io = require('socket.io').listen(app);
 
 	io.sockets.on('connection', function (socket) {
@@ -47,6 +47,10 @@ exports.listen = function (app, room) {
 				socket.room = room;
 				//rooms[room].push(socket.player);
 
+				// Add player to room
+				Room.addPlayer(socket.player, socket.room);
+				console.log(Room.all());
+
 				// Echo to the room that a player has connected to their room
 				socket.broadcast.to(room).emit('server-message', { text: socket.player.getFullName() + ' har anslutet!' });
 
@@ -63,7 +67,8 @@ exports.listen = function (app, room) {
 
 		// Player disconnect
 		socket.on('disconnect', function () {
-			console.log(socket.room);
+			Room.removePlayer(socket.player, socket.room);
+			console.log(Room.all());
 			socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getFullName() + ' har lämnat spelet.' });
 		});
 
@@ -84,7 +89,8 @@ exports.listen = function (app, room) {
 		// Player sends message
 		socket.on('user-message', function (data) {
 			// Is the guess correct?
-			var correct = data === 'korrekt';
+			var correct = data === 'korrekt',
+				nextPlayer;
 
 			// Send the message to all player in room
 			io.sockets.in(socket.room).emit('user-message', {
@@ -95,14 +101,24 @@ exports.listen = function (app, room) {
 
 			// Let next person draw
 			if (correct) {
-				// TODO Pick next person in que
+				// Pick next person in que
+				nextPlayer = Room.nextPlayer(socket.room);
 
-				// Tell all players that correct word is guessed and send word to next person
-				io.sockets.in(socket.room).emit('correct-word', {
+				// Tell player its his/hers turn to draw
+				io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
 					word: 'korrekt',
 					next: {
 						draw: true, // TODO Should only be true if its players turn to draw
 						word: randomWordFrom('general-easy'), // TODO Should only be sent if users turn to draw
+						player: '' // TODO Send name of next drawing person
+					}
+				});
+
+				// Tell all players that correct word is guessed and send word to next person
+				io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
+					word: 'korrekt',
+					next: {
+						draw: false, // TODO Should only be true if its players turn to draw
 						player: '' // TODO Send name of next drawing person
 					}
 				});
