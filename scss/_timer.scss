@@ -5,14 +5,14 @@
 
 #timer {
   background-color: rgba(196, 196, 196, .2);
-  height: 32px;
+  height: 28px;
   width: 100%;
   position: relative;
   text-align: left;
 
   #timer-progress {
     background-color: red;
-    height: 12px;
+    height: 8px;
     position: absolute;
     left: 10px;
     right: 10px;
