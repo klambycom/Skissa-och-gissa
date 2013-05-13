@@ -6,7 +6,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"drawing-done\">\n  <img src=\"";
+  buffer += "<div class=\"drawing-done\">\n  <div class=\"word\">";
+  if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</div>\n  <img src=\"";
   if (stack1 = helpers.img) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.img; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -14,11 +18,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" style=\"width: 100%\">\n  <p>Korrekt ord var ";
-  if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    + "\" style=\"width: 100%\">\n  <img src=\"gfx/nopic50.png\" alt=\"\" class=\"user\" />\n  <div class=\"by\">";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + ".</p>\n</div>\n";
+    + "</div>\n</div>\n";
   return buffer;
   });
 })();

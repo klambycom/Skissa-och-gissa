@@ -89,7 +89,7 @@ exports.listen = function (app, Room) {
 		// Player sends message
 		socket.on('user-message', function (data) {
 			// Is the guess correct?
-			var correct = data === 'korrekt',
+			var correct = data === (Room.getWord(socket.room) || 'korrekt'),
 				nextPlayer;
 
 			// Send the message to all player in room
@@ -101,25 +101,25 @@ exports.listen = function (app, Room) {
 
 			// Let next person draw
 			if (correct) {
-				// Pick next person in que
+				// Pick next person in queue
 				nextPlayer = Room.nextPlayer(socket.room);
 
 				// Tell player its his/hers turn to draw
 				io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
-					word: 'korrekt',
+					word: data,
 					next: {
-						draw: true, // TODO Should only be true if its players turn to draw
-						word: randomWordFrom('general-easy'), // TODO Should only be sent if users turn to draw
-						player: '' // TODO Send name of next drawing person
+						draw: true,
+						word: Room.setWord(socket.room, randomWordFrom('general-easy')),
+						player: nextPlayer.getAllData()
 					}
 				});
 
 				// Tell all players that correct word is guessed and send word to next person
 				io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
-					word: 'korrekt',
+					word: data,
 					next: {
-						draw: false, // TODO Should only be true if its players turn to draw
-						player: '' // TODO Send name of next drawing person
+						draw: false,
+						player: nextPlayer.getAllData()
 					}
 				});
 			}

@@ -57,10 +57,17 @@ window.onload = function () {
 			// Remove old word
 			if (typeof wordNode !== 'undefined') {
 				gameplan.removeChild(wordNode);
+				wordNode = undefined;
 				pageWrapper.classList.remove('draw');
+				chatInputField.disabled = false;
+				document.onselectstart = function () { return true; };
 			}
 
 			if (data.next.draw) {
+				// Disable chat input field
+				chatInputField.disabled = true;
+				// Disable selection
+				document.onselectstart = function () { return false; };
 				// Show new word
 				wordNode = SOG.utils.html('div', {
 					id: 'word-wrapper',
@@ -73,16 +80,22 @@ window.onload = function () {
 
 					// Show crayons
 					pageWrapper.classList.add('draw');
-
-					// TODO Disable input field
 				}, 2000);
+			} else {
+				window.setTimeout(function () {
+					chatInputField.focus(); // TODO Whats wrong?
+				}, 0);
 			}
 
 			// Save drawing in chat
 			chat.createMessage({
 				img: artboard.getImage(),
-				word: data.word
+				word: data.word,
+				name: 'Christian Nilsson'
 			});
+
+			// Clear the artboard
+			artboard.clear();
 
 			// Debugging, TODO remove
 			console.log(data);
