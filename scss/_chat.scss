@@ -24,6 +24,7 @@
     bottom: 0;
     right: 0;
     width: 0px;
+    overflow: hidden;
     background-color: rgb(229,229,229);
     -webkit-transition: all .5s .3s;
 
@@ -85,29 +86,20 @@
         }
       }
 
-      li.white a {
-        background-color: white;
-      }
-
-      li.red a {
-        background-color: rgb(236, 43, 43);
-      }
-
-      li.green a {
-        background-color: rgb(12, 170, 12);
-      }
-
-      li.blue a {
-        background-color: rgb(0, 173, 255);
-      }
-
-      li.yellow a {
-        background-color: rgb(245, 245, 81);
-      }
-
-      li.pink a {
-        background-color: pink;
-      }
+      li.white a { background-color: white; }
+      li.black a { background-color: black; }
+      li.red a { background-color: red; }
+      li.orange a { background-color: orange; }
+      li.yellow a { background-color: yellow; }
+      li.yellowgreen a { background-color: yellowgreen; }
+      li.green a { background-color: green; }
+      li.lightskyblue a { background-color: lightskyblue; }
+      li.dodgerblue a { background-color: dodgerblue; }
+      li.violet a { background-color: violet; }
+      li.pink a { background-color: pink; }
+      li.burlywood a { background-color: burlywood; }
+      li.saddlebrown a { background-color: saddlebrown; }
+      li.brown a { background-color: brown; }
     }
   }
 
@@ -126,30 +118,40 @@
       right: 0;
       bottom: 0;
       padding: 5px;
-      height: 50px;
-      background-color: rgb(214, 229, 243);
+      height: 40px;
 
       img {
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         float: left;
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
       }
 
       input {
-        height: 34px;
+        height: 30px;
         font-size: 25px;
         position: absolute;
         right: 5px;
-        left: 5px;
+        left: 50px;
         bottom: 5px;
         padding: 5px;
-        border: 3px solid rgba(0, 0, 0, .15);
-        -webkit-transition: border .5s;
+        border: 0px;
+        margin: 0;
+
+        background-color: rgb(229, 229, 229);
+        -webkit-transition: all .5s;
 
         &:focus {
           outline: 0;
-          border: 3px solid rgb(136,178,216);
-          -webkit-transition: border .5s;
+          background-color: rgb(136, 178, 216);
+          color: white;
+          -webkit-transition: all .5s;
+
+          &::-webkit-input-placeholder {
+            color: white;
+          }
         }
       }
     }
@@ -157,7 +159,7 @@
     #chat-messages {
       position: absolute;
       top: 0;
-      bottom: 60px;
+      bottom: 50px;
       left: 0;
       right: 0;
       overflow: auto;
@@ -204,7 +206,7 @@
           background-color: rgba(128, 128, 128, .05);
           line-height: 30px;
           margin-left: 35px;
-          padding-left: 5px;
+          padding: 0px 5px;
         }
 
         &.win p {
