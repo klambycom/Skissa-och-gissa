@@ -149,9 +149,10 @@
           color: white;
           -webkit-transition: all .5s;
 
-          &::-webkit-input-placeholder {
-            color: white;
-          }
+          &::-webkit-input-placeholder { color: white; }
+          &::-moz-placeholder { color: white; }
+          &:-moz-placeholder { color: white; }
+          &:-ms-input-placeholder { color: white; }
         }
       }
     }

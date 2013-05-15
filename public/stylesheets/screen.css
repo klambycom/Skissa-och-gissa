@@ -447,7 +447,19 @@ header p {
 #chat-container #chat #chat-input input:focus::-webkit-input-placeholder {
   color: white;
 }
-/* line 159, ../../scss/_chat.scss */
+/* line 153, ../../scss/_chat.scss */
+#chat-container #chat #chat-input input:focus::-moz-placeholder {
+  color: white;
+}
+/* line 154, ../../scss/_chat.scss */
+#chat-container #chat #chat-input input:focus:-moz-placeholder {
+  color: white;
+}
+/* line 155, ../../scss/_chat.scss */
+#chat-container #chat #chat-input input:focus:-ms-input-placeholder {
+  color: white;
+}
+/* line 160, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages {
   position: absolute;
   top: 0;
@@ -456,12 +468,12 @@ header p {
   right: 0;
   overflow: auto;
 }
-/* line 167, ../../scss/_chat.scss */
+/* line 168, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done {
   position: relative;
   margin: 5px;
 }
-/* line 171, ../../scss/_chat.scss */
+/* line 172, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done .word {
   background-color: rgba(37, 127, 161, 0.5);
   display: inline;
@@ -469,14 +481,14 @@ header p {
   padding: 5px;
   position: absolute;
 }
-/* line 179, ../../scss/_chat.scss */
+/* line 180, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done img.user {
   width: 50px;
   position: absolute;
   bottom: 0;
   left: 0;
 }
-/* line 186, ../../scss/_chat.scss */
+/* line 187, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done .by {
   position: absolute;
   bottom: 0;
@@ -486,27 +498,27 @@ header p {
   color: white;
   padding: 5px;
 }
-/* line 197, ../../scss/_chat.scss */
+/* line 198, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message {
   margin: 10px 5px;
 }
-/* line 200, ../../scss/_chat.scss */
+/* line 201, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
 }
-/* line 205, ../../scss/_chat.scss */
+/* line 206, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding: 0px 5px;
 }
-/* line 212, ../../scss/_chat.scss */
+/* line 213, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 217, ../../scss/_chat.scss */
+/* line 218, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;

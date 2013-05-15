@@ -1,6 +1,7 @@
 {
 	"title": "Skissa och gissa",
 	"view engine": "hbs",
+	"db": "mongodb://localhost/skissa-och-gissa",
 	"development": {
 		"port": 3000
 	},
