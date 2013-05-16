@@ -43,7 +43,7 @@ playerSchema.statics.createAndAddPoints = function (login_id, points, cb) {
 	});
 };
 
-playerSchema.statics.createPlayerOrAddPoints = function (lid, pnts, cb) {
+playerSchema.statics.createOrAddPoints = function (lid, pnts, cb) {
 	var self = this;
 
 	this.model('PlayerModel').findOne({ login_id: lid }, function (error, data) {
