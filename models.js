@@ -13,10 +13,43 @@ playerSchema = mongoose.Schema({
 	anonymous: { type: Boolean, default: false }
 });
 
-playerSchema.methods.addPoints = function (p) {
+playerSchema.methods.addPoints = function (p, cb) {
 	this.points += p;
 	this.save();
 	return this.points;
+};
+
+playerSchema.statics.createAndAddPoints = function (login_id, points, cb) {
+	this.model('PlayerModel').create({ login_id: login_id }, function (error, data) {
+		var p = 0;
+
+		if (error) {
+			// Error!
+			console.log(error);
+		} else {
+			// Player created!
+			p = data.addPoints(points);
+			if (cb) { cb(p, data); }
+		}
+	});
+};
+
+playerSchema.statics.createPlayerOrAddPoints = function (lid, pnts, cb) {
+	var self = this;
+
+	this.model('PlayerModel').findOne({ login_id: lid }, function (error, data) {
+		if (error) {
+			// Error!
+			console.log(error);
+		} else if (data) {
+			// Player found, add points!
+			var p = data.addPoints(pnts);
+			if (cb) { cb(p, data); }
+		} else {
+			// Player not found, create player, add points!
+			self.model('PlayerModel').createAndAddPoints(lid, pnts, cb);
+		}
+	});
 };
 
 mongoose.model('PlayerModel', playerSchema);
