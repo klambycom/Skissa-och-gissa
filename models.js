@@ -4,6 +4,9 @@
 var mongoose = require('mongoose'),
 	playerSchema;
 
+/*
+ * Schema
+ */
 playerSchema = mongoose.Schema({
 	login_service: { type: String, default: 'facebook' },
 	login_id: String,
@@ -13,12 +16,18 @@ playerSchema = mongoose.Schema({
 	anonymous: { type: Boolean, default: false }
 });
 
+/*
+ * Methods
+ */
 playerSchema.methods.addPoints = function (p, cb) {
 	this.points += p;
 	this.save();
 	return this.points;
 };
 
+/*
+ * Statics
+ */
 playerSchema.statics.createAndAddPoints = function (login_id, points, cb) {
 	this.model('PlayerModel').create({ login_id: login_id }, function (error, data) {
 		var p = 0;
