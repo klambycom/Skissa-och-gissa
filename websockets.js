@@ -51,7 +51,7 @@ exports.listen = function (app, Room) {
 				console.log(Room.all());
 
 				// Echo to the room that a player has connected to their room
-				socket.broadcast.to(room).emit('server-message', { text: socket.player.getFullName() + ' har anslutet!' });
+				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
 				// TODO Echo to client some information about the room (who is drawing, when its my turn, etc.)
 				//socket.emit('server-message', { text: 'Välkommen ' + socket.player.getFullName() + '!' });

@@ -32,6 +32,7 @@ window.onload = function () {
 			chatInputField = document.querySelector('#chat-input input'),
 			chatMessages = document.querySelector('#chat-messages'),
 			pageWrapper = document.querySelector('#page-wrapper'),
+			players = document.querySelector('#game-user-info .players'),
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard;
 
@@ -100,6 +101,18 @@ window.onload = function () {
 			// Debugging, TODO remove
 			console.log(data);
 			console.log('correct word: ' + data.word);
+		});
+
+		// A player joins the room
+		room.onPlayerJoinsRoom(function (player, data) {
+			// Show message in chat
+			chat.createMessage('', player.getFullName() + ' har gått med i spelet!');
+			// Add player to player-list
+			SOG.utils.html('img', {
+				src: player.getPicture(),
+				alt: player.getFullName(),
+				to: players
+			});
 		});
 
 		// Panel for crayon
