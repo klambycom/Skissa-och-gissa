@@ -35,7 +35,7 @@ exports.listen = function (app, Room) {
 			if (temp <= 10) {
 				// Leave the current room (stored in session)
 				socket.leave(socket.room);
-				//rooms[socket.room] = rooms[socket.room].filter(function (p) { return p.getSocketID() !== socket.id; });
+				Room.removePlayer(socket.player, socket.room);
 
 				// Send message to old room
 				socket.broadcast.to(socket.room).emit('server-message', {
@@ -45,7 +45,6 @@ exports.listen = function (app, Room) {
 				// Join new room
 				socket.join(room);
 				socket.room = room;
-				//rooms[room].push(socket.player);
 
 				// Add player to room
 				Room.addPlayer(socket.player, socket.room);
