@@ -158,6 +158,14 @@ window.onload = function () {
 		});
 	});
 
+	// Server chrashes or something
+	player.onDisconnect(function () {
+		SOG.browser.popup({
+			title: ':(',
+			message: 'Anslutningen till servern har brutits. Jag kanske uppdaterar spelet eller servern har kanske kraschat (förhoppningsvis inte). Du kan vänta ett par minuter och sen testa att ladda om sidan.'
+		});
+	});
+
 
 //	function signedIn() {
 //		console.log('inloggad');
