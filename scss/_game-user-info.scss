@@ -1,7 +1,10 @@
 #game-user-info {
   padding: 5px;
-  background-color: rgb(48, 48, 48);
   width: 40px;
+
+  background-color: rgba(48, 48, 48, .9);
+  -webkit-box-shadow: inset -5px 0px 20px -10px black;
+  box-shadow: inset -5px 0px 20px -10px black;
 
   position: absolute;
   top: 0;
@@ -18,6 +21,8 @@
   }
 
   .players {
+    margin-left: -1px;
+
     .player {
       position: relative;
       margin: 5px 0;
