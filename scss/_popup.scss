@@ -12,6 +12,7 @@
   background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* IE10+ */
   background: radial-gradient(ellipse at center,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#cc000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  z-index: 100000;
 
   opacity: 0;
   -webkit-transition: all .3s .1s;

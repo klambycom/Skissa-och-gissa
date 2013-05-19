@@ -31,3 +31,13 @@ header {
     clear: both;
   }
 }
+
+#page-wrapper {
+  -webkit-filter: blur(0px);
+  -webkit-transition: -webkit-filter .3s;
+
+  &.blur {
+    -webkit-filter: blur(1px);
+    -webkit-transition: -webkit-filter .4s;
+  }
+}
