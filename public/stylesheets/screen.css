@@ -221,8 +221,8 @@ header p {
 /* line 1, ../../scss/_game-user-info.scss */
 #game-user-info {
   padding: 5px;
-  background-color: gray;
-  width: 50px;
+  background-color: #303030;
+  width: 40px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -237,19 +237,55 @@ header p {
   font-weight: bold;
   margin-top: 5px;
 }
-/* line 20, ../../scss/_game-user-info.scss */
-#game-user-info .players {
-  float: right;
-  margin-right: 5px;
+/* line 21, ../../scss/_game-user-info.scss */
+#game-user-info .players .player {
+  position: relative;
+  margin: 5px 0;
 }
-/* line 24, ../../scss/_game-user-info.scss */
-#game-user-info .players img {
+/* line 25, ../../scss/_game-user-info.scss */
+#game-user-info .players .player img {
   width: 40px;
 }
 /* line 27, ../../scss/_game-user-info.scss */
-#game-user-info .players img.you {
-  border: 3px solid #88b2d8;
-  width: 34px;
+#game-user-info .players .player .information {
+  position: absolute;
+  top: 0;
+  left: 48px;
+  font-size: .9em;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  width: 200px;
+  padding: 5px;
+  display: none;
+  opacity: 0;
+  -webkit-transition: all .5s;
+}
+/* line 40, ../../scss/_game-user-info.scss */
+#game-user-info .players .player .information .name {
+  display: block;
+  padding-bottom: 1px;
+}
+/* line 45, ../../scss/_game-user-info.scss */
+#game-user-info .players .player .information .points {
+  font-size: .7em;
+  margin-top: 5px;
+  display: block;
+}
+/* line 52, ../../scss/_game-user-info.scss */
+#game-user-info .players .player:hover .information {
+  display: block;
+  opacity: 1;
+  -webkit-transition: all .5s;
+}
+/* line 59, ../../scss/_game-user-info.scss */
+#game-user-info .players .player.you .information .name {
+  display: none;
+}
+/* line 61, ../../scss/_game-user-info.scss */
+#game-user-info .players .player.you .information .points {
+  padding: 5px;
+  margin: 0px;
+  font-size: 1.4em;
 }
 
 /* line 3, ../../scss/_chat.scss */
@@ -400,7 +436,7 @@ header p {
   top: 0;
   bottom: 0;
   right: 0;
-  left: 60px;
+  left: 50px;
   background-color: white;
   -webkit-transition: all .5s .3s;
 }

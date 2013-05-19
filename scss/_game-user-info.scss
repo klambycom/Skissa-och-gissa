@@ -1,7 +1,7 @@
 #game-user-info {
   padding: 5px;
-  background-color: rgb(128, 128, 128);
-  width: 50px;
+  background-color: rgb(48, 48, 48);
+  width: 40px;
 
   position: absolute;
   top: 0;
@@ -18,15 +18,51 @@
   }
 
   .players {
-    float: right;
-    margin-right: 5px;
+    .player {
+      position: relative;
+      margin: 5px 0;
 
-    img {
-      width: 40px;
+      img { width: 40px; }
 
-      &.you {
-        border: 3px solid rgb(136,178,216);
-        width: 34px;
+      .information {
+        position: absolute;
+        top: 0;
+        left: 48px;
+        font-size: .9em;
+        background-color: rgba(0, 0, 0, .8);
+        color: white;
+        width: 200px;
+        padding: 5px;
+        display: none;
+        opacity: 0;
+        -webkit-transition: all .5s;
+
+        .name {
+          display: block;
+          padding-bottom: 1px;
+        }
+
+        .points {
+          font-size: .7em;
+          margin-top: 5px;
+          display: block;
+        }
+      }
+
+      &:hover .information {
+        display: block;
+        opacity: 1;
+        -webkit-transition: all .5s;
+      }
+
+      &.you .information {
+        .name { display: none; }
+
+        .points {
+          padding: 5px;
+          margin: 0px;
+          font-size: 1.4em;
+        }
       }
     }
   }

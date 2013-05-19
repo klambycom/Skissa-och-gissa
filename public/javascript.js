@@ -32,7 +32,7 @@ window.onload = function () {
 			chatInputField = document.querySelector('#chat-input input'),
 			chatMessages = document.querySelector('#chat-messages'),
 			pageWrapper = document.querySelector('#page-wrapper'),
-			players = document.querySelector('#game-user-info .players'),
+			playersList = document.querySelector('#game-user-info .players'),
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard;
 
@@ -108,10 +108,10 @@ window.onload = function () {
 			// Show message in chat
 			chat.createMessage('', player.getFullName() + ' har gått med i spelet!');
 			// Add player to player-list
-			SOG.utils.html('img', {
-				src: player.getPicture(),
-				alt: player.getFullName(),
-				to: players
+			playersList.innerHTML += Handlebars.templates['player.hbs']({
+				picture: player.getPicture(),
+				name: player.getFullName(),
+				points: 213
 			});
 		});
 
