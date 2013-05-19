@@ -256,38 +256,37 @@ header p {
 #game-user-info .players .player .information {
   position: absolute;
   top: 0;
-  left: 48px;
+  left: -220px;
   font-size: .9em;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   width: 200px;
   padding: 5px;
-  display: none;
   opacity: 0;
-  -webkit-transition: all .5s;
+  -webkit-transition: left .3s .1s, opacity .3s;
 }
-/* line 45, ../../scss/_game-user-info.scss */
+/* line 44, ../../scss/_game-user-info.scss */
 #game-user-info .players .player .information .name {
   display: block;
   padding-bottom: 1px;
 }
-/* line 50, ../../scss/_game-user-info.scss */
+/* line 49, ../../scss/_game-user-info.scss */
 #game-user-info .players .player .information .points {
   font-size: .7em;
   margin-top: 5px;
   display: block;
 }
-/* line 57, ../../scss/_game-user-info.scss */
+/* line 56, ../../scss/_game-user-info.scss */
 #game-user-info .players .player:hover .information {
-  display: block;
   opacity: 1;
-  -webkit-transition: all .5s;
+  left: 48px;
+  -webkit-transition: left .3s, opacity .4s .1s;
 }
-/* line 64, ../../scss/_game-user-info.scss */
+/* line 63, ../../scss/_game-user-info.scss */
 #game-user-info .players .player.you .information .name {
   display: none;
 }
-/* line 66, ../../scss/_game-user-info.scss */
+/* line 65, ../../scss/_game-user-info.scss */
 #game-user-info .players .player.you .information .points {
   padding: 5px;
   margin: 0px;
