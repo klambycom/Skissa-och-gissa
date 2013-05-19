@@ -84,7 +84,7 @@ exports.listen = function (app, Room) {
 
 		// Player sends message
 		socket.on('user-message', function (data) {
-			if (data.isBlank()) { return; }
+			if (data.isBlank() || Room.playersTurn(socket.player, socket.room)) { return; }
 
 			// Is the guess correct?
 			var word = data.compact(),
