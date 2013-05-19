@@ -33,6 +33,7 @@ window.onload = function () {
 			chatMessages = document.querySelector('#chat-messages'),
 			pageWrapper = document.querySelector('#page-wrapper'),
 			playersList = document.querySelector('#game-user-info .players'),
+			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard;
 
@@ -104,15 +105,13 @@ window.onload = function () {
 		});
 
 		// A player joins the room
-		room.onPlayerJoinsRoom(function (player, data) {
+		room.onPlayerJoinsRoom(function (p, data) {
 			// Show message in chat
-			chat.createMessage('', player.getFullName() + ' har gått med i spelet!');
+			chat.createMessage('', p.getFullName() + ' har gått med i spelet!');
 			// Add player to player-list
-			playersList.innerHTML += Handlebars.templates['player.hbs']({
-				picture: player.getPicture(),
-				name: player.getFullName(),
-				points: 213
-			});
+			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
+				return { points: 214, you: p.getSocketID() === player.getSocketID() };
+			}));
 		});
 
 		// Panel for crayon
