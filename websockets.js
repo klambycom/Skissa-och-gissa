@@ -39,7 +39,7 @@ exports.listen = function (app, Room) {
 
 				// Send message to old room
 				socket.broadcast.to(socket.room).emit('server-message', {
-					text: socket.player.getFullName() + ' har lämnat spelet.'
+					text: socket.player.getName() + ' har lämnat spelet.'
 				});
 
 				// Join new room
@@ -48,16 +48,13 @@ exports.listen = function (app, Room) {
 
 				// Add player to room
 				Room.addPlayer(socket.player, socket.room);
-				console.log(Room.all());
+				console.log(Room.all()); // TODO Remove
 
 				// Echo to the room that a player has connected to their room
 				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
-				// TODO Echo to client some information about the room (who is drawing, when its my turn, etc.)
-				//socket.emit('server-message', { text: 'Välkommen ' + socket.player.getFullName() + '!' });
-
 				// Tell browser it worked
-				socket.emit('join-room', { success: true });
+				socket.emit('join-room', { success: true, players: Room.players(socket.room) });
 			} else {
 				// Tell browser it didn't worked
 				socket.emit('join-room', { success: false, message: 'Rummet är fullt!' });
@@ -67,8 +64,8 @@ exports.listen = function (app, Room) {
 		// Player disconnect
 		socket.on('disconnect', function () {
 			Room.removePlayer(socket.player, socket.room);
-			console.log(Room.all());
-			socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getFullName() + ' har lämnat spelet.' });
+			console.log(Room.all()); // TODO Remove
+			socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getName() + ' har lämnat spelet.' });
 		});
 
 		// TODO

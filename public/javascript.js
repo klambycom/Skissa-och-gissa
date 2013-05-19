@@ -24,7 +24,7 @@ window.onload = function () {
 		showErrorMessage;
 
 	// Start game
-	startGame = function () {
+	startGame = function (data) {
 		// Html for game
 		document.getElementById('page-wrapper').innerHTML = Handlebars.templates['room.hbs']({});
 
@@ -35,10 +35,25 @@ window.onload = function () {
 			playersList = document.querySelector('#game-user-info .players'),
 			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
-			artboard = SOG.browser.artboard;
+			artboard = SOG.browser.artboard,
+			addPlayerToList;
+
+		// Add player to list
+		addPlayerToList = function (p, data) {
+			var you = p.getSocketID() === player.getSocketID();
+			// Show message in chat
+			if (!you) { chat.createMessage('', p.getName() + ' har gått med i spelet!'); }
+			// Add player to player-list
+			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
+				return { points: 214, you: you };
+			}));
+		};
 
 		// Init chat
 		chat.init({ input: chatInputField, messages: chatMessages, player: player });
+
+		// Add current players to list
+		data.players.forEach(addPlayerToList);
 
 		// Show messages in chat sent by users
 		room.onUserMessage(chat.createMessage);
@@ -105,14 +120,7 @@ window.onload = function () {
 		});
 
 		// A player joins the room
-		room.onPlayerJoinsRoom(function (p, data) {
-			// Show message in chat
-			chat.createMessage('', p.getName() + ' har gått med i spelet!');
-			// Add player to player-list
-			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
-				return { points: 214, you: p.getSocketID() === player.getSocketID() };
-			}));
-		});
+		room.onPlayerJoinsRoom(addPlayerToList);
 
 		// Panel for crayon
 		SOG.browser.crayons.init({
