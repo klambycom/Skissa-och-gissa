@@ -723,7 +723,7 @@ header p {
 /* line 31, ../../scss/_timer.scss */
 #timer #timer-progress:after {
   content: '';
-  background-color: rgba(231, 231, 231, 0.8);
+  background-color: rgba(231, 231, 231, 0.95);
   border-radius: 0 2px 2px 0;
   height: 12px;
   float: right;
