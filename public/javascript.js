@@ -107,7 +107,7 @@ window.onload = function () {
 		// A player joins the room
 		room.onPlayerJoinsRoom(function (p, data) {
 			// Show message in chat
-			chat.createMessage('', p.getFullName() + ' har gått med i spelet!');
+			chat.createMessage('', p.getName() + ' har gått med i spelet!');
 			// Add player to player-list
 			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
 				return { points: 214, you: p.getSocketID() === player.getSocketID() };
