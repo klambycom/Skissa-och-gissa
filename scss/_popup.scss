@@ -1,0 +1,61 @@
+#popup-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .75);
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 92%, rgba(0,0,0,0.8) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.5)), color-stop(92%,rgba(0,0,0,0.8)), color-stop(100%,rgba(0,0,0,0.8))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.8) 92%,rgba(0,0,0,0.8) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#cc000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  opacity: 0;
+  -webkit-transition: all .3s .1s;
+
+  #popup {
+    width: 400px;
+    background-color: white;
+    min-height: 100px;
+    margin: 0 auto;
+    border-radius: 4px 4px 3px 3px;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .4);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .4);
+
+    -webkit-transform: scale(0);
+    -webkit-transition: all .5s;
+
+    .title {
+      background-color: rgb(43, 171, 189);
+      padding: 8px;
+      font-size: 1.2em;
+      color: white;
+      font-weight: bold;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .message {
+      padding: 5px;
+      font-size: .95em;
+    }
+
+    .extra {
+      font-size: .75em;
+      color: rgb(82, 82, 82);
+      padding: 5px;
+    }
+  }
+
+  &.show {
+    opacity: 1;
+    -webkit-transition: all .3s .1s;
+
+    #popup {
+      -webkit-transform: scale(1);
+      -webkit-transition: all .5s;
+    }
+  }
+}

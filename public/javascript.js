@@ -162,7 +162,8 @@ window.onload = function () {
 	player.onDisconnect(function () {
 		SOG.browser.popup({
 			title: ':(',
-			message: 'Anslutningen till servern har brutits. Jag kanske uppdaterar spelet eller servern har kanske kraschat (förhoppningsvis inte). Du kan vänta ett par minuter och sen testa att ladda om sidan.'
+			message: 'Anslutningen till servern har brutits. Jag kanske uppdaterar spelet eller servern har kanske kraschat (förhoppningsvis inte).',
+			extra: 'Vänta ett par minuter så borde webbplatsen laddas om, du behöver inte göra något.'
 		});
 	});
 
