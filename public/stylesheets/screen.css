@@ -97,20 +97,22 @@ header p {
   padding: 10px;
   margin-top: 20px;
   border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
-/* line 28, ../../scss/_main.scss */
+/* line 30, ../../scss/_main.scss */
 #main:after {
   display: block;
   content: "";
   clear: both;
 }
 
-/* line 35, ../../scss/_main.scss */
+/* line 37, ../../scss/_main.scss */
 #page-wrapper {
   -webkit-filter: blur(0px);
   -webkit-transition: -webkit-filter .3s;
 }
-/* line 39, ../../scss/_main.scss */
+/* line 41, ../../scss/_main.scss */
 #page-wrapper.blur {
   -webkit-filter: blur(1px);
   -webkit-transition: -webkit-filter .4s;
