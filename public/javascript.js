@@ -153,7 +153,10 @@ window.onload = function () {
 	// Change room
 	gamesList.forEach(function (game) {
 		game.addEventListener('click', function (e) {
-			room.changeTo(game.dataset.name, { success: startGame, fail: showErrorMessage });
+			room.changeTo(game.dataset.name, {
+				success: startGame,
+				fail: SOG.browser.popup.flip().curry('simple')
+			});
 			e.preventDefault();
 		});
 	});

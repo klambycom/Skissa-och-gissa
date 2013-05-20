@@ -31,8 +31,7 @@ exports.listen = function (app, Room) {
 
 		// Join a game
 		socket.on('join-room', function (room) {
-			var temp = 5;
-			if (temp <= 10) {
+			if (Room.players(room).length < 10) {
 				// Leave the current room (stored in session)
 				socket.leave(socket.room);
 				Room.removePlayer(socket.player, socket.room);
