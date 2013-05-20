@@ -231,6 +231,23 @@ header p {
   margin-right: 5px;
 }
 
+/* line 1, ../../scss/_footer.scss */
+#footer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: .75em;
+  color: #8a8a8a;
+}
+/* line 7, ../../scss/_footer.scss */
+#footer a {
+  color: #616161;
+  text-decoration: none;
+}
+/* line 10, ../../scss/_footer.scss */
+#footer a:hover {
+  text-decoration: underline;
+}
+
 /* line 1, ../../scss/_game-user-info.scss */
 #game-user-info {
   padding: 5px;
