@@ -71,3 +71,30 @@
     }
   }
 }
+
+@-webkit-keyframes simplepopup {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; }
+  97%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#simple-popup-message-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  .simple-popup-message {
+    background-color: rgb(6, 225, 255);
+    display: inline;
+    padding: 5px 50px;
+    color: white;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, .3);
+    box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, .3);
+
+    opacity: 0;
+    -webkit-animation: simplepopup 10s;
+  }
+}
