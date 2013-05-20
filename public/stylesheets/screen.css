@@ -793,18 +793,29 @@ header p {
   padding: 5px;
   font-size: .95em;
 }
-/* line 46, ../../scss/_popup.scss */
+/* line 45, ../../scss/_popup.scss */
+#popup-wrapper #popup .message ul {
+  font-size: .85em;
+  list-style: disc;
+  margin: 0px 15px;
+}
+/* line 50, ../../scss/_popup.scss */
+#popup-wrapper #popup .message ul li {
+  margin: 5px;
+}
+/* line 56, ../../scss/_popup.scss */
 #popup-wrapper #popup .extra {
   font-size: .75em;
   color: #525252;
   padding: 5px;
+  text-align: center;
 }
-/* line 53, ../../scss/_popup.scss */
+/* line 64, ../../scss/_popup.scss */
 #popup-wrapper.show {
   opacity: 1;
   -webkit-transition: all .3s .1s;
 }
-/* line 57, ../../scss/_popup.scss */
+/* line 68, ../../scss/_popup.scss */
 #popup-wrapper.show #popup {
   -webkit-transform: scale(1);
   -webkit-transition: all .5s;

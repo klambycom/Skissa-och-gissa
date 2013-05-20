@@ -41,12 +41,23 @@
     .message {
       padding: 5px;
       font-size: .95em;
+
+      ul {
+        font-size: .85em;
+        list-style: disc;
+        margin: 0px 15px;
+
+        li {
+          margin: 5px;
+        }
+      }
     }
 
     .extra {
       font-size: .75em;
       color: rgb(82, 82, 82);
       padding: 5px;
+      text-align: center;
     }
   }
 
