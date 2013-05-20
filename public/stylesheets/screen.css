@@ -147,21 +147,31 @@ header p {
   background-color: #40964E;
   content: 'lätt';
 }
-/* line 30, ../../scss/_games.scss */
+/* line 29, ../../scss/_games.scss */
+#games .game {
+  background-color: white;
+  -webkit-transition: background-color .3s;
+}
+/* line 33, ../../scss/_games.scss */
+#games .game:hover {
+  background-color: whitesmoke;
+  -webkit-transition: background-color .3s;
+}
+/* line 38, ../../scss/_games.scss */
 #games .game:not(:last-child) {
   margin-bottom: 20px;
 }
-/* line 34, ../../scss/_games.scss */
+/* line 42, ../../scss/_games.scss */
 #games .game h1 {
   font-size: 2em;
   margin-bottom: 5px;
 }
-/* line 39, ../../scss/_games.scss */
+/* line 47, ../../scss/_games.scss */
 #games .game img {
   float: left;
   margin-right: 10px;
 }
-/* line 44, ../../scss/_games.scss */
+/* line 52, ../../scss/_games.scss */
 #games .game:after {
   content: "";
   display: block;
