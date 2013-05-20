@@ -31,7 +31,11 @@ exports.listen = function (app, Room) {
 
 		// Join a game
 		socket.on('join-room', function (room) {
-			if (Room.players(room).length < 10) {
+			try {
+				// Add player to room
+				Room.addPlayer(socket.player, room);
+				console.log(Room.all()); // TODO Remove
+
 				// Leave the current room (stored in session)
 				socket.leave(socket.room);
 				Room.removePlayer(socket.player, socket.room);
@@ -45,18 +49,13 @@ exports.listen = function (app, Room) {
 				socket.join(room);
 				socket.room = room;
 
-				// Add player to room
-				Room.addPlayer(socket.player, socket.room);
-				console.log(Room.all()); // TODO Remove
-
 				// Echo to the room that a player has connected to their room
 				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
 				// Tell browser it worked
 				socket.emit('join-room', { success: true, players: Room.players(socket.room) });
-			} else {
-				// Tell browser it didn't worked
-				socket.emit('join-room', { success: false, message: 'Rummet är fullt!' });
+			} catch (e) {
+				socket.emit('error-message', { name: e.name, message: e.message });
 			}
 		});
 

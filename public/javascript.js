@@ -16,8 +16,9 @@
 window.onload = function () {
 	'use strict';
 
-	var player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
-		room = new SOG.browser.Room({ id: 'room', name: 'Lobby' }),
+	var game = SOG.browser.game,
+		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
+		room = new SOG.browser.Room({ id: 'room', name: 'Lobby', socket: game.getSocket() }),
 		gamesList = [].slice.call(document.querySelectorAll('#games .game')),
 		wordNode,
 		startGame,
@@ -169,6 +170,11 @@ window.onload = function () {
 			extra: 'Vänta ett par minuter så borde spelet laddas om av sig själv.',
 			escape: false
 		});
+	});
+
+	// Show error messages on error
+	game.onError(function (e) {
+		SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
 	});
 
 
