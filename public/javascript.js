@@ -162,16 +162,6 @@ window.onload = function () {
 		});
 	});
 
-	// Server chrashes or something
-	player.onDisconnect(function () {
-		SOG.browser.popup({
-			title: ':(',
-			message: 'Anslutningen till servern har brutits. Möjliga anledningar: <ul><li>Jag uppdaterar spelet (bra).</li><li>Servern har kraschat (dåligt).</li></ul>',
-			extra: 'Vänta ett par minuter så borde spelet laddas om av sig själv.',
-			escape: false
-		});
-	});
-
 	// Show error messages on error
 	game.onError(function (e) {
 		SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
