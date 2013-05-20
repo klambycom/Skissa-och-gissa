@@ -87,7 +87,7 @@ exports.listen = function (app, Room) {
 
 			// Is the guess correct?
 			var word = data.compact(),
-				correct = word === (Room.getWord(socket.room) || 'korrekt'),
+				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase(),
 				nextPlayer;
 
 			// Send the message to all player in room
