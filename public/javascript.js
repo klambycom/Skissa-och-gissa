@@ -99,10 +99,14 @@ window.onload = function () {
 					// Show crayons
 					pageWrapper.classList.add('draw');
 				}, 2000);
+				// Enable drawing
+				artboard.enable();
 			} else {
 				window.setTimeout(function () {
 					chatInputField.focus(); // TODO Whats wrong?
 				}, 0);
+				// Disable drawing
+				artboard.disable();
 			}
 
 			// Save drawing in chat

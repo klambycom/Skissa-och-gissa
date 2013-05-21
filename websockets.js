@@ -61,9 +61,13 @@ exports.listen = function (app, Room) {
 
 		// Player disconnect
 		socket.on('disconnect', function () {
-			Room.removePlayer(socket.player, socket.room);
-			console.log(Room.all()); // TODO Remove
-			socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getName() + ' har lämnat spelet.' });
+			try {
+				Room.removePlayer(socket.player, socket.room);
+				console.log(Room.all()); // TODO Remove
+				socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getName() + ' har lämnat spelet.' });
+			} catch (e) {
+				console.log(e);
+			}
 		});
 
 		// TODO
@@ -76,8 +80,9 @@ exports.listen = function (app, Room) {
 
 		// Get drawing-points from player, and send to the others
 		socket.on('canvas', function (data) {
-			//room.emit('canvas', data);
-			socket.broadcast.to(socket.room).emit('canvas', data);
+			if (Room.playersTurn(socket.player, socket.room)) {
+				socket.broadcast.to(socket.room).emit('canvas', data);
+			}
 		});
 
 		// Player sends message
