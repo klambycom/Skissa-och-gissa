@@ -797,6 +797,10 @@ header p {
   -webkit-transition: all .3s .1s;
 }
 /* line 20, ../../scss/_popup.scss */
+#popup-wrapper.not-closeable {
+  cursor: not-allowed;
+}
+/* line 22, ../../scss/_popup.scss */
 #popup-wrapper #popup {
   width: 400px;
   background-color: white;
@@ -805,10 +809,11 @@ header p {
   border-radius: 4px 4px 3px 3px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+  cursor: auto;
   -webkit-transform: scale(0);
   -webkit-transition: all .5s;
 }
-/* line 32, ../../scss/_popup.scss */
+/* line 35, ../../scss/_popup.scss */
 #popup-wrapper #popup .title {
   background-color: #2babbd;
   padding: 8px;
@@ -817,62 +822,62 @@ header p {
   font-weight: bold;
   border-radius: 3px 3px 0 0;
 }
-/* line 41, ../../scss/_popup.scss */
+/* line 44, ../../scss/_popup.scss */
 #popup-wrapper #popup .message {
   padding: 5px;
   font-size: .95em;
 }
-/* line 45, ../../scss/_popup.scss */
+/* line 48, ../../scss/_popup.scss */
 #popup-wrapper #popup .message ul {
   font-size: .85em;
   list-style: disc;
   margin: 0px 15px;
 }
-/* line 50, ../../scss/_popup.scss */
+/* line 53, ../../scss/_popup.scss */
 #popup-wrapper #popup .message ul li {
   margin: 5px;
 }
-/* line 56, ../../scss/_popup.scss */
+/* line 59, ../../scss/_popup.scss */
 #popup-wrapper #popup .extra {
   font-size: .75em;
   color: #525252;
   padding: 5px;
   text-align: center;
 }
-/* line 64, ../../scss/_popup.scss */
+/* line 67, ../../scss/_popup.scss */
 #popup-wrapper.show {
   opacity: 1;
   -webkit-transition: all .3s .1s;
 }
-/* line 68, ../../scss/_popup.scss */
+/* line 71, ../../scss/_popup.scss */
 #popup-wrapper.show #popup {
   -webkit-transform: scale(1);
   -webkit-transition: all .5s;
 }
 
 @-webkit-keyframes simplepopup {
-  /* line 76, ../../scss/_popup.scss */
+  /* line 79, ../../scss/_popup.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 77, ../../scss/_popup.scss */
+  /* line 80, ../../scss/_popup.scss */
   3% {
     opacity: 1;
   }
 
-  /* line 78, ../../scss/_popup.scss */
+  /* line 81, ../../scss/_popup.scss */
   97% {
     opacity: 1;
   }
 
-  /* line 79, ../../scss/_popup.scss */
+  /* line 82, ../../scss/_popup.scss */
   100% {
     opacity: 0;
   }
 }
 
-/* line 82, ../../scss/_popup.scss */
+/* line 85, ../../scss/_popup.scss */
 #simple-popup-message-wrapper {
   position: fixed;
   top: 20px;
@@ -880,7 +885,7 @@ header p {
   right: 0;
   text-align: center;
 }
-/* line 89, ../../scss/_popup.scss */
+/* line 92, ../../scss/_popup.scss */
 #simple-popup-message-wrapper .simple-popup-message {
   background-color: #06e1ff;
   display: inline;
