@@ -5,7 +5,8 @@ var Player = require('./lib/server/Player').Player,
 	dictionaries = require('./dictionary.json'),
 	sugar = require('sugar'),
 	fs = require('fs'),
-	randomWordFrom = function (c) { return dictionaries[c].words.sample(); };
+	randomWordFrom = function (c) { return dictionaries[c].words.sample(); },
+	timer = {};
 
 exports.listen = function (app, Room) {
 	var io = require('socket.io').listen(app);
@@ -85,14 +86,49 @@ exports.listen = function (app, Room) {
 			}
 		});
 
+		var newWord = function (word) {
+			// Start timer
+			clearTimeout(timer[socket.room]);
+			timer[socket.room] = setTimeout(newWord, (dictionaries['general-easy'].time * 60000) + 2000);
+
+			// Pick next person in queue
+			var nextPlayer = Room.nextPlayer(socket.room);
+
+			// Cancel if room is empty
+			if (typeof nextPlayer === 'undefined') {
+				clearTimeout(timer[socket.room]);
+				return;
+			}
+
+			// Tell player its his/hers turn to draw
+			io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
+				word: word,
+				next: {
+					draw: true,
+					word: Room.setWord(socket.room, randomWordFrom('general-easy')),
+					player: nextPlayer.getAllData(),
+					minutes: dictionaries['general-easy'].time
+				}
+			});
+
+			// Tell all players that correct word is guessed and send word to next person
+			io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
+				word: word,
+				next: {
+					draw: false,
+					player: nextPlayer.getAllData(),
+					minutes: dictionaries['general-easy'].time
+				}
+			});
+		};
+
 		// Player sends message
 		socket.on('user-message', function (data) {
 			if (data.isBlank() || Room.playersTurn(socket.player, socket.room)) { return; }
 
 			// Is the guess correct?
 			var word = data.compact(),
-				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase(),
-				nextPlayer;
+				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase();
 
 			// Send the message to all player in room
 			io.sockets.in(socket.room).emit('user-message', {
@@ -102,29 +138,7 @@ exports.listen = function (app, Room) {
 			});
 
 			// Let next person draw
-			if (correct) {
-				// Pick next person in queue
-				nextPlayer = Room.nextPlayer(socket.room);
-
-				// Tell player its his/hers turn to draw
-				io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
-					word: word,
-					next: {
-						draw: true,
-						word: Room.setWord(socket.room, randomWordFrom('general-easy')),
-						player: nextPlayer.getAllData()
-					}
-				});
-
-				// Tell all players that correct word is guessed and send word to next person
-				io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
-					word: word,
-					next: {
-						draw: false,
-						player: nextPlayer.getAllData()
-					}
-				});
-			}
+			if (correct) { newWord(word); }
 		});
 
 		// Save image to server

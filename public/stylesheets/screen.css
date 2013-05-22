@@ -767,7 +767,23 @@ header p {
   border-radius: 0 2px 2px 0;
   height: 12px;
   float: right;
-  -webkit-animation: PROGRESS 60s infinite;
+  width: 100%;
+}
+/* line 40, ../../scss/_timer.scss */
+#timer #timer-progress.min-2:after {
+  -webkit-animation: PROGRESS 120s;
+}
+/* line 41, ../../scss/_timer.scss */
+#timer #timer-progress.min-3:after {
+  -webkit-animation: PROGRESS 180s;
+}
+/* line 42, ../../scss/_timer.scss */
+#timer #timer-progress.min-4:after {
+  -webkit-animation: PROGRESS 240s;
+}
+/* line 43, ../../scss/_timer.scss */
+#timer #timer-progress.min-5:after {
+  -webkit-animation: PROGRESS 300s;
 }
 
 /* line 1, ../../scss/_popup.scss */

@@ -34,7 +34,12 @@
       border-radius: 0 2px 2px 0;
       height: 12px;
       float: right;
-      -webkit-animation: PROGRESS 60s infinite;
+      width: 100%;
     }
+
+    &.min-2:after { -webkit-animation: PROGRESS 120s; }
+    &.min-3:after { -webkit-animation: PROGRESS 180s; }
+    &.min-4:after { -webkit-animation: PROGRESS 240s; }
+    &.min-5:after { -webkit-animation: PROGRESS 300s; }
   }
 }

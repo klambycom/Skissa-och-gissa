@@ -34,6 +34,7 @@ window.onload = function () {
 			chatMessages = document.querySelector('#chat-messages'),
 			pageWrapper = document.querySelector('#page-wrapper'),
 			playersList = document.querySelector('#game-user-info .players'),
+			timer = document.querySelector('#timer-progress'),
 			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard,
@@ -118,6 +119,10 @@ window.onload = function () {
 
 			// Clear the artboard
 			artboard.clear();
+
+			// Start timer
+			timer.className = '';
+			setTimeout(function () { timer.classList.add('min-' + data.next.minutes); }, 2000);
 
 			// Debugging, TODO remove
 			console.log(data);
