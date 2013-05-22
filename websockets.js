@@ -30,6 +30,52 @@ exports.listen = function (app, Room) {
 			//rooms.lobby.push(socket.player);
 		});
 
+
+		var newWord = function (word) {
+			// Start timer
+			clearTimeout(timer[socket.room]);
+			timer[socket.room] = setTimeout(newWord, (dictionaries['general-easy'].time * 60000) + 2000);
+
+			// Pick next person in queue
+			var nextPlayer = Room.nextPlayer(socket.room);
+
+			// Cancel if room is empty
+			if (typeof nextPlayer === 'undefined') {
+				clearTimeout(timer[socket.room]);
+				return;
+			}
+
+			// Check if there is just one player
+			if (Room.players(socket.room).length === 1) {
+				socket.broadcast.to(socket.room).emit('server-message', {
+					text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.'
+				});
+				return;
+			}
+
+			// Tell player its his/hers turn to draw
+			io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
+				word: word,
+				next: {
+					draw: true,
+					word: Room.setWord(socket.room, randomWordFrom('general-easy')),
+					player: nextPlayer.getAllData(),
+					minutes: dictionaries['general-easy'].time
+				}
+			});
+
+			// Tell all players that correct word is guessed and send word to next person
+			io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
+				word: word,
+				next: {
+					draw: false,
+					player: nextPlayer.getAllData(),
+					minutes: dictionaries['general-easy'].time
+				}
+			});
+		};
+
+
 		// Join a game
 		socket.on('join-room', function (room) {
 			try {
@@ -55,6 +101,13 @@ exports.listen = function (app, Room) {
 
 				// Tell browser it worked
 				socket.emit('join-room', { success: true, players: Room.players(socket.room) });
+
+				// Start game if its the second player
+				if (Room.players(socket.room).length === 2) {
+					newWord('fixa');
+				} else if (Room.players(socket.room).length === 1) {
+					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
+				}
 			} catch (e) {
 				socket.emit('error-message', { name: e.name, message: e.message });
 			}
@@ -85,42 +138,6 @@ exports.listen = function (app, Room) {
 				socket.broadcast.to(socket.room).emit('canvas', data);
 			}
 		});
-
-		var newWord = function (word) {
-			// Start timer
-			clearTimeout(timer[socket.room]);
-			timer[socket.room] = setTimeout(newWord, (dictionaries['general-easy'].time * 60000) + 2000);
-
-			// Pick next person in queue
-			var nextPlayer = Room.nextPlayer(socket.room);
-
-			// Cancel if room is empty
-			if (typeof nextPlayer === 'undefined') {
-				clearTimeout(timer[socket.room]);
-				return;
-			}
-
-			// Tell player its his/hers turn to draw
-			io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
-				word: word,
-				next: {
-					draw: true,
-					word: Room.setWord(socket.room, randomWordFrom('general-easy')),
-					player: nextPlayer.getAllData(),
-					minutes: dictionaries['general-easy'].time
-				}
-			});
-
-			// Tell all players that correct word is guessed and send word to next person
-			io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
-				word: word,
-				next: {
-					draw: false,
-					player: nextPlayer.getAllData(),
-					minutes: dictionaries['general-easy'].time
-				}
-			});
-		};
 
 		// Player sends message
 		socket.on('user-message', function (data) {
