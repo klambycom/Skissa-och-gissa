@@ -9,8 +9,8 @@ var express = require('express'),
 	config = require('./configure.json'),
 	flash = require('connect-flash'),
 	server,
-	room = require('./lib/server/room').room,
-	mongoose = require('mongoose');
+	room = require('./lib/server/room').room;
+	//mongoose = require('mongoose');
 
 // Configure
 var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
@@ -43,9 +43,9 @@ app.configure('production', function () {
 });
 
 // MongoDB
-mongoose.connect(app.get('db'));
-require('./models');
-require('./test');
+//mongoose.connect(app.get('db'));
+//require('./models');
+//require('./test');
 
 // Create some rooms
 room.create(['general-easy', 'general-moderate', 'general-hard']);
