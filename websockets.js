@@ -1,6 +1,8 @@
 /*jslint node: true, es5: true */
 'use strict';
 
+require('./lib/utils/functional');
+
 var Player = require('./lib/server/Player').Player,
 	dictionaries = require('./dictionary.json'),
 	sugar = require('sugar'),
@@ -31,25 +33,28 @@ exports.listen = function (app, Room) {
 		});
 
 
-		var newWord = function (word) {
+		var newWord = function (r, w) {
 			// Start timer
-			clearTimeout(timer[socket.room]);
-			timer[socket.room] = setTimeout(newWord, (dictionaries['general-easy'].time * 60000) + 2000);
+			clearTimeout(timer[r]);
+			timer[r] = setTimeout(newWord.curry(r), (dictionaries['general-easy'].time * 60000) + 2000);
 
 			// Pick next person in queue
-			var nextPlayer = Room.nextPlayer(socket.room);
+			var nextPlayer = Room.nextPlayer(r),
+				word = w || Room.getWord(r);
 
 			// Cancel if room is empty
 			if (typeof nextPlayer === 'undefined') {
-				clearTimeout(timer[socket.room]);
+				clearTimeout(timer[r]);
 				return;
 			}
 
 			// Check if there is just one player
-			if (Room.players(socket.room).length === 1) {
-				socket.broadcast.to(socket.room).emit('server-message', {
+			if (Room.players(r).length === 1) {
+				socket.broadcast.to(r).emit('correct-word', { word: word });
+				socket.broadcast.to(r).emit('server-message', {
 					text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.'
 				});
+				clearTimeout(timer[r]);
 				return;
 			}
 
@@ -58,14 +63,14 @@ exports.listen = function (app, Room) {
 				word: word,
 				next: {
 					draw: true,
-					word: Room.setWord(socket.room, randomWordFrom('general-easy')),
+					word: Room.setWord(r, randomWordFrom('general-easy')),
 					player: nextPlayer.getAllData(),
 					minutes: dictionaries['general-easy'].time
 				}
 			});
 
 			// Tell all players that correct word is guessed and send word to next person
-			io.sockets.in(socket.room).except(nextPlayer.getSocketID()).emit('correct-word', {
+			io.sockets.in(r).except(nextPlayer.getSocketID()).emit('correct-word', {
 				word: word,
 				next: {
 					draw: false,
@@ -104,7 +109,7 @@ exports.listen = function (app, Room) {
 
 				// Start game if its the second player
 				if (Room.players(socket.room).length === 2) {
-					newWord('fixa');
+					newWord(socket.room, '');
 				} else if (Room.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
 				}
@@ -155,7 +160,7 @@ exports.listen = function (app, Room) {
 			});
 
 			// Let next person draw
-			if (correct) { newWord(word); }
+			if (correct) { newWord(socket.room); }
 		});
 
 		// Save image to server

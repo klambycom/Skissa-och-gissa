@@ -82,7 +82,7 @@ window.onload = function () {
 				document.onselectstart = function () { return true; };
 			}
 
-			if (data.next.draw) {
+			if (data.next && data.next.draw) {
 				// Disable chat input field
 				chatInputField.disabled = true;
 				// Disable selection
@@ -111,18 +111,20 @@ window.onload = function () {
 			}
 
 			// Save drawing in chat
-			chat.createMessage({
-				img: artboard.getImage(),
-				word: data.word,
-				name: 'Christian Nilsson'
-			});
+			if (data.word !== '') {
+				chat.createMessage({
+					img: artboard.getImage(),
+					word: data.word,
+					name: 'Christian Nilsson'
+				});
+			}
 
 			// Clear the artboard
 			artboard.clear();
 
 			// Start timer
 			timer.className = '';
-			setTimeout(function () { timer.classList.add('min-' + data.next.minutes); }, 2000);
+			setTimeout(function () { timer.classList.add('min-' + (data.next.minutes || 0)); }, 2000);
 
 			// Debugging, TODO remove
 			console.log(data);
