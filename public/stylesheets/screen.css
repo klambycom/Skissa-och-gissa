@@ -605,6 +605,8 @@ header p {
   font-size: .75em;
   color: gray;
   font-weight: lighter;
+  text-indent: -10px;
+  padding-left: 10px;
 }
 
 /* line 1, ../../scss/_gameplan.scss */
