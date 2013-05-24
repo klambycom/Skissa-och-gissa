@@ -14,6 +14,8 @@ module.exports = function (grunt) {
 					'lib/utils/functional.js', 'lib/utils/namespace.js', 'lib/utils/currying.js', 'lib/utils/html.js',
 					'lib/utils/Subscriber.js', 'lib/utils/Channel.js', 'lib/utils/Mediator.js',
 
+					//'lib/utils',
+					//'public/templates/', // Should work, but will test later.
 					'public/templates/facebook.js', 'public/templates/popup.js', 'public/templates/player.js',
 					'public/templates/room.js', 'public/templates/message.js', 'public/templates/servermessage.js',
 					'public/templates/donemessage.js',
@@ -34,7 +36,8 @@ module.exports = function (grunt) {
 
 					'public/javascript.js'
 				],
-				dest: 'public/javascript/<%= pkg.name %>.js'
+				dest: 'public/javascript/<%= pkg.name %>.js',
+				nonull: true
 			}
 		},
 		uglify: {
