@@ -7,7 +7,6 @@ var Player = require('./lib/server/Player').Player,
 	dictionaries = require('./dictionary.json'),
 	sugar = require('sugar'),
 	fs = require('fs'),
-	randomWordFrom = function (c) { return dictionaries[c].words.sample(); },
 	timer = {};
 
 exports.listen = function (app, Room) {
@@ -33,10 +32,10 @@ exports.listen = function (app, Room) {
 		});
 
 
-		var newWord = function (r, w) {
+		var newWord = function (r, d, w) {
 			// Start timer
 			clearTimeout(timer[r]);
-			timer[r] = setTimeout(newWord.curry(r), (dictionaries['general-easy'].time * 60000) + 2000);
+			timer[r] = setTimeout(newWord.curry(r, d), (d.time * 60000) + 2000);
 
 			// Pick next person in queue
 			var nextPlayer = Room.nextPlayer(r),
@@ -63,9 +62,9 @@ exports.listen = function (app, Room) {
 				word: word,
 				next: {
 					draw: true,
-					word: Room.setWord(r, randomWordFrom('general-easy')),
+					word: Room.setWord(r, d.words.sample()),
 					player: nextPlayer.getAllData(),
-					minutes: dictionaries['general-easy'].time
+					minutes: d.time
 				}
 			});
 
@@ -75,7 +74,7 @@ exports.listen = function (app, Room) {
 				next: {
 					draw: false,
 					player: nextPlayer.getAllData(),
-					minutes: dictionaries['general-easy'].time
+					minutes: d.time
 				}
 			});
 		};
@@ -109,7 +108,7 @@ exports.listen = function (app, Room) {
 
 				// Start game if its the second player
 				if (Room.players(socket.room).length === 2) {
-					newWord(socket.room, '');
+					newWord(socket.room, dictionaries['general-easy'], '');
 				} else if (Room.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
 				}
@@ -160,7 +159,7 @@ exports.listen = function (app, Room) {
 			});
 
 			// Let next person draw
-			if (correct) { newWord(socket.room); }
+			if (correct) { newWord(socket.room, dictionaries['general-easy']); }
 		});
 
 		// Save image to server
