@@ -81,6 +81,7 @@ window.onload = function () {
 				dPoints: drawer.points
 			}));
 			// Update scores
+			// TODO Make nicer
 			document.querySelector('#player-' + guesser.player.getSocketID() + ' .points').innerHTML = guesser.total + ' poäng';
 			document.querySelector('#player-' + drawer.player.getSocketID() + ' .points').innerHTML = drawer.total + ' poäng';
 		});
