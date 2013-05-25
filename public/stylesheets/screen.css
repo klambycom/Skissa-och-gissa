@@ -862,40 +862,62 @@ header p {
   padding: 5px;
   text-align: center;
 }
-/* line 67, ../../scss/_popup.scss */
+/* line 66, ../../scss/_popup.scss */
+#popup-wrapper #popup .buttons {
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  text-align: right;
+}
+/* line 72, ../../scss/_popup.scss */
+#popup-wrapper #popup .buttons .ok-btn {
+  margin: 5px;
+  background-color: #2bbd88;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  -webkit-transition: all .5s;
+  border-radius: 3px;
+}
+/* line 81, ../../scss/_popup.scss */
+#popup-wrapper #popup .buttons .ok-btn:hover {
+  background-color: rgba(43, 189, 136, 0.7);
+  -webkit-transition: all .5s;
+}
+/* line 89, ../../scss/_popup.scss */
 #popup-wrapper.show {
   opacity: 1;
   -webkit-transition: all .3s .1s;
 }
-/* line 71, ../../scss/_popup.scss */
+/* line 93, ../../scss/_popup.scss */
 #popup-wrapper.show #popup {
   -webkit-transform: scale(1);
   -webkit-transition: all .5s;
 }
 
 @-webkit-keyframes simplepopup {
-  /* line 79, ../../scss/_popup.scss */
+  /* line 101, ../../scss/_popup.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 80, ../../scss/_popup.scss */
+  /* line 102, ../../scss/_popup.scss */
   3% {
     opacity: 1;
   }
 
-  /* line 81, ../../scss/_popup.scss */
+  /* line 103, ../../scss/_popup.scss */
   97% {
     opacity: 1;
   }
 
-  /* line 82, ../../scss/_popup.scss */
+  /* line 104, ../../scss/_popup.scss */
   100% {
     opacity: 0;
   }
 }
 
-/* line 85, ../../scss/_popup.scss */
+/* line 107, ../../scss/_popup.scss */
 #simple-popup-message-wrapper {
   position: fixed;
   top: 20px;
@@ -903,7 +925,7 @@ header p {
   right: 0;
   text-align: center;
 }
-/* line 92, ../../scss/_popup.scss */
+/* line 114, ../../scss/_popup.scss */
 #simple-popup-message-wrapper .simple-popup-message {
   background-color: #06e1ff;
   display: inline;
