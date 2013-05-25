@@ -190,7 +190,13 @@ window.onload = function () {
 
 	// Show error messages on error
 	game.onError(function (e) {
-		SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
+		var p = SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
+
+		if (e.name === 'DisconnectedException') {
+			game.onConnect(function () {
+				p.addBtn('Ok, anslut igen!', 'http://skissaochgissa.se');
+			});
+		}
 	});
 
 

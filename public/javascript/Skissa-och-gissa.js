@@ -615,8 +615,8 @@ SOG.browser.game = (function () {
 			},
 			'DisconnectedException': {
 				title: ':(',
-				message: 'Anslutningen till servern har brutits. Möjliga anledningar: <ul><li>Jag uppdaterar spelet (bra).</li><li>Servern har kraschat (dåligt).</li></ul>',
-				extra: 'Vänta ett par minuter så borde spelet laddas om av sig själv.',
+				message: 'Anslutningen till servern har brutits. Möjliga anledningar: <ul><li>Jag uppdaterar spelet (bra).</li><li>Servern har kraschat (dåligt).</li><li>Du har varit inaktiv väldigt länge (tråkigt).</li></ul>',
+				extra: 'Vänta ett par minuter och testa sen att ladda om sidan.',
 				escape: false
 			},
 			'ScoreMessage': "{gName} fick {gPoints} ponäng efter att ha gissat rätt. {dName} fick {dPoints} poäng för att har ritat så bra."
@@ -632,6 +632,16 @@ SOG.browser.game = (function () {
 		onError: function (cb) {
 			socket.on('error-message', cb);
 			socket.on('disconnect', cb.curry({ name: 'DisconnectedException' }));
+		},
+
+		/**
+		 * Fired when client connects to websocket.
+		 *
+		 * @event onConnect
+		 * @param cb {function}
+		 */
+		onConnect: function (cb) {
+			socket.on('connect', cb);
 		},
 
 		/**
@@ -1543,7 +1553,9 @@ SOG.browser.popup = (function () {
 		popup,
 		closePopup,
 		createPopup,
-		createSimplePopup;
+		createSimplePopup,
+		btnWrapper,
+		addBtn;
 
 	closePopup = function (e) {
 		wrapper.classList.remove('show');
@@ -1608,13 +1620,37 @@ SOG.browser.popup = (function () {
 		return wrapper;
 	};
 
+	addBtn = function (text, cb, classname) {
+		if (!btnWrapper) {
+			btnWrapper = SOG.utils.html('div', { 'class': 'buttons', to: popup });
+		}
+
+		var btn = SOG.utils.html('a', {
+			'class': classname || 'ok-btn',
+			text: text,
+			to: btnWrapper
+		});
+
+		if (typeof cb === 'string') {
+			btn.setAttribute('href', cb);
+		} else {
+			btn.addEventListener('click', function (e) {
+				cb();
+				e.preventDefault();
+			});
+		}
+	};
+
 	return function (options, type) {
 		if (type === 'simple') {
 			return createSimplePopup(options);
-		} else {
-			createPopup(options);
-			return { close: closePopup };
 		}
+
+		createPopup(options);
+		return {
+			close: closePopup,
+			addBtn: addBtn
+		};
 	};
 }());
 ;/*global Handlebars */
@@ -1822,6 +1858,7 @@ window.onload = function () {
 				dPoints: drawer.points
 			}));
 			// Update scores
+			// TODO Make nicer
 			document.querySelector('#player-' + guesser.player.getSocketID() + ' .points').innerHTML = guesser.total + ' poäng';
 			document.querySelector('#player-' + drawer.player.getSocketID() + ' .points').innerHTML = drawer.total + ' poäng';
 		});
@@ -1930,7 +1967,13 @@ window.onload = function () {
 
 	// Show error messages on error
 	game.onError(function (e) {
-		SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
+		var p = SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
+
+		if (e.name === 'DisconnectedException') {
+			game.onConnect(function () {
+				p.addBtn('Ok, anslut igen!', 'http://skissaochgissa.se');
+			});
+		}
 	});
 
 
