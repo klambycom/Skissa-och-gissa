@@ -71,6 +71,16 @@ window.onload = function () {
 			room: room
 		});
 
+		// New points
+		game.onPoints(function (guesser, drawer) {
+			chat.createMessage('', game.str('ScoreMessage').assign({
+				gName: guesser.player.getName(),
+				gPoints: guesser.points,
+				dName: drawer.player.getName(),
+				dPoints: drawer.points
+			}));
+		});
+
 		// Correct word
 		room.onCorrectWordGuessed(function (data) {
 			// Remove old word

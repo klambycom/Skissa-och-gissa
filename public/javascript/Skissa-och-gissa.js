@@ -614,7 +614,8 @@ SOG.browser.game = (function () {
 				message: 'Anslutningen till servern har brutits. Möjliga anledningar: <ul><li>Jag uppdaterar spelet (bra).</li><li>Servern har kraschat (dåligt).</li></ul>',
 				extra: 'Vänta ett par minuter så borde spelet laddas om av sig själv.',
 				escape: false
-			}
+			},
+			'ScoreMessage': "{gName} fick {gPoints} ponäng efter att ha gissat rätt. {dName} fick {dPoints} poäng för att har ritat så bra."
 		};
 
 	return {
@@ -640,7 +641,26 @@ SOG.browser.game = (function () {
 		 * @param id {string}
 		 * @return Returns the string with that id.
 		 */
-		str: function (id) { return strings[id]; }
+		str: function (id) { return strings[id]; },
+
+		/**
+		 * @method onPoints
+		 * @param cb {function} First param is an object with guesser and
+		 *                      next is for the drawer (player, points, total).
+		 */
+		onPoints: function (cb) {
+			socket.on('update-points', function (data) {
+				cb({
+					player: new SOG.browser.Player(data.guess_player),
+					points: data.guess_points,
+					total: data.guess_total
+				}, {
+					player: new SOG.browser.Player(data.draw_player),
+					points: data.draw_points,
+					total: data.draw_total
+				});
+			});
+		}
 	};
 }());
 ;/*jslint browser: true */
@@ -1177,19 +1197,18 @@ SOG.browser.artboard = (function (points) {
 		 * @param d {object} New data.
 		 */
 		this.updateData = function (d) { data = d; };
-	};
 
-	/**
-	 * @method getPoints
-	 * @param p {int}
-	 * @return Returns points.
-	 */
-	Player.prototype.points = (function () {
 		var pnts = 0;
-		return function (p) {
-			return pnts + (p || 0);
+		/**
+		 * @method points
+		 * @param points {int} Optional. Points to add or 0 to clear.
+		 * @return Returns points.
+		 */
+		this.points = function (p) {
+			pnts = (p === 0) ? 0 : pnts + (p || 0);
+			return pnts;
 		};
-	}());
+	};
 
 	/**
 	 * Get values from the player in a object.
@@ -1787,6 +1806,16 @@ window.onload = function () {
 			x: gameplan.offsetLeft + 5,
 			y: gameplan.offsetTop + 5,
 			room: room
+		});
+
+		// New points
+		game.onPoints(function (guesser, drawer) {
+			chat.createMessage('', game.str('ScoreMessage').assign({
+				gName: guesser.player.getName(),
+				gPoints: guesser.points,
+				dName: drawer.player.getName(),
+				dPoints: drawer.points
+			}));
 		});
 
 		// Correct word
