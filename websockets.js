@@ -149,7 +149,10 @@ exports.listen = function (app, Room) {
 
 			// Is the guess correct?
 			var word = data.compact(),
-				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase();
+				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase(),
+				p,
+				d,
+				r;
 
 			// Send the message to all player in room
 			io.sockets.in(socket.room).emit('user-message', {
@@ -159,7 +162,30 @@ exports.listen = function (app, Room) {
 			});
 
 			// Let next person draw
-			if (correct) { newWord(socket.room, dictionaries['general-easy']); }
+			if (correct) {
+				r = Room.get(socket.room);
+
+				// Points to the player who guessed right
+				p = r.players[socket.player.getSocketID()];
+				p.points(dictionaries['general-easy'].points.max);
+
+				// Points to the player who drawed
+				d = r.players[r.queue[r.queue.length - 1]];
+				d.points(dictionaries['general-easy'].points.max / 4);
+
+				// Send to clients
+				io.sockets.in(socket.room).emit('update-points', {
+					guess_player: p.getAllData(),
+					guess_points: dictionaries['general-easy'].points.max,
+					guess_total: p.points(),
+					draw_player: d.getAllData(),
+					draw_points: dictionaries['general-easy'].points.max / 4,
+					draw_total: d.points()
+				});
+
+				// Continue...
+				newWord(socket.room, dictionaries['general-easy']);
+			}
 		});
 
 		// Save image to server
