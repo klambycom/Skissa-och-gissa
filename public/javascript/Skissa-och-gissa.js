@@ -490,7 +490,11 @@ function program1(depth0,data) {
   buffer += "<div class=\"player";
   stack1 = helpers['if'].call(depth0, depth0.you, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\n  <img src=\"";
+  buffer += "\" id=\"player-";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <img src=\"";
   if (stack1 = helpers.picture) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.picture; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -1784,7 +1788,7 @@ window.onload = function () {
 			if (!you) { chat.createMessage('', p.getName() + ' har gått med i spelet!'); }
 			// Add player to player-list
 			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
-				return { points: 214, you: you };
+				return { points: 214, you: you, id: p.getSocketID() };
 			}));
 		};
 
@@ -1810,12 +1814,16 @@ window.onload = function () {
 
 		// New points
 		game.onPoints(function (guesser, drawer) {
+			// Show a message in the chat
 			chat.createMessage('', game.str('ScoreMessage').assign({
 				gName: guesser.player.getName(),
 				gPoints: guesser.points,
 				dName: drawer.player.getName(),
 				dPoints: drawer.points
 			}));
+			// Update scores
+			document.querySelector('#player-' + guesser.player.getSocketID() + ' .points').innerHTML = guesser.total + ' poäng';
+			document.querySelector('#player-' + drawer.player.getSocketID() + ' .points').innerHTML = drawer.total + ' poäng';
 		});
 
 		// Correct word

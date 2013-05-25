@@ -47,7 +47,7 @@ window.onload = function () {
 			if (!you) { chat.createMessage('', p.getName() + ' har gått med i spelet!'); }
 			// Add player to player-list
 			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
-				return { points: 214, you: you };
+				return { points: 214, you: you, id: p.getSocketID() };
 			}));
 		};
 
@@ -73,12 +73,16 @@ window.onload = function () {
 
 		// New points
 		game.onPoints(function (guesser, drawer) {
+			// Show a message in the chat
 			chat.createMessage('', game.str('ScoreMessage').assign({
 				gName: guesser.player.getName(),
 				gPoints: guesser.points,
 				dName: drawer.player.getName(),
 				dPoints: drawer.points
 			}));
+			// Update scores
+			document.querySelector('#player-' + guesser.player.getSocketID() + ' .points').innerHTML = guesser.total + ' poäng';
+			document.querySelector('#player-' + drawer.player.getSocketID() + ' .points').innerHTML = drawer.total + ' poäng';
 		});
 
 		// Correct word
