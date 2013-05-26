@@ -37,6 +37,9 @@ exports.listen = function (app, Room) {
 			clearTimeout(timer[r]);
 			timer[r] = setTimeout(newWord.curry(r, d), (d.time * 60000) + 2000);
 
+			// Clear canvas data
+			Room.canvas(socket.room, 0);
+
 			// Pick next person in queue
 			var nextPlayer = Room.nextPlayer(r),
 				word = w || Room.getWord(r);
@@ -112,6 +115,9 @@ exports.listen = function (app, Room) {
 				} else if (Room.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
 				}
+
+				// Send the canvas to the player
+				socket.emit('canvas', Room.canvas(socket.room));
 			} catch (e) {
 				socket.emit('error-message', { name: e.name, message: e.message });
 			}
@@ -139,7 +145,7 @@ exports.listen = function (app, Room) {
 		// Get drawing-points from player, and send to the others
 		socket.on('canvas', function (data) {
 			if (Room.playersTurn(socket.player, socket.room)) {
-				socket.broadcast.to(socket.room).emit('canvas', data);
+				socket.broadcast.to(socket.room).emit('canvas', Room.canvas(socket.room, data));
 			}
 		});
 

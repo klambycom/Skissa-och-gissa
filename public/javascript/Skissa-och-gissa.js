@@ -764,7 +764,18 @@ SOG.browser.points = (function (Point) {
 
 	var color = '#df4b26',
 		size = 5,
-		points = [];
+		points = [],
+		forEach = function (fn, a) { a.forEach(fn); }, // TODO Move to utils.funtional, kanske?
+		add = function (x, y, dragging) {
+			var p;
+			if (x instanceof Object) {
+				p = new Point(x.x, x.y, !!x.dragging, x.color, x.size);
+			} else {
+				p = new Point(x, y, !!dragging, color, size);
+			}
+			points.push(p);
+			return p;
+		};
 
 	return {
 		/**
@@ -776,16 +787,9 @@ SOG.browser.points = (function (Point) {
 		 * @param dragging {boolean} True if its not the first point in current line.
 		 * @return Returns the newly created Point.
 		 */
-		add: function (x, y, dragging) {
-			var p;
-			if (x instanceof Object) {
-				p = new Point(x.x, x.y, !!x.dragging, x.color, x.size);
-			} else {
-				p = new Point(x, y, !!dragging, color, size);
-			}
-			points.push(p);
-			return p;
-		},
+		add: add,
+
+		addArray: forEach.curry(add),
 
 		// TODO Delete this.
 		test: function () { return points; },
@@ -923,8 +927,14 @@ SOG.browser.artboard = (function (points) {
 	 * @param data {object} The data for the point.
 	 */
 	receivePoint = function (data) {
-		points.add(data);
-		points.last(draw);
+		if (Array.isArray(data)) {
+			console.log(data);
+			points.addArray(data);
+			points.each(draw);
+		} else {
+			points.add(data);
+			points.last(draw);
+		}
 	};
 
 	/**
