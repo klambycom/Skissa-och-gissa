@@ -617,7 +617,8 @@ SOG.browser.game = (function () {
 				title: ':(',
 				message: 'Anslutningen till servern har brutits. Möjliga anledningar: <ul><li>Jag uppdaterar spelet (bra).</li><li>Servern har kraschat (dåligt).</li><li>Du har varit inaktiv väldigt länge (tråkigt).</li></ul>',
 				extra: 'Vänta ett par minuter och testa sen att ladda om sidan.',
-				escape: false
+				escape: false,
+				closeable: false
 			},
 			'ScoreMessage': "{gName} fick {gPoints} ponäng efter att ha gissat rätt. {dName} fick {dPoints} poäng för att har ritat så bra."
 		};
