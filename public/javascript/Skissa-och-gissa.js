@@ -1800,17 +1800,19 @@ window.onload = function () {
 		gamesList = [].slice.call(document.querySelectorAll('#games .game')),
 		wordNode,
 		startGame,
-		showErrorMessage;
+		showErrorMessage,
+		pageWrapper = document.getElementById('page-wrapper'),
+		gameWrapper = document.getElementById('game-wrapper');
 
 	// Start game
 	startGame = function (data) {
 		// Html for game
-		document.getElementById('page-wrapper').innerHTML = Handlebars.templates['room.hbs']({});
+		pageWrapper.classList.add('hide-wrapper');
+		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({});
 
 		var gameplan = document.querySelector('#gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
 			chatMessages = document.querySelector('#chat-messages'),
-			pageWrapper = document.querySelector('#page-wrapper'),
 			playersList = document.querySelector('#game-user-info .players'),
 			timer = document.querySelector('#timer-progress'),
 			playerTmpl = Handlebars.templates['player.hbs'],
@@ -1870,7 +1872,7 @@ window.onload = function () {
 			if (typeof wordNode !== 'undefined') {
 				gameplan.removeChild(wordNode);
 				wordNode = undefined;
-				pageWrapper.classList.remove('draw');
+				gameWrapper.classList.remove('draw');
 				chatInputField.disabled = false;
 				document.onselectstart = function () { return true; };
 			}
@@ -1891,7 +1893,7 @@ window.onload = function () {
 					wordNode.classList.add('small');
 
 					// Show crayons
-					pageWrapper.classList.add('draw');
+					gameWrapper.classList.add('draw');
 				}, 2000);
 				// Enable drawing
 				artboard.enable();
@@ -1971,6 +1973,10 @@ window.onload = function () {
 		var p = SOG.browser.popup(game.str(e.name) || { title: e.name, message: e.message });
 
 		if (e.name === 'DisconnectedException') {
+			// Change to first page
+			pageWrapper.classList.remove('hide-wrapper');
+			gameWrapper.classList.add('hide-wrapper');
+			// Add button when connected again
 			game.onConnect(function () {
 				p.addBtn('Ok, anslut igen!', 'http://skissaochgissa.se');
 			});
