@@ -928,7 +928,6 @@ SOG.browser.artboard = (function (points) {
 	 */
 	receivePoint = function (data) {
 		if (Array.isArray(data)) {
-			console.log(data);
 			points.addArray(data);
 			points.each(draw);
 		} else {
@@ -1860,6 +1859,9 @@ window.onload = function () {
 			y: gameplan.offsetTop + 5,
 			room: room
 		});
+
+		// Clear the artboard
+		artboard.clear();
 
 		// New points
 		game.onPoints(function (guesser, drawer) {

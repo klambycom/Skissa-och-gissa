@@ -73,6 +73,9 @@ window.onload = function () {
 			room: room
 		});
 
+		// Clear the artboard
+		artboard.clear();
+
 		// New points
 		game.onPoints(function (guesser, drawer) {
 			// Show a message in the chat

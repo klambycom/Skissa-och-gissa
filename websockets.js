@@ -114,6 +114,11 @@ exports.listen = function (app, Room) {
 					newWord(socket.room, dictionaries['general-easy'], '');
 				} else if (Room.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
+				} else {
+					socket.emit('correct-word', {
+						word: '',
+						next: { draw: false, player: Room.get(socket.room).drawing, minutes: 0 }
+					});
 				}
 
 				// Send the canvas to the player
