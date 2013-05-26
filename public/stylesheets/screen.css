@@ -118,6 +118,11 @@ header p {
   -webkit-transition: -webkit-filter .4s;
 }
 
+/* line 47, ../../scss/_main.scss */
+.hide-wrapper {
+  display: none;
+}
+
 /* line 1, ../../scss/_games.scss */
 #games {
   width: 600px;
@@ -334,12 +339,12 @@ header p {
 }
 
 /* line 3, ../../scss/_chat.scss */
-#page-wrapper.draw #chat-container #crayons {
+#game-wrapper.draw #chat-container #crayons {
   width: 50px;
   -webkit-transition: all .5s .3s;
 }
 /* line 8, ../../scss/_chat.scss */
-#page-wrapper.draw #chat-container #chat {
+#game-wrapper.draw #chat-container #chat {
   right: 50px;
   -webkit-transition: all .5s .3s;
 }
@@ -674,7 +679,7 @@ header p {
 }
 
 /* line 2, ../../scss/_artboard.scss */
-#page-wrapper.draw #artboard {
+#game-wrapper.draw #artboard {
   border: 5px solid #88b2d8;
   -webkit-transition: border .5s;
 }
