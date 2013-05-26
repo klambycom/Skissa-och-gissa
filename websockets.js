@@ -32,10 +32,10 @@ exports.listen = function (app, Room) {
 		});
 
 
-		var newWord = function (r, d, w) {
+		var newWord = function (r, w) {
 			// Start timer
 			clearTimeout(timer[r]);
-			timer[r] = setTimeout(newWord.curry(r, d), (d.time * 60000) + 2000);
+			timer[r] = setTimeout(newWord.curry(r), (Room.get(r).time * 60000) + 2000);
 
 			// Clear canvas data
 			Room.canvas(socket.room, 0);
@@ -67,7 +67,7 @@ exports.listen = function (app, Room) {
 					draw: true,
 					word: Room.randomWord(r),
 					player: nextPlayer.getAllData(),
-					minutes: d.time
+					minutes: Room.get(r).time
 				}
 			});
 
@@ -77,7 +77,7 @@ exports.listen = function (app, Room) {
 				next: {
 					draw: false,
 					player: nextPlayer.getAllData(),
-					minutes: d.time
+					minutes: Room.get(r).time
 				}
 			});
 		};
@@ -111,7 +111,7 @@ exports.listen = function (app, Room) {
 
 				// Start game if its the second player
 				if (Room.players(socket.room).length === 2) {
-					newWord(socket.room, dictionaries['general-easy'], '');
+					newWord(socket.room, '');
 				} else if (Room.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
 				} else {
@@ -123,6 +123,9 @@ exports.listen = function (app, Room) {
 
 				// Send the canvas to the player
 				socket.emit('canvas', Room.canvas(socket.room));
+
+				// Create new room if this is almost full
+				if (Room.nrOfSameType(socket.room) === 0) { Room.create(Room.get(socket.room).type); }
 			} catch (e) {
 				socket.emit('error-message', { name: e.name, message: e.message });
 			}
@@ -195,7 +198,7 @@ exports.listen = function (app, Room) {
 				});
 
 				// Continue...
-				newWord(socket.room, dictionaries['general-easy']);
+				newWord(socket.room);
 			}
 		});
 
