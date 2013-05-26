@@ -976,6 +976,8 @@ SOG.browser.artboard = (function (points) {
 
 		if (curr.dragging) {
 			context.moveTo(prev.x, prev.y);
+		} else {
+			context.moveTo(curr.x - 0.1, curr.y - 0.1); // Make a dot
 		}
 		context.lineTo(curr.x, curr.y);
 
@@ -1859,9 +1861,6 @@ window.onload = function () {
 			y: gameplan.offsetTop + 5,
 			room: room
 		});
-
-		// Clear the artboard
-		artboard.clear();
 
 		// New points
 		game.onPoints(function (guesser, drawer) {
