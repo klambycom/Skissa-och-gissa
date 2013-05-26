@@ -62,7 +62,7 @@ exports.listen = function (app, Room) {
 				word: word,
 				next: {
 					draw: true,
-					word: Room.setWord(r, d.words.sample()),
+					word: Room.randomWord(r),
 					player: nextPlayer.getAllData(),
 					minutes: d.time
 				}
