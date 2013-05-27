@@ -44,6 +44,17 @@ exports.listen = function (app, Room) {
 			var nextPlayer = Room.nextPlayer(r),
 				word = w || Room.getWord(r);
 
+			// Game over
+			if (Room.roundsLeft(r) <= 0) {
+				clearTimeout(timer[r]);
+				io.sockets.in(r).emit('game-over', Room.playersNameAndScore(r));
+				io.sockets.in(r).emit('correct-word', {
+					word: word,
+					next: { draw: false, player: nextPlayer.getAllData(), minutes: 0 }
+				});
+				return;
+			}
+
 			// Cancel if room is empty
 			if (typeof nextPlayer === 'undefined') {
 				clearTimeout(timer[r]);

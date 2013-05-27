@@ -165,6 +165,18 @@ window.onload = function () {
 				playersList.removeChild(document.getElementById('player-' + id));
 				chat.createMessage('', name + ' har lämnat spelet.');
 			});
+
+			// Game over!
+			game.onGameOver(function (data) {
+				SOG.utils.html('div', {
+					id: 'game-over-wrapper',
+					text: Handlebars.templates['gameover.hbs']({ players: data }),
+					to: gameplan
+				});
+
+				console.log('gameover');
+				console.log(data);
+			});
 		});
 
 		// A player joins the room

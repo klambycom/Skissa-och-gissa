@@ -1,0 +1,35 @@
+#game-over-wrapper {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(137, 178, 216);
+  color: white;
+
+  h1 {
+    font-size: 5em;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  ul {
+    li {
+      width: 260px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    img { width: 50px; height: 50px; }
+
+    .player-info {
+      float: right;
+      width: 200px;
+      padding: 1px;
+
+      .name { font-size: .8em; }
+      .score { font-size: 2em; display: block; }
+    }
+  }
+}
