@@ -18,9 +18,11 @@ module.exports = function (grunt) {
 					//'public/templates/', // Should work, but will test later.
 					'public/templates/facebook.js', 'public/templates/popup.js', 'public/templates/player.js',
 					'public/templates/room.js', 'public/templates/message.js', 'public/templates/servermessage.js',
-					'public/templates/donemessage.js', 'public/templates/gameover.js',
+					'public/templates/donemessage.js', 'public/templates/gameover.js', 'public/templates/game.js',
 
 					'lib/browser/game.js',
+
+					'lib/browser/lobby.js',
 
 					'lib/browser/Point.js', 'lib/browser/points.js', 'lib/browser/artboard.js',
 

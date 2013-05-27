@@ -1,0 +1,12 @@
+<img src="images/{{image}}" alt="{{name}}">
+<h1>{{name}}</h1>
+<p class="description">{{description}}</p>
+<p class="data">Just nu {{nrOfPlayers}} spelare med {{roundsLeft}} rundor kvar att spela.</p>
+<p class="players">
+  {{#each players}}
+  <div class="player">
+    <img src="{{picture}}" alt="{{name}}">
+    <div class="name">{{name}}</div>
+  </div>
+  {{/each}}
+</p>

@@ -26,6 +26,9 @@ window.onload = function () {
 		pageWrapper = document.getElementById('page-wrapper'),
 		gameWrapper = document.getElementById('game-wrapper');
 
+	// Init lobby
+	SOG.browser.lobby.init(game.getSocket(), document.getElementById('games'));
+
 	// Start game
 	startGame = function (data) {
 		// Html for game
@@ -199,14 +202,8 @@ window.onload = function () {
 	});
 
 	// Change room
-	gamesList.forEach(function (game) {
-		game.addEventListener('click', function (e) {
-			room.changeTo(game.dataset.name, {
-				success: startGame,
-				fail: SOG.browser.popup.flip().curry('simple')
-			});
-			e.preventDefault();
-		});
+	SOG.browser.lobby.onGameSelected(function (gid) {
+		room.changeTo(gid, startGame);
 	});
 
 	// Show error messages on error

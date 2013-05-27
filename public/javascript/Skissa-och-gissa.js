@@ -632,6 +632,62 @@ function program1(depth0,data) {
   buffer += "\n</ul>\n";
   return buffer;
   });
+})();;(function() {
+  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['game.hbs'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <div class=\"player\">\n    <img src=\"";
+  if (stack1 = helpers.picture) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.picture; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" alt=\"";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    <div class=\"name\">";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</div>\n  </div>\n  ";
+  return buffer;
+  }
+
+  buffer += "<img src=\"images/";
+  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" alt=\"";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n<h1>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n<p class=\"description\">";
+  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n<p class=\"data\">Just nu ";
+  if (stack1 = helpers.nrOfPlayers) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.nrOfPlayers; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " spelare med ";
+  if (stack1 = helpers.roundsLeft) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.roundsLeft; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " rundor kvar att spela.</p>\n<p class=\"players\">\n  ";
+  stack1 = helpers.each.call(depth0, depth0.players, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</p>\n";
+  return buffer;
+  });
 })();;/*global io, SOG */
 
 /**
@@ -725,6 +781,77 @@ SOG.browser.game = (function () {
 					total: data.draw_total
 				});
 			});
+		}
+	};
+}());
+;/*jslint browser: true */
+/*global SOG, Handlebars */
+
+SOG.utils.namespace('SOG.browser.lobby');
+
+SOG.browser.lobby = (function () {
+	'use strict';
+
+	var socket, games, addRoom, removeRoom, updateRoom, gameSelected, click;
+
+	click = function (g) {
+		return function (e) {
+			gameSelected(g);
+			e.preventDefault();
+		};
+	};
+
+	addRoom = function (data) {
+		var game, fragment;
+
+		if (data instanceof Array) {
+			fragment = document.createDocumentFragment();
+
+			data.forEach(function (d) {
+				game = SOG.utils.html('article', {
+					'class': 'game ' + d.difficulty,
+					'data-name': d.id,
+					text: Handlebars.templates['game.hbs'](d),
+					to: fragment
+				});
+				game.addEventListener('click', click(d.id));
+				fragment.appendChild(game);
+			});
+
+			games.innerHTML = '';
+			games.appendChild(fragment);
+		} else {
+			game = SOG.utils.html('article', {
+				'class': 'game ' + data.difficulty,
+				'data-name': data.id,
+				text: Handlebars.templates['game.hbs'](data),
+				to: games
+			});
+			game.addEventListener('click', click(data.id));
+		}
+	};
+
+	removeRoom = function (data) {
+		console.log(data);
+	};
+
+	updateRoom = function (id, data) {
+		console.log(id);
+		console.log(data);
+	};
+
+	return {
+		init: function (s, g) {
+			socket = s;
+			games = g;
+
+			socket.on('add-room', addRoom);
+			socket.on('remove-room', removeRoom);
+			socket.on('update-room', updateRoom);
+		},
+
+		onGameSelected: function (cb) {
+			gameSelected = cb;
 		}
 	};
 }());
@@ -1592,24 +1719,18 @@ SOG.utils.namespace('SOG.browser.Room');
 	 * Change room.
 	 *
 	 * @method changeTo
-	 * @param room {string} The ID/name of the room.
-	 * @param fn {object} Object with callback-functions.
-	 *        @param fn.success {function} Success callback.
-	 *        @param fn.fail {function} Fail callback.
+	 * @param roomId {string}
+	 * @param cb {function}
 	 */
-	SOG.browser.Room.prototype.changeTo = function (room, fn) {
+	SOG.browser.Room.prototype.changeTo = function (room, cb) {
 		// Ask to join room
 		this.get('socket').emit('join-room', room);
 		// Take care of response
 		this.get('socket').on('join-room', function (data) {
-			if (data.success) {
-				data.players = data.players.map(function (p) {
-					return new SOG.browser.Player(p);
-				});
-				fn.success(data);
-			} else {
-				fn.fail(data.message);
-			}
+			data.players = data.players.map(function (p) {
+				return new SOG.browser.Player(p);
+			});
+			cb(data);
 		});
 	};
 }());
@@ -1880,6 +2001,9 @@ window.onload = function () {
 		pageWrapper = document.getElementById('page-wrapper'),
 		gameWrapper = document.getElementById('game-wrapper');
 
+	// Init lobby
+	SOG.browser.lobby.init(game.getSocket(), document.getElementById('games'));
+
 	// Start game
 	startGame = function (data) {
 		// Html for game
@@ -2053,14 +2177,8 @@ window.onload = function () {
 	});
 
 	// Change room
-	gamesList.forEach(function (game) {
-		game.addEventListener('click', function (e) {
-			room.changeTo(game.dataset.name, {
-				success: startGame,
-				fail: SOG.browser.popup.flip().curry('simple')
-			});
-			e.preventDefault();
-		});
+	SOG.browser.lobby.onGameSelected(function (gid) {
+		room.changeTo(gid, startGame);
 	});
 
 	// Show error messages on error

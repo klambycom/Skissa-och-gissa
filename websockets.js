@@ -29,6 +29,10 @@ exports.listen = function (app, Room) {
 
 			// Store player in lobby
 			//rooms.lobby.push(socket.player);
+
+
+			socket.emit('add-room', Room.available());
+			//socket.on('remove-room', removeRoom);
 		});
 
 
@@ -118,7 +122,7 @@ exports.listen = function (app, Room) {
 				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
 				// Tell browser it worked
-				socket.emit('join-room', { success: true, players: Room.players(socket.room) });
+				socket.emit('join-room', { players: Room.players(socket.room) });
 
 				// Start game if its the second player
 				if (Room.players(socket.room).length === 2) {
