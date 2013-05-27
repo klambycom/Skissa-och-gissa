@@ -42,11 +42,16 @@
     h1 {
       font-size: 2em;
       margin-bottom: 5px;
+      padding-top: 10px;
     }
 
     img {
       float: left;
       margin-right: 10px;
+      height: 100px;
+
+      border: 2px solid rgb(245, 245, 245);
+      border-radius: 3px;
     }
 
     &:after {

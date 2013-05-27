@@ -130,7 +130,9 @@ window.onload = function () {
 			}
 
 			// Save drawing in chat
-			if (data.word !== '') {
+			if (data.word !== '' && artboard.getImage() !== '') {
+				player.saveImage(artboard.getImage());
+
 				chat.createMessage({
 					img: artboard.getImage(),
 					word: data.word,
@@ -173,15 +175,6 @@ window.onload = function () {
 			sizes: [].slice.call(document.querySelectorAll('#sizes a')),
 			colors: [].slice.call(document.querySelectorAll('#colors a'))
 		});
-
-
-		window.testSaveImage = function () {
-			player.saveImage(artboard.getImage());
-		};
-
-		window.testToggleDraw = function () {
-			document.querySelector('#page-wrapper').classList.toggle('draw');
-		};
 	};
 
 	// Show error message

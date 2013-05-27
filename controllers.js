@@ -25,7 +25,8 @@ app.get('/', function (req, res) {
 				name: dict.name,
 				description: dict.description,
 				difficulty: dict.difficulty,
-				nrOfPlayers: players.length
+				nrOfPlayers: players.length,
+				image: req.rooms[a].image
 			};
 		})
 	});

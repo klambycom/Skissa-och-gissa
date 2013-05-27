@@ -170,13 +170,17 @@ header p {
 #games .game h1 {
   font-size: 2em;
   margin-bottom: 5px;
+  padding-top: 10px;
 }
-/* line 47, ../../scss/_games.scss */
+/* line 48, ../../scss/_games.scss */
 #games .game img {
   float: left;
   margin-right: 10px;
+  height: 100px;
+  border: 2px solid whitesmoke;
+  border-radius: 3px;
 }
-/* line 52, ../../scss/_games.scss */
+/* line 57, ../../scss/_games.scss */
 #games .game:after {
   content: "";
   display: block;

@@ -208,13 +208,15 @@ exports.listen = function (app, Room) {
 		// Save image to server
 		socket.on('save-image', function (data) {
 			// TODO Check if it really was players turn to draw
+			if (!Room.playersTurn(socket.player, socket.room)) { return; }
+
+			// Check if there is a image
+			if (data === '') { return; }
 
 			// Strip off the url prefix to get just the base64-encoded bytes
 			var image = data.replace(/^data:image\/\w+;base64,/, ''),
 				path = 'public/images/',
-				// TODO Change socket.id to a database id
-				// TODO Change word to right word
-				filename = socket.id + '-' + 'word' + '-' + Date.now() + '.png';
+				filename = socket.id + '-' + Room.getWord(socket.room) + '-' + Date.now() + '.png';
 
 			// Save image
 			fs.writeFile(path + filename, image, 'base64', function (err) {
@@ -224,7 +226,8 @@ exports.listen = function (app, Room) {
 				} else {
 					// The image was saved
 					console.log('Image saved');
-					// TODO Send message to player and ask to tell facebook?
+					// Save image for room
+					Room.saveImage(socket.room, filename);
 				}
 			});
 		});
