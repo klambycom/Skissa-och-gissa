@@ -2,6 +2,13 @@
   #artboard {
     border: 5px solid rgb(136,178,216);
     -webkit-transition: border .5s;
+
+    &.black_crayon { cursor: url(../red.png), auto; }
+    &.red_crayon { cursor: url(../red.png), auto; }
+    &.blue_crayon { cursor: url(../blue.png), auto; }
+    &.green_crayon { cursor: url(../green.png), auto; }
+    &.pink_crayon { cursor: url(../pink.png), auto; }
+    &.yellow_crayon { cursor: url(../yellow.png), auto; }
   }
 }
 
@@ -13,24 +20,4 @@
   background-color: white;
   border: 5px solid rgba(0, 0, 0, .1);
   -webkit-transition: border .5s;
-}
-
-.red_crayon {
-  cursor: url(../red.png), auto;
-}
-
-.blue_crayon {
-  cursor: url(../blue.png), auto;
-}
-
-.green_crayon {
-  cursor: url(../green.png), auto;
-}
-
-.pink_crayon {
-  cursor: url(../pink.png), auto;
-}
-
-.yellow_crayon {
-  cursor: url(../yellow.png), auto;
 }

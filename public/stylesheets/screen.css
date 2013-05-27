@@ -717,42 +717,41 @@ header p {
   border: 5px solid #88b2d8;
   -webkit-transition: border .5s;
 }
-
+/* line 6, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.black_crayon {
+  cursor: url(../red.png), auto;
+}
+/* line 7, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.red_crayon {
+  cursor: url(../red.png), auto;
+}
 /* line 8, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.blue_crayon {
+  cursor: url(../blue.png), auto;
+}
+/* line 9, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.green_crayon {
+  cursor: url(../green.png), auto;
+}
+/* line 10, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.pink_crayon {
+  cursor: url(../pink.png), auto;
+}
+/* line 11, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.yellow_crayon {
+  cursor: url(../yellow.png), auto;
+}
+
+/* line 15, ../../scss/_artboard.scss */
 #artboard-wrapper {
   padding: 20px;
 }
 
-/* line 12, ../../scss/_artboard.scss */
+/* line 19, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
   border: 5px solid rgba(0, 0, 0, 0.1);
   -webkit-transition: border .5s;
-}
-
-/* line 18, ../../scss/_artboard.scss */
-.red_crayon {
-  cursor: url(../red.png), auto;
-}
-
-/* line 22, ../../scss/_artboard.scss */
-.blue_crayon {
-  cursor: url(../blue.png), auto;
-}
-
-/* line 26, ../../scss/_artboard.scss */
-.green_crayon {
-  cursor: url(../green.png), auto;
-}
-
-/* line 30, ../../scss/_artboard.scss */
-.pink_crayon {
-  cursor: url(../pink.png), auto;
-}
-
-/* line 34, ../../scss/_artboard.scss */
-.yellow_crayon {
-  cursor: url(../yellow.png), auto;
 }
 
 @-webkit-keyframes PROGRESS {
