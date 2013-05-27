@@ -718,36 +718,68 @@ header p {
   -webkit-transition: border .5s;
 }
 /* line 6, ../../scss/_artboard.scss */
-#game-wrapper.draw #artboard.black_crayon {
-  cursor: url(../red.png), auto;
+#game-wrapper.draw #artboard.white_crayon {
+  cursor: url(../white.png), auto;
 }
 /* line 7, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.black_crayon {
+  cursor: url(../black.png), auto;
+}
+/* line 8, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.red_crayon {
   cursor: url(../red.png), auto;
 }
-/* line 8, ../../scss/_artboard.scss */
-#game-wrapper.draw #artboard.blue_crayon {
-  cursor: url(../blue.png), auto;
-}
 /* line 9, ../../scss/_artboard.scss */
-#game-wrapper.draw #artboard.green_crayon {
-  cursor: url(../green.png), auto;
+#game-wrapper.draw #artboard.orange_crayon {
+  cursor: url(../orange.png), auto;
 }
 /* line 10, ../../scss/_artboard.scss */
-#game-wrapper.draw #artboard.pink_crayon {
-  cursor: url(../pink.png), auto;
-}
-/* line 11, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.yellow_crayon {
   cursor: url(../yellow.png), auto;
 }
-
+/* line 11, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.yellowgreen_crayon {
+  cursor: url(../yellowgreen.png), auto;
+}
+/* line 12, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.green_crayon {
+  cursor: url(../green.png), auto;
+}
+/* line 13, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.lightskyblue_crayon {
+  cursor: url(../lightskyblue.png), auto;
+}
+/* line 14, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.dodgerblue_crayon {
+  cursor: url(../dodgerblue.png), auto;
+}
 /* line 15, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.violet_crayon {
+  cursor: url(../violet.png), auto;
+}
+/* line 16, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.pink_crayon {
+  cursor: url(../pink.png), auto;
+}
+/* line 17, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.burlywood_crayon {
+  cursor: url(../burlywood.png), auto;
+}
+/* line 18, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.saddlebrown_crayon {
+  cursor: url(../saddlebrown.png), auto;
+}
+/* line 19, ../../scss/_artboard.scss */
+#game-wrapper.draw #artboard.brown_crayon {
+  cursor: url(../brown.png), auto;
+}
+
+/* line 23, ../../scss/_artboard.scss */
 #artboard-wrapper {
   padding: 20px;
 }
 
-/* line 19, ../../scss/_artboard.scss */
+/* line 27, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
   border: 5px solid rgba(0, 0, 0, 0.1);
