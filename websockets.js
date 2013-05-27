@@ -140,7 +140,10 @@ exports.listen = function (app, Room) {
 				socket.emit('canvas', Room.canvas(socket.room));
 
 				// Create new room if this is almost full
-				if (Room.nrOfSameType(socket.room) === 0) { Room.create(Room.get(socket.room).type); }
+				if (Room.nrOfSameType(socket.room) === 0) {
+					var nrid = Room.create(Room.get(socket.room).type);
+					io.sockets.in('lobby').emit('add-room', Room.getDataForClient(nrid));
+				}
 			} catch (e) {
 				socket.emit('error-message', { name: e.name, message: e.message });
 			}
