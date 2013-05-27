@@ -173,9 +173,6 @@ window.onload = function () {
 					text: Handlebars.templates['gameover.hbs']({ players: data }),
 					to: gameplan
 				});
-
-				console.log('gameover');
-				console.log(data);
 			});
 		});
 
