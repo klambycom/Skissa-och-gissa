@@ -678,6 +678,36 @@ header p {
   -webkit-transition: all .5s;
 }
 
+/* line 64, ../../scss/_gameplan.scss */
+#drawing-player {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 4px;
+}
+/* line 71, ../../scss/_gameplan.scss */
+#drawing-player img {
+  height: 20px;
+  margin-bottom: -5px;
+}
+/* line 76, ../../scss/_gameplan.scss */
+#drawing-player span {
+  margin-left: 5px;
+  padding: 2px 4px;
+  font-size: .85em;
+  color: #464444;
+  background-color: #e5e5e5;
+  -webkit-transform: all .5s;
+}
+
+/* line 86, ../../scss/_gameplan.scss */
+.draw #drawing-player span {
+  background-color: #88b2d8;
+  color: white;
+  -webkit-transform: all .5s;
+}
+
 /* line 2, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard {
   border: 5px solid #88b2d8;

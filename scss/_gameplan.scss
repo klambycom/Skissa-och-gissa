@@ -60,3 +60,31 @@
     }
   }
 }
+
+#drawing-player {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 4px;
+
+  img {
+    height: 20px;
+    margin-bottom: -5px;
+  }
+
+  span {
+    margin-left: 5px;
+    padding: 2px 4px;
+    font-size: .85em;
+    color: rgb(70, 68, 68);
+    background-color: rgb(229,229,229);
+    -webkit-transform: all .5s;
+  }
+}
+
+.draw #drawing-player span {
+  background-color: rgb(136, 178, 216);
+  color: white;
+  -webkit-transform: all .5s;
+}

@@ -37,10 +37,12 @@ window.onload = function () {
 			chatMessages = document.querySelector('#chat-messages'),
 			playersList = document.querySelector('#game-user-info .players'),
 			timer = document.querySelector('#timer-progress'),
+			artboardWrapper = document.getElementById('artboard-wrapper'),
 			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
 			artboard = SOG.browser.artboard,
-			addPlayerToList;
+			addPlayerToList,
+			drawingPlayer;
 
 		// Add player to list
 		addPlayerToList = function (p, data) {
@@ -142,6 +144,19 @@ window.onload = function () {
 			// Start timer
 			timer.className = '';
 			setTimeout(function () { timer.classList.add('min-' + (data.next.minutes || 0)); }, 2000);
+
+			// Show who is drawing
+			if (drawingPlayer) {
+				artboardWrapper.removeChild(drawingPlayer);
+				drawingPlayer = undefined;
+			}
+			if (data.next.player) {
+				drawingPlayer = SOG.utils.html('div', {
+					id: 'drawing-player',
+					text: '<img src="' + data.next.player.getPicture() + '"><span>' + data.next.player.getName() + ' ritar.</span>',
+					to: artboardWrapper
+				});
+			}
 
 			// Debugging, TODO remove
 			console.log(data);
