@@ -1,8 +1,7 @@
 <img src="images/{{image}}" alt="{{name}}">
 <h1>{{name}}</h1>
-<p class="description">{{description}}</p>
-<p class="data">Just nu {{nrOfPlayers}} spelare med {{roundsLeft}} rundor kvar att spela.</p>
-<p class="players">
+<p class="description">{{description}} Just nu <span class="nr-of-players">{{nrOfPlayers}}</span> spelare med <span class="rounds-left">{{roundsLeft}}</span> rundor kvar att spela.</p>
+<div class="players">
   {{#each players}}
   <div class="player">
     <img src="{{picture}}" alt="{{name}}">

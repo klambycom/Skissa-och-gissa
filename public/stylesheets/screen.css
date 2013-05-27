@@ -186,6 +186,36 @@ header p {
   display: block;
   clear: both;
 }
+/* line 63, ../../scss/_games.scss */
+#games .game .description {
+  font-size: .9em;
+}
+/* line 65, ../../scss/_games.scss */
+#games .game .players .player {
+  position: relative;
+  display: inline;
+}
+/* line 69, ../../scss/_games.scss */
+#games .game .players .player img {
+  height: 20px;
+  margin: 4px 5px 0px 0px;
+}
+/* line 74, ../../scss/_games.scss */
+#games .game .players .player .name {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px;
+  white-space: nowrap;
+  font-size: .8em;
+  position: absolute;
+  left: -27px;
+  top: -20px;
+}
+/* line 86, ../../scss/_games.scss */
+#games .game .players .player:hover .name {
+  display: block;
+}
 
 /* line 1, ../../scss/_sidebar.scss */
 #sidebar {
