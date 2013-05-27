@@ -1526,6 +1526,12 @@ SOG.utils.namespace('SOG.browser.Room');
 		});
 	};
 
+	SOG.browser.Room.prototype.onLeaveRoom = function (cb) {
+		this.get('socket').on('leave-room', function (data) {
+			cb(data.name, data.id);
+		});
+	};
+
 	/**
 	 * Change room.
 	 *
@@ -1950,9 +1956,11 @@ window.onload = function () {
 				});
 			}
 
-			// Debugging, TODO remove
-			console.log(data);
-			console.log('correct word: ' + data.word);
+			// When someone leave
+			room.onLeaveRoom(function (name, id) {
+				playersList.removeChild(document.getElementById('player-' + id));
+				chat.createMessage('', name + ' har lämnat spelet.');
+			});
 		});
 
 		// A player joins the room

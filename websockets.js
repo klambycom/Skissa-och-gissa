@@ -136,9 +136,10 @@ exports.listen = function (app, Room) {
 			try {
 				Room.removePlayer(socket.player, socket.room);
 				console.log(Room.all()); // TODO Remove
-				socket.broadcast.to(socket.room).emit('server-message', { text: socket.player.getName() + ' har lämnat spelet.' });
 				// New word if this player is drawing
 				if (Room.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
+				// Tell clients to remove player
+				socket.broadcast.to(socket.room).emit('leave-room', { name: socket.player.getName(), id: socket.player.getSocketID() });
 			} catch (e) {
 				console.log(e);
 			}
