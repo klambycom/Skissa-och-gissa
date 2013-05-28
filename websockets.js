@@ -153,6 +153,11 @@ exports.listen = function (app, Room) {
 					var nrid = Room.create(Room.get(socket.room).type);
 					io.sockets.in('lobby').emit('add-room', Room.getDataForClient(nrid));
 				}
+
+				// Remove game from front page if full
+				if (!Room.notFull(socket.room)) {
+					io.sockets.in('lobby').emit('remove-room', socket.room);
+				}
 			} catch (e) {
 				socket.emit('error-message', { name: e.name, message: e.message });
 			}
