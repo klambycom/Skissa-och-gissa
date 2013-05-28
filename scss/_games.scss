@@ -93,4 +93,16 @@
       }
     }
   }
+
+  #load-games {
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 18px;
+    font-weight: lighter;
+
+    img { height: 12px; margin-right: 5px; }
+  }
 }
