@@ -1,5 +1,5 @@
 #games {
-  width: 600px;
+  width: 680px;
   float: left;
 
   .hard h1:after, .moderate h1:after, .easy h1:after {
@@ -29,6 +29,7 @@
   .game {
     background-color: white;
     -webkit-transition: background-color .3s;
+    position: relative;
 
     &:hover {
       background-color: rgb(245, 245, 245);
@@ -36,7 +37,7 @@
     }
 
     &:not(:last-child) {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     h1 {
@@ -48,7 +49,7 @@
     img {
       float: left;
       margin-right: 10px;
-      height: 100px;
+      height: 150px;
 
       border: 2px solid rgb(245, 245, 245);
       border-radius: 3px;
@@ -60,30 +61,36 @@
       clear: both;
     }
 
-    .description { font-size: .9em; }
+    .description { margin: 5px; }
 
-    .players .player {
-      position: relative;
-      display: inline;
+    .players {
+      position: absolute;
+      bottom: 8px;
+      left: 214px;
 
-      img {
-        height: 20px;
-        margin: 4px 5px 0px 0px;
+      .player {
+        position: relative;
+        display: inline;
+
+        img {
+          height: 35px;
+          margin: 4px 5px 0px 0px;
+        }
+
+        .name {
+          display: none;
+          background-color: rgba(0, 0, 0, .8);
+          color: white;
+          padding: 5px;
+          white-space: nowrap;
+          font-size: .8em;
+          position: absolute;
+          left: -42px;
+          top: -22px;
+        }
+
+        &:hover .name { display: block; }
       }
-
-      .name {
-        display: none;
-        background-color: rgba(0, 0, 0, .8);
-        color: white;
-        padding: 5px;
-        white-space: nowrap;
-        font-size: .8em;
-        position: absolute;
-        left: -27px;
-        top: -20px;
-      }
-
-      &:hover .name { display: block; }
     }
   }
 }

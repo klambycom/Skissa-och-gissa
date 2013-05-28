@@ -125,7 +125,7 @@ header p {
 
 /* line 1, ../../scss/_games.scss */
 #games {
-  width: 600px;
+  width: 680px;
   float: left;
 }
 /* line 5, ../../scss/_games.scss */
@@ -156,51 +156,58 @@ header p {
 #games .game {
   background-color: white;
   -webkit-transition: background-color .3s;
+  position: relative;
 }
-/* line 33, ../../scss/_games.scss */
+/* line 34, ../../scss/_games.scss */
 #games .game:hover {
   background-color: whitesmoke;
   -webkit-transition: background-color .3s;
 }
-/* line 38, ../../scss/_games.scss */
+/* line 39, ../../scss/_games.scss */
 #games .game:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
-/* line 42, ../../scss/_games.scss */
+/* line 43, ../../scss/_games.scss */
 #games .game h1 {
   font-size: 2em;
   margin-bottom: 5px;
   padding-top: 10px;
 }
-/* line 48, ../../scss/_games.scss */
+/* line 49, ../../scss/_games.scss */
 #games .game img {
   float: left;
   margin-right: 10px;
-  height: 100px;
+  height: 150px;
   border: 2px solid whitesmoke;
   border-radius: 3px;
 }
-/* line 57, ../../scss/_games.scss */
+/* line 58, ../../scss/_games.scss */
 #games .game:after {
   content: "";
   display: block;
   clear: both;
 }
-/* line 63, ../../scss/_games.scss */
+/* line 64, ../../scss/_games.scss */
 #games .game .description {
-  font-size: .9em;
+  margin: 5px;
 }
-/* line 65, ../../scss/_games.scss */
+/* line 66, ../../scss/_games.scss */
+#games .game .players {
+  position: absolute;
+  bottom: 8px;
+  left: 214px;
+}
+/* line 71, ../../scss/_games.scss */
 #games .game .players .player {
   position: relative;
   display: inline;
 }
-/* line 69, ../../scss/_games.scss */
+/* line 75, ../../scss/_games.scss */
 #games .game .players .player img {
-  height: 20px;
+  height: 35px;
   margin: 4px 5px 0px 0px;
 }
-/* line 74, ../../scss/_games.scss */
+/* line 80, ../../scss/_games.scss */
 #games .game .players .player .name {
   display: none;
   background-color: rgba(0, 0, 0, 0.8);
@@ -209,17 +216,17 @@ header p {
   white-space: nowrap;
   font-size: .8em;
   position: absolute;
-  left: -27px;
-  top: -20px;
+  left: -42px;
+  top: -22px;
 }
-/* line 86, ../../scss/_games.scss */
+/* line 92, ../../scss/_games.scss */
 #games .game .players .player:hover .name {
   display: block;
 }
 
 /* line 1, ../../scss/_sidebar.scss */
 #sidebar {
-  width: 390px;
+  width: 310px;
   float: right;
   margin-left: 10px;
 }
