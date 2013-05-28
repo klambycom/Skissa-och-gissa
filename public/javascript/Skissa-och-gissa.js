@@ -831,8 +831,8 @@ SOG.browser.lobby = (function () {
 		}
 	};
 
-	removeRoom = function (data) {
-		console.log(data);
+	removeRoom = function (id) {
+		games.removeChild(document.querySelector('article[data-name="' + id + '"]'));
 	};
 
 	updateRoom = function (id, data) {

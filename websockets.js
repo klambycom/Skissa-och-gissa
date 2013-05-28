@@ -95,6 +95,15 @@ exports.listen = function (app, Room) {
 					minutes: Room.get(r).time
 				}
 			});
+		}, deleteGame = function (r) {
+			var deleted = Room.delete(r);
+
+			io.sockets.in('lobby').emit('remove-room', deleted.id);
+
+			// Create new game if needed
+			if (Room.nrOfSameType(deleted.type) === 0) {
+				io.sockets.in('lobby').emit('add-room', Room.getDataForClient(Room.create(deleted.type)));
+			}
 		};
 
 
@@ -140,7 +149,7 @@ exports.listen = function (app, Room) {
 				socket.emit('canvas', Room.canvas(socket.room));
 
 				// Create new room if this is almost full
-				if (Room.nrOfSameType(socket.room) === 0) {
+				if (Room.nrOfSameType(Room.get(socket.room).type) === 0) {
 					var nrid = Room.create(Room.get(socket.room).type);
 					io.sockets.in('lobby').emit('add-room', Room.getDataForClient(nrid));
 				}
@@ -152,14 +161,17 @@ exports.listen = function (app, Room) {
 		// Player disconnect
 		socket.on('disconnect', function () {
 			try {
-				Room.removePlayer(socket.player, socket.room);
-				console.log(Room.all()); // TODO Remove
-				// New word if this player is drawing
-				if (Room.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
-				// Tell clients to remove player
-				socket.broadcast.to(socket.room).emit('leave-room', { name: socket.player.getName(), id: socket.player.getSocketID() });
+				if (socket.room !== 'lobby') {
+					var nrOfPlayers = Room.removePlayer(socket.player, socket.room);
+					// New word if this player is drawing
+					if (Room.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
+					// Tell clients to remove player
+					socket.broadcast.to(socket.room).emit('leave-room', { name: socket.player.getName(), id: socket.player.getSocketID() });
+					// Remove room if no players left
+					if (nrOfPlayers === 0) { deleteGame(socket.room); }
+				}
 			} catch (e) {
-				console.log(e);
+				console.log('DISCONNECT ERROR: ' + e);
 			}
 		});
 
