@@ -241,63 +241,57 @@ header p {
 /* line 13, ../../scss/_sidebar.scss */
 #facebook a {
   color: white;
+}
+/* line 16, ../../scss/_sidebar.scss */
+#facebook a:hover {
   text-decoration: none;
 }
-/* line 17, ../../scss/_sidebar.scss */
-#facebook a:hover {
-  text-decoration: underline;
-}
-/* line 22, ../../scss/_sidebar.scss */
+/* line 21, ../../scss/_sidebar.scss */
 #facebook .f {
   font-size: 3.5em;
   float: left;
   padding-left: 10px;
 }
-/* line 28, ../../scss/_sidebar.scss */
+/* line 27, ../../scss/_sidebar.scss */
 #facebook a#fb-login-button {
   margin: 19px 0px 0px 69px;
   display: block;
-  text-decoration: underline;
 }
 /* line 33, ../../scss/_sidebar.scss */
-#facebook a#fb-login-button:hover {
-  text-decoration: none;
-}
-/* line 38, ../../scss/_sidebar.scss */
 #facebook #fb-user-data img {
   float: left;
   margin-right: 10px;
   width: 50px;
   height: 50px;
 }
-/* line 45, ../../scss/_sidebar.scss */
+/* line 40, ../../scss/_sidebar.scss */
 #facebook #fb-user-data h1 {
   font-size: 1.5em;
   margin-bottom: 10px;
 }
 
-/* line 53, ../../scss/_sidebar.scss */
+/* line 48, ../../scss/_sidebar.scss */
 #highscore h1 {
   font-size: 2em;
   margin: 20px 0 10px 0;
 }
-/* line 58, ../../scss/_sidebar.scss */
+/* line 53, ../../scss/_sidebar.scss */
 #highscore li {
   margin-bottom: 10px;
 }
-/* line 61, ../../scss/_sidebar.scss */
+/* line 56, ../../scss/_sidebar.scss */
 #highscore li:after {
   display: block;
   content: "";
   clear: both;
 }
-/* line 67, ../../scss/_sidebar.scss */
+/* line 62, ../../scss/_sidebar.scss */
 #highscore li .name {
   font-size: 1.5em;
   display: block;
   margin-bottom: 5px;
 }
-/* line 73, ../../scss/_sidebar.scss */
+/* line 68, ../../scss/_sidebar.scss */
 #highscore li img {
   float: left;
   margin-right: 5px;

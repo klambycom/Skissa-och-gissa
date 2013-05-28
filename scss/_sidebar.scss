@@ -12,10 +12,9 @@
 
   a {
     color: white;
-    text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
@@ -28,10 +27,6 @@
   a#fb-login-button {
     margin: 19px 0px 0px 69px;
     display: block;
-    text-decoration: underline;
-  }
-  a#fb-login-button:hover {
-    text-decoration: none;
   }
 
   #fb-user-data {
