@@ -27,12 +27,8 @@ exports.listen = function (app, Room) {
 			// Join lobby
 			socket.join('lobby');
 
-			// Store player in lobby
-			//rooms.lobby.push(socket.player);
-
-
+			// Show available games
 			socket.emit('add-room', Room.available());
-			//socket.on('remove-room', removeRoom);
 		});
 
 

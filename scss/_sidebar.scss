@@ -7,7 +7,7 @@
 #facebook {
   min-height: 50px;
   padding: 10px;
-  background-color: rgba(59,89,152,1);
+  background-color: rgb(53,96,158);
   color: white;
 
   a {
@@ -17,6 +17,21 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .f {
+    font-size: 3.5em;
+    float: left;
+    padding-left: 10px;
+  }
+
+  a#fb-login-button {
+    margin: 19px 0px 0px 69px;
+    display: block;
+    text-decoration: underline;
+  }
+  a#fb-login-button:hover {
+    text-decoration: none;
   }
 
   #fb-user-data {

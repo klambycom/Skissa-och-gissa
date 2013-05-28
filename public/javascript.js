@@ -1,23 +1,81 @@
 /*jslint browser: true, devel: true */
 /*global SOG, FB, Handlebars */
 
-//(function (d) {
-//	'use strict';
-//
-//	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-//	if (d.getElementById(id)) { return; }
-//	js = d.createElement('script');
-//	js.id = id;
-//	js.async = true;
-//	js.src = "//connect.facebook.net/en_US/all.js";
-//	ref.parentNode.insertBefore(js, ref);
-//}(document));
-//
+SOG.player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' });
+
+function signedIn() {
+	'use strict';
+	console.log('inloggad');
+	FB.api('/me?fields=id,name,first_name,username,picture,link,friends.fields(id,name,picture)', function (d) {
+		// Save user data
+		SOG.player.updateDataSkit(d);
+		// Change on the page
+		var facebook_div = document.querySelector('#facebook'),
+			template = Handlebars.templates['facebook.hbs'],
+			html = template({ name: SOG.player.getFullName(), picture: SOG.player.getPicture() });
+		facebook_div.innerHTML = html;
+	});
+}
+
+function login() {
+	'use strict';
+	var btn = document.querySelector('#fb-login-button');
+	btn.addEventListener('click', function (e) {
+		e.preventDefault();
+		FB.login(function (res) {
+			if (res.authResponse) {
+				signedIn();
+			}
+		});
+	});
+}
+
+function logout() {
+	'use strict';
+	FB.logout(function () {
+		console.log('bye');
+	});
+}
+
+window.fbAsyncInit = function () {
+	'use strict';
+	console.log('fbAsyncInit');
+	FB.init({
+		appId      : '539892936062898', //App ID
+		channelUrl : '//localhost:3000/channel.html', // Channel File
+		status     : true, // Check login status
+		cookie     : true, // Enable cookies to allow the server to access the session
+		xfbml      : true // Parse XFBML
+	});
+	// Additional init code here
+	FB.getLoginStatus(function (response) {
+		if (response.status === 'connected') {
+			// Inloggad
+			console.log('signed in');
+			signedIn();
+		} else {
+			console.log('log in');
+			login();
+		}
+	});
+};
+
+(function (d) {
+	'use strict';
+
+	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	if (d.getElementById(id)) { return; }
+	js = d.createElement('script');
+	js.id = id;
+	js.async = true;
+	js.src = "//connect.facebook.net/en_US/all.js";
+	ref.parentNode.insertBefore(js, ref);
+}(document));
+
 window.onload = function () {
 	'use strict';
 
 	var game = SOG.browser.game,
-		player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' }),
 		room = new SOG.browser.Room({ id: 'room', name: 'Lobby', socket: game.getSocket() }),
 		gamesList = [].slice.call(document.querySelectorAll('#games .game')),
 		wordNode,
@@ -49,7 +107,7 @@ window.onload = function () {
 
 		// Add player to list
 		addPlayerToList = function (p, data) {
-			var you = p.getSocketID() === player.getSocketID();
+			var you = p.getSocketID() === SOG.player.getSocketID();
 			// Show message in chat
 			if (!you) { chat.createMessage('', p.getName() + ' har gått med i spelet!'); }
 			// Add player to player-list
@@ -59,7 +117,7 @@ window.onload = function () {
 		};
 
 		// Init chat
-		chat.init({ input: chatInputField, messages: chatMessages, player: player });
+		chat.init({ input: chatInputField, messages: chatMessages, player: SOG.player });
 
 		// Add current players to list
 		data.players.forEach(addPlayerToList);
@@ -134,7 +192,7 @@ window.onload = function () {
 
 			// Save drawing in chat
 			if (data.word !== '' && artboard.getImage() !== '') {
-				player.saveImage(artboard.getImage());
+				SOG.player.saveImage(artboard.getImage());
 
 				chat.createMessage({
 					img: artboard.getImage(),
@@ -195,9 +253,9 @@ window.onload = function () {
 	};
 
 	// Join room
-	player.join(room);
+	SOG.player.join(room);
 
-	player.onDataChanged(function (p) {
+	SOG.player.onDataChanged(function (p) {
 		console.log(p);
 	});
 
@@ -222,66 +280,6 @@ window.onload = function () {
 	});
 
 
-//	function signedIn() {
-//		console.log('inloggad');
-//		FB.api('/me?fields=id,name,first_name,username,picture,link,friends.fields(id,name,picture)', function (d) {
-//			// Save user data
-//			player.updateDataSkit(d);
-//			// Change on the page
-//			var facebook_div = document.querySelector('#facebook'),
-//				template = Handlebars.templates['facebook.hbs'],
-//				html = template({ name: player.getFullName(), picture: player.getPicture() });
-//			facebook_div.innerHTML = html;
-//		});
-//	}
-//
-//	function login() {
-//		var btn = document.querySelector('#fb-login-button');
-//		btn.addEventListener('click', function (e) {
-//			e.preventDefault();
-//			FB.login(function (res) {
-//				if (res.authResponse) {
-//					signedIn();
-//				}
-//			});
-//		});
-//	}
-//
-//	function logout() {
-//		FB.logout(function () {
-//			console.log('bye');
-//		});
-//	}
-//
-//	window.lo = logout;
-//
-//	window.fbAsyncInit = function () {
-//		FB.init({
-//			appId      : '539892936062898', //App ID
-//			channelUrl : '//localhost:3000/channel.html', // Channel File
-//			status     : true, // Check login status
-//			cookie     : true, // Enable cookies to allow the server to access the session
-//			xfbml      : true // Parse XFBML
-//		});
-//		// Additional init code here
-//		FB.getLoginStatus(function (response) {
-//			if (response.status === 'connected') {
-//				// Inloggad
-//				signedIn();
-//			} else {
-//				login();
-//			}
-//		});
-//	};
-//
-//	window.tt = player;
-//
-//	/*
-//	SOG.utils.mediator.subscribe('wat', function (data) {
-//		console.log(data.msg);
-//	});
-//	window.testSendMsg = function (msg) {
-//		SOG.utils.mediator.publish('wat', { msg: msg });
-//	};
-//	*/
+
+	window.tt = SOG.player;
 };
