@@ -215,11 +215,11 @@ exports.listen = function (app, Room) {
 
 				// Points to the player who guessed right
 				p = r.players[socket.player.getSocketID()];
-				p.points(dictionaries['general-easy'].points.max);
+				p.skitpoints(dictionaries['general-easy'].points.max);
 
 				// Points to the player who drawed
 				d = r.players[r.queue[r.queue.length - 1]];
-				d.points(dictionaries['general-easy'].points.max / 4);
+				d.skitpoints(dictionaries['general-easy'].points.max / 4);
 
 				// Send to clients
 				io.sockets.in(socket.room).emit('update-points', {

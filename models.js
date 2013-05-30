@@ -1,6 +1,8 @@
 /*jslint node: true, es5: true */
 'use strict';
 
+require('./lib/utils/functional');
+
 var mongoose = require('mongoose'),
 	playerSchema;
 
@@ -54,4 +56,4 @@ playerSchema.statics.createAndOrAddPoints = function (lid, pnts, cb) {
 	});
 };
 
-mongoose.model('PlayerModel', playerSchema);
+module.exports = mongoose.model('PlayerModel', playerSchema);
