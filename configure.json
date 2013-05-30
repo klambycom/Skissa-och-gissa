@@ -1,11 +1,12 @@
 {
 	"title": "Skissa och gissa",
 	"view engine": "hbs",
-	"db": "mongodb://localhost/skissa-och-gissa",
 	"development": {
+		"db": "mongodb://localhost/skissa-och-gissa",
 		"port": 3000
 	},
 	"production": {
+		"db": "mongodb://localhost/skissa-och-gissa",
 		"port": 8080
 	}
 }
