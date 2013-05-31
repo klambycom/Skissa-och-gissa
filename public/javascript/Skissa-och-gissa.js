@@ -1506,8 +1506,10 @@ SOG.utils.namespace('SOG.browser.Player');
 
 		// Send user to server
 		this.room.on('identify-player', function (data) {
+			console.log(data);
 			self.setSocketID(data.id);
 			self.room.emit('identify-player', self.getAllData());
+			console.log('inner: ' + self.getSocketID());
 		});
 	};
 
@@ -1552,8 +1554,10 @@ SOG.utils.namespace('SOG.browser.Player');
 	 * @param data {object} The data to send to the server.
 	 */
 	Player.prototype.updateDataSkit = function (data) {
-		this.room.emit('identify-player', data);
-		this.updateData(data);
+		var d = Object.merge(data, { socket: this.getSocketID() });
+		this.room.emit('identify-player', d);
+		console.log(d);
+		this.updateData(d);
 	};
 
 	/**
