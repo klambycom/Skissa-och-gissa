@@ -1,7 +1,7 @@
 {
 	"name": "Skissa-och-gissa",
 	"description": "Skissa och gissa",
-	"version": "0.10.0-2",
+	"version": "0.10.0-3",
 	"private": true,
 	"author": {
 		"name": "Christian Nilsson",
