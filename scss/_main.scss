@@ -45,3 +45,13 @@ header {
 }
 
 .hide-wrapper { display: none; }
+
+#page-wrapper {
+  -webkit-transform: scale(1);
+  -webkit-transition: -webkit-transform 1s;
+}
+
+body.game #page-wrapper {
+  -webkit-transform: scale(0);
+  -webkit-transition: -webkit-transform 1s;
+}

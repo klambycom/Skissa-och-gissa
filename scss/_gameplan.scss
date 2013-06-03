@@ -1,3 +1,13 @@
+#game-wrapper {
+  opacity: 0;
+  -webkit-transition: all 1s;
+}
+
+body.game #game-wrapper {
+  opacity: 1;
+  -webkit-transition: all 1s;
+}
+
 #gameplan {
   position: absolute;
   top: 0;

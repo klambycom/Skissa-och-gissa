@@ -91,7 +91,6 @@ window.onload = function () {
 	// Start game
 	startGame = function (data) {
 		// Html for game
-		pageWrapper.classList.add('hide-wrapper');
 		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({});
 
 		var gameplan = document.querySelector('#gameplan'),
@@ -263,6 +262,7 @@ window.onload = function () {
 	// Change room
 	SOG.browser.lobby.onGameSelected(function (gid) {
 		room.changeTo(gid, startGame);
+		document.body.classList.add('game');
 	});
 
 	// Show error messages on error

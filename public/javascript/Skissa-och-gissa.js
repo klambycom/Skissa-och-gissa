@@ -25,6 +25,24 @@ Function.prototype.composite = function (g) {
 	};
 };
 
+Function.prototype.compose = function (g) {
+	'use strict';
+
+	// preserve f
+	var f = this,
+		fns = Array.prototype.slice.call(arguments);
+
+	// construct function z
+	return function () {
+		var args = Array.prototype.slice.call(arguments), i;
+		// when called, nest g's return in a call to f
+		for (i = 0; i < fns.length; i += 1) {
+			args = [fns[i].apply(this, args)];
+		}
+		return args[0];
+	};
+};
+
 /**
  * Partial Application (aka currying).
  *
@@ -2067,7 +2085,6 @@ window.onload = function () {
 	// Start game
 	startGame = function (data) {
 		// Html for game
-		pageWrapper.classList.add('hide-wrapper');
 		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({});
 
 		var gameplan = document.querySelector('#gameplan'),
@@ -2239,6 +2256,7 @@ window.onload = function () {
 	// Change room
 	SOG.browser.lobby.onGameSelected(function (gid) {
 		room.changeTo(gid, startGame);
+		document.body.classList.add('game');
 	});
 
 	// Show error messages on error
