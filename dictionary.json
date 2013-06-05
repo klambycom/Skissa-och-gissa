@@ -15,7 +15,7 @@
 	},
 	"general-moderate": {
 		"name": "Allmän",
-		"description": "Jajafanplease",
+		"description": "Denna kommer nog tas bort.",
 		"difficulty": "moderate",
 		"time": 2,
 		"rounds": 25,
@@ -29,7 +29,7 @@
 	},
 	"general-hard": {
 		"name": "Allmän",
-		"description": "...",
+		"description": "Nästan omöjligt!",
 		"difficulty": "hard",
 		"time": 2,
 		"rounds": 30,
