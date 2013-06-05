@@ -17,31 +17,13 @@
     <div id="highscore">
       <h1>Highscore</h1>
       <ul>
-        <li>
-          <img src="gfx/nopic50.png" alt="Foo Bar">
-          <span class="name">Foo Bar</span>
-          <span class="score">1245131 poäng</span>
+      {{#each highscore}}
+        <li data-login-id="{{login_id}}">
+          <img src="{{picture}}" alt="{{name}}">
+          <span class="name">{{name}}</span>
+          <span class="score">{{points}} poäng</span>
         </li>
-        <li>
-          <img src="gfx/nopic50.png" alt="Foo Bar">
-          <span class="name">Foo Bar</span>
-          <span class="score">1245131 poäng</span>
-        </li>
-        <li>
-          <img src="gfx/nopic50.png" alt="Foo Bar">
-          <span class="name">Foo Bar</span>
-          <span class="score">1245131 poäng</span>
-        </li>
-        <li>
-          <img src="gfx/nopic50.png" alt="Foo Bar">
-          <span class="name">Foo Bar</span>
-          <span class="score">1245131 poäng</span>
-        </li>
-        <li>
-          <img src="gfx/nopic50.png" alt="Foo Bar">
-          <span class="name">Foo Bar</span>
-          <span class="score">1245131 poäng</span>
-        </li>
+      {{/each}}
       </ul>
     </div>
   </aside>

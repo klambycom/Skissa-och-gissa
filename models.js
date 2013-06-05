@@ -4,7 +4,8 @@
 require('./lib/utils/functional');
 
 var mongoose = require('mongoose'),
-	playerSchema;
+	playerSchema,
+	graph = require('fbgraph');
 
 /*
  * Schema
@@ -55,5 +56,38 @@ playerSchema.statics.createAndOrAddPoints = function (lid, pnts, cb) {
 		}
 	});
 };
+
+playerSchema.statics.highscore = (function () {
+	var saved_result, saved_date;
+
+	return function (cb) {
+		if (saved_date + (1000 * 60 * 60) > Date.now()) {
+			cb(undefined, saved_result);
+			return;
+		}
+
+		return this.model('PlayerModel').find().sort({ points: -1 }).limit(5).exec(function (err, data) {
+			var fbIds = data.map(function (i) { return 'uid = ' + i.login_id; }).join(' OR '),
+				query = 'SELECT uid, name, pic_square FROM user WHERE ' + fbIds;
+
+			graph.fql(query, function (fbErr, res) {
+				var result = data.map(function (i) {
+					var fb = res.data.filter(function (f) { return f.uid === +i.login_id; })[0];
+					return {
+						login_id: i.login_id,
+						points: i.points,
+						name: fb.name,
+						picture: fb.pic_square
+					};
+				});
+				if (!err && !fbErr) {
+					saved_result = result;
+					saved_date = Date.now();
+				}
+				cb({ mongo: err, facebook: fbErr }, result);
+			});
+		});
+	};
+}());
 
 module.exports = mongoose.model('PlayerModel', playerSchema);
