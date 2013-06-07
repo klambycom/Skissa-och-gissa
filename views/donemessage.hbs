@@ -1,8 +1,12 @@
 <div class="drawing-done">
   <div class="word">{{word}}</div>
-  <a href="{{img}}" download="{{word}}.png">
+  {{#if fid}}
+  <a href="/p/{{fid}}/latest" target="_blank">
+  {{else}}
+  <a href="{{url}}" download="{{word}}.png" target="_blank">
+  {{/if}}
     <img src="{{img}}" alt="{{word}}" style="width: 100%">
   </a>
-  <img src="gfx/nopic50.png" alt="" class="user" />
+  <img src="{{picture}}" alt="" class="user" />
   <div class="by">{{name}}</div>
 </div>
