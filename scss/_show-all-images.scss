@@ -1,0 +1,16 @@
+#image-wrapper {
+  .image {
+    width: 250px;
+    overflow: hidden;
+    height: 200px;
+    float: left;
+    margin: 10px;
+    box-shadow: 0px 0px 3px 0px skyblue;
+
+    img {
+      width: 400px;
+      margin-left: -75px;
+      margin-top: -50px;
+    }
+  }
+}
