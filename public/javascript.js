@@ -91,7 +91,7 @@ window.onload = function () {
 	// Start game
 	startGame = function (data) {
 		// Html for game
-		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({});
+		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({ picture: SOG.player.getPicture() });
 
 		var gameplan = document.querySelector('#gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
