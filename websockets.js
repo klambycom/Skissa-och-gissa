@@ -41,7 +41,8 @@ exports.listen = function (app, Room) {
 			Room.canvas(socket.room, 0);
 
 			// Pick next person in queue
-			var nextPlayer = Room.nextPlayer(r),
+			var currentPlayer = Room.getPlayerDrawing(r),
+				nextPlayer = Room.nextPlayer(r),
 				word = w || Room.getWord(r);
 
 			// Game over
@@ -50,6 +51,7 @@ exports.listen = function (app, Room) {
 				io.sockets.in(r).emit('game-over', Room.playersNameAndScore(r));
 				io.sockets.in(r).emit('correct-word', {
 					word: word,
+					player: currentPlayer && currentPlayer.getAllData(),
 					next: { draw: false, player: nextPlayer.getAllData(), minutes: 0 }
 				});
 				return;
@@ -74,6 +76,7 @@ exports.listen = function (app, Room) {
 			// Tell player its his/hers turn to draw
 			io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
 				word: word,
+				player: currentPlayer && currentPlayer.getAllData(),
 				next: {
 					draw: true,
 					word: Room.randomWord(r),
@@ -85,6 +88,7 @@ exports.listen = function (app, Room) {
 			// Tell all players that correct word is guessed and send word to next person
 			io.sockets.in(r).except(nextPlayer.getSocketID()).emit('correct-word', {
 				word: word,
+				player: currentPlayer && currentPlayer.getAllData(),
 				next: {
 					draw: false,
 					player: nextPlayer.getAllData(),
@@ -247,7 +251,7 @@ exports.listen = function (app, Room) {
 			// Strip off the url prefix to get just the base64-encoded bytes
 			var image = data.replace(/^data:image\/\w+;base64,/, ''),
 				path = 'public/images/',
-				filename = socket.id + '-' + Room.getWord(socket.room) + '-' + Date.now() + '.png';
+				filename = socket.id + Date.now() + '.png';
 
 			// Save image
 			fs.writeFile(path + filename, image, 'base64', function (err) {
@@ -258,7 +262,9 @@ exports.listen = function (app, Room) {
 					// The image was saved
 					console.log('Image saved');
 					// Save image for room
-					Room.saveImage(socket.room, filename);
+					Room.saveImage(socket.room, filename, function (err, data) {
+						console.log(data);
+					});
 				}
 			});
 		});
