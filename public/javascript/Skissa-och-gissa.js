@@ -588,22 +588,42 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 templates['donemessage.hbs'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
-
-  buffer += "<div class=\"drawing-done\">\n  <div class=\"word\">";
-  if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <a href=\"/p/";
+  if (stack1 = helpers.fid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.fid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</div>\n  <a href=\"";
-  if (stack1 = helpers.img) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.img; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    + "/latest\" target=\"_blank\">\n  ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <a href=\"";
+  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\" download=\"";
   if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + ".png\">\n    <img src=\"";
+    + ".png\" target=\"_blank\">\n  ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"drawing-done\">\n  <div class=\"word\">";
+  if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</div>\n  ";
+  stack1 = helpers['if'].call(depth0, depth0.fid, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    <img src=\"";
   if (stack1 = helpers.img) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.img; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -611,7 +631,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.word) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.word; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" style=\"width: 100%\">\n  </a>\n  <img src=\"gfx/nopic50.png\" alt=\"\" class=\"user\" />\n  <div class=\"by\">";
+    + "\" style=\"width: 100%\">\n  </a>\n  <img src=\"";
+  if (stack1 = helpers.picture) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.picture; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" alt=\"\" class=\"user\" />\n  <div class=\"by\">";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -1208,8 +1232,8 @@ SOG.browser.artboard = (function (points) {
 	 */
 	changeCrayon = function (color) {
 		// Remove all colors from cursor
-		['blue_crayon', 'green_crayon', 'pink_crayon', 'yellow_crayon', 'red_crayon'].forEach(function (c) {
-			context.canvas.classList.remove(c);
+		['white', 'black', 'red', 'orange', 'yellow', 'yellowgreen', 'green', 'lightskyblue', 'dodgerblue', 'violet', 'pink', 'burlywood', 'saddlebrown', 'brown'].forEach(function (c) {
+			context.canvas.classList.remove(c + '_crayon');
 		});
 		// Add cursor with right color
 		context.canvas.classList.add(color + '_crayon');
@@ -1232,6 +1256,7 @@ SOG.browser.artboard = (function (points) {
 			// Prevent Chrome from selecting the canvas
 			// TODO Set on document? No need to select anything?
 			opt.canvas.onselectstart = function () { return false; };
+			opt.canvas.onmousedown = function () { return false; };
 			// Set room
 			room = opt.room;
 			// Offset if needed
@@ -1724,6 +1749,7 @@ SOG.utils.namespace('SOG.browser.Room');
 	SOG.browser.Room.prototype.onCorrectWordGuessed = function (fn) {
 		this.get('socket').on('correct-word', function (data) {
 			data.next.player = new SOG.browser.Player(data.next.player);
+			data.player = new SOG.browser.Player(data.player);
 			fn(data);
 		});
 	};
@@ -1909,8 +1935,8 @@ SOG.browser.chat = (function () {
 				html = serverMessageTemplate({ message: message });
 			} else {
 				html = messageTemplate({
-					name: thisPlayer.getFullName(),
-					picture: 'gfx/nopic30.png',
+					name: from.getFullName(),
+					picture: from.getPicture(),
 					message: message,
 					css: (options.win) ? ' win' : ''
 				});
@@ -2153,14 +2179,11 @@ window.onload = function () {
 				wordNode = undefined;
 				gameWrapper.classList.remove('draw');
 				chatInputField.disabled = false;
-				document.onselectstart = function () { return true; };
 			}
 
 			if (data.next && data.next.draw) {
 				// Disable chat input field
 				chatInputField.disabled = true;
-				// Disable selection
-				document.onselectstart = function () { return false; };
 				// Show new word
 				wordNode = SOG.utils.html('div', {
 					id: 'word-wrapper',
@@ -2191,7 +2214,9 @@ window.onload = function () {
 				chat.createMessage({
 					img: artboard.getImage(),
 					word: data.word,
-					name: 'Christian Nilsson'
+					name: data.player.getName(),
+					picture: data.player.getPicture(),
+					fid: data.player.getFacebookID()
 				});
 			}
 

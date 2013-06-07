@@ -283,42 +283,50 @@ body.game #page-wrapper {
 #facebook a#fb-login-button {
   margin: 19px 0px 0px 69px;
   display: block;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(155, 195, 238, 0.5);
+  width: 175px;
+  -webkit-transition: all .3s;
 }
-/* line 33, ../../scss/_sidebar.scss */
+/* line 35, ../../scss/_sidebar.scss */
+#facebook a#fb-login-button:hover {
+  border-bottom: 2px solid #9bc3ee;
+}
+/* line 39, ../../scss/_sidebar.scss */
 #facebook #fb-user-data img {
   float: left;
   margin-right: 10px;
   width: 50px;
   height: 50px;
 }
-/* line 40, ../../scss/_sidebar.scss */
+/* line 46, ../../scss/_sidebar.scss */
 #facebook #fb-user-data h1 {
   font-size: 1.5em;
   margin-bottom: 10px;
 }
 
-/* line 48, ../../scss/_sidebar.scss */
+/* line 54, ../../scss/_sidebar.scss */
 #highscore h1 {
   font-size: 2em;
   margin: 20px 0 10px 0;
 }
-/* line 53, ../../scss/_sidebar.scss */
+/* line 59, ../../scss/_sidebar.scss */
 #highscore li {
   margin-bottom: 10px;
 }
-/* line 56, ../../scss/_sidebar.scss */
+/* line 62, ../../scss/_sidebar.scss */
 #highscore li:after {
   display: block;
   content: "";
   clear: both;
 }
-/* line 62, ../../scss/_sidebar.scss */
+/* line 68, ../../scss/_sidebar.scss */
 #highscore li .name {
   font-size: 1.5em;
   display: block;
   margin-bottom: 5px;
 }
-/* line 68, ../../scss/_sidebar.scss */
+/* line 74, ../../scss/_sidebar.scss */
 #highscore li img {
   float: left;
   margin-right: 5px;
@@ -670,19 +678,20 @@ body.game #page-wrapper {
 #chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
+  height: 30px;
 }
-/* line 206, ../../scss/_chat.scss */
+/* line 207, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding: 0px 5px;
 }
-/* line 213, ../../scss/_chat.scss */
+/* line 214, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 218, ../../scss/_chat.scss */
+/* line 219, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;
@@ -805,59 +814,59 @@ body.game #game-wrapper {
 }
 /* line 6, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.white_crayon {
-  cursor: url(../white.png), auto;
+  cursor: url(../gfx/white.png), auto;
 }
 /* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.black_crayon {
-  cursor: url(../black.png), auto;
+  cursor: url(../gfx/black.png), auto;
 }
 /* line 8, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.red_crayon {
-  cursor: url(../red.png), auto;
+  cursor: url(../gfx/red.png), auto;
 }
 /* line 9, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.orange_crayon {
-  cursor: url(../orange.png), auto;
+  cursor: url(../gfx/orange.png), auto;
 }
 /* line 10, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.yellow_crayon {
-  cursor: url(../yellow.png), auto;
+  cursor: url(../gfx/yellow.png), auto;
 }
 /* line 11, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.yellowgreen_crayon {
-  cursor: url(../yellowgreen.png), auto;
+  cursor: url(../gfx/yellowgreen.png), auto;
 }
 /* line 12, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.green_crayon {
-  cursor: url(../green.png), auto;
+  cursor: url(../gfx/green.png), auto;
 }
 /* line 13, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.lightskyblue_crayon {
-  cursor: url(../lightskyblue.png), auto;
+  cursor: url(../gfx/lightskyblue.png), auto;
 }
 /* line 14, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.dodgerblue_crayon {
-  cursor: url(../dodgerblue.png), auto;
+  cursor: url(../gfx/dodgerblue.png), auto;
 }
 /* line 15, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.violet_crayon {
-  cursor: url(../violet.png), auto;
+  cursor: url(../gfx/violet.png), auto;
 }
 /* line 16, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.pink_crayon {
-  cursor: url(../pink.png), auto;
+  cursor: url(../gfx/pink.png), auto;
 }
 /* line 17, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.burlywood_crayon {
-  cursor: url(../burlywood.png), auto;
+  cursor: url(../gfx/burlywood.png), auto;
 }
 /* line 18, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.saddlebrown_crayon {
-  cursor: url(../saddlebrown.png), auto;
+  cursor: url(../gfx/saddlebrown.png), auto;
 }
 /* line 19, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.brown_crayon {
-  cursor: url(../brown.png), auto;
+  cursor: url(../gfx/brown.png), auto;
 }
 
 /* line 23, ../../scss/_artboard.scss */
@@ -1135,4 +1144,97 @@ body.game #game-wrapper {
   box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, 0.3);
   opacity: 0;
   -webkit-animation: simplepopup 10s;
+}
+
+/* line 1, ../../scss/_show-image.scss */
+#image-wrapper {
+  width: 1100px;
+  margin: 70px auto;
+  font-family: sans-serif;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+/* line 8, ../../scss/_show-image.scss */
+#image-wrapper:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+/* line 14, ../../scss/_show-image.scss */
+#image-wrapper img {
+  float: left;
+  background-color: white;
+}
+/* line 19, ../../scss/_show-image.scss */
+#image-wrapper #sidebar {
+  float: right;
+  width: 300px;
+  height: 600px;
+  position: relative;
+  margin: 0;
+  background-color: rgba(48, 48, 48, 0.9);
+  -webkit-box-shadow: inset 8px 0px 16px -10px black;
+  box-shadow: inset 8px 0px 16px -10px black;
+}
+/* line 30, ../../scss/_show-image.scss */
+#image-wrapper #sidebar h1 {
+  padding: 20px;
+  color: white;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+/* line 37, ../../scss/_show-image.scss */
+#image-wrapper #sidebar #meta {
+  padding-left: 20px;
+  color: white;
+  font-weight: lighter;
+  font-size: .9em;
+}
+/* line 43, ../../scss/_show-image.scss */
+#image-wrapper #sidebar #meta a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(43, 171, 189, 0.4);
+  -webkit-transition: all 1s;
+}
+/* line 48, ../../scss/_show-image.scss */
+#image-wrapper #sidebar #meta a:hover {
+  border-bottom: 1px solid white;
+}
+/* line 52, ../../scss/_show-image.scss */
+#image-wrapper #sidebar .save-btn {
+  margin: 5px;
+  background-color: #2babbd;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  -webkit-transition: all .5s;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-size: 1.1em;
+  text-align: center;
+}
+/* line 67, ../../scss/_show-image.scss */
+#image-wrapper #sidebar .save-btn:hover {
+  -webkit-transition: all .5s;
+  background-color: #48bece;
+}
+
+/* line 2, ../../scss/_show-all-images.scss */
+#image-wrapper .image {
+  width: 250px;
+  overflow: hidden;
+  height: 200px;
+  float: left;
+  margin: 10px;
+  box-shadow: 0px 0px 3px 0px skyblue;
+}
+/* line 10, ../../scss/_show-all-images.scss */
+#image-wrapper .image img {
+  width: 400px;
+  margin-left: -75px;
+  margin-top: -50px;
 }

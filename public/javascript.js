@@ -159,14 +159,11 @@ window.onload = function () {
 				wordNode = undefined;
 				gameWrapper.classList.remove('draw');
 				chatInputField.disabled = false;
-				document.onselectstart = function () { return true; };
 			}
 
 			if (data.next && data.next.draw) {
 				// Disable chat input field
 				chatInputField.disabled = true;
-				// Disable selection
-				document.onselectstart = function () { return false; };
 				// Show new word
 				wordNode = SOG.utils.html('div', {
 					id: 'word-wrapper',
@@ -197,7 +194,9 @@ window.onload = function () {
 				chat.createMessage({
 					img: artboard.getImage(),
 					word: data.word,
-					name: 'Christian Nilsson'
+					name: data.player.getName(),
+					picture: data.player.getPicture(),
+					fid: data.player.getFacebookID()
 				});
 			}
 
