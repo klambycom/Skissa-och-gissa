@@ -112,7 +112,7 @@ window.onload = function () {
 			if (!you) { chat.createMessage('', p.getName() + ' har gått med i spelet!'); }
 			// Add player to player-list
 			playersList.innerHTML += playerTmpl(p.getObject(['name', 'picture'], function () {
-				return { points: 214, you: you, id: p.getSocketID() };
+				return { points: p.points(), you: you, id: p.getSocketID() };
 			}));
 		};
 
