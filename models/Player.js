@@ -1,7 +1,7 @@
 /*jslint node: true, es5: true */
 'use strict';
 
-require('./lib/utils/functional');
+require('../lib/utils/functional');
 
 var mongoose = require('mongoose'),
 	playerSchema,

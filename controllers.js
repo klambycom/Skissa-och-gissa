@@ -6,7 +6,7 @@ var save = function (v) { return function (r, f) { exports.controllers.push({ ve
 	app = { get: save('get'), post: save('post'), param: save('param') };
 
 var SharedPlayer = require('./lib/shared/Player').Player,
-	PlayerModel = require('./models'),
+	PlayerModel = require('./models/Player'),
 	ImageModel = require('./models/Image');
 
 var fs = require('fs');

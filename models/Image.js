@@ -33,8 +33,4 @@ imageSchema.statics.findImage = function (id, cb) {
 	});
 };
 
-//ImageModel.findOne({ _id: req.params.id }, function (err, data) {
-
-//ImageModel.findOne({ player: req.params.player }).sort({ created_at: -1 }).limit(1).exec(function (err, data) {
-
 module.exports = mongoose.model('ImageModel', imageSchema);
