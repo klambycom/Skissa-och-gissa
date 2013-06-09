@@ -10,7 +10,8 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	server,
 	game = require('./lib/server/game').game,
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	dict = require('./dictionary.json');
 
 // Configure
 var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
@@ -46,7 +47,7 @@ app.configure('production', function () {
 mongoose.connect(app.get('db'));
 
 // Create some games
-game.create(['general-easy', 'general-moderate', 'general-hard']);
+game.create(Object.keys(dict));
 
 // Save rooms to every page load
 app.use(function (req, res, next) {
