@@ -38,6 +38,7 @@ Function.prototype.compose = function (/* functions */) {
 		var args = [].slice.call(arguments), i;
 
 		// Run args on all functions and save result
+		// Run args on function and save result to next function
 		for (i = fns.length - 1; i >= 0; i -= 1) {
 			args = [fns[i].apply(this, args)];
 		}
@@ -1274,6 +1275,8 @@ SOG.browser.artboard = (function (points) {
 			// Set up artboard
 			context = opt.canvas.getContext('2d');
 			this.clear();
+			// Change cursor
+			this.setColor('red');
 			// Receive one point from server
 			room.onReceivePoint(receivePoint);
 		},
@@ -1319,8 +1322,6 @@ SOG.browser.artboard = (function (points) {
 			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 			// Pencil style
 			context.lineJoin = 'round';
-			// Change cursor
-			changeCrayon('red');
 		},
 
 		/**
@@ -1329,7 +1330,7 @@ SOG.browser.artboard = (function (points) {
 		 * @method setColor
 		 * @param c {string} The color.
 		 */
-		setColor: points.setColor.composite(changeCrayon),
+		setColor: points.setColor.compose(changeCrayon),
 
 		/**
 		 * Set the size.
@@ -2019,7 +2020,7 @@ SOG.browser.crayons = (function (currying) {
 		 */
 		init: function (dom) {
 			// Select default
-			color(dom.colors[1]);
+			color(dom.colors[2]);
 			size(dom.sizes[0]);
 			// Add event listeners
 			dom.sizes.forEach(function (s) { s.addEventListener('click', size); });
@@ -2122,11 +2123,11 @@ window.onload = function () {
 		// Html for game
 		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({ picture: SOG.player.getPicture() });
 
-		var gameplan = document.querySelector('#gameplan'),
+		var gameplan = document.getElementById('gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
-			chatMessages = document.querySelector('#chat-messages'),
+			chatMessages = document.getElementById('chat-messages'),
 			playersList = document.querySelector('#game-user-info .players'),
-			timer = document.querySelector('#timer-progress'),
+			timer = document.getElementById('timer-progress'),
 			artboardWrapper = document.getElementById('artboard-wrapper'),
 			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
