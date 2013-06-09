@@ -91,6 +91,7 @@ header p {
 
 /* line 20, ../../scss/_main.scss */
 #main {
+  display: block;
   width: 1000px;
   margin: 0 auto;
   background-color: white;
@@ -101,14 +102,14 @@ header p {
   -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
-/* line 29, ../../scss/_main.scss */
+/* line 30, ../../scss/_main.scss */
 #main:after {
   display: block;
   content: "";
   clear: both;
 }
 
-/* line 36, ../../scss/_main.scss */
+/* line 37, ../../scss/_main.scss */
 #page-wrapper {
   -webkit-filter: blur(0px);
   -moz-filter: blur(0px);
@@ -118,7 +119,7 @@ header p {
   -o-transition: filter 0.3s;
   transition: filter 0.3s;
 }
-/* line 40, ../../scss/_main.scss */
+/* line 41, ../../scss/_main.scss */
 #page-wrapper.blur {
   -webkit-filter: blur(1px);
   -moz-filter: blur(1px);
@@ -129,12 +130,12 @@ header p {
   transition: filter 0.4s;
 }
 
-/* line 46, ../../scss/_main.scss */
+/* line 47, ../../scss/_main.scss */
 .hide-wrapper {
   display: none;
 }
 
-/* line 48, ../../scss/_main.scss */
+/* line 49, ../../scss/_main.scss */
 #page-wrapper {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -147,7 +148,7 @@ header p {
   transition: transform 1s;
 }
 
-/* line 53, ../../scss/_main.scss */
+/* line 54, ../../scss/_main.scss */
 body.game #page-wrapper {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
