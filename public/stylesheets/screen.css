@@ -98,41 +98,66 @@ header p {
   margin-top: 20px;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
-/* line 30, ../../scss/_main.scss */
+/* line 29, ../../scss/_main.scss */
 #main:after {
   display: block;
   content: "";
   clear: both;
 }
 
-/* line 37, ../../scss/_main.scss */
+/* line 36, ../../scss/_main.scss */
 #page-wrapper {
   -webkit-filter: blur(0px);
-  -webkit-transition: -webkit-filter .3s;
+  -moz-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-transition: filter 0.3s;
+  -moz-transition: filter 0.3s;
+  -o-transition: filter 0.3s;
+  transition: filter 0.3s;
 }
-/* line 41, ../../scss/_main.scss */
+/* line 40, ../../scss/_main.scss */
 #page-wrapper.blur {
   -webkit-filter: blur(1px);
-  -webkit-transition: -webkit-filter .4s;
+  -moz-filter: blur(1px);
+  filter: blur(1px);
+  -webkit-transition: filter 0.4s;
+  -moz-transition: filter 0.4s;
+  -o-transition: filter 0.4s;
+  transition: filter 0.4s;
 }
 
-/* line 47, ../../scss/_main.scss */
+/* line 46, ../../scss/_main.scss */
 .hide-wrapper {
   display: none;
 }
 
-/* line 49, ../../scss/_main.scss */
+/* line 48, ../../scss/_main.scss */
 #page-wrapper {
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
   -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
 }
 
-/* line 54, ../../scss/_main.scss */
+/* line 53, ../../scss/_main.scss */
 body.game #page-wrapper {
   -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
   -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
 }
 
 /* line 1, ../../scss/_games.scss */
@@ -167,13 +192,19 @@ body.game #page-wrapper {
 /* line 29, ../../scss/_games.scss */
 #games .game {
   background-color: white;
-  -webkit-transition: background-color .3s;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   position: relative;
 }
 /* line 34, ../../scss/_games.scss */
 #games .game:hover {
   background-color: whitesmoke;
-  -webkit-transition: background-color .3s;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 /* line 39, ../../scss/_games.scss */
 #games .game:not(:last-child) {
@@ -286,7 +317,10 @@ body.game #page-wrapper {
   text-decoration: none;
   border-bottom: 2px solid rgba(155, 195, 238, 0.5);
   width: 175px;
-  -webkit-transition: all .3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 /* line 35, ../../scss/_sidebar.scss */
 #facebook a#fb-login-button:hover {
@@ -355,6 +389,7 @@ body.game #page-wrapper {
   width: 40px;
   background-color: rgba(48, 48, 48, 0.9);
   -webkit-box-shadow: inset -5px 0px 20px -10px black;
+  -moz-box-shadow: inset -5px 0px 20px -10px black;
   box-shadow: inset -5px 0px 20px -10px black;
   position: absolute;
   top: 0;
@@ -362,7 +397,7 @@ body.game #page-wrapper {
   left: 0;
   z-index: 1000;
 }
-/* line 15, ../../scss/_game-user-info.scss */
+/* line 14, ../../scss/_game-user-info.scss */
 #game-user-info h1 {
   display: block;
   float: left;
@@ -370,20 +405,20 @@ body.game #page-wrapper {
   font-weight: bold;
   margin-top: 5px;
 }
-/* line 23, ../../scss/_game-user-info.scss */
+/* line 22, ../../scss/_game-user-info.scss */
 #game-user-info .players {
   margin-left: -1px;
 }
-/* line 26, ../../scss/_game-user-info.scss */
+/* line 25, ../../scss/_game-user-info.scss */
 #game-user-info .players .player {
   position: relative;
   margin: 5px 0;
 }
-/* line 30, ../../scss/_game-user-info.scss */
+/* line 29, ../../scss/_game-user-info.scss */
 #game-user-info .players .player img {
   width: 40px;
 }
-/* line 32, ../../scss/_game-user-info.scss */
+/* line 31, ../../scss/_game-user-info.scss */
 #game-user-info .players .player .information {
   position: absolute;
   top: 0;
@@ -394,30 +429,38 @@ body.game #page-wrapper {
   width: 200px;
   padding: 5px;
   opacity: 0;
-  -webkit-transition: left .3s .1s, opacity .3s;
+  -webkit-transition: left 0.3s, opacity 0.3s;
+  -webkit-transition-delay: 0.1s, 0s;
+  -moz-transition: left 0.3s 0.1s, opacity 0.3s;
+  -o-transition: left 0.3s 0.1s, opacity 0.3s;
+  transition: left 0.3s 0.1s, opacity 0.3s;
 }
-/* line 44, ../../scss/_game-user-info.scss */
+/* line 43, ../../scss/_game-user-info.scss */
 #game-user-info .players .player .information .name {
   display: block;
   padding-bottom: 1px;
 }
-/* line 49, ../../scss/_game-user-info.scss */
+/* line 48, ../../scss/_game-user-info.scss */
 #game-user-info .players .player .information .points {
   font-size: .7em;
   margin-top: 5px;
   display: block;
 }
-/* line 56, ../../scss/_game-user-info.scss */
+/* line 55, ../../scss/_game-user-info.scss */
 #game-user-info .players .player:hover .information {
   opacity: 1;
   left: 48px;
-  -webkit-transition: left .3s, opacity .4s .1s;
+  -webkit-transition: left 0.3s, opacity 0.4s;
+  -webkit-transition-delay: 0s, 0.1s;
+  -moz-transition: left 0.3s, opacity 0.4s 0.1s;
+  -o-transition: left 0.3s, opacity 0.4s 0.1s;
+  transition: left 0.3s, opacity 0.4s 0.1s;
 }
-/* line 63, ../../scss/_game-user-info.scss */
+/* line 62, ../../scss/_game-user-info.scss */
 #game-user-info .players .player.you .information .name {
   display: none;
 }
-/* line 65, ../../scss/_game-user-info.scss */
+/* line 64, ../../scss/_game-user-info.scss */
 #game-user-info .players .player.you .information .points {
   padding: 5px;
   margin: 0px;
@@ -427,12 +470,20 @@ body.game #page-wrapper {
 /* line 3, ../../scss/_chat.scss */
 #game-wrapper.draw #chat-container #crayons {
   width: 50px;
-  -webkit-transition: all .5s .3s;
+  -webkit-transition: all 0.5s;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all 0.5s 0.3s;
+  -o-transition: all 0.5s 0.3s;
+  transition: all 0.5s 0.3s;
 }
 /* line 8, ../../scss/_chat.scss */
 #game-wrapper.draw #chat-container #chat {
   right: 50px;
-  -webkit-transition: all .5s .3s;
+  -webkit-transition: all 0.5s;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all 0.5s 0.3s;
+  -o-transition: all 0.5s 0.3s;
+  transition: all 0.5s 0.3s;
 }
 
 /* line 15, ../../scss/_chat.scss */
@@ -451,7 +502,11 @@ body.game #page-wrapper {
   width: 0px;
   overflow: hidden;
   background-color: #e5e5e5;
-  -webkit-transition: all .5s .3s;
+  -webkit-transition: all 0.5s;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all 0.5s 0.3s;
+  -o-transition: all 0.5s 0.3s;
+  transition: all 0.5s 0.3s;
 }
 /* line 31, ../../scss/_chat.scss */
 #chat-container #crayons h1 {
@@ -473,100 +528,112 @@ body.game #page-wrapper {
   border-radius: 2px;
   width: 30px;
   margin: 10px;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 /* line 51, ../../scss/_chat.scss */
 #chat-container #crayons #sizes a.selected {
   background-color: #88b2d8;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 57, ../../scss/_chat.scss */
+/* line 58, ../../scss/_chat.scss */
 #chat-container #crayons #sizes li.size-5 a {
   height: 5px;
 }
-/* line 61, ../../scss/_chat.scss */
+/* line 58, ../../scss/_chat.scss */
 #chat-container #crayons #sizes li.size-10 a {
   height: 10px;
 }
-/* line 65, ../../scss/_chat.scss */
+/* line 58, ../../scss/_chat.scss */
 #chat-container #crayons #sizes li.size-15 a {
   height: 15px;
 }
-/* line 69, ../../scss/_chat.scss */
+/* line 58, ../../scss/_chat.scss */
 #chat-container #crayons #sizes li.size-20 a {
   height: 20px;
 }
-/* line 75, ../../scss/_chat.scss */
+/* line 63, ../../scss/_chat.scss */
 #chat-container #crayons #colors a {
   width: 30px;
   height: 30px;
   display: block;
   margin: 7px;
   border: 3px solid #e5e5e5;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 83, ../../scss/_chat.scss */
+/* line 71, ../../scss/_chat.scss */
 #chat-container #crayons #colors a.selected {
   border: 3px solid #88b2d8;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 89, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.white a {
   background-color: white;
 }
-/* line 90, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.black a {
   background-color: black;
 }
-/* line 91, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.red a {
   background-color: red;
 }
-/* line 92, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.orange a {
   background-color: orange;
 }
-/* line 93, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.yellow a {
   background-color: yellow;
 }
-/* line 94, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.yellowgreen a {
   background-color: yellowgreen;
 }
-/* line 95, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.green a {
   background-color: green;
 }
-/* line 96, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.lightskyblue a {
   background-color: lightskyblue;
 }
-/* line 97, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.dodgerblue a {
   background-color: dodgerblue;
 }
-/* line 98, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.violet a {
   background-color: violet;
 }
-/* line 99, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.pink a {
   background-color: pink;
 }
-/* line 100, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.burlywood a {
   background-color: burlywood;
 }
-/* line 101, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.saddlebrown a {
   background-color: saddlebrown;
 }
-/* line 102, ../../scss/_chat.scss */
+/* line 78, ../../scss/_chat.scss */
 #chat-container #crayons #colors li.brown a {
   background-color: brown;
 }
-/* line 106, ../../scss/_chat.scss */
+/* line 83, ../../scss/_chat.scss */
 #chat-container #chat {
   position: absolute;
   top: 0;
@@ -574,9 +641,13 @@ body.game #page-wrapper {
   right: 0;
   left: 50px;
   background-color: white;
-  -webkit-transition: all .5s .3s;
+  -webkit-transition: all 0.5s;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all 0.5s 0.3s;
+  -o-transition: all 0.5s 0.3s;
+  transition: all 0.5s 0.3s;
 }
-/* line 115, ../../scss/_chat.scss */
+/* line 92, ../../scss/_chat.scss */
 #chat-container #chat #chat-input {
   position: absolute;
   left: 0;
@@ -585,7 +656,7 @@ body.game #page-wrapper {
   padding: 5px;
   height: 40px;
 }
-/* line 123, ../../scss/_chat.scss */
+/* line 100, ../../scss/_chat.scss */
 #chat-container #chat #chat-input img {
   height: 40px;
   width: 40px;
@@ -594,7 +665,7 @@ body.game #page-wrapper {
   left: 5px;
   bottom: 5px;
 }
-/* line 132, ../../scss/_chat.scss */
+/* line 109, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input {
   height: 30px;
   font-size: 25px;
@@ -606,32 +677,38 @@ body.game #page-wrapper {
   border: 0px;
   margin: 0;
   background-color: #e5e5e5;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 146, ../../scss/_chat.scss */
+/* line 123, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus {
   outline: 0;
   background-color: #88b2d8;
   color: white;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 152, ../../scss/_chat.scss */
+/* line 130, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus::-webkit-input-placeholder {
   color: white;
 }
-/* line 153, ../../scss/_chat.scss */
+/* line 130, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus::-moz-placeholder {
   color: white;
 }
-/* line 154, ../../scss/_chat.scss */
+/* line 130, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus:-moz-placeholder {
   color: white;
 }
-/* line 155, ../../scss/_chat.scss */
+/* line 130, ../../scss/_chat.scss */
 #chat-container #chat #chat-input input:focus:-ms-input-placeholder {
   color: white;
 }
-/* line 160, ../../scss/_chat.scss */
+/* line 136, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages {
   position: absolute;
   top: 0;
@@ -640,12 +717,12 @@ body.game #page-wrapper {
   right: 0;
   overflow: auto;
 }
-/* line 168, ../../scss/_chat.scss */
+/* line 144, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done {
   position: relative;
   margin: 5px;
 }
-/* line 172, ../../scss/_chat.scss */
+/* line 148, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done .word {
   background-color: rgba(37, 127, 161, 0.5);
   display: inline;
@@ -653,14 +730,14 @@ body.game #page-wrapper {
   padding: 5px;
   position: absolute;
 }
-/* line 180, ../../scss/_chat.scss */
+/* line 156, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done img.user {
   width: 50px;
   position: absolute;
   bottom: 0;
   left: 0;
 }
-/* line 187, ../../scss/_chat.scss */
+/* line 163, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .drawing-done .by {
   position: absolute;
   bottom: 0;
@@ -670,28 +747,28 @@ body.game #page-wrapper {
   color: white;
   padding: 5px;
 }
-/* line 198, ../../scss/_chat.scss */
+/* line 174, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message {
   margin: 10px 5px;
 }
-/* line 201, ../../scss/_chat.scss */
+/* line 177, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message img {
   float: left;
   padding-right: 5px;
   height: 30px;
 }
-/* line 207, ../../scss/_chat.scss */
+/* line 183, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message p {
   background-color: rgba(128, 128, 128, 0.05);
   line-height: 30px;
   margin-left: 35px;
   padding: 0px 5px;
 }
-/* line 214, ../../scss/_chat.scss */
+/* line 190, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .message.win p {
   background-color: rgba(0, 255, 0, 0.15);
 }
-/* line 219, ../../scss/_chat.scss */
+/* line 195, ../../scss/_chat.scss */
 #chat-container #chat #chat-messages .server-message {
   margin: 10px 5px;
   font-size: .75em;
@@ -705,12 +782,18 @@ body.game #page-wrapper {
 #game-wrapper {
   opacity: 0;
   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
 }
 
 /* line 6, ../../scss/_gameplan.scss */
 body.game #game-wrapper {
   opacity: 1;
   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
 }
 
 /* line 11, ../../scss/_gameplan.scss */
@@ -769,12 +852,18 @@ body.game #game-wrapper {
   width: 250px;
   margin: 0 auto;
   margin-top: -8px;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 /* line 66, ../../scss/_gameplan.scss */
 #word-wrapper.small #word .text {
   font-size: 0;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 /* line 74, ../../scss/_gameplan.scss */
@@ -797,22 +886,33 @@ body.game #game-wrapper {
   font-size: .85em;
   color: #464444;
   background-color: #e5e5e5;
-  -webkit-transform: all .5s;
+  -webkit-transform: all 0.5s;
+  -moz-transform: all 0.5s;
+  -ms-transform: all 0.5s;
+  -o-transform: all 0.5s;
+  transform: all 0.5s;
 }
 
 /* line 96, ../../scss/_gameplan.scss */
 .draw #drawing-player span {
   background-color: #88b2d8;
   color: white;
-  -webkit-transform: all .5s;
+  -webkit-transform: all 0.5s;
+  -moz-transform: all 0.5s;
+  -ms-transform: all 0.5s;
+  -o-transform: all 0.5s;
+  transform: all 0.5s;
 }
 
 /* line 2, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard {
   border: 5px solid #88b2d8;
-  -webkit-transition: border .5s;
+  -webkit-transition: border 0.5s;
+  -moz-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  transition: border 0.5s;
 }
-/* line 6, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.white_crayon {
   cursor: url(../gfx/white.png), auto;
 }
@@ -820,65 +920,68 @@ body.game #game-wrapper {
 #game-wrapper.draw #artboard.black_crayon {
   cursor: url(../gfx/black.png), auto;
 }
-/* line 8, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.red_crayon {
   cursor: url(../gfx/red.png), auto;
 }
-/* line 9, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.orange_crayon {
   cursor: url(../gfx/orange.png), auto;
 }
-/* line 10, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.yellow_crayon {
   cursor: url(../gfx/yellow.png), auto;
 }
-/* line 11, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.yellowgreen_crayon {
   cursor: url(../gfx/yellowgreen.png), auto;
 }
-/* line 12, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.green_crayon {
   cursor: url(../gfx/green.png), auto;
 }
-/* line 13, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.lightskyblue_crayon {
   cursor: url(../gfx/lightskyblue.png), auto;
 }
-/* line 14, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.dodgerblue_crayon {
   cursor: url(../gfx/dodgerblue.png), auto;
 }
-/* line 15, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.violet_crayon {
   cursor: url(../gfx/violet.png), auto;
 }
-/* line 16, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.pink_crayon {
   cursor: url(../gfx/pink.png), auto;
 }
-/* line 17, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.burlywood_crayon {
   cursor: url(../gfx/burlywood.png), auto;
 }
-/* line 18, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.saddlebrown_crayon {
   cursor: url(../gfx/saddlebrown.png), auto;
 }
-/* line 19, ../../scss/_artboard.scss */
+/* line 7, ../../scss/_artboard.scss */
 #game-wrapper.draw #artboard.brown_crayon {
   cursor: url(../gfx/brown.png), auto;
 }
 
-/* line 23, ../../scss/_artboard.scss */
+/* line 12, ../../scss/_artboard.scss */
 #artboard-wrapper {
   padding: 20px;
 }
 
-/* line 27, ../../scss/_artboard.scss */
+/* line 16, ../../scss/_artboard.scss */
 #artboard {
   background-color: white;
   border: 5px solid rgba(0, 0, 0, 0.1);
-  -webkit-transition: border .5s;
+  -webkit-transition: border 0.5s;
+  -moz-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  transition: border 0.5s;
 }
 
 @-webkit-keyframes PROGRESS {
@@ -910,24 +1013,12 @@ body.game #game-wrapper {
   right: 10px;
   bottom: 10px;
   border-radius: 3px;
-  background: #ff4949;
-  /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #ff4949), color-stop(16%, #f3f722), color-stop(21%, #f3f722), color-stop(31%, #22f730), color-stop(43%, #22eff9), color-stop(49%, #22eff9), color-stop(67%, #5850f4), color-stop(83%, #f722f0), color-stop(100%, #e2391f));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(-45deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* IE10+ */
+  background: -webkit-linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  background: -moz-linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
+  background: -o-linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
   background: linear-gradient(135deg, #ff4949 0%, #f3f722 16%, #f3f722 21%, #22f730 31%, #22eff9 43%, #22eff9 49%, #5850f4 67%, #f722f0 83%, #e2391f 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4949', endColorstr='#e2391f',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */
 }
-/* line 31, ../../scss/_timer.scss */
+/* line 24, ../../scss/_timer.scss */
 #timer #timer-progress:after {
   content: '';
   background-color: rgba(231, 231, 231, 0.95);
@@ -936,19 +1027,19 @@ body.game #game-wrapper {
   float: right;
   width: 100%;
 }
-/* line 40, ../../scss/_timer.scss */
+/* line 34, ../../scss/_timer.scss */
 #timer #timer-progress.min-2:after {
   -webkit-animation: PROGRESS 120s;
 }
-/* line 41, ../../scss/_timer.scss */
+/* line 34, ../../scss/_timer.scss */
 #timer #timer-progress.min-3:after {
   -webkit-animation: PROGRESS 180s;
 }
-/* line 42, ../../scss/_timer.scss */
+/* line 34, ../../scss/_timer.scss */
 #timer #timer-progress.min-4:after {
   -webkit-animation: PROGRESS 240s;
 }
-/* line 43, ../../scss/_timer.scss */
+/* line 34, ../../scss/_timer.scss */
 #timer #timer-progress.min-5:after {
   -webkit-animation: PROGRESS 300s;
 }
@@ -961,7 +1052,7 @@ body.game #game-wrapper {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #89b2d8;
+  background-color: #88b2d8;
   color: white;
 }
 /* line 11, ../../scss/_gameover.scss */
@@ -1021,7 +1112,11 @@ body.game #game-wrapper {
   /* IE6-9 fallback on horizontal gradient */
   z-index: 100000;
   opacity: 0;
-  -webkit-transition: all .3s .1s;
+  -webkit-transition: all 0.3s;
+  -webkit-transition-delay: 0.1s;
+  -moz-transition: all 0.3s 0.1s;
+  -o-transition: all 0.3s 0.1s;
+  transition: all 0.3s 0.1s;
 }
 /* line 20, ../../scss/_popup.scss */
 #popup-wrapper.not-closeable {
@@ -1035,12 +1130,20 @@ body.game #game-wrapper {
   margin: 0 auto;
   border-radius: 4px 4px 3px 3px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
   cursor: auto;
   -webkit-transform: scale(0);
-  -webkit-transition: all .5s;
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 35, ../../scss/_popup.scss */
+/* line 34, ../../scss/_popup.scss */
 #popup-wrapper #popup .title {
   background-color: #2babbd;
   padding: 8px;
@@ -1049,84 +1152,101 @@ body.game #game-wrapper {
   font-weight: bold;
   border-radius: 3px 3px 0 0;
 }
-/* line 44, ../../scss/_popup.scss */
+/* line 43, ../../scss/_popup.scss */
 #popup-wrapper #popup .message {
   padding: 5px;
   font-size: .95em;
 }
-/* line 48, ../../scss/_popup.scss */
+/* line 47, ../../scss/_popup.scss */
 #popup-wrapper #popup .message ul {
   font-size: .85em;
   list-style: disc;
   margin: 0px 15px;
 }
-/* line 53, ../../scss/_popup.scss */
+/* line 52, ../../scss/_popup.scss */
 #popup-wrapper #popup .message ul li {
   margin: 5px;
 }
-/* line 59, ../../scss/_popup.scss */
+/* line 58, ../../scss/_popup.scss */
 #popup-wrapper #popup .extra {
   font-size: .75em;
   color: #525252;
   padding: 5px;
   text-align: center;
 }
-/* line 66, ../../scss/_popup.scss */
+/* line 65, ../../scss/_popup.scss */
 #popup-wrapper #popup .buttons {
   background-color: rgba(0, 0, 0, 0.08);
   padding: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   text-align: right;
 }
-/* line 72, ../../scss/_popup.scss */
+/* line 71, ../../scss/_popup.scss */
 #popup-wrapper #popup .buttons .ok-btn {
   margin: 5px;
   background-color: #2bbd88;
   padding: 5px;
   color: white;
   text-decoration: none;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
   border-radius: 3px;
 }
-/* line 81, ../../scss/_popup.scss */
+/* line 80, ../../scss/_popup.scss */
 #popup-wrapper #popup .buttons .ok-btn:hover {
   background-color: rgba(43, 189, 136, 0.7);
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
-/* line 89, ../../scss/_popup.scss */
+/* line 88, ../../scss/_popup.scss */
 #popup-wrapper.show {
   opacity: 1;
-  -webkit-transition: all .3s .1s;
+  -webkit-transition: all 0.3s;
+  -webkit-transition-delay: 0.1s;
+  -moz-transition: all 0.3s 0.1s;
+  -o-transition: all 0.3s 0.1s;
+  transition: all 0.3s 0.1s;
 }
-/* line 93, ../../scss/_popup.scss */
+/* line 92, ../../scss/_popup.scss */
 #popup-wrapper.show #popup {
   -webkit-transform: scale(1);
-  -webkit-transition: all .5s;
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 @-webkit-keyframes simplepopup {
-  /* line 101, ../../scss/_popup.scss */
+  /* line 100, ../../scss/_popup.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 102, ../../scss/_popup.scss */
+  /* line 101, ../../scss/_popup.scss */
   3% {
     opacity: 1;
   }
 
-  /* line 103, ../../scss/_popup.scss */
+  /* line 102, ../../scss/_popup.scss */
   97% {
     opacity: 1;
   }
 
-  /* line 104, ../../scss/_popup.scss */
+  /* line 103, ../../scss/_popup.scss */
   100% {
     opacity: 0;
   }
 }
 
-/* line 107, ../../scss/_popup.scss */
+/* line 106, ../../scss/_popup.scss */
 #simple-popup-message-wrapper {
   position: fixed;
   top: 20px;
@@ -1134,13 +1254,14 @@ body.game #game-wrapper {
   right: 0;
   text-align: center;
 }
-/* line 114, ../../scss/_popup.scss */
+/* line 113, ../../scss/_popup.scss */
 #simple-popup-message-wrapper .simple-popup-message {
   background-color: #06e1ff;
   display: inline;
   padding: 5px 50px;
   color: white;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, 0.3);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, 0.3);
   box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, 0.3);
   opacity: 0;
   -webkit-animation: simplepopup 10s;
@@ -1152,20 +1273,21 @@ body.game #game-wrapper {
   margin: 70px auto;
   font-family: sans-serif;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
-/* line 8, ../../scss/_show-image.scss */
+/* line 7, ../../scss/_show-image.scss */
 #image-wrapper:after {
   content: '';
   clear: both;
   display: table;
 }
-/* line 14, ../../scss/_show-image.scss */
+/* line 13, ../../scss/_show-image.scss */
 #image-wrapper img {
   float: left;
   background-color: white;
 }
-/* line 19, ../../scss/_show-image.scss */
+/* line 18, ../../scss/_show-image.scss */
 #image-wrapper #sidebar {
   float: right;
   width: 300px;
@@ -1174,41 +1296,48 @@ body.game #game-wrapper {
   margin: 0;
   background-color: rgba(48, 48, 48, 0.9);
   -webkit-box-shadow: inset 8px 0px 16px -10px black;
+  -moz-box-shadow: inset 8px 0px 16px -10px black;
   box-shadow: inset 8px 0px 16px -10px black;
 }
-/* line 30, ../../scss/_show-image.scss */
+/* line 28, ../../scss/_show-image.scss */
 #image-wrapper #sidebar h1 {
   padding: 20px;
   color: white;
   font-size: 2em;
   text-transform: capitalize;
 }
-/* line 37, ../../scss/_show-image.scss */
+/* line 35, ../../scss/_show-image.scss */
 #image-wrapper #sidebar #meta {
   padding-left: 20px;
   color: white;
   font-weight: lighter;
   font-size: .9em;
 }
-/* line 43, ../../scss/_show-image.scss */
+/* line 41, ../../scss/_show-image.scss */
 #image-wrapper #sidebar #meta a {
   color: white;
   text-decoration: none;
   border-bottom: 1px solid rgba(43, 171, 189, 0.4);
   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
 }
-/* line 48, ../../scss/_show-image.scss */
+/* line 46, ../../scss/_show-image.scss */
 #image-wrapper #sidebar #meta a:hover {
   border-bottom: 1px solid white;
 }
-/* line 52, ../../scss/_show-image.scss */
+/* line 50, ../../scss/_show-image.scss */
 #image-wrapper #sidebar .save-btn {
   margin: 5px;
   background-color: #2babbd;
   padding: 10px;
   color: white;
   text-decoration: none;
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
   border-radius: 3px;
   position: absolute;
   bottom: 20px;
@@ -1217,9 +1346,12 @@ body.game #game-wrapper {
   font-size: 1.1em;
   text-align: center;
 }
-/* line 67, ../../scss/_show-image.scss */
+/* line 65, ../../scss/_show-image.scss */
 #image-wrapper #sidebar .save-btn:hover {
-  -webkit-transition: all .5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
   background-color: #48bece;
 }
 

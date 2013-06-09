@@ -3,8 +3,7 @@
   width: 40px;
 
   background-color: rgba(48, 48, 48, .9);
-  -webkit-box-shadow: inset -5px 0px 20px -10px black;
-  box-shadow: inset -5px 0px 20px -10px black;
+  @include box-shadow(inset -5px 0px 20px -10px black);
 
   position: absolute;
   top: 0;
@@ -39,7 +38,7 @@
         width: 200px;
         padding: 5px;
         opacity: 0;
-        -webkit-transition: left .3s .1s, opacity .3s;
+        @include transition(left .3s .1s, opacity .3s);
 
         .name {
           display: block;
@@ -56,7 +55,7 @@
       &:hover .information {
         opacity: 1;
         left: 48px;
-        -webkit-transition: left .3s, opacity .4s .1s;
+        @include transition(left .3s, opacity .4s .1s);
       }
 
       &.you .information {

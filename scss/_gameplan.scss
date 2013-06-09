@@ -1,11 +1,11 @@
 #game-wrapper {
   opacity: 0;
-  -webkit-transition: all 1s;
+  @include transition(all 1s);
 }
 
 body.game #game-wrapper {
   opacity: 1;
-  -webkit-transition: all 1s;
+  @include transition(all 1s);
 }
 
 #gameplan {
@@ -61,11 +61,11 @@ body.game #game-wrapper {
       margin: 0 auto;
       margin-top: -8px;
 
-      -webkit-transition: all .5s;
+      @include transition(all .5s);
 
       .text {
         font-size: 0;
-        -webkit-transition: all .5s;
+        @include transition(all .5s);
       }
     }
   }
@@ -89,12 +89,12 @@ body.game #game-wrapper {
     font-size: .85em;
     color: rgb(70, 68, 68);
     background-color: rgb(229,229,229);
-    -webkit-transform: all .5s;
+    @include transform(all .5s);
   }
 }
 
 .draw #drawing-player span {
-  background-color: rgb(136, 178, 216);
+  background-color: $highlight_color;
   color: white;
-  -webkit-transform: all .5s;
+  @include transform(all .5s);
 }

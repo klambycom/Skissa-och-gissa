@@ -4,6 +4,13 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3";
+
+$highlight_color: rgb(136,178,216);
+
+$crayons: white black red orange yellow yellowgreen green lightskyblue dodgerblue violet pink burlywood saddlebrown brown;
+$crayons_path: '../gfx/';
+$crayons_sizes: 5 10 15 20;
 
 @import "main";
 

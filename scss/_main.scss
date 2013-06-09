@@ -24,8 +24,7 @@ header {
   padding: 10px;
   margin-top: 20px;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .1);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .1);
+  @include box-shadow(0px 0px 20px 0px rgba(0, 0, 0, .1));
 
   &:after {
     display: block;
@@ -35,23 +34,23 @@ header {
 }
 
 #page-wrapper {
-  -webkit-filter: blur(0px);
-  -webkit-transition: -webkit-filter .3s;
+  @include filter(blur(0px));
+  @include transition(filter .3s);
 
   &.blur {
-    -webkit-filter: blur(1px);
-    -webkit-transition: -webkit-filter .4s;
+    @include filter(blur(1px));
+    @include transition(filter .4s);
   }
 }
 
 .hide-wrapper { display: none; }
 
 #page-wrapper {
-  -webkit-transform: scale(1);
-  -webkit-transition: -webkit-transform 1s;
+  @include transform(scale(1));
+  @include transition(transform 1s);
 }
 
 body.game #page-wrapper {
-  -webkit-transform: scale(0);
-  -webkit-transition: -webkit-transform 1s;
+  @include transform(scale(0));
+  @include transition(transform 1s);
 }

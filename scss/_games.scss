@@ -28,12 +28,12 @@
 
   .game {
     background-color: white;
-    -webkit-transition: background-color .3s;
+    @include transition(background-color .3s);
     position: relative;
 
     &:hover {
       background-color: rgb(245, 245, 245);
-      -webkit-transition: background-color .3s;
+      @include transition(background-color .3s);
     }
 
     &:not(:last-child) {

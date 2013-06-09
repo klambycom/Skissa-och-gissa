@@ -15,7 +15,7 @@
   z-index: 100000;
 
   opacity: 0;
-  -webkit-transition: all .3s .1s;
+  @include transition(all .3s .1s);
 
   &.not-closeable { cursor: not-allowed; }
 
@@ -25,12 +25,11 @@
     min-height: 100px;
     margin: 0 auto;
     border-radius: 4px 4px 3px 3px;
-    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .4);
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .4);
+    @include box-shadow(0px 0px 20px 0px rgba(0, 0, 0, .4));
     cursor: auto;
 
-    -webkit-transform: scale(0);
-    -webkit-transition: all .5s;
+    @include transform(scale(0));
+    @include transition(all .5s);
 
     .title {
       background-color: rgb(43, 171, 189);
@@ -75,12 +74,12 @@
         padding: 5px;
         color: white;
         text-decoration: none;
-        -webkit-transition: all .5s;
+        @include transition(all .5s);
         border-radius: 3px;
 
         &:hover {
           background-color: rgba(43, 189, 136, .7);
-          -webkit-transition: all .5s;
+          @include transition(all .5s);
         }
       }
     }
@@ -88,11 +87,11 @@
 
   &.show {
     opacity: 1;
-    -webkit-transition: all .3s .1s;
+    @include transition(all .3s .1s);
 
     #popup {
-      -webkit-transform: scale(1);
-      -webkit-transition: all .5s;
+      @include transform(scale(1));
+      @include transition(all .5s);
     }
   }
 }
@@ -116,8 +115,7 @@
     display: inline;
     padding: 5px 50px;
     color: white;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, .3);
-    box-shadow: 0px 0px 10px 0px rgba(5, 140, 158, .3);
+    @include box-shadow(0px 0px 10px 0px rgba(5, 140, 158, .3));
 
     opacity: 0;
     -webkit-animation: simplepopup 10s;

@@ -2,12 +2,12 @@
   #chat-container {
     #crayons {
       width: 50px;
-      -webkit-transition: all .5s .3s;
+      @include transition(all .5s .3s);
     }
 
     #chat {
       right: 50px;
-      -webkit-transition: all .5s .3s;
+      @include transition(all .5s .3s);
     }
   }
 }
@@ -26,7 +26,7 @@
     width: 0px;
     overflow: hidden;
     background-color: rgb(229,229,229);
-    -webkit-transition: all .5s .3s;
+    @include transition(all .5s .3s);
 
     h1 {
       text-align: center;
@@ -46,28 +46,16 @@
         border-radius: 2px;
         width: 30px;
         margin: 10px;
-        -webkit-transition: all .5s;
+        @include transition(all .5s);
 
         &.selected {
-          background-color: rgb(136,178,216);
-          -webkit-transition: all .5s;
+          background-color: $highlight_color;
+          @include transition(all .5s);
         }
       }
 
-      li.size-5 a {
-        height: 5px;
-      }
-
-      li.size-10 a {
-        height: 10px;
-      }
-
-      li.size-15 a {
-        height: 15px;
-      }
-
-      li.size-20 a {
-        height: 20px;
+      @each $s in $crayons_sizes {
+        li.size-#{$s} a { height: #{$s}px; }
       }
     }
 
@@ -78,28 +66,17 @@
         display: block;
         margin: 7px;
         border: 3px solid rgb(229,229,229);
-        -webkit-transition: all .5s;
+        @include transition(all .5s);
 
         &.selected {
-          border: 3px solid rgb(136,178,216);
-          -webkit-transition: all .5s;
+          border: 3px solid $highlight_color;
+          @include transition(all .5s);
         }
       }
 
-      li.white a { background-color: white; }
-      li.black a { background-color: black; }
-      li.red a { background-color: red; }
-      li.orange a { background-color: orange; }
-      li.yellow a { background-color: yellow; }
-      li.yellowgreen a { background-color: yellowgreen; }
-      li.green a { background-color: green; }
-      li.lightskyblue a { background-color: lightskyblue; }
-      li.dodgerblue a { background-color: dodgerblue; }
-      li.violet a { background-color: violet; }
-      li.pink a { background-color: pink; }
-      li.burlywood a { background-color: burlywood; }
-      li.saddlebrown a { background-color: saddlebrown; }
-      li.brown a { background-color: brown; }
+      @each $c in $crayons {
+        li.#{$c} a { background-color: #{$c}; }
+      }
     }
   }
 
@@ -110,7 +87,7 @@
     right: 0;
     left: 50px;
     background-color: white;
-    -webkit-transition: all .5s .3s;
+    @include transition(all .5s .3s);
 
     #chat-input {
       position: absolute;
@@ -141,18 +118,17 @@
         margin: 0;
 
         background-color: rgb(229, 229, 229);
-        -webkit-transition: all .5s;
+        @include transition(all .5s);
 
         &:focus {
           outline: 0;
-          background-color: rgb(136, 178, 216);
+          background-color: $highlight_color;
           color: white;
-          -webkit-transition: all .5s;
+          @include transition(all .5s);
 
-          &::-webkit-input-placeholder { color: white; }
-          &::-moz-placeholder { color: white; }
-          &:-moz-placeholder { color: white; }
-          &:-ms-input-placeholder { color: white; }
+          @each $v in ':-webkit-input' ':-moz' '-moz' '-ms-input' {
+            &:#{$v}-placeholder { color: white; }
+          }
         }
       }
     }
