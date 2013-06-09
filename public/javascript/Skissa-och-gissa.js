@@ -1,3 +1,4 @@
+/*jslint white: true */
 // From http://dailyjs.com/2012/09/14/functional-programming/
 // TODO Do it better!
 
@@ -25,20 +26,23 @@ Function.prototype.composite = function (g) {
 	};
 };
 
-Function.prototype.compose = function (g) {
+Function.prototype.compose = function (/* functions */) {
 	'use strict';
 
-	// preserve f
-	var f = this,
-		fns = Array.prototype.slice.call(arguments);
+	// Save all functions in array
+	var fns = [].slice.call(arguments);
+	fns.unshift(this);
 
-	// construct function z
-	return function () {
-		var args = Array.prototype.slice.call(arguments), i;
-		// when called, nest g's return in a call to f
-		for (i = 0; i < fns.length; i += 1) {
+	// Create the new function
+	return function (/* args */) {
+		var args = [].slice.call(arguments), i;
+
+		// Run args on all functions and save result
+		for (i = fns.length - 1; i >= 0; i -= 1) {
 			args = [fns[i].apply(this, args)];
 		}
+
+		// Return result from first function
 		return args[0];
 	};
 };
