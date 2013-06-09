@@ -93,11 +93,11 @@ window.onload = function () {
 		// Html for game
 		gameWrapper.innerHTML = Handlebars.templates['room.hbs']({ picture: SOG.player.getPicture() });
 
-		var gameplan = document.querySelector('#gameplan'),
+		var gameplan = document.getElementById('gameplan'),
 			chatInputField = document.querySelector('#chat-input input'),
-			chatMessages = document.querySelector('#chat-messages'),
+			chatMessages = document.getElementById('chat-messages'),
 			playersList = document.querySelector('#game-user-info .players'),
-			timer = document.querySelector('#timer-progress'),
+			timer = document.getElementById('timer-progress'),
 			artboardWrapper = document.getElementById('artboard-wrapper'),
 			playerTmpl = Handlebars.templates['player.hbs'],
 			chat = SOG.browser.chat,
