@@ -57,7 +57,7 @@ exports.listen = function (app, game) {
 				return;
 			}
 
-			// Cancel if room is empty
+			// Cancel if game is empty
 			if (typeof nextPlayer === 'undefined') {
 				clearTimeout(timer[r]);
 				return;
@@ -112,7 +112,6 @@ exports.listen = function (app, game) {
 			try {
 				// Add player to room
 				game.addPlayer(socket.player, room);
-				console.log(game.all()); // TODO Remove
 
 				// Leave the current room (stored in session)
 				socket.leave(socket.room);
@@ -127,7 +126,7 @@ exports.listen = function (app, game) {
 				socket.join(room);
 				socket.room = room;
 
-				// Echo to the room that a player has connected to their room
+				// Echo to the game that a player has connected to their game
 				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
 				// Tell browser it worked
@@ -148,7 +147,7 @@ exports.listen = function (app, game) {
 				// Send the canvas to the player
 				socket.emit('canvas', game.canvas(socket.room));
 
-				// Create new room if this is almost full
+				// Create new game if this is almost full
 				if (game.nrOfSameType(game.get(socket.room).type) === 0) {
 					var nrid = game.create(game.get(socket.room).type);
 					io.sockets.in('lobby').emit('add-room', game.getDataForClient(nrid));
@@ -172,7 +171,7 @@ exports.listen = function (app, game) {
 					if (game.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
 					// Tell clients to remove player
 					socket.broadcast.to(socket.room).emit('leave-room', { name: socket.player.getName(), id: socket.player.getSocketID() });
-					// Remove room if no players left
+					// Remove game if no players left
 					if (nrOfPlayers === 0) { deleteGame(socket.room); }
 				}
 			} catch (e) {
@@ -180,13 +179,9 @@ exports.listen = function (app, game) {
 			}
 		});
 
-		// TODO
 		socket.on('update-player-data', function (data) {
 			socket.broadcast.to(socket.room).emit('server-message', { text: data.name + ' har bytt namn.' });
 		});
-
-
-
 
 		// Get drawing-points from player, and send to the others
 		socket.on('canvas', function (data) {
@@ -256,11 +251,8 @@ exports.listen = function (app, game) {
 			// Save image
 			fs.writeFile(path + filename, image, 'base64', function (err) {
 				if (err) {
-					// Something went wrong
 					console.log(err);
 				} else {
-					// The image was saved
-					console.log('Image saved');
 					// Save image for room
 					game.saveImage(socket.room, filename, function (err, data) {
 						console.log(data);
