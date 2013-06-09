@@ -9,7 +9,7 @@ var express = require('express'),
 	config = require('./configure.json'),
 	flash = require('connect-flash'),
 	server,
-	room = require('./lib/server/room').room,
+	game = require('./lib/server/game').game,
 	mongoose = require('mongoose');
 
 // Configure
@@ -46,12 +46,12 @@ app.configure('production', function () {
 mongoose.connect(app.get('db'));
 //require('./test');
 
-// Create some rooms
-room.create(['general-easy', 'general-moderate', 'general-hard']);
+// Create some games
+game.create(['general-easy', 'general-moderate', 'general-hard']);
 
 // Save rooms to every page load
 app.use(function (req, res, next) {
-	req.rooms = room.all();
+	req.rooms = game.all();
 	next();
 });
 
@@ -63,4 +63,4 @@ server = app.listen(app.get('port'));
 console.log('Listening on port %d in %s mode...', app.get('port'), app.get('env'));
 
 // WebSocket
-require('./websockets').listen(server, room);
+require('./websockets').listen(server, game);

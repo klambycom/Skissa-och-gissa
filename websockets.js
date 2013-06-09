@@ -9,7 +9,7 @@ var Player = require('./lib/server/Player').Player,
 	fs = require('fs'),
 	timer = {};
 
-exports.listen = function (app, Room) {
+exports.listen = function (app, game) {
 	var io = require('socket.io').listen(app);
 
 	io.sockets.on('connection', function (socket) {
@@ -28,27 +28,27 @@ exports.listen = function (app, Room) {
 			socket.join('lobby');
 
 			// Show available games
-			socket.emit('add-room', Room.available());
+			socket.emit('add-room', game.available());
 		});
 
 
 		var newWord = function (r, w) {
 			// Start timer
 			clearTimeout(timer[r]);
-			timer[r] = setTimeout(newWord.curry(r), (Room.get(r).time * 60000) + 2000);
+			timer[r] = setTimeout(newWord.curry(r), (game.get(r).time * 60000) + 2000);
 
 			// Clear canvas data
-			Room.canvas(socket.room, 0);
+			game.canvas(socket.room, 0);
 
 			// Pick next person in queue
-			var currentPlayer = Room.getPlayerDrawing(r),
-				nextPlayer = Room.nextPlayer(r),
-				word = w || Room.getWord(r);
+			var currentPlayer = game.getPlayerDrawing(r),
+				nextPlayer = game.nextPlayer(r),
+				word = w || game.getWord(r);
 
 			// Game over
-			if (Room.roundsLeft(r) <= 0) {
+			if (game.roundsLeft(r) <= 0) {
 				clearTimeout(timer[r]);
-				io.sockets.in(r).emit('game-over', Room.playersNameAndScore(r));
+				io.sockets.in(r).emit('game-over', game.playersNameAndScore(r));
 				io.sockets.in(r).emit('correct-word', {
 					word: word,
 					player: currentPlayer && currentPlayer.getAllData(),
@@ -64,7 +64,7 @@ exports.listen = function (app, Room) {
 			}
 
 			// Check if there is just one player
-			if (Room.players(r).length === 1) {
+			if (game.players(r).length === 1) {
 				socket.broadcast.to(r).emit('correct-word', { word: word });
 				socket.broadcast.to(r).emit('server-message', {
 					text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.'
@@ -79,9 +79,9 @@ exports.listen = function (app, Room) {
 				player: currentPlayer && currentPlayer.getAllData(),
 				next: {
 					draw: true,
-					word: Room.randomWord(r),
+					word: game.randomWord(r),
 					player: nextPlayer.getAllData(),
-					minutes: Room.get(r).time
+					minutes: game.get(r).time
 				}
 			});
 
@@ -92,17 +92,17 @@ exports.listen = function (app, Room) {
 				next: {
 					draw: false,
 					player: nextPlayer.getAllData(),
-					minutes: Room.get(r).time
+					minutes: game.get(r).time
 				}
 			});
 		}, deleteGame = function (r) {
-			var deleted = Room.delete(r);
+			var deleted = game.delete(r);
 
 			io.sockets.in('lobby').emit('remove-room', deleted.id);
 
 			// Create new game if needed
-			if (Room.nrOfSameType(deleted.type) === 0) {
-				io.sockets.in('lobby').emit('add-room', Room.getDataForClient(Room.create(deleted.type)));
+			if (game.nrOfSameType(deleted.type) === 0) {
+				io.sockets.in('lobby').emit('add-room', game.getDataForClient(game.create(deleted.type)));
 			}
 		};
 
@@ -111,12 +111,12 @@ exports.listen = function (app, Room) {
 		socket.on('join-room', function (room) {
 			try {
 				// Add player to room
-				Room.addPlayer(socket.player, room);
-				console.log(Room.all()); // TODO Remove
+				game.addPlayer(socket.player, room);
+				console.log(game.all()); // TODO Remove
 
 				// Leave the current room (stored in session)
 				socket.leave(socket.room);
-				Room.removePlayer(socket.player, socket.room);
+				game.removePlayer(socket.player, socket.room);
 
 				// Send message to old room
 				socket.broadcast.to(socket.room).emit('server-message', {
@@ -131,31 +131,31 @@ exports.listen = function (app, Room) {
 				socket.broadcast.to(room).emit('player-joined-room', { player: socket.player.getAllData() });
 
 				// Tell browser it worked
-				socket.emit('join-room', { players: Room.players(socket.room) });
+				socket.emit('join-room', { players: game.players(socket.room) });
 
 				// Start game if its the second player
-				if (Room.players(socket.room).length === 2) {
+				if (game.players(socket.room).length === 2) {
 					newWord(socket.room, '');
-				} else if (Room.players(socket.room).length === 1) {
+				} else if (game.players(socket.room).length === 1) {
 					socket.emit('server-message', { text: 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.' });
 				} else {
 					socket.emit('correct-word', {
 						word: '',
-						next: { draw: false, player: Room.get(socket.room).drawing, minutes: 0 }
+						next: { draw: false, player: game.get(socket.room).drawing, minutes: 0 }
 					});
 				}
 
 				// Send the canvas to the player
-				socket.emit('canvas', Room.canvas(socket.room));
+				socket.emit('canvas', game.canvas(socket.room));
 
 				// Create new room if this is almost full
-				if (Room.nrOfSameType(Room.get(socket.room).type) === 0) {
-					var nrid = Room.create(Room.get(socket.room).type);
-					io.sockets.in('lobby').emit('add-room', Room.getDataForClient(nrid));
+				if (game.nrOfSameType(game.get(socket.room).type) === 0) {
+					var nrid = game.create(game.get(socket.room).type);
+					io.sockets.in('lobby').emit('add-room', game.getDataForClient(nrid));
 				}
 
 				// Remove game from front page if full
-				if (!Room.notFull(socket.room)) {
+				if (!game.notFull(socket.room)) {
 					io.sockets.in('lobby').emit('remove-room', socket.room);
 				}
 			} catch (e) {
@@ -167,9 +167,9 @@ exports.listen = function (app, Room) {
 		socket.on('disconnect', function () {
 			try {
 				if (socket.room !== 'lobby') {
-					var nrOfPlayers = Room.removePlayer(socket.player, socket.room);
+					var nrOfPlayers = game.removePlayer(socket.player, socket.room);
 					// New word if this player is drawing
-					if (Room.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
+					if (game.playersTurn(socket.player, socket.room)) { newWord(socket.room); }
 					// Tell clients to remove player
 					socket.broadcast.to(socket.room).emit('leave-room', { name: socket.player.getName(), id: socket.player.getSocketID() });
 					// Remove room if no players left
@@ -190,18 +190,18 @@ exports.listen = function (app, Room) {
 
 		// Get drawing-points from player, and send to the others
 		socket.on('canvas', function (data) {
-			if (Room.playersTurn(socket.player, socket.room)) {
-				socket.broadcast.to(socket.room).emit('canvas', Room.canvas(socket.room, data));
+			if (game.playersTurn(socket.player, socket.room)) {
+				socket.broadcast.to(socket.room).emit('canvas', game.canvas(socket.room, data));
 			}
 		});
 
 		// Player sends message
 		socket.on('user-message', function (data) {
-			if (data.isBlank() || Room.playersTurn(socket.player, socket.room)) { return; }
+			if (data.isBlank() || game.playersTurn(socket.player, socket.room)) { return; }
 
 			// Is the guess correct?
 			var word = data.compact(),
-				correct = word.toLowerCase() === (Room.getWord(socket.room) || 'korrekt').toLowerCase(),
+				correct = word.toLowerCase() === (game.getWord(socket.room) || 'korrekt').toLowerCase(),
 				p,
 				d,
 				r;
@@ -215,7 +215,7 @@ exports.listen = function (app, Room) {
 
 			// Let next person draw
 			if (correct) {
-				r = Room.get(socket.room);
+				r = game.get(socket.room);
 
 				// Points to the player who guessed right
 				p = r.players[socket.player.getSocketID()];
@@ -243,7 +243,7 @@ exports.listen = function (app, Room) {
 		// Save image to server
 		socket.on('save-image', function (data) {
 			// TODO Check if it really was players turn to draw
-			if (!Room.playersTurn(socket.player, socket.room)) { return; }
+			if (!game.playersTurn(socket.player, socket.room)) { return; }
 
 			// Check if there is a image
 			if (data === '') { return; }
@@ -262,7 +262,7 @@ exports.listen = function (app, Room) {
 					// The image was saved
 					console.log('Image saved');
 					// Save image for room
-					Room.saveImage(socket.room, filename, function (err, data) {
+					game.saveImage(socket.room, filename, function (err, data) {
 						console.log(data);
 					});
 				}
