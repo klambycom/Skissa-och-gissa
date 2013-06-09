@@ -44,7 +44,6 @@ app.configure('production', function () {
 
 // MongoDB
 mongoose.connect(app.get('db'));
-//require('./test');
 
 // Create some games
 game.create(['general-easy', 'general-moderate', 'general-hard']);
