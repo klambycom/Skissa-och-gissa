@@ -102,7 +102,7 @@ exports.listen = function (app, game) {
 
 			// Create new game if needed
 			if (game.nrOfSameType(deleted.type) === 0) {
-				io.sockets.in('lobby').emit('add-room', game.getDataForClient(game.create(deleted.type)));
+				io.sockets.in('lobby').emit('add-room', game.getData(game.create(deleted.type)));
 			}
 		};
 
@@ -150,7 +150,7 @@ exports.listen = function (app, game) {
 				// Create new game if this is almost full
 				if (game.nrOfSameType(game.get(socket.room).type) === 0) {
 					var nrid = game.create(game.get(socket.room).type);
-					io.sockets.in('lobby').emit('add-room', game.getDataForClient(nrid));
+					io.sockets.in('lobby').emit('add-room', game.getData(nrid));
 				}
 
 				// Remove game from front page if full
