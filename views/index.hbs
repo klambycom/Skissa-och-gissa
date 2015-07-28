@@ -16,6 +16,7 @@
     </div>
     <div id="highscore">
       <h1>Highscore</h1>
+      {{#unless login_id}}<small>Ingen har spelat inloggad än!</small>{{/unless}}
       <ul>
       {{#each highscore}}
         <li data-login-id="{{login_id}}">
