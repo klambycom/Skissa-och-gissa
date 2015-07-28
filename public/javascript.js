@@ -1,7 +1,8 @@
 /*jslint browser: true, devel: true */
 /*global SOG, FB, Handlebars */
 
-SOG.player = new SOG.browser.Player({ name: 'Christian ' + Date.now() + 'son' });
+// Default player name
+SOG.player = new SOG.browser.Player({ name: 'Anonym (' + Date.now() + ')' });
 
 //function signedIn() {
 //	'use strict';
