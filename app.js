@@ -13,35 +13,36 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	dict = require('./dictionary.json');
 
+console.log(app.get('env'));
+
 // Configure
 var set = function (obj) { return function (s) { app.set(s, obj[s]); }; },
 	setAll = function (obj) { Object.keys(obj).forEach(set(obj)); };
 
-// All environments
-app.configure(function () {
-	Object.keys(config).filter(function (c) { return c !== 'development' && c !== 'production'; })
-					   .forEach(set(config));
+// Configure all environments
+Object
+  .keys(config)
+  .filter(function (c) { return c !== 'development' && c !== 'production'; })
+  .forEach(set(config));
 
-	app.use(express['static'](app.get('public folder') || 'public'));
-	app.use(express.bodyParser());
-	app.use(express.cookieParser(app.get('cookie secret')));
-	app.use(flash());
-});
+app.use(express['static'](app.get('public folder') || 'public'));
+app.use(express.bodyParser());
+app.use(express.cookieParser(app.get('cookie secret')));
+app.use(flash());
 
-// Development only
-app.configure('development', function () {
+// Configure development only
+if (app.get('env') === 'development') {
 	setAll(config.development);
 
 	app.use(function (req, res, next) {
+    // Print information about request to console
 		console.log('%s %s', req.method, req.url);
 		next();
 	});
-});
+}
 
-// Production only
-app.configure('production', function () {
-	setAll(config.production);
-});
+// Configure production only
+if (app.get('env') === 'production') { setAll(config.production); }
 
 // MongoDB
 mongoose.connect(app.get('db'));
