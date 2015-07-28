@@ -26,8 +26,8 @@ Object
   .forEach(set(config));
 
 app.use(express['static'](app.get('public folder') || 'public'));
-app.use(express.bodyParser());
-app.use(express.cookieParser(app.get('cookie secret')));
+//app.use(express.bodyParser());
+//app.use(express.cookieParser(app.get('cookie secret')));
 app.use(flash());
 
 // Configure development only
