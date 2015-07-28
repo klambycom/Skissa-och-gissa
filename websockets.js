@@ -10,7 +10,7 @@ var Player = require('./lib/server/Player').Player,
 	timer = {};
 
 exports.listen = function (app, game) {
-	var io = require('socket.io').listen(app);
+	var io = require('socket.io')(app);
 
 	io.sockets.on('connection', function (socket) {
 		// Player joins
@@ -74,7 +74,7 @@ exports.listen = function (app, game) {
 			}
 
 			// Tell player its his/hers turn to draw
-			io.sockets.socket(nextPlayer.getSocketID()).emit('correct-word', {
+			io.sockets.connected[nextPlayer.getSocketID()].emit('correct-word', {
 				word: word,
 				player: currentPlayer && currentPlayer.getAllData(),
 				next: {
@@ -86,7 +86,7 @@ exports.listen = function (app, game) {
 			});
 
 			// Tell all players that correct word is guessed and send word to next person
-			io.sockets.in(r).except(nextPlayer.getSocketID()).emit('correct-word', {
+			io.sockets.in(r).connected[nextPlayer.getSocketID()].broadcast.emit('correct-word', {
 				word: word,
 				player: currentPlayer && currentPlayer.getAllData(),
 				next: {

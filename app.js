@@ -4,14 +4,15 @@
 require('./lib/utils/functional');
 
 var express = require('express'),
-	app = express(),
-	controllers = require('./controllers').controllers,
-	config = require('./configure.json'),
-	flash = require('connect-flash'),
-	server,
-	game = require('./lib/server/game').game,
-	mongoose = require('mongoose'),
-	dict = require('./dictionary.json');
+    http = require('http'),
+    app = express(),
+    controllers = require('./controllers').controllers,
+    config = require('./configure.json'),
+    flash = require('connect-flash'),
+    server,
+    game = require('./lib/server/game').game,
+    mongoose = require('mongoose'),
+    dict = require('./dictionary.json');
 
 console.log(app.get('env'));
 
@@ -59,9 +60,12 @@ app.use(function (req, res, next) {
 // Controllers or routes
 controllers.forEach(function (c) { app[c.verb](c.route, c.fn); });
 
-// Start server
-server = app.listen(app.get('port'));
-console.log('Listening on port %d in %s mode...', app.get('port'), app.get('env'));
+// Create server
+server = http.createServer(app);
 
 // WebSocket
 require('./websockets').listen(server, game);
+
+// Start server
+server.listen(app.get('port'));
+console.log('Listening on port %d in %s mode...', app.get('port'), app.get('env'));
