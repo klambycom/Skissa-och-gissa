@@ -7,6 +7,6 @@
 	},
 	"production": {
 		"db": "mongodb://localhost/skissa-och-gissa",
-		"port": 8080
+		"port": 80
 	}
 }
