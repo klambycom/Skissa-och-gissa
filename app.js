@@ -29,6 +29,7 @@ app.use(express['static'](app.get('public folder') || 'public'));
 //app.use(express.cookieParser(app.get('cookie secret')));
 app.use(flash());
 
+app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP);
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT);
 
 // OpenShift MongoDB
@@ -77,5 +78,9 @@ server = http.createServer(app);
 require('./websockets').listen(server, game);
 
 // Start server
-server.listen(app.get('port'));
-console.log('Listening on port %d in %s mode...', app.get('port'), app.get('env'));
+server.listen(app.get('port'), app.get('ipaddr'));
+console.log(
+    'Listening on port %s:%d in %s mode...',
+    app.get('ipaddr'),
+    app.get('port'),
+    app.get('env'));
