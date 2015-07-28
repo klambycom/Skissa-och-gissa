@@ -3,3 +3,5 @@ node_modules/
 .sass-cache/
 docs/
 npm-debug.log
+public/images/
+!public/images/placeholder.png
