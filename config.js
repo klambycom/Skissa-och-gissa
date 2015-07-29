@@ -1,6 +1,7 @@
 var express = require('express');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
 module.exports = {
   all: function (app) {
@@ -8,7 +9,9 @@ module.exports = {
     app.set('view engine', 'hbs');
 
     app.use(express['static'](app.get('public folder') || 'public'));
-    //app.use(express.bodyParser());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+    app.use(bodyParser.text());
     app.use(cookieParser(app.get('cookie secret')));
     app.use(flash());
   },
