@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "connect-flash": "",
+    "cookie-parser": "^1.3.5",
     "express": "^4.13.1",
     "fbgraph": "*",
     "hbs": "^3.1.0",
