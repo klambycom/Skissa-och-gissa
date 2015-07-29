@@ -6,8 +6,7 @@ SOG.player = new SOG.browser.Player({ name: 'Anonym (' + Date.now() + ')' });
 
 function signedIn() {
 	'use strict';
-	console.log('inloggad');
-	FB.api('/me?fields=id,name,first_name,username,picture,link,friends.fields(id,name,picture)', function (d) {
+	FB.api('/me?fields=id,name,first_name,picture,link,friends.fields(id,name,picture)', function (d) {
 		// Save user data
 		SOG.player.updateDataSkit(d);
 		// Change on the page
@@ -40,7 +39,6 @@ function logout() {
 
 window.fbAsyncInit = function () {
 	'use strict';
-	console.log('fbAsyncInit');
 	FB.init({
 		appId      : '539892936062898', //App ID
 		//appId      : '614840228526917', //App ID
@@ -53,10 +51,8 @@ window.fbAsyncInit = function () {
 	FB.getLoginStatus(function (response) {
 		if (response.status === 'connected') {
 			// Inloggad
-			console.log('signed in');
 			signedIn();
 		} else {
-			console.log('log in');
 			login();
 		}
 	});
