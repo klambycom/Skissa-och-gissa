@@ -13,7 +13,7 @@ var pages = require('./src/server/pages');
 // Game-logic
 // TODO Move!
 var game = require('./lib/server/game').game;
-var dict = require('./dictionary.json');
+var dict = require('./src/dictionary.json');
 
 // Configure
 if (app.get('env') === 'development') { config.development(app); }
