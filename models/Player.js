@@ -71,15 +71,22 @@ playerSchema.statics.highscore = (function () {
 				query = 'SELECT uid, name, pic_square FROM user WHERE ' + fbIds;
 
 			graph.fql(query, function (fbErr, res) {
-				var result = data.map(function (i) {
-					var fb = res.data.filter(function (f) { return f.uid === +i.login_id; })[0];
-					return {
-						login_id: i.login_id,
-						points: i.points,
-						name: fb.name,
-						picture: fb.pic_square
-					};
-				});
+        var result = [];
+
+        try {
+          var result = data.map(function (i) {
+            var fb = res.data.filter(function (f) { return f.uid === +i.login_id; })[0];
+            return {
+              login_id: i.login_id,
+              points: i.points,
+              name: fb.name,
+              picture: fb.pic_square
+            };
+          });
+        } catch (e) {
+          console.log('models/Player.js:highscore', res, fbErr, result);
+        }
+
 				if (!err && !fbErr) {
 					saved_result = result;
 					saved_date = Date.now();
