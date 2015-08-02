@@ -5,12 +5,14 @@ require('./lib/utils/functional');
 
 var http = require('http'),
     app = require('express')(),
-    controllers = require('./controllers').controllers,
     server,
     game = require('./lib/server/game').game,
     mongoose = require('mongoose'),
     dict = require('./dictionary.json'),
     config = require('./config');
+
+var api = require('./src/server/api');
+var pages = require('./src/server/pages');
 
 // Configure
 if (app.get('env') === 'development') { config.development(app); }
@@ -29,8 +31,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Controllers or routes
-controllers.forEach(function (c) { app[c.verb](c.route, c.fn); });
+// Mount sub-apps
+app.use('/', pages);
+app.use('/api', api);
 
 // Create server
 server = http.createServer(app);
