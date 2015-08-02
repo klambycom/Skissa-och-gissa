@@ -40,7 +40,7 @@ app.use('/api', api);
 var server = http.createServer(app);
 
 // WebSocket
-require('./websockets').listen(server, game);
+require('./src/server/websockets').listen(server, game);
 
 // Start server
 server.listen(app.get('port'), app.get('ipaddr'));
