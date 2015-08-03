@@ -4,7 +4,7 @@ require('./lib/utils/functional');
 // Server
 var http = require('http');
 var app = require('express')();
-var config = require('./config');
+var config = require('./src/config');
 // DB
 var mongoose = require('mongoose');
 // Sub-apps
