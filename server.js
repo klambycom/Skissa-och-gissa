@@ -1,6 +1,3 @@
-// TODO Remove?
-require('./lib/utils/functional');
-
 // Server
 var http = require('http');
 var app = require('express')();
