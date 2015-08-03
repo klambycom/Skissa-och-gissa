@@ -1,16 +1,19 @@
-/*jslint node: true */
-'use strict';
-
+// TODO Remove?
 require('./lib/utils/functional');
 
-var http = require('http'),
-    app = require('express')(),
-    controllers = require('./controllers').controllers,
-    server,
-    game = require('./lib/server/game').game,
-    mongoose = require('mongoose'),
-    dict = require('./dictionary.json'),
-    config = require('./config');
+// Server
+var http = require('http');
+var app = require('express')();
+var config = require('./src/config');
+// DB
+var mongoose = require('mongoose');
+// Sub-apps
+var api = require('./src/server/api');
+var pages = require('./src/server/pages');
+// Game-logic
+// TODO Move!
+var game = require('./lib/server/game').game;
+var dict = require('./src/dictionary.json');
 
 // Configure
 if (app.get('env') === 'development') { config.development(app); }
@@ -29,14 +32,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Controllers or routes
-controllers.forEach(function (c) { app[c.verb](c.route, c.fn); });
+// Mount sub-apps
+app.use('/', pages);
+app.use('/api', api);
 
 // Create server
-server = http.createServer(app);
+var server = http.createServer(app);
 
 // WebSocket
-require('./websockets').listen(server, game);
+require('./src/server/websockets').listen(server, game);
 
 // Start server
 server.listen(app.get('port'), app.get('ipaddr'));

@@ -8,6 +8,12 @@ Run `grunt`.
 Open `localhost:3000`.
 
 
+## Testing
+
+Run tests and lint the code with `gulp test`, and watch tests with
+`gulp watch:test`.
+
+
 
 [david-url]: https://david-dm.org/klambycom/Skissa-och-gissa#info=dependencies&view=table
 [david-image]: https://david-dm.org/klambycom/Skissa-och-gissa.png

@@ -1,10 +1,10 @@
 /*jslint node: true, es5: true */
 'use strict';
 
-require('./lib/utils/functional');
+require('../../lib/utils/functional');
 
-var Player = require('./lib/server/Player').Player,
-    dictionaries = require('./dictionary.json'),
+var Player = require('../../lib/server/Player').Player,
+    dictionaries = require('../dictionary.json'),
     sugar = require('sugar'),
     fs = require('fs'),
     timer = {};
