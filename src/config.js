@@ -6,7 +6,10 @@ var bodyParser = require('body-parser');
 module.exports = {
   all: function (app) {
     app.set('title', 'Skissa och gissa');
-    app.set('view engine', 'hbs');
+    app.set('views', __dirname + '/react'); // Why does this not work?
+    console.log(app.get('views'));
+    app.set('view engine', 'js');
+    app.set('view', require('react-engine/lib/expressView'));
 
     app.use(express['static'](app.get('public folder') || 'public'));
     app.use(bodyParser.urlencoded({ extended: false }));

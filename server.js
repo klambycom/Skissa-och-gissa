@@ -1,7 +1,10 @@
+require('node-jsx').install();
+
 // Server
 var http = require('http');
 var app = require('express')();
 var config = require('./src/config');
+var ReactEngine = require('react-engine');
 // DB
 var mongoose = require('mongoose');
 // Sub-apps
@@ -11,6 +14,10 @@ var pages = require('./src/server/pages');
 // TODO Move!
 var game = require('./lib/server/game').game;
 var dict = require('./src/dictionary.json');
+
+// View engine
+var engine = ReactEngine.server.create();
+app.engine('.js', engine);
 
 // Configure
 if (app.get('env') === 'development') { config.development(app); }
