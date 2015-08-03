@@ -2,7 +2,11 @@
 
 <!-- Start src/server/db.js -->
 
+## imageSchema
+
 Image
+
+## playerSchema
 
 Player
 
