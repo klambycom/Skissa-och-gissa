@@ -12,6 +12,7 @@ module.exports = React.createClass({
             <div id="page">
               {this.props.children}
             </div>
+            <script src="/main.js"></script>
           </body>
         </html>
         );
