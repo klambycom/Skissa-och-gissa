@@ -82,4 +82,12 @@ gulp.task('test', ['jasmine', 'lint']);
 
 gulp.task('watch', function () {
   gulp.watch([paths.js, paths.node], ['docs']);
+  gulp.watch([paths.js, paths.main], ['browserify']);
 });
+
+/*
+ * Combined tasks
+ */
+
+gulp.task('default', ['uglify', 'docs']);
+gulp.task('build', ['uglify']);
