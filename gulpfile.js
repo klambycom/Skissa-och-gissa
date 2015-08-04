@@ -3,13 +3,28 @@ var jasmine = require('gulp-jasmine');
 var jshint = require('gulp-jshint');
 var markdox = require('gulp-markdox');
 var rename = require('gulp-rename');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
 
 var paths = {
   js:   'src/react/**/*.js',
+  main: 'src/index.js',
   node: 'src/server/**/*.js',
   test: 'test/**/*_test.js',
-  docs: 'docs'
+  docs: 'docs',
+  dist: 'dist'
 };
+
+/*
+ * Build browser js
+ */
+
+gulp.task('browserify', function () {
+  return gulp.src(paths.main)
+    .pipe(browserify({ transform: 'reactify', debug: true }))
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest(paths.dist));
+});
 
 /*
  * Documentation
