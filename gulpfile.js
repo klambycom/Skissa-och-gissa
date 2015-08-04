@@ -8,12 +8,13 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
 var paths = {
-  js:   'src/react/**/*.js',
-  main: 'src/index.js',
-  node: 'src/server/**/*.js',
-  test: 'test/**/*_test.js',
-  docs: 'docs',
-  dist: 'dist'
+  js:     'src/react/**/*.js',
+  main:   'src/index.js',
+  node:   'src/server/**/*.js',
+  test:   'test/**/*_test.js',
+  docs:   'docs',
+  dist:   'dist',
+  public: 'public'
 };
 
 /*
@@ -24,14 +25,14 @@ gulp.task('browserify', function () {
   return gulp.src(paths.main)
     .pipe(browserify({ transform: 'reactify', debug: true }))
     .pipe(concat('main.js'))
-    .pipe(gulp.dest(paths.dist));
+    .pipe(gulp.dest(paths.public));
 });
 
 gulp.task('uglify', ['browserify'], function () {
-  return gulp.src('dist/main.js')
+  return gulp.src(paths.public + '/main.js')
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
-    .pipe(gulp.dest(paths.dist));
+    .pipe(gulp.dest(paths.public));
 });
 
 /*
