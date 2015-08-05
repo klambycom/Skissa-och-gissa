@@ -1,5 +1,6 @@
 require('node-jsx').install();
 
+var path = require('path');
 // Server
 var http = require('http');
 var app = require('express')();
@@ -16,7 +17,8 @@ var game = require('./lib/server/game').game;
 var dict = require('./src/dictionary.json');
 
 // View engine
-var engine = ReactEngine.server.create();
+var routes = path.normalize(path.join(__dirname + '/src/routes.js'));
+var engine = ReactEngine.server.create({ routes: require(routes), routesFilePath: routes });
 app.engine('.js', engine);
 
 // Configure

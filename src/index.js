@@ -1,10 +1,12 @@
 var Client = require('react-engine/lib/client');
+var Routes = require('./routes');
 
 require('./react/index.js');
 require('./react/layout.js');
 require('./react/room.js');
 
 var options = {
+  routes: Routes,
   viewResolver: function (viewName) {
     try {
       return require('./react/' + viewName);

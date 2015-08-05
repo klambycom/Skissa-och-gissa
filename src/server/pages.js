@@ -1,11 +1,11 @@
-var pages = require('express')();
+var pages = require('express').Router();
 
 pages.get('/', function (req, res) {
-  res.render('index', { title: 'test' });
+  res.render(req.url, { title: 'test' });
 });
 
 pages.get('/game', function (req, res) {
-  res.render('room', { title: 'test' });
+  res.render(req.url, { title: 'test' });
 });
 
 module.exports = pages;

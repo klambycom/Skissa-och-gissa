@@ -1,5 +1,4 @@
 var React = require('react');
-var Layout = require('./layout');
 var Login = require('./login');
 var Highscore = require('./highscore');
 
@@ -10,7 +9,7 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-        <Layout title={this.props.title}>
+        <div>
           <header onClick={this.onButtonClick}>
             <h1>{this.props.title}</h1>
             <p>{this.props.description}</p>
@@ -23,7 +22,7 @@ module.exports = React.createClass({
             </aside>
           </main>
           <footer id="footer">Webbplatsen är skapad av <a href="http://christiann.se">Christian Nilsson</a>.</footer>
-        </Layout>
+        </div>
         );
   }
 });
