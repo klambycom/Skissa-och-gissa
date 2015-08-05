@@ -7,11 +7,10 @@ module.exports = React.createClass({
           <head>
             <meta charSet="utf-8" />
             <title>{this.props.title}</title>
+            <link rel="stylesheet" href="/stylesheets/screen.css" />
           </head>
           <body>
-            <div id="page">
-              {this.props.children}
-            </div>
+            {this.props.children}
             <script src="/main.js"></script>
           </body>
         </html>

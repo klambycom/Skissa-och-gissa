@@ -1,5 +1,7 @@
 var React = require('react');
 var Layout = require('./layout');
+var Login = require('./login');
+var Highscore = require('./highscore');
 
 module.exports = React.createClass({
   onButtonClick: function () {
@@ -9,8 +11,18 @@ module.exports = React.createClass({
   render: function () {
     return (
         <Layout title={this.props.title}>
-          <h1>Helloworld!</h1>
-          <button onClick={this.onButtonClick}>___Click Me___</button>
+          <header onClick={this.onButtonClick}>
+            <h1>{this.props.title}</h1>
+            <p>{this.props.description}</p>
+          </header>
+          <main id="main">
+            <div id="games">TODO</div>
+            <aside id="sidebar">
+              <Login />
+              <Highscore title="Highscore" />
+            </aside>
+          </main>
+          <footer id="footer">Webbplatsen är skapad av <a href="http://christiann.se">Christian Nilsson</a>.</footer>
         </Layout>
         );
   }
