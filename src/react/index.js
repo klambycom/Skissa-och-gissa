@@ -8,7 +8,7 @@ module.exports = React.createClass({
   },
 
   getInitialState: function () {
-    return { message: '' };
+    return { message: '', games: [] };
   },
 
   componentWillMount: function () {
@@ -24,6 +24,16 @@ module.exports = React.createClass({
       message = <div id="flash-message">{this.state.message}</div>;
     }
 
+    // Dispaly loading text
+    var loading = '';
+    if (this.state.games.length === 0) {
+      loading = (
+          <div id="games">
+            <div id="load-games"><img src="/ajax-loader.gif" />Hämtar spel...</div>
+          </div>
+          );
+    }
+
     return (
         <div>
           <header onClick={this.onButtonClick}>
@@ -33,6 +43,7 @@ module.exports = React.createClass({
           <main id="main">
             <div id="games">
               {message}
+              {loading}
               TODO
             </div>
             <aside id="sidebar">
