@@ -23,15 +23,15 @@ describe('DB', function () {
 
   beforeEach(function () {
     delete mongoose.connection.models['Image'];
-    delete mongoose.connection.models['Player'];
+    delete mongoose.connection.models['User'];
   });
 
   it('should have schema for Image', function () {
     expect(mongoose.modelSchemas.Image).toBeDefined();
   });
 
-  it('should have schema for Player', function () {
-    expect(mongoose.modelSchemas.Player).toBeDefined();
+  it('should have schema for User', function () {
+    expect(mongoose.modelSchemas.User).toBeDefined();
   });
 
   describe('Image', function () {

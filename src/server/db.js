@@ -21,10 +21,10 @@ imageSchema.statics.findImage = function (id) {
 };
 
 /**
- * Player
+ * User
  */
 
-var playerSchema = Schema({
+var userSchema = Schema({
 });
 
 // met addPoints
@@ -34,5 +34,5 @@ var playerSchema = Schema({
 
 module.exports = {
   Image: mongoose.model('Image', imageSchema),
-  Player: mongoose.model('Player', playerSchema)
+  User: mongoose.model('User', userSchema)
 };

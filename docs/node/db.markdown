@@ -6,9 +6,9 @@
 
 Image
 
-## playerSchema
+## userSchema
 
-Player
+User
 
 <!-- End src/server/db.js -->
 
