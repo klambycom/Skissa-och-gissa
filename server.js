@@ -15,6 +15,13 @@ var pages = require('./src/server/pages');
 // TODO Move!
 var game = require('./lib/server/game').game;
 var dict = require('./src/dictionary.json');
+// Passport
+var passport = require('passport');
+// Middlewares
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
 
 // View engine
 var routes = path.normalize(path.join(__dirname + '/src/routes.js'));
@@ -26,8 +33,21 @@ if (app.get('env') === 'development') { config.development(app); }
 if (app.get('env') === 'production') { config.production(app); }
 config.all(app);
 
+// Middlewares
+app.use(express['static'](app.get('public folder')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(cookieParser(app.get('cookie secret')));
+app.use(expressSession({ secret: app.get('session secret') }));
+app.use(flash());
+
 // MongoDB
 mongoose.connect(app.get('db'));
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Create some games
 game.create(Object.keys(dict));
