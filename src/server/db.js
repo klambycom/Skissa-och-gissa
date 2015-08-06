@@ -25,6 +25,20 @@ imageSchema.statics.findImage = function (id) {
  */
 
 var userSchema = Schema({
+  facebook: {
+    id: String,
+    access_token: String,
+    firstName: String,
+    lastName: String,
+    email: String
+  },
+  twitter: {
+    id: String,
+    token: String,
+    username: String,
+    displayName: String,
+    lastStatus: String // TODO Remove if this is just the last Tweet
+  }
 });
 
 // met addPoints
