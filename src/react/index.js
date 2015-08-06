@@ -7,7 +7,23 @@ module.exports = React.createClass({
     alert('I was rendered on server side but I am clickable because of client mounting!');
   },
 
+  getInitialState: function () {
+    return { message: '' };
+  },
+
+  componentWillMount: function () {
+    if (typeof this.props.message[0] !== 'undefined') {
+      this.setState({ message: this.props.message[0] });
+    }
+  },
+
   render: function () {
+    // Display flash messages
+    var message = '';
+    if (this.state.message !== '') {
+      message = <div id="flash-message">{this.state.message}</div>;
+    }
+
     return (
         <div>
           <header onClick={this.onButtonClick}>
@@ -15,7 +31,10 @@ module.exports = React.createClass({
             <p>{this.props.description}</p>
           </header>
           <main id="main">
-            <div id="games">TODO</div>
+            <div id="games">
+              {message}
+              TODO
+            </div>
             <aside id="sidebar">
               <Login user={this.props.user} />
               <Highscore title="Highscore" />
