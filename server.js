@@ -64,6 +64,10 @@ app.use(function (req, res, next) {
 app.use('/', pages);
 app.use('/api', api);
 
+app.use(function (req, res, next) {
+  res.status(404).render('404', { title: 'Sidan hittades ej', url: req.url });
+});
+
 // Create server
 var server = http.createServer(app);
 

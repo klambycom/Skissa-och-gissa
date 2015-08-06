@@ -1,9 +1,10 @@
 var Client = require('react-engine/lib/client');
 var Routes = require('./routes');
 
-require('./react/index.js');
-require('./react/layout.js');
-require('./react/room.js');
+require('./react/index');
+require('./react/layout');
+require('./react/room');
+require('./react/404');
 
 var options = {
   routes: Routes,
