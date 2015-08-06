@@ -17,7 +17,7 @@ module.exports = React.createClass({
           <main id="main">
             <div id="games">TODO</div>
             <aside id="sidebar">
-              <Login />
+              <Login user={this.props.user} />
               <Highscore title="Highscore" />
             </aside>
           </main>

@@ -3,7 +3,8 @@ require('node-jsx').install();
 var path = require('path');
 // Server
 var http = require('http');
-var app = require('express')();
+var express = require('express');
+var app = express();
 var config = require('./src/config');
 var ReactEngine = require('react-engine');
 // DB
@@ -17,6 +18,7 @@ var game = require('./lib/server/game').game;
 var dict = require('./src/dictionary.json');
 // Passport
 var passport = require('passport');
+var initPassport = require('./src/passport/init');
 // Middlewares
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
@@ -48,6 +50,7 @@ mongoose.connect(app.get('db'));
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+initPassport(passport);
 
 // Create some games
 game.create(Object.keys(dict));
