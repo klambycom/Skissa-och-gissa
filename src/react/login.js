@@ -14,7 +14,7 @@ module.exports = React.createClass({
   render: function () {
     if (this.state.signedIn) {
       return (
-          <div id="login facebook">
+          <div id="login" className="facebook">
             Inloggad som {this.props.user.facebook.firstName} {this.props.user.facebook.lastName}
             {' '}
             <a href="/logout">Logga ut</a>
