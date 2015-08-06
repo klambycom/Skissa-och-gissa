@@ -21,7 +21,7 @@ module.exports = React.createClass({
               <Highscore title="Highscore" />
             </aside>
           </main>
-          <footer id="footer">Webbplatsen är skapad av <a href="http://christiann.se">Christian Nilsson</a>.</footer>
+          <footer id="footer">Webbplatsen är skapad av <a href="http://christiann.se">Christian Nilsson</a> och koden finns på <a href="https://github.com/klambycom/Skissa-och-gissa/">Github</a>.</footer>
         </div>
         );
   }
