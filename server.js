@@ -18,7 +18,6 @@ var game = require('./lib/server/game').game;
 var dict = require('./src/dictionary.json');
 // Passport
 var passport = require('passport');
-var initPassport = require('./src/passport/init');
 // Middlewares
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
@@ -50,7 +49,7 @@ mongoose.connect(app.get('db'));
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
-initPassport(passport);
+require('./src/passport/init');
 
 // Create some games
 game.create(Object.keys(dict));
