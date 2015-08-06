@@ -22,7 +22,7 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
+var session = require('express-session');
 
 // View engine
 var routes = path.normalize(path.join(__dirname + '/src/routes.js'));
@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(cookieParser(app.get('cookie secret')));
-app.use(expressSession({ secret: app.get('session secret') }));
+app.use(session({ secret: app.get('session secret'), resave: false, saveUninitialized: false }));
 app.use(flash());
 
 // MongoDB
