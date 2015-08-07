@@ -1,4 +1,5 @@
 var path = require('path');
+var morgan = require('morgan');
 
 module.exports = {
   all: function (app) {
@@ -20,16 +21,24 @@ module.exports = {
     app.set('port', 3000);
     app.set('db', 'mongodb://localhost/skissa-och-gissa');
 
+    app.use(morgan('dev'));
+
+    /*
     app.use(function (req, res, next) {
       // Print information about request to console
       console.log('%s %s', req.method, req.url);
       next();
     });
+    */
   },
 
   production: function (app) {
     app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP);
     app.set('port', process.env.OPENSHIFT_NODEJS_PORT);
+
+    app.use(morgan('combined', {
+      skip: function (req, res) { return res.statusCode < 400; }
+    }));
 
     // OpenShift MongoDB
     var connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +

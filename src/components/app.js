@@ -3,10 +3,6 @@ var RouteHandler  = require('react-router').RouteHandler ;
 var Popup = require('./popup');
 
 module.exports = React.createClass({
-  componentDidMount: function () {
-    console.log(this.props);
-  },
-
   render: function () {
     return (
         <html lang="sv">
