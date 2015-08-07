@@ -2,7 +2,7 @@ var Client = require('react-engine/lib/client');
 var Routes = require('./routes');
 
 require('./components/index');
-require('./components/room');
+require('./components/game/index');
 require('./components/404');
 
 var options = {

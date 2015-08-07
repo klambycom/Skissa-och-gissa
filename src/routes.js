@@ -5,13 +5,13 @@ var DefaultRoute = Router.DefaultRoute;
 
 var App = require('./components/app');
 var Index = require('./components/index');
-var Room = require('./components/room');
+var Game = require('./components/game/index');
 var Settings = require('./components/settings');
 
 var routes = module.exports = (
     <Route path='/' handler={App}>
       <DefaultRoute name='index' handler={Index} />
-      <Route name="game" path="/game" handler={Room} />
+      <Route name="game" path="/game" handler={Game} />
       <Route name="settings" path="/settings" handler={Settings} />
     </Route>
     );
