@@ -1,13 +1,22 @@
 var React = require('react');
 var RouteHandler  = require('react-router').RouteHandler ;
-var Layout = require('./layout');
+var Popup = require('./popup');
 
 module.exports = React.createClass({
   render: function () {
     return (
-        <Layout {...this.props}>
-          <RouteHandler {...this.props} />
-        </Layout>
+        <html lang="sv">
+          <head>
+            <meta charSet="utf-8" />
+            <title>{this.props.title}</title>
+            <link rel="stylesheet" href="/stylesheets/screen.css" />
+          </head>
+          <body>
+            <Popup />
+            <RouteHandler {...this.props} />
+            <script src="/main.js"></script>
+          </body>
+        </html>
         );
   }
 });

@@ -1,5 +1,4 @@
 var React = require('react');
-var Layout = require('./layout');
 var Chat = require('./chat');
 
 module.exports = React.createClass({
