@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/room.js -->
+<!-- Start src/components/room.js -->
 
 ## React
 
-<!-- End src/react/room.js -->
+<!-- End src/components/room.js -->
 

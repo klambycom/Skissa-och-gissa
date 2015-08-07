@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/game.js -->
+<!-- Start src/components/game.js -->
 
 ## React
 
-<!-- End src/react/game.js -->
+<!-- End src/components/game.js -->
 

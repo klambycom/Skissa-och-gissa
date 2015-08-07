@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/chat.js -->
+<!-- Start src/components/chat.js -->
 
 ## React
 
-<!-- End src/react/chat.js -->
+<!-- End src/components/chat.js -->
 

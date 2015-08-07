@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/settings.js -->
+<!-- Start src/components/settings.js -->
 
 ## React
 
-<!-- End src/react/settings.js -->
+<!-- End src/components/settings.js -->
 

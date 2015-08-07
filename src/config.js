@@ -4,7 +4,7 @@ module.exports = {
   all: function (app) {
     app.set('title', 'Skissa och gissa');
 
-    app.set('views', path.normalize(path.join(__dirname + '/react'))); // Why does this not work?
+    app.set('views', path.normalize(path.join(__dirname + '/components'))); // Why does this not work?
     app.set('view engine', 'js');
     app.set('view', require('react-engine/lib/expressView'));
 

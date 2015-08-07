@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/app.js -->
+<!-- Start src/components/app.js -->
 
 ## React
 
-<!-- End src/react/app.js -->
+<!-- End src/components/app.js -->
 

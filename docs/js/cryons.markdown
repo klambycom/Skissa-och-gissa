@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/cryons.js -->
+<!-- Start src/components/cryons.js -->
 
 ## React
 
-<!-- End src/react/cryons.js -->
+<!-- End src/components/cryons.js -->
 

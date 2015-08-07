@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/popup.js -->
+<!-- Start src/components/popup.js -->
 
 ## React
 
-<!-- End src/react/popup.js -->
+<!-- End src/components/popup.js -->
 

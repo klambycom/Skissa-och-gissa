@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/index.js -->
+<!-- Start src/components/index.js -->
 
 ## React
 
-<!-- End src/react/index.js -->
+<!-- End src/components/index.js -->
 

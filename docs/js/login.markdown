@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/login.js -->
+<!-- Start src/components/login.js -->
 
 ## React
 
-<!-- End src/react/login.js -->
+<!-- End src/components/login.js -->
 

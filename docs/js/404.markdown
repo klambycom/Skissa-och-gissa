@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/404.js -->
+<!-- Start src/components/404.js -->
 
 ## React
 
-<!-- End src/react/404.js -->
+<!-- End src/components/404.js -->
 

@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/highscore.js -->
+<!-- Start src/components/highscore.js -->
 
 ## React
 
-<!-- End src/react/highscore.js -->
+<!-- End src/components/highscore.js -->
 

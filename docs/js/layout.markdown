@@ -1,8 +1,8 @@
 
 
-<!-- Start src/react/layout.js -->
+<!-- Start src/components/layout.js -->
 
 ## React
 
-<!-- End src/react/layout.js -->
+<!-- End src/components/layout.js -->
 
