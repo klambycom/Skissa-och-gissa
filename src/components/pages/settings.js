@@ -1,12 +1,12 @@
 var React = require('react');
-var PageLayout = require('./page_layout');
+var Layout = require('./layout');
 
 module.exports = React.createClass({
   render: function () {
     return (
-        <PageLayout {...this.props}>
+        <Layout {...this.props}>
           Inga settings än!
-        </PageLayout>
+        </Layout>
         );
   }
 });

@@ -1,7 +1,7 @@
 var React = require('react');
 var Link = require('react-router').Link;
-var Login = require('./login');
-var Highscore = require('./highscore');
+var Login = require('./sidebar/login');
+var Highscore = require('./sidebar/highscore');
 
 module.exports = React.createClass({
   getInitialState: function () {

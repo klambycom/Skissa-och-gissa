@@ -1,5 +1,5 @@
 var React = require('react');
-var PageLayout = require('./page_layout');
+var Layout = require('./layout');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -18,10 +18,10 @@ module.exports = React.createClass({
     }
 
     return (
-        <PageLayout {...this.props}>
+        <Layout {...this.props}>
           {loading}
           TODO
-        </PageLayout>
+        </Layout>
         );
   }
 });

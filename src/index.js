@@ -1,8 +1,9 @@
 var Client = require('react-engine/lib/client');
 var Routes = require('./routes');
 
-require('./components/index');
-require('./components/game/index');
+require('./components/pages/index'); // TODO Needed?
+require('./components/pages/settings'); // TODO Needed?
+require('./components/game/index'); // TODO Needed?
 require('./components/404');
 
 var options = {

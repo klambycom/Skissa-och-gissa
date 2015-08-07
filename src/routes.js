@@ -4,9 +4,9 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
 var App = require('./components/app');
-var Index = require('./components/index');
+var Index = require('./components/pages/index');
 var Game = require('./components/game/index');
-var Settings = require('./components/settings');
+var Settings = require('./components/pages/settings');
 
 var routes = module.exports = (
     <Route path='/' handler={App}>
