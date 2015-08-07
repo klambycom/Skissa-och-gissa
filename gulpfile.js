@@ -8,7 +8,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
 var paths = {
-  js:     'src/react/**/*.js',
+  js:     'src/components/**/*.js',
   main:   'src/index.js',
   node:   'src/server/**/*.js',
   test:   'test/**/*_test.js',

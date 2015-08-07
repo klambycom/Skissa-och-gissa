@@ -3,10 +3,10 @@ var Router = require('react-router');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
-var App = require('./react/app');
-var Index = require('./react/index');
-var Room = require('./react/room');
-var Settings = require('./react/settings');
+var App = require('./components/app');
+var Index = require('./components/index');
+var Room = require('./components/room');
+var Settings = require('./components/settings');
 
 var routes = module.exports = (
     <Route path='/' handler={App}>
