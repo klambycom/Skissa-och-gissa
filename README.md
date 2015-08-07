@@ -14,6 +14,18 @@ Run tests and lint the code with `gulp test`, and watch tests with
 `gulp watch:test`.
 
 
+## Environment variables
+
+The application needs some environment variables to run:
+
+* `SESSION_SECRET`
+* `COOKIE_SECRET`
+* `FACEBOOK_CLIENTID`
+* `FACEBOOK_CLIENTSECRET`
+* `TWITTER_CONSUMERKEY`
+* `TWITTER_CONSUMERSECRET`
+
+
 
 [david-url]: https://david-dm.org/klambycom/Skissa-och-gissa#info=dependencies&view=table
 [david-image]: https://david-dm.org/klambycom/Skissa-och-gissa.png

@@ -10,8 +10,8 @@ module.exports = {
 
     app.set('public folder', 'public');
 
-    app.set('session secret', 'jklrj2kl45hjkkl');
-    app.set('cookie secret', '243jklj23klj4kl');
+    app.set('session secret', process.env.SESSION_SECRET);
+    app.set('cookie secret', process.env.COOKIE_SECRET);
   },
 
   development: function (app) {
@@ -44,8 +44,8 @@ module.exports = {
     var port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
 
     return {
-      appID: process.env.FACEBOOK_CLIENTID || '614840228526917',
-      appSecret: process.env.FACEBOOK_CLIENTSECRET || '80956177cb2fed0bb210201640be9a70',
+      appID: process.env.FACEBOOK_CLIENTID,
+      appSecret: process.env.FACEBOOK_CLIENTSECRET,
       callbackUrl: 'http://' + ip + ':' + port + '/login/facebook/callback'
     };
   },
@@ -55,8 +55,8 @@ module.exports = {
     var port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
 
     return {
-      consumerKey: process.env.TWITTER_CONSUMERKEY || '',
-      consumerSecret: process.env.TWITTER_CONSUMERSECRET || '',
+      consumerKey: process.env.TWITTER_CONSUMERKEY,
+      consumerSecret: process.env.TWITTER_CONSUMERSECRET,
       callbackUrl: 'http://' + ip + ':' + port + '/login/twitter/callback'
     };
   }
