@@ -2,7 +2,8 @@ var path = require('path');
 
 module.exports = {
   all: function (app) {
-    app.set('title', 'Skissa och gissa');
+    app.locals.page_title = 'Skissa och gissa';
+    app.locals.page_description = 'Lorem ipsum';
 
     app.set('views', path.normalize(path.join(__dirname + '/components'))); // Why does this not work?
     app.set('view engine', 'js');

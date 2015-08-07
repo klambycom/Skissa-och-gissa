@@ -26,8 +26,8 @@ module.exports = React.createClass({
     return (
         <div>
           <header>
-            <Link to="index"><h1>{this.props.title}</h1></Link>
-            <p>{this.props.description}</p>
+            <Link to="index"><h1>{this.props.page_title}</h1></Link>
+            <p>{this.props.page_description}</p>
           </header>
           <main id="main">
             <div id="games">
