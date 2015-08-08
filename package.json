@@ -37,6 +37,7 @@
     "node": "0.10.x"
   },
   "devDependencies": {
+    "cheerio": "^0.19.0",
     "gulp": "^3.9.0",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",

@@ -2,7 +2,6 @@ var pages = require('express').Router();
 var passport = require('passport');
 
 pages.get('/', function (req, res) {
-  console.log(req.user);
   res.render(req.url, {
     title: 'test',
     message: req.flash('message'),
@@ -11,7 +10,6 @@ pages.get('/', function (req, res) {
 });
 
 pages.get('/settings', function (req, res) {
-  console.log(req.user);
   res.render(req.url, {
     title: 'test',
     message: req.flash('message'),
