@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 
 var paths = {
   js:     'src/components/**/*.js',
+  flux:   'src/flux/**/*.js',
   main:   'src/index.js',
   node:   'src/server/**/*.js',
   test:   'test/**/*_test.js',
@@ -46,6 +47,13 @@ gulp.task('docs:js', function () {
     .pipe(gulp.dest(paths.docs + '/js'));
 });
 
+gulp.task('docs:flux', function () {
+  return gulp.src(paths.flux)
+    .pipe(markdox())
+    .pipe(rename({ extname: '.markdown' }))
+    .pipe(gulp.dest(paths.docs + '/flux'));
+});
+
 gulp.task('docs:node', function () {
   return gulp.src(paths.node)
     .pipe(markdox())
@@ -53,7 +61,7 @@ gulp.task('docs:node', function () {
     .pipe(gulp.dest(paths.docs + '/node'));
 });
 
-gulp.task('docs', ['docs:js', 'docs:node']);
+gulp.task('docs', ['docs:js', 'docs:flux', 'docs:node']);
 
 /*
  * Testing
@@ -82,7 +90,7 @@ gulp.task('test', ['jasmine', 'lint']);
  */
 
 gulp.task('watch', function () {
-  gulp.watch([paths.js, paths.node], ['docs']);
+  gulp.watch([paths.js, paths.flux, paths.node], ['docs']);
   gulp.watch([paths.js, paths.main], ['browserify']);
 });
 
