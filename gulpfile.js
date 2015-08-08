@@ -15,7 +15,8 @@ var paths = {
   test:   'test/**/*_test.js',
   docs:   'docs',
   dist:   'dist',
-  public: 'public'
+  public: 'public',
+  assets: 'assets/**/*'
 };
 
 /*
@@ -86,17 +87,27 @@ gulp.task('watch:test', function () {
 gulp.task('test', ['jasmine', 'lint']);
 
 /*
+ * Assets
+ */
+
+gulp.task('assets', function () {
+  return gulp.src(paths.assets)
+    .pipe(gulp.dest(paths.public));
+});
+
+/*
  * Watch
  */
 
 gulp.task('watch', function () {
   gulp.watch([paths.js, paths.flux, paths.node], ['docs']);
   gulp.watch([paths.js, paths.main], ['browserify']);
+  gulp.watch([paths.assets], ['assets']);
 });
 
 /*
  * Combined tasks
  */
 
-gulp.task('default', ['uglify', 'docs']);
-gulp.task('build', ['uglify']);
+gulp.task('default', ['uglify', 'assets', 'docs']);
+gulp.task('build', ['uglify', 'assets']);
