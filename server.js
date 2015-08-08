@@ -32,6 +32,7 @@ app.engine('.js', engine);
 // Configure
 if (app.get('env') === 'development') { config.development(app); }
 if (app.get('env') === 'production') { config.production(app); }
+if (app.get('env') === 'test') { config.test(app); }
 config.all(app);
 
 // Middlewares
@@ -75,9 +76,13 @@ var server = http.createServer(app);
 require('./src/server/websockets').listen(server, game);
 
 // Start server
-server.listen(app.get('port'), app.get('ipaddr'));
-console.log(
-    'Listening on port %s:%d in %s mode...',
-    app.get('ipaddr'),
-    app.get('port'),
-    app.get('env'));
+if (app.get('env') !== 'test') {
+  server.listen(app.get('port'), app.get('ipaddr'));
+  console.log(
+      'Listening on port %s:%d in %s mode...',
+      app.get('ipaddr'),
+      app.get('port'),
+      app.get('env'));
+}
+
+module.exports = app;

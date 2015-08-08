@@ -16,6 +16,17 @@ module.exports = {
     app.set('cookie secret', process.env.COOKIE_SECRET);
   },
 
+  test: function (app) {
+    app.set('ipaddr', 'localhost');
+    app.set('port', 1234);
+    app.set('db', 'mongodb://localhost/skissa-och-gissa-test');
+
+    process.env.SESSION_SECRET = 'test';
+    process.env.COOKIE_SECRET = 'test';
+    process.env.FACEBOOK_CLIENTID = 'test';
+    process.env.FACEBOOK_CLIENTSECRET = 'test';
+  },
+
   development: function (app) {
     app.set('ipaddr', 'localhost');
     app.set('port', 3000);
