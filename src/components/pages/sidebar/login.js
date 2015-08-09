@@ -1,4 +1,5 @@
 var React = require('react');
+var ProfilePicture = require('../../profile_picture');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -15,6 +16,7 @@ module.exports = React.createClass({
     if (this.state.signedIn) {
       return (
           <div id="login" className="facebook">
+            <ProfilePicture user={this.props.user} />
             Inloggad som {this.props.user.facebook.firstName} {this.props.user.facebook.lastName}
             {' '}
             <a href="/logout">Logga ut</a>
