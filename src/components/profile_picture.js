@@ -2,7 +2,7 @@ var React = require('react');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { url: '/nopic50.png' };
+    return { url: '/nopic50.png', alt: 'Profilbild' };
   },
 
   getDefaultProps: function () {
@@ -15,6 +15,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function () {
+    // Set src from Facebook
     if (this.props.user.facebook && this.props.user.facebook.id) {
       // Doc: https://developers.facebook.com/docs/graph-api/reference/v2.4/user/picture
       this.setState({
@@ -22,12 +23,24 @@ module.exports = React.createClass({
           + '/picture?type=' + this.props.size
       });
     }
+
+    // Set alt from Facebook
+    if (this.props.user.facebook && this.props.user.facebook.firstName) {
+      this.setState({
+        alt: 'Bild på ' + this.props.user.facebook.firstName
+          + ' ' + this.props.user.facebook.lastName
+      });
+    }
+
+    // TODO Set src from Twitter
+
+    // TODO Set alt from Twitter
   },
 
   render: function () {
     return <img
       src={this.state.url}
-      alt="Profilbild"
+      alt={this.state.alt}
       id="profile-picture"
       className={this.props.size} />;
   }
