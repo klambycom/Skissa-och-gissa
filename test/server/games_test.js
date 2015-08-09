@@ -4,8 +4,39 @@ var games = rewire('../../src/server/games');
 
 var Player = games.__get__('Player');
 var Room = games.__get__('Room');
+var rooms = games.__get__('rooms');
+var dict = games.__get__('dict');
+
 
 describe('Games', function () {
+
+  it('should create a lobby', function () {
+    expect(rooms.lobby).to.not.be.undefined;
+    expect(rooms.lobby).to.be.an.instanceof(Room);
+  });
+
+  it('should create a game of each type', function () {
+    var roomTypes = Object.keys(rooms).map(function (x) { return rooms[x].type; });
+    expect(roomTypes).to.contain('lobby');
+
+    Object.keys(dict).forEach(function (x) {
+      expect(roomTypes).to.contain(x);
+    });
+  });
+
+  it('should save the rules when creating games', function () {
+    var game = rooms[Object.keys(rooms)[1]];
+    var rules = dict[Object.keys(dict)[0]];
+
+    expect(game.type).to.equal(Object.keys(dict)[0]);
+    expect(game.time).to.equal(rules.time);
+    expect(game.rounds).to.equal(rules.rounds);
+    expect(game.maxPlayers).to.equal(rules.maxPlayers);
+    expect(game.points.max).to.equal(rules.points.max);
+    expect(game.points.one_line).to.equal(rules.points.one_line);
+    expect(game.points.many_lines).to.equal(rules.points.many_lines);
+    expect(game.words).to.equal(rules.words);
+  });
 
   describe('#createPlayer', function () {
 

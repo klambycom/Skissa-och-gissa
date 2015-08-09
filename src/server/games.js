@@ -9,6 +9,7 @@
 /*!  */
 
 var uuid = require('uuid');
+var dict = require('../dictionary.json');
 var rooms = {};
 
 /*!
@@ -18,6 +19,7 @@ var rooms = {};
 var Room = function (id) {
   this.id = id;
   this.players = {};
+  this.type = 'lobby';
 };
 
 Room.prototype.add = function (player) {
@@ -28,23 +30,38 @@ Room.prototype.remove = function (player) {
   delete this.players[player.uuid];
 };
 
-Room.create = function (type) {
-  // TODO Create a new Room(uuid) of the type
+Room.prototype.setRules = function (rules) {
+  this.time = rules.time;
+  this.rounds = rules.rounds;
+  this.maxPlayers = rules.maxPlayers;
+  this.points = rules.points; // max, one_line, many_lines
+  this.words = rules.words;
+};
 
+Room.create = function (type) {
   // Create room
-  var uuid = uuid.v4();
-  var room = new Room(uuid);
-  rooms[uuid] = room;
+  var _uuid = uuid.v4();
+  var room = new Room(_uuid);
+
+  // Set the rules
+  room.type = type;
+  room.setRules(dict[type]);
+
+  // Save room
+  rooms[_uuid] = room;
 
   return room;
 };
 
+// Create rooms from dict
 rooms.lobby = new Room('lobby');
+Object.keys(dict).forEach(Room.create);
 
 /*!
  * Player
  */
 
+// TODO Save Facebook information!
 var Player = function (websocket) {
   this.websocket = websocket;
   this.uuid = uuid.v4();
