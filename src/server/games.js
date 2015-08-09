@@ -9,19 +9,51 @@
 /*!  */
 
 var uuid = require('uuid');
+var rooms = {};
+
+/*!
+ * Room
+ */
 
 var Room = function (id) {
   this.id = id;
+  this.players = {};
 };
 
-var rooms = {
-  lobby: new Room('lobby')
+Room.prototype.add = function (player) {
+  this.players[player.uuid] = player;
 };
+
+Room.prototype.remove = function (player) {
+  delete this.players[player.uuid];
+};
+
+Room.create = function (type) {
+  // TODO Create a new Room(uuid) of the type
+
+  // Create room
+  var uuid = uuid.v4();
+  var room = new Room(uuid);
+  rooms[uuid] = room;
+
+  return room;
+};
+
+rooms.lobby = new Room('lobby');
+
+/*!
+ * Player
+ */
 
 var Player = function (websocket) {
   this.websocket = websocket;
   this.uuid = uuid.v4();
-  this.room = rooms.lobby;
+  this.join('lobby');
+};
+
+Player.prototype.join = function (roomId) {
+  this.room = rooms[roomId];
+  rooms[roomId].players[this.uuid] = this;
 };
 
 /*!  */

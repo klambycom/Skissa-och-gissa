@@ -21,17 +21,21 @@ describe('Games', function () {
       expect(this.player).to.be.an.instanceof(Player);
     });
 
-    it('should create a player and save the websocket', function () {
+    it('should save the websocket', function () {
       expect(this.player.websocket).to.deep.equal({ id: 123 });
     });
 
-    it('should create a player with a unique uuid', function () {
+    it('should create a unique uuid', function () {
       expect(this.player.uuid).to.be.a('string');
     });
 
-    it('should create a player and join lobby', function () {
+    it('should join lobby', function () {
       expect(this.player.room).to.be.an.instanceof(Room);
       expect(this.player.room.id).to.equal('lobby');
+    });
+
+    it('should add player to the playerlist of lobby', function () {
+      expect(this.player.room.players[this.player.uuid]).to.contain(this.player);
     });
   });
 
