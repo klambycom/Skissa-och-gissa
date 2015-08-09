@@ -69,8 +69,12 @@ var Player = function (websocket) {
 };
 
 Player.prototype.join = function (roomId) {
+  // Leave the old room
+  if (this.room) { rooms[this.room.id].remove(this); }
+
+  // Join the new room
   this.room = rooms[roomId];
-  rooms[roomId].players[this.uuid] = this;
+  this.room.add(this);
 };
 
 /*!  */
@@ -100,6 +104,7 @@ module.exports = {
    */
 
   join: function (player, roomId) {
+    player.join(roomId);
   },
 
   /**
