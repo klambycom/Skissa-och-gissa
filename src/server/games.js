@@ -1,16 +1,77 @@
-// join(player, room[, oldRoom]) // Eller så ska man inte kunna lämna lobbyn,
-// men det behöver nog ändå se ut så här?
+/**
+ * # Games
+ *
+ * Handle games, and let users join and leave games.
+ *
+ * @module games
+ */
 
-// leave(player) // Ta bort spelare när den disconnectar
+module.exports = {
 
-// players(room) // Returnera alla spelare i rummet/spelet
+  /**
+   * Join a room, and leave a old room if specified
+   *
+   * @function join
+   *
+   * @fires player_added
+   * @fires player_removed
+   */
 
-// all() // Returnera alla rum/spel
+  join: function (player, room, oldRoom) {
+  },
 
-// get(room) // Returnera rum/spel (Skapa game-class och player-class)
+  /**
+   * Leave room (and disconnect)
+   *
+   * @function leave
+   *
+   * @fires player_added
+   * @fires player_removed
+   */
 
-// on() // New room, remove room, add player to room, remove player to room, new room image
+  leave: function (player) {
+  },
 
+  /**
+   * All players in a specific room
+   *
+   * @function players
+   */
 
+  players: function (room) {
+  },
 
+  /**
+   * All players in all rooms
+   *
+   * @function all
+   */
 
+  all: function () {
+  },
+
+  /**
+   * Get room with roomId
+   *
+   * @function get
+   */
+
+  get: function (roomId) {
+  },
+
+  /**
+   * Fired when room is created or removed, when player is added or removed
+   * from room and when new image for a room is created
+   *
+   * @function get
+   *
+   * @event room_created
+   * @event room_removed
+   * @event player_added
+   * @event player_removed
+   * @event new_room_image
+   */
+
+  on: function () {
+  }
+};
