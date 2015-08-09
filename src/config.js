@@ -21,6 +21,8 @@ module.exports = {
     app.set('port', 1234);
     app.set('db', 'mongodb://localhost/skissa-och-gissa-test');
 
+    app.locals.js_path = '/main.min.js';
+
     process.env.SESSION_SECRET = 'test';
     process.env.COOKIE_SECRET = 'test';
     process.env.FACEBOOK_CLIENTID = 'test';
@@ -32,20 +34,16 @@ module.exports = {
     app.set('port', 3000);
     app.set('db', 'mongodb://localhost/skissa-och-gissa');
 
-    app.use(morgan('dev'));
+    app.locals.js_path = '/main.js';
 
-    /*
-    app.use(function (req, res, next) {
-      // Print information about request to console
-      console.log('%s %s', req.method, req.url);
-      next();
-    });
-    */
+    app.use(morgan('dev'));
   },
 
   production: function (app) {
     app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP);
     app.set('port', process.env.OPENSHIFT_NODEJS_PORT);
+
+    app.locals.js_path = '/main.min.js';
 
     app.use(morgan('combined', {
       skip: function (req, res) { return res.statusCode < 400; }

@@ -14,7 +14,7 @@ module.exports = React.createClass({
           <body>
             <Popup />
             <RouteHandler {...this.props} />
-            <script src="/main.js"></script>
+            <script src={this.props.js_path}></script>
           </body>
         </html>
         );

@@ -68,6 +68,16 @@ describe('ACCEPTANCE: Pages-routes', function () {
           done();
         });
     });
+
+    it('should have a script-tag for main.min.js', function (done) {
+      request(app)
+        .get('/')
+        .end(function (err, res) {
+          $ = cheerio.load(res.text);
+          expect($('script').first().attr('src')).toEqual('/main.min.js');
+          done();
+        });
+    });
   });
 
   describe('/settings', function () {
