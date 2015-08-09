@@ -14,8 +14,8 @@ var api = require('./src/server/api');
 var pages = require('./src/server/pages');
 // Game-logic
 // TODO Move!
-var game = require('./lib/server/game').game;
-var dict = require('./src/dictionary.json');
+//var game = require('./lib/server/game').game;
+//var dict = require('./src/dictionary.json');
 // Passport
 var passport = require('passport');
 // Middlewares
@@ -53,13 +53,13 @@ app.use(passport.session());
 require('./src/passport/init');
 
 // Create some games
-game.create(Object.keys(dict));
+//game.create(Object.keys(dict));
 
 // Save rooms to every page load
-app.use(function (req, res, next) {
-  req.rooms = game.all();
-  next();
-});
+//app.use(function (req, res, next) {
+//  req.rooms = game.all();
+//  next();
+//});
 
 // Mount sub-apps
 app.use('/', pages);
@@ -73,7 +73,7 @@ app.use(function (req, res, next) {
 var server = http.createServer(app);
 
 // WebSocket
-require('./src/server/websockets').listen(server, game);
+//require('./src/server/websockets').listen(server, game);
 
 // Start server
 if (app.get('env') !== 'test') {
