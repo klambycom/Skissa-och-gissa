@@ -77,6 +77,10 @@ Player.prototype.join = function (roomId) {
   this.room.add(this);
 };
 
+Player.prototype.disconnect = function () {
+  rooms[this.room.id].remove(this);
+};
+
 /*!  */
 
 module.exports = {
@@ -118,6 +122,7 @@ module.exports = {
    */
 
   leave: function (player) {
+    player.disconnect();
   },
 
   /**

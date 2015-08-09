@@ -76,6 +76,7 @@ describe('Games', function () {
       this.player = games.createPlayer({ });
       this.lobby = rooms[Object.keys(rooms)[0]];
       this.game = rooms[Object.keys(rooms)[1]];
+      games.join(this.player, this.game.id);
     });
 
     it('should be defined', function () {
@@ -83,25 +84,32 @@ describe('Games', function () {
     });
 
     it('should change the players room', function () {
-      games.join(this.player, this.game.id);
       expect(this.player.room).to.equal(this.game);
     });
 
     it('should add the player to the rooms players list', function () {
-      games.join(this.player, this.game.id);
       expect(Object.keys(this.game.players)).to.contain(this.player.uuid);
     });
 
     it('should remove the player from the old rooms players list', function () {
-      games.join(this.player, this.game.id);
       expect(Object.keys(this.lobby.players)).to.not.contain(this.player.uuid);
     });
   });
 
   describe('#leave', function () {
 
+    beforeEach(function () {
+      this.player = games.createPlayer({ });
+      this.lobby = rooms[Object.keys(rooms)[0]];
+    });
+
     it('should be defined', function () {
       expect(games.leave).to.be.a('function');
+    });
+
+    it('should remove player', function () {
+      games.leave(this.player);
+      expect(Object.keys(this.lobby.players)).to.not.contain(this.player.uuid);
     });
   });
 
