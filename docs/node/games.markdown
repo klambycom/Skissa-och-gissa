@@ -6,23 +6,30 @@
 
 Handle games, and let users join and leave games.
 
-## join(playerId, roomId, oldRoomId)
+## createPlayer()
+
+Create new player and join lobby
+
+### Return:
+
+* **Player** the created player
+
+## join(player, roomId)
 
 Join a room and leave the old room
 
 ### Params:
 
-* **string** *playerId* - ID of the player
+* **Player** *player* - The player
 * **string** *roomId* - ID of the new room
-* **string** *oldRoomId* - ID of the old room
 
-## leave(playerId)
+## leave(player)
 
 Leave room (and disconnect)
 
 ### Params:
 
-* **string** *playerId* - ID of the player
+* **Player** *player* - The player
 
 ## players(roomId)
 

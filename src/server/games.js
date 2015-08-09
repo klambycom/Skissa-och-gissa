@@ -8,34 +8,62 @@
 
 /*!  */
 
+var uuid = require('uuid');
+
+var Room = function (id) {
+  this.id = id;
+};
+
+var rooms = {
+  lobby: new Room('lobby')
+};
+
+var Player = function (websocket) {
+  this.websocket = websocket;
+  this.uuid = uuid.v4();
+  this.room = rooms.lobby;
+};
+
+/*!  */
+
 module.exports = {
+
+  /**
+   * Create new player and join lobby
+   *
+   * @function createPlayer
+   * @return {Player} the created player
+   */
+
+  createPlayer: function (websocket) {
+    return new Player(websocket);
+  },
 
   /**
    * Join a room and leave the old room
    *
    * @function join
-   * @param {string} playerId - ID of the player
+   * @param {Player} player - The player
    * @param {string} roomId - ID of the new room
-   * @param {string} oldRoomId - ID of the old room
    *
    * @fires player_added
    * @fires player_removed
    */
 
-  join: function (playerId, roomId, oldRoomId) {
+  join: function (player, roomId) {
   },
 
   /**
    * Leave room (and disconnect)
    *
    * @function leave
-   * @param {string} playerId - ID of the player
+   * @param {Player} player - The player
    *
    * @fires player_added
    * @fires player_removed
    */
 
-  leave: function (playerId) {
+  leave: function (player) {
   },
 
   /**
