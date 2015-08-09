@@ -26,6 +26,11 @@ The application needs some environment variables to run:
 * `TWITTER_CONSUMERSECRET`
 
 
+## License
+
+Licensed under the [MIT license](LICENSE).
+
+
 
 [david-url]: https://david-dm.org/klambycom/Skissa-och-gissa#info=dependencies&view=table
 [david-image]: https://david-dm.org/klambycom/Skissa-och-gissa.png
