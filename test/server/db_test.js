@@ -1,9 +1,11 @@
+var expect = require('chai').expect;
+
 var mongoose = require('mongoose');
 var db = require('../../src/server/db');
 
 var haveField = function (field, type) {
-  expect(field).toBeDefined();
-  expect(field.instance).toEqual(type);
+  expect(field).to.exist;
+  expect(field.instance).to.equal(type);
 };
 
 var haveValidator = function (field, type, message) {
@@ -15,7 +17,7 @@ var haveValidator = function (field, type, message) {
   if (Object.keys(validator).length === 0) {
     fail('Expected validator for ' + type);
   } else if (typeof message !== 'undefined') {
-    expect(validator.message).toEqual(message);
+    expect(validator.message).to.equal(message);
   }
 };
 
@@ -27,11 +29,11 @@ describe('DB', function () {
   });
 
   it('should have schema for Image', function () {
-    expect(mongoose.modelSchemas.Image).toBeDefined();
+    expect(mongoose.modelSchemas.Image).to.exist;
   });
 
   it('should have schema for User', function () {
-    expect(mongoose.modelSchemas.User).toBeDefined();
+    expect(mongoose.modelSchemas.User).to.exist;
   });
 
   describe('Image', function () {
@@ -72,14 +74,14 @@ describe('DB', function () {
     describe('#latest', function () {
       
       it('should be defined', function () {
-        expect(db.Image.latest).toBeDefined();
+        expect(db.Image.latest).to.exist;
       });
     });
 
     describe('#findImage', function () {
       
       it('should be defined', function () {
-        expect(db.Image.findImage).toBeDefined();
+        expect(db.Image.findImage).to.exist;
       });
     });
   });

@@ -1,19 +1,19 @@
 process.env.NODE_ENV = 'test';
 
+var expect = require('chai').expect;
+
 var mongoose = require('mongoose');
 var request = require('supertest');
 var app = require('../../server.js');
 var cheerio = require('cheerio');
+
+// Helper functions
 
 var clearDB = function () {
   for (var i in mongoose.connection.collections) {
     mongoose.connection.collections[i].remove();
   }
 };
-
-
-
-// Helper functions
 
 // TODO Create real expect().???() functions instead of helpers.
 // E.g. expect('/').toReturnStatusCode(200)
@@ -24,7 +24,7 @@ var expectStatusCode = function (url, statusCode) {
       .get(url)
       .expect(statusCode)
       .end(function (err) {
-        expect(err).toBeNull();
+        expect(err).to.not.exist;
         done();
       });
   };
@@ -36,7 +36,7 @@ var expectTitleToContain = function (url, title) {
       .get(url)
       .end(function (err, res) {
         $ = cheerio.load(res.text);
-        expect($('title').text()).toMatch(title);
+        expect($('title').text()).to.include(title);
         done();
       });
   };
@@ -63,8 +63,8 @@ describe('ACCEPTANCE: Pages-routes', function () {
         .get('/')
         .end(function (err, res) {
           $ = cheerio.load(res.text);
-          expect($('#login a').text()).toMatch('Logga in med Facebook');
-          expect($('#login a').attr('href')).toMatch('/login/facebook');
+          expect($('#login a').text()).to.include('Logga in med Facebook');
+          expect($('#login a').attr('href')).to.include('/login/facebook');
           done();
         });
     });
@@ -74,7 +74,7 @@ describe('ACCEPTANCE: Pages-routes', function () {
         .get('/')
         .end(function (err, res) {
           $ = cheerio.load(res.text);
-          expect($('script').first().attr('src')).toEqual('/main.min.js');
+          expect($('script').first().attr('src')).to.equal('/main.min.js');
           done();
         });
     });
@@ -92,21 +92,14 @@ describe('ACCEPTANCE: Pages-routes', function () {
         .get('/settings')
         .end(function (err, res) {
           $ = cheerio.load(res.text);
-          expect($('header a').text()).toMatch('Skissa och gissa');
-          expect($('header a').attr('href')).toMatch('/');
+          expect($('header a').text()).to.equal('Skissa och gissa');
+          expect($('header a').attr('href')).to.equal('/');
           done();
         });
     });
 
-    it('should have the text "Skissa och gissa" in the title', function (done) {
-      request(app)
-        .get('/settings')
-        .end(function (err, res) {
-          $ = cheerio.load(res.text);
-          expect($('title').text()).toMatch('Skissa och gissa');
-          done();
-        });
-    });
+    it('should have the text "Skissa och gissa" in the title',
+        expectTitleToContain('/settings', 'Skissa och gissa'));
   });
 
   describe('/game', function () {
