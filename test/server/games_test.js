@@ -162,10 +162,47 @@ describe('Games', function () {
     });
   });
 
-  describe('#on', function () {
+  describe('#addListener', function () {
+
+    beforeEach(function () {
+      this.player = games.createPlayer({ });
+    });
 
     it('should be defined', function () {
-      expect(games.on).to.be.a('function');
+      expect(games.addListener).to.be.a('function');
     });
+
+    it('should not throw exception if event is valid', function () {
+      games.addListener('room_created', function () {});
+      games.addListener('room_removed', function () {});
+      games.addListener('player_added', function () {});
+      games.addListener('player_removed', function () {});
+      games.addListener('new_room_image', function () {});
+    });
+
+    it('should throw exception if event is invalid', function () {
+      var exception;
+      try {
+        games.addListener('rum_skapat', function () {});
+      } catch (e) {
+        exception = e;
+      }
+      expect(exception).to.equal('Invalid event');
+    });
+
+    it('should fire "player_removed"-event when player disconnects', function (done) {
+      games.addListener('player_removed', function (e) {
+        expect(e.player).to.equal(this.player);
+        expect(e.from).to.equal(this.player.room.id);
+        done();
+      }.bind(this));
+      games.leave(this.player);
+    });
+
+    it('should fire "player_added"-event when player joins a room');
+
+    it('should fire "player_removed"-event when player joins a room');
+
+    it('should fire "player_added"-event when player is created and joins the lobby');
   });
 });

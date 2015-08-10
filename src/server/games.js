@@ -8,6 +8,8 @@
 
 /*!  */
 
+var EventEmitter = require('events').EventEmitter;
+var events = new EventEmitter();
 var uuid = require('uuid');
 var dict = require('../dictionary.json');
 var rooms = {};
@@ -90,6 +92,8 @@ module.exports = {
    *
    * @function createPlayer
    * @returns {Player} the created player
+   *
+   * @fires player_added
    */
 
   createPlayer: function (websocket) {
@@ -117,11 +121,11 @@ module.exports = {
    * @function leave
    * @param {Player} player - The player
    *
-   * @fires player_added
    * @fires player_removed
    */
 
   leave: function (player) {
+    events.emit('player_removed', { player: player, from: player.room.id });
     player.disconnect();
   },
 
@@ -160,7 +164,9 @@ module.exports = {
    * Fired when room is created or removed, when player is added or removed
    * from room and when new image for a room is created
    *
-   * @function get
+   * @function addListener
+   * @param {string} event
+   * @param {function} listener
    *
    * @event room_created
    * @event room_removed
@@ -169,6 +175,10 @@ module.exports = {
    * @event new_room_image
    */
 
-  on: function () {
+  addListener: function (event, listener) {
+    if (['room_created', 'room_removed', 'player_added', 'player_removed', 'new_room_image']
+        .indexOf(event) < 0) { throw 'Invalid event'; }
+
+    return events.on(event, listener);
   }
 };

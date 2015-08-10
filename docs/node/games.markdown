@@ -55,10 +55,15 @@ Get room with roomId, or throw an error.
 
 * **Room** the room
 
-## get()
+## addListener(event, listener)
 
 Fired when room is created or removed, when player is added or removed
 from room and when new image for a room is created
+
+### Params:
+
+* **string** *event* 
+* **function** *listener* 
 
 <!-- End src/server/games.js -->
 
