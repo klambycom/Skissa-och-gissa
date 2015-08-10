@@ -141,15 +141,6 @@ module.exports = {
   },
 
   /**
-   * All players in all rooms
-   *
-   * @function all
-   */
-
-  all: function () {
-  },
-
-  /**
    * Get room with roomId
    *
    * @function get

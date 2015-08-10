@@ -137,13 +137,6 @@ describe('Games', function () {
     });
   });
 
-  describe('#all', function () {
-
-    it('should be defined', function () {
-      expect(games.all).to.be.a('function');
-    });
-  });
-
   describe('#get', function () {
 
     it('should be defined', function () {

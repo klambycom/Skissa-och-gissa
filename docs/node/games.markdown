@@ -43,10 +43,6 @@ All players in a specific room
 
 * **array** all players in the room
 
-## all()
-
-All players in all rooms
-
 ## get(roomId)
 
 Get room with roomId
