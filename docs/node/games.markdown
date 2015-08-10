@@ -51,6 +51,10 @@ Get room with roomId
 
 * **string** *roomId* - ID of the room
 
+### Return:
+
+* **Room** the room
+
 ## get()
 
 Fired when room is created or removed, when player is added or removed

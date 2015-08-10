@@ -139,8 +139,26 @@ describe('Games', function () {
 
   describe('#get', function () {
 
+    beforeEach(function () {
+      this.game = rooms[Object.keys(rooms)[2]];
+    });
+
     it('should be defined', function () {
       expect(games.get).to.be.a('function');
+    });
+
+    it('should return correct room', function () {
+      expect(games.get(this.game.id)).to.equal(this.game);
+    });
+
+    it('should throw exception if room is not found', function () {
+      var exception;
+      try {
+        games.get('invalid');
+      } catch (e) {
+        exception = e;
+      }
+      expect(exception).to.equal('Room not found');
     });
   });
 

@@ -89,7 +89,7 @@ module.exports = {
    * Create new player and join lobby
    *
    * @function createPlayer
-   * @return {Player} the created player
+   * @returns {Player} the created player
    */
 
   createPlayer: function (websocket) {
@@ -131,7 +131,7 @@ module.exports = {
    * @function players
    * @param {string} roomId - ID of the room
    *
-   * @return {array} all players in the room
+   * @returns {array} all players in the room
    */
 
   players: function (roomId) {
@@ -145,9 +145,15 @@ module.exports = {
    *
    * @function get
    * @param {string} roomId - ID of the room
+   *
+   * @throws Will throw an error if the room is not found
+   *
+   * @returns {Room} the room
    */
 
   get: function (roomId) {
+    if (!rooms[roomId]) { throw 'Room not found'; }
+    return rooms[roomId];
   },
 
   /**
