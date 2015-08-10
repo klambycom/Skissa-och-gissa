@@ -39,6 +39,10 @@ All players in a specific room
 
 * **string** *roomId* - ID of the room
 
+### Return:
+
+* **array** all players in the room
+
 ## all()
 
 All players in all rooms

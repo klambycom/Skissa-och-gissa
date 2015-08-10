@@ -115,8 +115,25 @@ describe('Games', function () {
 
   describe('#players', function () {
 
+    beforeEach(function () {
+      this.player1 = games.createPlayer({ });
+      this.player2 = games.createPlayer({ });
+      this.game = rooms[Object.keys(rooms)[2]];
+    });
+
     it('should be defined', function () {
       expect(games.players).to.be.a('function');
+    });
+
+    it('should return empty array if room is empty', function () {
+      expect(games.players(this.game.id)).to.deep.equal([]);
+    });
+
+    it('should return array with all players in the room', function () {
+      games.join(this.player1, this.game.id);
+      games.join(this.player2, this.game.id);
+      expect(games.players(this.game.id)).to.include(this.player1);
+      expect(games.players(this.game.id)).to.include(this.player2);
     });
   });
 

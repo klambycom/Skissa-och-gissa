@@ -130,9 +130,14 @@ module.exports = {
    *
    * @function players
    * @param {string} roomId - ID of the room
+   *
+   * @return {array} all players in the room
    */
 
   players: function (roomId) {
+    return Object
+      .keys(rooms[roomId].players)
+      .map(function (x) { return rooms[roomId].players[x]; });
   },
 
   /**
