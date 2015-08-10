@@ -45,7 +45,7 @@ All players in a specific room
 
 ## get(roomId)
 
-Get room with roomId
+Get room with roomId, or throw an error.
 
 ### Params:
 

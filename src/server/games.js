@@ -141,7 +141,7 @@ module.exports = {
   },
 
   /**
-   * Get room with roomId
+   * Get room with roomId, or throw an error.
    *
    * @function get
    * @param {string} roomId - ID of the room
