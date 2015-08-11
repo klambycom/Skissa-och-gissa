@@ -5,8 +5,4 @@ npm-debug.log
 public/images/
 !public/images/placeholder.png
 dist/
-
-public/main.js
-public/main.min.js
-public/*.png
-public/*.gif
+public/
