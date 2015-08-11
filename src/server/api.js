@@ -16,11 +16,16 @@ api.get('/logout', function (req, res) {
  */
 
 api.param('uuid', function (req, res, next, uuid) {
-  req.game = games.get(uuid).toJSON();
-  next();
+  try {
+    req.game = games.get(uuid).toJSON();
+    next();
+  } catch (e) {
+    res.status(404).send('Not found');
+  }
 });
 
 api.get('/games/:uuid', function (req, res) {
+  console.log(req);
   res.json(req.game);
 });
 

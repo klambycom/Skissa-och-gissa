@@ -21,13 +21,16 @@ module.exports = React.createClass({
     if (this.props.game) {
       this._setGame(this.props.game);
     } else {
-      api.games.get(this.props.params.uuid).then(function (response) {
-        this._setGame(response.body().data());
-      }.bind(this));
+      api.games
+        .get(this.props.params.uuid)
+        .then(this._setGame)
+        .catch(this._handleError);
     }
   },
 
   _setGame: function (game) {
+    if (typeof game === 'function') { game = game.body().data(); }
+
     this.setState({
       name: game.name,
       maxPlayers: game.maxPlayers,
@@ -36,6 +39,16 @@ module.exports = React.createClass({
       time: game.time,
       players: game.players
     });
+  },
+
+  _handleError: function (error) {
+    // TODO Handle errors
+    if (error && error.status === 404) {
+      // TODO Handle game not found! Redirect to / and show error message!
+      console.log('Game not found');
+    } else {
+      console.log('Other error!');
+    }
   },
 
   render: function () {
