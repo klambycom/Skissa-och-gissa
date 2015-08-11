@@ -24,12 +24,12 @@ pages.get('/settings', function (req, res) {
  */
 
 pages.param('uuid', function (req, res, next, uuid) {
-  req.game = games.get(uuid);
+  req.game = games.get(uuid).toJSON();
   next();
 });
 
 pages.get('/game/:uuid', function (req, res) {
-  res.render(req.url, { title: req.game });
+  res.render(req.url, { game: req.game });
 });
 
 /*

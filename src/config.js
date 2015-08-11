@@ -33,6 +33,7 @@ module.exports = {
     app.set('ipaddr', 'localhost');
     app.set('port', 3000);
     app.set('db', 'mongodb://localhost/skissa-och-gissa');
+    app.set('json spaces', 2);
 
     app.locals.js_path = '/main.js';
 

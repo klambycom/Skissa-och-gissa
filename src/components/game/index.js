@@ -2,8 +2,29 @@ var React = require('react');
 var Chat = require('./chat');
 
 module.exports = React.createClass({
-  componentDidMount: function () {
-    console.log(this.props.title);
+
+  getInitialState: function () {
+    return {
+      name: '',
+      maxPlayers: 0,
+      nrOfPlayers: 0,
+      nrOfRoundsLeft: 0,
+      time: 0,
+      players: []
+    };
+  },
+
+  componentWillMount: function () {
+    if (this.props.game) {
+      this.setState({
+        name: this.props.game.name,
+        maxPlayers: this.props.game.maxPlayers,
+        nrOfPlayers: this.props.game.nrOfPlayers,
+        nrOfRoundsLeft: this.props.game.rounds,
+        time: this.props.game.time,
+        players: this.props.game.players
+      });
+    }
   },
 
   render: function () {

@@ -40,6 +40,29 @@ Room.prototype.setRules = function (rules) {
   this.words = rules.words;
 };
 
+// TODO Return players that are friends with the player
+Room.prototype.toJSON = function () {
+  // Create array containing all players in the room
+  var players = Object
+    .keys(this.players)
+    .map(function (x) { return this.players[x]; }.bind(this))
+    .map(function (x) { return { uuid: x.id, name: x.name, fbId: x.fbId }; });
+
+  return {
+    uuid: this.id,
+    type: this.type,
+    name: dict[this.type].name,
+    description: dict[this.type].description,
+    time: this.time,
+    rounds: this.rounds,
+    nrOfPlayers: Object.keys(this.players).length,
+    maxPlayers: this.maxPlayers,
+    points: this.points,
+    difficulty: dict[this.type].difficulty,
+    players: players
+  };
+};
+
 Room.create = function (type) {
   // Create room
   var _uuid = uuid.v4();
@@ -99,8 +122,6 @@ module.exports = {
    * @returns {array} an array with the JSON of each room
    */
 
-  // TODO Only one room if ID is specified as param
-  // TODO Return players that are friends with the player
   json: function () {
     return Object
       .keys(rooms)
@@ -109,27 +130,7 @@ module.exports = {
       // Filter out lobby
       .filter(function (x) { return x.id !== 'lobby'; })
       // Create JSON for each room
-      .map(function (game) {
-        // Create array containing all players in the room
-        var players = Object
-          .keys(game.players)
-          .map(function (x) { return game.players[x]; })
-          .map(function (x) { return { uuid: x.id, name: x.name, fbId: x.fbId }; });
-
-        return {
-          uuid: game.id,
-          type: game.type,
-          name: dict[game.type].name,
-          description: dict[game.type].description,
-          time: game.time,
-          rounds: game.rounds,
-          nrOfPlayers: Object.keys(game.players).length,
-          maxPlayers: game.maxPlayers,
-          points: game.points,
-          difficulty: dict[game.type].difficulty,
-          players: players
-        };
-      });
+      .map(function (game) { return game.toJSON(); });
   },
 
   /**
