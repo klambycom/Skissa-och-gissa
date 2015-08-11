@@ -1,7 +1,10 @@
 var React = require('react');
+var State = require('react-router').State;
 var Chat = require('./chat');
+var api = require('../../browser/api');
 
 module.exports = React.createClass({
+  mixins: [ State ],
 
   getInitialState: function () {
     return {
@@ -16,15 +19,23 @@ module.exports = React.createClass({
 
   componentWillMount: function () {
     if (this.props.game) {
-      this.setState({
-        name: this.props.game.name,
-        maxPlayers: this.props.game.maxPlayers,
-        nrOfPlayers: this.props.game.nrOfPlayers,
-        nrOfRoundsLeft: this.props.game.rounds,
-        time: this.props.game.time,
-        players: this.props.game.players
-      });
+      this._setGame(this.props.game);
+    } else {
+      api.games.get(this.props.params.uuid).then(function (response) {
+        this._setGame(response.body().data());
+      }.bind(this));
     }
+  },
+
+  _setGame: function (game) {
+    this.setState({
+      name: game.name,
+      maxPlayers: game.maxPlayers,
+      nrOfPlayers: game.nrOfPlayers,
+      nrOfRoundsLeft: game.rounds,
+      time: game.time,
+      players: game.players
+    });
   },
 
   render: function () {

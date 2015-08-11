@@ -12,7 +12,7 @@ module.exports = React.createClass({
           <div id="chat">
             <div id="chat-messages"></div>
             <div id="chat-input">
-              <img src="TODO" alt="TODO" />
+              <img src="/placeholder.png" alt="TODO" />
               <input type="text" placeholder="Gissa på ett ord.." autofocus />
             </div>
           </div>
