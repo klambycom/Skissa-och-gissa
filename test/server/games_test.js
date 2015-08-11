@@ -6,6 +6,7 @@ var Player = games.__get__('Player');
 var Room = games.__get__('Room');
 var rooms = games.__get__('rooms');
 var dict = games.__get__('dict');
+var events = games.__get__('events');
 
 describe('Games', function () {
 
@@ -162,6 +163,7 @@ describe('Games', function () {
   });
 
   describe('#addListener', function () {
+    // TODO Make the tests using mocking!
 
     beforeEach(function () {
       this.player = games.createPlayer({ });
@@ -194,6 +196,7 @@ describe('Games', function () {
       var listener = function (e) {
         expect(e.player).to.equal(this.player);
         expect(e.room).to.equal(this.player.room);
+        events.removeListener('player_removed', listener);
         done();
       }.bind(this);
 
@@ -208,12 +211,14 @@ describe('Games', function () {
           var listenerAdd = function (e) {
             expect(e.player).to.equal(this.player);
             expect(e.room).to.equal(this.game);
+            events.removeListener('player_added', listenerAdd);
             done();
           }.bind(this);
 
           var listenerRemove = function (e) {
             expect(e.player.uuid).to.equal(this.player.uuid);
             expect(e.room.uuid).to.equal(oldRoom.uuid);
+            events.removeListener('player_removed', listenerRemove);
             done();
           }.bind(this);
 
@@ -222,17 +227,17 @@ describe('Games', function () {
           games.join(this.player, this.game.id);
         });
 
-    // TODO Make the tests using mocking!
-    //it('should fire "player_added"-event when player is created and joins the lobby',
-    //    function (done) {
-    //      var listener = function (e) {
-    //        expect(e.player).to.be.ok;
-    //        expect(e.room.id).to.equal('lobby');
-    //        done();
-    //      }.bind(this);
+    it('should fire "player_added"-event when player is created and joins the lobby',
+        function (done) {
+          var listener = function (e) {
+            expect(e.player).to.be.ok;
+            expect(e.room.id).to.equal('lobby');
+            events.removeListener('player_added', listener);
+            done();
+          }.bind(this);
 
-    //      games.addListener('player_added', listener);
-    //      games.createPlayer({ });
-    //    });
+          games.addListener('player_added', listener);
+          games.createPlayer({ });
+        });
   });
 });
