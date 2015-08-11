@@ -7,7 +7,6 @@ var Room = games.__get__('Room');
 var rooms = games.__get__('rooms');
 var dict = games.__get__('dict');
 
-
 describe('Games', function () {
 
   it('should create a lobby', function () {
@@ -166,6 +165,7 @@ describe('Games', function () {
 
     beforeEach(function () {
       this.player = games.createPlayer({ });
+      this.game = rooms[Object.keys(rooms)[1]];
     });
 
     it('should be defined', function () {
@@ -191,18 +191,48 @@ describe('Games', function () {
     });
 
     it('should fire "player_removed"-event when player disconnects', function (done) {
-      games.addListener('player_removed', function (e) {
+      var listener = function (e) {
         expect(e.player).to.equal(this.player);
-        expect(e.from).to.equal(this.player.room.id);
+        expect(e.room).to.equal(this.player.room);
         done();
-      }.bind(this));
+      }.bind(this);
+
+      games.addListener('player_removed', listener);
       games.leave(this.player);
     });
 
-    it('should fire "player_added"-event when player joins a room');
+    it('should fire "player_removed"- and "player_added"-event when player joins a room',
+        function (done) {
+          var oldRoom = this.player.room;
 
-    it('should fire "player_removed"-event when player joins a room');
+          var listenerAdd = function (e) {
+            expect(e.player).to.equal(this.player);
+            expect(e.room).to.equal(this.game);
+            done();
+          }.bind(this);
 
-    it('should fire "player_added"-event when player is created and joins the lobby');
+          var listenerRemove = function (e) {
+            expect(e.player.uuid).to.equal(this.player.uuid);
+            expect(e.room.uuid).to.equal(oldRoom.uuid);
+            done();
+          }.bind(this);
+
+          games.addListener('player_added', listenerAdd);
+          games.addListener('player_removed', listenerRemove);
+          games.join(this.player, this.game.id);
+        });
+
+    // TODO Make the tests using mocking!
+    //it('should fire "player_added"-event when player is created and joins the lobby',
+    //    function (done) {
+    //      var listener = function (e) {
+    //        expect(e.player).to.be.ok;
+    //        expect(e.room.id).to.equal('lobby');
+    //        done();
+    //      }.bind(this);
+
+    //      games.addListener('player_added', listener);
+    //      games.createPlayer({ });
+    //    });
   });
 });

@@ -97,7 +97,10 @@ module.exports = {
    */
 
   createPlayer: function (websocket) {
-    return new Player(websocket);
+    var player = new Player(websocket)
+    events.emit('player_added', { player: player, room: player.room });
+
+    return player;
   },
 
   /**
@@ -112,7 +115,10 @@ module.exports = {
    */
 
   join: function (player, roomId) {
+    var oldRoom = player.room;
     player.join(roomId);
+    events.emit('player_added', { player: player, room: player.room });
+    events.emit('player_removed', { player: player, room: oldRoom });
   },
 
   /**
@@ -125,7 +131,7 @@ module.exports = {
    */
 
   leave: function (player) {
-    events.emit('player_removed', { player: player, from: player.room.id });
+    events.emit('player_removed', { player: player, room: player.room });
     player.disconnect();
   },
 
