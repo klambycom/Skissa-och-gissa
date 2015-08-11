@@ -2,6 +2,10 @@ var React = require('react');
 var Chat = require('./chat');
 
 module.exports = React.createClass({
+  componentDidMount: function () {
+    console.log(this.props.title);
+  },
+
   render: function () {
     return (
         <div id="game-wrapper">

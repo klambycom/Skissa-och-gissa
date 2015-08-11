@@ -11,7 +11,7 @@ var Settings = require('./components/pages/settings');
 var routes = module.exports = (
     <Route path='/' handler={App}>
       <DefaultRoute name='index' handler={Index} />
-      <Route name="game" path="/game" handler={Game} />
+      <Route name="game" path="/game/:uuid" handler={Game} />
       <Route name="settings" path="/settings" handler={Settings} />
     </Route>
     );

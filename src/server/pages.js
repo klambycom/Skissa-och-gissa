@@ -23,8 +23,13 @@ pages.get('/settings', function (req, res) {
  * Game
  */
 
-pages.get('/game', function (req, res) {
-  res.render(req.url, { title: 'test' });
+pages.param('uuid', function (req, res, next, uuid) {
+  req.game = games.get(uuid);
+  next();
+});
+
+pages.get('/game/:uuid', function (req, res) {
+  res.render(req.url, { title: req.game });
 });
 
 /*
