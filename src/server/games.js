@@ -67,6 +67,11 @@ Object.keys(dict).forEach(Room.create);
 var Player = function (websocket) {
   this.websocket = websocket;
   this.uuid = uuid.v4();
+
+  // Information from Facebook
+  this.name = 'Anonymous';
+  this.fbId = 'kj2l34jl3j';
+
   this.join('lobby');
 };
 
@@ -86,6 +91,46 @@ Player.prototype.disconnect = function () {
 /*!  */
 
 module.exports = {
+
+  /**
+   * Get all games as JSON
+   *
+   * @function json
+   * @returns {array} an array with the JSON of each room
+   */
+
+  // TODO Only one room if ID is specified as param
+  // TODO Return players that are friends with the player
+  json: function () {
+    return Object
+      .keys(rooms)
+      // Create array from the rooms-object
+      .map(function (x) { return rooms[x]; })
+      // Filter out lobby
+      .filter(function (x) { return x.id !== 'lobby'; })
+      // Create JSON for each room
+      .map(function (game) {
+        // Create array containing all players in the room
+        var players = Object
+          .keys(game.players)
+          .map(function (x) { return game.players[x]; })
+          .map(function (x) { return { uuid: x.id, name: x.name, fbId: x.fbId }; });
+
+        return {
+          uuid: game.id,
+          type: game.type,
+          name: dict[game.type].name,
+          description: dict[game.type].description,
+          time: game.time,
+          rounds: game.rounds,
+          nrOfPlayers: Object.keys(game.players).length,
+          maxPlayers: game.maxPlayers,
+          points: game.points,
+          difficulty: dict[game.type].difficulty,
+          players: players
+        };
+      });
+  },
 
   /**
    * Create new player and join lobby

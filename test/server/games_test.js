@@ -38,6 +38,69 @@ describe('Games', function () {
     expect(game.words).to.equal(rules.words);
   });
 
+  describe('#json', function () {
+
+    it('should be defined', function () {
+      expect(games.json).to.be.a('function');
+    });
+
+    it('should return an array', function () {
+      expect(games.json()).to.be.an('array');
+    });
+
+    it('should return the rooms as JSON', function () {
+      var game = rooms[Object.keys(rooms)[1]];
+
+      games.join(games.createPlayer({ }), game.id);
+      games.join(games.createPlayer({ }), game.id);
+      games.join(games.createPlayer({ }), game.id);
+
+      expect(games.json()[0]).to.contain({
+        uuid: game.id,
+        type: game.type,
+        time: game.time,
+        rounds: game.rounds,
+        nrOfPlayers: Object.keys(game.players).length,
+        maxPlayers: game.maxPlayers,
+        points: game.points,
+        name: dict[game.type].name,
+        description: dict[game.type].description,
+        difficulty: dict[game.type].difficulty
+      });
+    });
+
+    it('should return friends in room');
+
+    it('should return players in room', function () {
+      var json = games.json()[0];
+      var game = rooms[Object.keys(rooms)[1]];
+      var player = games.createPlayer({ });
+
+      games.join(player, game.id);
+
+      expect(json.players).to.contain({
+        uuid: player.id,
+        name: player.name,
+        fbId: player.fbId
+      });
+    });
+
+    it('should not contain the lobby', function () {
+      expect(games.json().map(function (x) {return x.uuid; })).to.not.include('lobby');
+    });
+
+    it('should return all rooms/games', function () {
+      var gameUuids = games.json().map(function (x) { return x.uuid; });
+
+      Object
+        .keys(rooms)
+        .filter(function (x) { return x !== 'lobby'; })
+        .forEach(function (x, i) {
+          expect(x).to.equal(gameUuids[i], 'Room at position nr ' + i);
+        });
+    });
+  });
+
   describe('#createPlayer', function () {
 
     beforeEach(function () {

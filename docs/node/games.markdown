@@ -6,6 +6,14 @@
 
 Handle games, and let users join and leave games.
 
+## json()
+
+Get all games as JSON
+
+### Return:
+
+* **array** an array with the JSON of each room
+
 ## createPlayer()
 
 Create new player and join lobby
