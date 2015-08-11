@@ -1,12 +1,18 @@
 var React = require('react');
 var Layout = require('./layout');
+var GameListItem = require('../game_list_item');
 
 module.exports = React.createClass({
   getInitialState: function () {
     return { games: [] };
   },
 
-  render: function () {
+  componentWillMount: function () {
+    // Games from when rendering from server
+    if (this.props.games) { this.setState({ games: this.props.games }); }
+  },
+
+  renderLoadingGames: function () {
     // Dispaly loading text
     var loading = '';
     if (this.state.games.length === 0) {
@@ -17,10 +23,16 @@ module.exports = React.createClass({
           );
     }
 
+    return loading;
+  },
+
+  render: function () {
     return (
         <Layout {...this.props}>
-          {loading}
-          TODO
+          {this.renderLoadingGames()}
+          <div id="games">{this.state.games.map(function (game, i) {
+            return <GameListItem game={game} key={i} />;
+          })}</div>
         </Layout>
         );
   }

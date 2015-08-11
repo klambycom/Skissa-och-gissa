@@ -1,11 +1,13 @@
 var pages = require('express').Router();
 var passport = require('passport');
+var games = require('./games');
 
 pages.get('/', function (req, res) {
   res.render(req.url, {
     title: 'test',
     message: req.flash('message'),
-    user: req.user
+    user: req.user,
+    games: games.json()
   });
 });
 
