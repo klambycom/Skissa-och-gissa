@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var request = require('supertest');
 var app = require('../../server.js');
+var games = require('../../src/server/games.js');
 var cheerio = require('cheerio');
 
 // Helper functions
@@ -104,9 +105,16 @@ describe('ACCEPTANCE: Pages-routes', function () {
 
   describe('/game', function () {
 
-    it('should return status code 200', expectStatusCode('/game', 200));
+    it('should return status code 200 when romm exists',
+        expectStatusCode('/game/' + games.json()[0].uuid, 200));
+
+    it('should return status code 404 if room is not specified',
+        expectStatusCode('/game', 404));
+
+    it('should return status code 500 if room is not found',
+        expectStatusCode('/game/not_found_j323k', 500));
 
     it('should have the text "Skissa och gissa" in the title',
-        expectTitleToContain('/game', 'Skissa och gissa'));
+        expectTitleToContain('/game/' + games.json()[0].uuid, 'Skissa och gissa'));
   });
 });
