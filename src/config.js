@@ -66,7 +66,8 @@ module.exports = {
     return {
       appID: process.env.FACEBOOK_CLIENTID,
       appSecret: process.env.FACEBOOK_CLIENTSECRET,
-      callbackUrl: 'http://' + ip + ':' + port + '/login/facebook/callback'
+      callbackUrl: 'http://' + ip + ':' + port + '/login/facebook/callback',
+      fields: 'id,first_name,last_name,picture,friends,permissions'
     };
   },
 

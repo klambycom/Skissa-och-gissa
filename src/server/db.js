@@ -30,7 +30,10 @@ var userSchema = Schema({
     access_token: String,
     firstName: String,
     lastName: String,
-    email: String
+    friends: [String],
+    permissions: {
+      userFriends: Boolean
+    }
   },
   twitter: {
     id: String,
@@ -40,6 +43,24 @@ var userSchema = Schema({
     lastStatus: String // TODO Remove if this is just the last Tweet
   }
 });
+
+userSchema.methods.setFacebook = function (profile) {
+  console.log('updateFacebook');
+
+  // TODO Update familyName, givenName, Friends and permissions
+  this.facebook.firstName = profile.name.givenName;
+  this.facebook.lastName = profile.name.familyName;
+  this.facebook.friends = profile._json.friends.data.map(function (x) { return x.id; });
+  // Only extra permission is user_friends right now. I don't think
+  // i need the users email.
+  profile._json.permissions.data.forEach(function (x) {
+    if (x.permission === 'user_friends') {
+      this.facebook.permissions.userFriends = x.status === 'granted';
+    }
+  }.bind(this));
+
+  return this;
+};
 
 // met addPoints
 // stat createAndAddPoints

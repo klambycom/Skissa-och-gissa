@@ -48,7 +48,7 @@ pages.get('/logout', function (req, res) {
 });
 
 pages.get('/login/facebook', passport.authenticate('facebook', {
-  scope: 'email'
+  scope: 'user_friends'
 }));
 
 pages.get('/login/facebook/callback', passport.authenticate('facebook', {
