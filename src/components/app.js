@@ -10,6 +10,7 @@ module.exports = React.createClass({
             <meta charSet="utf-8" />
             <title>{this.props.page_title}</title>
             <link rel="stylesheet" href="/stylesheets/screen.css" />
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
           </head>
           <body>
             <Popup />

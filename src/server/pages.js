@@ -11,14 +11,6 @@ pages.get('/', function (req, res) {
   });
 });
 
-pages.get('/settings', function (req, res) {
-  res.render(req.url, {
-    title: 'test',
-    message: req.flash('message'),
-    user: req.user
-  });
-});
-
 /*
  * Game
  */
@@ -36,7 +28,13 @@ pages.get('/game/:uuid', function (req, res) {
  * User
  */
 
-// TODO
+pages.get('/settings', function (req, res) {
+  res.render(req.url, {
+    title: 'test',
+    message: req.flash('message'),
+    user: req.user
+  });
+});
 
 /*
  * Passport
