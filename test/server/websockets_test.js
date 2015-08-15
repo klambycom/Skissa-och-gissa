@@ -116,6 +116,15 @@ describe('Websockets', function () {
 
       expect(this.socketMock.join).to.have.been.calledWith(this.data.roomId);
     });
+
+    it('should tell the clients in the new room that a user have joined the room', function () {
+      this.broadcastMock.to = sinon.stub().returns(this.broadcastMock);
+      this.broadcastMock.emit = sinon.spy();
+      runWebsockets(this.socketMock).call('join-room', this.data);
+
+      expect(this.broadcastMock.to).to.have.been.calledWith(this.data.roomId);
+      expect(this.broadcastMock.emit).to.have.been.calledWith('player-joined-room', { player: this.player });
+    });
   });
 
   //it('should send a join-event when a new user connects', function () {

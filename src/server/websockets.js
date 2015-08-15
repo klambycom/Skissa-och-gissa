@@ -26,6 +26,11 @@ module.exports = function (app, socketio) {
      *
      * Client tells server that player joins a new room. The client sends the
      * room ID, e.g. { roomId: UUID }.
+     *
+     * When the player joins a room, several messages is sent to the clients:
+     *
+     * * **leave-room** tells the old room that the user have left the room
+     * * **player-joined-room** tells the new room that the user is joining the room
      */
 
     socket.on('join-room', function (data) {
@@ -40,6 +45,11 @@ module.exports = function (app, socketio) {
 
       // Player joins the new room
       games.join(player, data.roomId);
+
+      // Tell the new room that the player have joined the room,
+      // e.g. { player: PlayerJSON }
+      // TODO Get player JSON from games!!!!!!!
+      socket.broadcast.to(data.roomId).emit('player-joined-room', { player: player });
     });
   });
 };
