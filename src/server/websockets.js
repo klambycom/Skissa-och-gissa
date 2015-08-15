@@ -11,6 +11,7 @@ module.exports = function (app, socketio) {
     var player = games.createPlayer(socket);
 
     // TODO Join lobby!
+    socket.join(player.room.id);
 
     // Player joins a room
     // join-room data = { roomId: UUID }; // Client to server

@@ -58,10 +58,18 @@ describe('Websockets', function () {
   });
 
   it('should create a player when a user connects', function () {
-    this.gamesMock.createPlayer = sinon.spy();
+    this.gamesMock.createPlayer = sinon.stub().returns({ room: { id: 'lobby' } });
     runWebsockets(this.socketMock);
 
     expect(this.gamesMock.createPlayer).to.have.been.calledWith(this.socketMock);
+  });
+
+  it('should join lobby when a user connect', function () {
+    this.gamesMock.createPlayer = sinon.stub().returns({ room: { id: 'lobby' } });
+    this.socketMock.join = sinon.spy();
+    runWebsockets(this.socketMock);
+
+    expect(this.socketMock.join).to.have.been.calledWith('lobby');
   });
 
   describe('Event: join-room', function () {
