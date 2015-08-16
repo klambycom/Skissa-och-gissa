@@ -47,6 +47,9 @@ module.exports = function (app, socketio) {
       socket.broadcast.to(player.room.id).emit('leave-room', { playerId: player.uuid });
 
       // Player joins the new room
+      // TODO Start game if the room have enough players
+      // TODO Create new room if this room is almost full
+      // TODO Hide (or show in some other way) room if page is full
       games.join(player, data.roomId);
 
       // Tell the new room that the player have joined the room,
@@ -56,7 +59,13 @@ module.exports = function (app, socketio) {
 
       // Tell the players client that the player have joined the new room by
       // sending room data to the player, e.g. { room: RoomJSON }
-      socket.emit('join-room', 'tmp'); // TODO Get room JSON from games!!!!!!!
+      // TODO Get room JSON from games!!!!!!!
+      // TODO Add canvas to the JSON before sending to client!!!!!
+      socket.emit('join-room', 'tmp');
+
+      // TODO Surround in try catch and emit error message to client if error
+      // joining room
+      // socket.emit('error', { type: 'join', message: 'Error joining room!' });
     });
   });
 };
