@@ -32,6 +32,7 @@ describe('Websockets', function () {
     this.socketMock = {
       id: 123,
       on: on.add,
+      emit: function () {},
       broadcast: this.broadcastMock,
       leave: function () {},
       join: function () {}
@@ -124,6 +125,13 @@ describe('Websockets', function () {
 
       expect(this.broadcastMock.to).to.have.been.calledWith(this.data.roomId);
       expect(this.broadcastMock.emit).to.have.been.calledWith('player-joined-room', { player: this.player });
+    });
+
+    it('should send room-json to the players client', function () {
+      this.socketMock.emit = sinon.spy();
+      runWebsockets(this.socketMock).call('join-room', this.data);
+
+      expect(this.socketMock.emit).to.have.been.calledWith('join-room');
     });
   });
 
