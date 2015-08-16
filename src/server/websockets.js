@@ -55,6 +55,8 @@ module.exports = function (app, socketio) {
       // Tell the new room that the player have joined the room,
       // e.g. { player: PlayerJSON }
       // TODO Get player JSON from games!!!!!!!
+      // TODO Maybe remove and let the rooms listen for lobby updates that
+      // concerns that specific room
       socket.broadcast.to(data.roomId).emit('player-joined', { player: player });
 
       // Tell the players client that the player have joined the new room by
