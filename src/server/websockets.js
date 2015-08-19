@@ -28,12 +28,15 @@ module.exports = function (app, socketio) {
      * room ID, e.g. { roomId: UUID }. When the player joins a room, several
      * messages is sent to the clients:
      *
-     * * **leave** tells the old room that the user have left the room
-     * * **player-joined** tells the new room that the user is joining the room
+     * * **leave** tells the old room that the user have left the room,
+     *   e.g. { playerId: UUID }.
+     *
+     * * **player-joined** tells the new room that the user is joining the
+     *   room, e.g. { player: PlayerJSON }.
      *
      * And a **join**-message is sent to the new players client, with
      * information about the room, to tell the client that the player have
-     * sucessfully joined the new room.
+     * sucessfully joined the new room, e.g. { room: RoomJSON }.
      */
 
     socket.on('join', function (data) {
@@ -42,8 +45,7 @@ module.exports = function (app, socketio) {
       socket.leave(player.room.id);
       socket.join(data.roomId);
 
-      // Tell the old room that the player have left the room,
-      // e.g. { playerId: UUID }.
+      // Tell the OLD room that the player have left the room
       socket.broadcast.to(player.room.id).emit('leave', { playerId: player.uuid });
 
       // Player joins the new room
@@ -52,15 +54,14 @@ module.exports = function (app, socketio) {
       // TODO Hide (or show in some other way) room if page is full
       games.join(player, data.roomId);
 
-      // Tell the new room that the player have joined the room,
-      // e.g. { player: PlayerJSON }
+      // Tell the NEW room that the player have joined the room
       // TODO Get player JSON from games!!!!!!!
       // TODO Maybe remove and let the rooms listen for lobby updates that
       // concerns that specific room
       socket.broadcast.to(data.roomId).emit('player-joined', { player: player });
 
-      // Tell the players client that the player have joined the new room by
-      // sending room data to the player, e.g. { room: RoomJSON }
+      // Tell the client of the player that the player have joined the new room
+      // by sending room data to the player
       // TODO Get room JSON from games!!!!!!!
       // TODO Add canvas to the JSON before sending to client!!!!!
       socket.emit('join', 'tmp');
