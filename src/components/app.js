@@ -12,7 +12,7 @@ module.exports = React.createClass({
             <link rel="stylesheet" href="/stylesheets/screen.css" />
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
           </head>
-          <body>
+          <body className="game">
             <Popup />
             <RouteHandler {...this.props} />
             <script src={this.props.js_path}></script>

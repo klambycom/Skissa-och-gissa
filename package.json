@@ -29,6 +29,7 @@
     "reflux": "^0.2.11",
     "restful.js": "^0.7.0",
     "socket.io": "^1.3.6",
+    "socket.io-client": "^1.3.6",
     "uuid": "^2.0.1"
   },
   "subdomain": "skissaochgissa",

@@ -60,7 +60,7 @@ app.use(function (req, res, next) {
 var server = http.createServer(app);
 
 // WebSocket
-//require('./src/server/websockets').listen(server, game);
+require('./src/server/websockets')(server);
 
 // Start server
 if (app.get('env') !== 'test') {
