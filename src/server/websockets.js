@@ -21,6 +21,9 @@ module.exports = function (app, socketio) {
     // Tell socket.io to join lobby!
     socket.join(player.room.id);
 
+    // Send the player to the client
+    socket.emit('player', player.json());
+
     /**
      * ## socket.on('join')
      *

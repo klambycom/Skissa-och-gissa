@@ -107,6 +107,10 @@ Player.prototype.join = function (roomId) {
   this.room.add(this);
 };
 
+Player.prototype.json = function () {
+  return { UUID: this.uuid, name: this.name, fbId: this.fbId, points: 0 };
+};
+
 Player.prototype.disconnect = function () {
   rooms[this.room.id].remove(this);
 };

@@ -38,7 +38,13 @@ describe('Websockets', function () {
       join: function () {}
     };
     // Mock games.js
-    this.gamesMock = { createPlayer: function () {}, join: function () {} };
+    this.playerJSON = { UUID: 'player1' };
+    this.player = {
+      uuid: 'player1',
+      room: { id: 'lobby' },
+      json: function () { return this.playerJSON; }.bind(this)
+    };
+    this.gamesMock = { createPlayer: sinon.stub().returns(this.player), join: function () {} };
     websockets.__set__('games', this.gamesMock);
   });
 
@@ -59,25 +65,36 @@ describe('Websockets', function () {
   });
 
   it('should create a player when a user connects', function () {
-    this.gamesMock.createPlayer = sinon.stub().returns({ room: { id: 'lobby' } });
     runWebsockets(this.socketMock);
 
     expect(this.gamesMock.createPlayer).to.have.been.calledWith(this.socketMock);
   });
 
   it('should join lobby when a user connect', function () {
-    this.gamesMock.createPlayer = sinon.stub().returns({ room: { id: 'lobby' } });
     this.socketMock.join = sinon.spy();
     runWebsockets(this.socketMock);
 
     expect(this.socketMock.join).to.have.been.calledWith('lobby');
   });
 
+  it('should send player data to the client when the user connects', function () {
+    this.socketMock.emit = sinon.spy();
+    runWebsockets(this.socketMock);
+
+    expect(this.socketMock.emit).to.have.been.calledWith('player', this.playerJSON);
+  });
+
+  it('should get player data from the json-method of the player', function () {
+    this.player.json = sinon.spy();
+    runWebsockets(this.socketMock);
+
+    //expect(this.player.json).to.have.been.called();
+    expect(this.player.json).to.have.been.calledWith();
+  });
+
   describe('Event: join', function () {
 
     beforeEach(function () {
-      this.player = { uuid: 'player1', room: { id: 'lobby' } };
-      this.gamesMock.createPlayer = sinon.stub().returns(this.player);
       this.data = { roomId: '12345' }; 
     });
 
