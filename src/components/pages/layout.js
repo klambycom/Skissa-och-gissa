@@ -9,7 +9,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function () {
-    if (typeof this.props.message[0] !== 'undefined') {
+    if (this.props.message && this.props.message[0]) {
       this.setState({ message: this.props.message[0] });
     }
   },
