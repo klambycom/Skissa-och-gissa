@@ -1,5 +1,10 @@
 var Reflux = require('reflux');
-var socket = require('socket.io-client')('http://localhost:3000');
+// TODO Remove later. And mock socket another way. For tests!
+var socket = { on: function () {}, emit: function () {} };
+if (process && process.browser) {
+  socket = require('socket.io-client')('http://localhost:3000');
+}
+console.log('logic');
 
 var actions = Reflux.createActions([
     'join', // Joining a game/room
@@ -12,7 +17,9 @@ var store = Reflux.createStore({
   init: function () {
     this.ready = false;
     socket.on('connect', this._connect);
+    socket.on('player', this._setPlayer);
     socket.on('disconnect', this._disconnect);
+    socket.on('error', function (err) { console.log('Socket.io-client ERROR: ', err); });
 
     socket.on('player-joined', this._newPlayer);
     socket.on('message', this._message);
@@ -30,6 +37,11 @@ var store = Reflux.createStore({
     this.trigger({ event: 'connection', type: 'disconnected' });
   },
 
+  _setPlayer: function (data) {
+    this.player = data;
+    this.trigger({ event: 'player', type: 'update', data: data });
+  },
+
   _newPlayer: function (data) {
     this.trigger({ event: 'chat', type: 'new-player', data: data });
   },
@@ -40,6 +52,7 @@ var store = Reflux.createStore({
   },
 
   onJoin: function (roomId) {
+    console.log('Join: ', roomId);
     socket.emit('join', { roomId: roomId });
   },
 

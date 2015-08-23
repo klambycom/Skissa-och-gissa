@@ -1,13 +1,18 @@
 var React = require('react');
 var Reflux = require('reflux');
+var State = require('react-router').State;
 var Cryons = require('./cryons');
 var Logic = require('../../browser/logic');
 
 module.exports = React.createClass({
-  mixins: [Reflux.listenTo(Logic.store, 'handleMessage')],
+  mixins: [Reflux.listenTo(Logic.store, 'handleMessage'), State],
 
   getInitialState: function () {
     return { messages: [] };
+  },
+
+  componentWillMount: function () {
+    Logic.actions.join(this.getParams().uuid);
   },
 
   handleMessage: function (data) {
@@ -29,6 +34,10 @@ module.exports = React.createClass({
         player = data.data.player;
         message = data.data.message;
       }
+    }
+    // Player updates
+    else if (data.event === 'player' && data.type === 'update') {
+      console.log(data.data);
     }
 
     // Print out message
