@@ -25,7 +25,6 @@ api.param('uuid', function (req, res, next, uuid) {
 });
 
 api.get('/games/:uuid', function (req, res) {
-  console.log(req);
   res.json(req.game);
 });
 
