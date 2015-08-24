@@ -6,3 +6,4 @@ public/images/
 !public/images/placeholder.png
 dist/
 public/
+logs/*.log

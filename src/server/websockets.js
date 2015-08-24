@@ -7,6 +7,7 @@
 /*! */
 
 var games = require('./games');
+var logger = require('./logger');
 
 module.exports = function (app, socketio) {
   // Create instance of Socket.io if undefined
@@ -43,7 +44,9 @@ module.exports = function (app, socketio) {
      */
 
     socket.on('join', function (data) {
-      console.log('UUID(' + player.uuid + ') joining "' + data.roomId + '"!');
+      logger.verbose(
+          'UUID(%s) is joining the room "%s"', player.uuid, data.roomId,
+          { type: 'websocket', meta: { player: player.json(), data: data } });
 
       try {
         // TODO Check if room exists first! And is not full!
@@ -79,7 +82,10 @@ module.exports = function (app, socketio) {
         // joining room
         // socket.emit('error', { type: 'join', message: 'Error joining room!' });
       } catch (e) {
-        console.log('Join error: ', e);
+        logger.error(
+            'Error joining the room "%s"', data.roomId,
+            { type: 'websocket', meta: { player: player.json(), data: data } });
+
         throw e;
       }
     });
@@ -89,7 +95,9 @@ module.exports = function (app, socketio) {
      */
 
     socket.on('chat', function (data) {
-      console.log('UUID(' + data.player.UUID + ') wrote "' + data.message + '"!');
+      logger.verbose(
+          'UUID(%s) wrote "%s"', data.player.UUID, data.message,
+          { type: 'websocket', meta: { player: data.player, message: data.message } });
 
       socket.broadcast.emit('chat', data);
     });

@@ -1,5 +1,7 @@
 require('node-jsx').install();
 
+// Utils
+var logger = require('./src/server/logger');
 var path = require('path');
 // Server
 var http = require('http');
@@ -53,6 +55,10 @@ app.use('/', pages);
 app.use('/api', api);
 
 app.use(function (req, res, next) {
+  logger.error(
+      'Page not found (%s)', req.url,
+      { type: 'HTTP', meta: { status_code: 404, url: req.url } });
+
   res.status(404).render('404', { title: 'Sidan hittades ej', url: req.url });
 });
 
@@ -65,11 +71,19 @@ require('./src/server/websockets')(server);
 // Start server
 if (app.get('env') !== 'test') {
   server.listen(app.get('port'), app.get('ipaddr'));
-  console.log(
+
+  logger.info(
       'Listening on port %s:%d in %s mode...',
       app.get('ipaddr'),
       app.get('port'),
-      app.get('env'));
+      app.get('env'),
+      {
+        meta: {
+          ipaddr: app.get('ipaddr'),
+          port: app.get('port'),
+          env: app.get('env')
+        }
+      });
 }
 
 module.exports = app;

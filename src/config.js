@@ -1,5 +1,6 @@
 var path = require('path');
 var morgan = require('morgan');
+var logger = require('./server/logger');
 
 module.exports = {
   all: function (app) {
@@ -37,7 +38,7 @@ module.exports = {
 
     app.locals.js_path = '/main.js';
 
-    app.use(morgan('dev'));
+    app.use(morgan('dev', { stream: logger.streamDev }));
   },
 
   production: function (app) {
@@ -47,6 +48,7 @@ module.exports = {
     app.locals.js_path = '/main.min.js';
 
     app.use(morgan('combined', {
+      stream: logger.stream,
       skip: function (req, res) { return res.statusCode < 400; }
     }));
 
