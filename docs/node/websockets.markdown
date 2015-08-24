@@ -22,5 +22,7 @@ And a **join**-message is sent to the new players client, with
 information about the room, to tell the client that the player have
 sucessfully joined the new room, e.g. { room: RoomJSON }.
 
+## socket.on('chat')
+
 <!-- End src/server/websockets.js -->
 

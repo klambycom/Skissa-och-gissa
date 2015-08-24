@@ -92,7 +92,7 @@ describe('Websockets', function () {
     expect(this.player.json).to.have.been.calledWith();
   });
 
-  describe('Event: join', function () {
+  describe('EVENT: join', function () {
 
     beforeEach(function () {
       this.data = { roomId: '12345' }; 
@@ -136,12 +136,13 @@ describe('Websockets', function () {
     });
 
     it('should tell the clients in the new room that a user have joined the room', function () {
+      this.player.json = sinon.stub().returns({ uuid: 123 });
       this.broadcastMock.to = sinon.stub().returns(this.broadcastMock);
       this.broadcastMock.emit = sinon.spy();
       runWebsockets(this.socketMock).call('join', this.data);
 
       expect(this.broadcastMock.to).to.have.been.calledWith(this.data.roomId);
-      expect(this.broadcastMock.emit).to.have.been.calledWith('player-joined', { player: this.player });
+      expect(this.broadcastMock.emit).to.have.been.calledWith('player joined', { uuid: 123 });
     });
 
     it('should send room-json to the players client', function () {
@@ -149,6 +150,16 @@ describe('Websockets', function () {
       runWebsockets(this.socketMock).call('join', this.data);
 
       expect(this.socketMock.emit).to.have.been.calledWith('join');
+    });
+  });
+
+  describe('EVENT: chat', function () {
+
+    it('should listen to "chat', function () {
+      this.socketMock.on = sinon.spy();
+      runWebsockets(this.socketMock);
+
+      expect(this.socketMock.on).to.have.been.calledWith('chat');
     });
   });
 

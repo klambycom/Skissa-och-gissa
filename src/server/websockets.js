@@ -43,35 +43,55 @@ module.exports = function (app, socketio) {
      */
 
     socket.on('join', function (data) {
-      // Tell socket.io to leave old room and join the new room
-      // TODO Should probably not leave room if room is the lobby
-      socket.leave(player.room.id);
-      socket.join(data.roomId);
+      console.log('UUID(' + player.uuid + ') joining "' + data.roomId + '"!');
 
-      // Tell the OLD room that the player have left the room
-      socket.broadcast.to(player.room.id).emit('leave', { playerId: player.uuid });
+      try {
+        // TODO Check if room exists first! And is not full!
 
-      // Player joins the new room
-      // TODO Start game if the room have enough players
-      // TODO Create new room if this room is almost full
-      // TODO Hide (or show in some other way) room if page is full
-      games.join(player, data.roomId);
+        // Tell socket.io to leave old room and join the new room
+        // TODO Should probably not leave room if room is the lobby
+        socket.leave(player.room.id);
+        socket.join(data.roomId);
 
-      // Tell the NEW room that the player have joined the room
-      // TODO Get player JSON from games!!!!!!!
-      // TODO Maybe remove and let the rooms listen for lobby updates that
-      // concerns that specific room
-      socket.broadcast.to(data.roomId).emit('player-joined', { player: player });
+        // Tell the OLD room that the player have left the room
+        socket.broadcast.to(player.room.id).emit('leave', { playerId: player.uuid });
 
-      // Tell the client of the player that the player have joined the new room
-      // by sending room data to the player
-      // TODO Get room JSON from games!!!!!!!
-      // TODO Add canvas to the JSON before sending to client!!!!!
-      socket.emit('join', 'tmp');
+        // Player joins the new room
+        // TODO Start game if the room have enough players
+        // TODO Create new room if this room is almost full
+        // TODO Hide (or show in some other way) room if page is full
+        games.join(player, data.roomId);
 
-      // TODO Surround in try catch and emit error message to client if error
-      // joining room
-      // socket.emit('error', { type: 'join', message: 'Error joining room!' });
+        // Tell the NEW room that the player have joined the room
+        // TODO Get player JSON from games!!!!!!!
+        // TODO Maybe remove and let the rooms listen for lobby updates that
+        // concerns that specific room
+        // TODO Can probably remove to(..)!
+        socket.broadcast.to(data.roomId).emit('player joined', player.json());
+
+        // Tell the client of the player that the player have joined the new room
+        // by sending room data to the player
+        // TODO Get room JSON from games!!!!!!!
+        // TODO Add canvas to the JSON before sending to client!!!!!
+        socket.emit('join', 'tmp');
+
+        // TODO Surround in try catch and emit error message to client if error
+        // joining room
+        // socket.emit('error', { type: 'join', message: 'Error joining room!' });
+      } catch (e) {
+        console.log('Join error: ', e);
+        throw e;
+      }
+    });
+
+    /**
+     * ## socket.on('chat')
+     */
+
+    socket.on('chat', function (data) {
+      console.log('UUID(' + data.player.UUID + ') wrote "' + data.message + '"!');
+
+      socket.broadcast.emit('chat', data);
     });
   });
 };
