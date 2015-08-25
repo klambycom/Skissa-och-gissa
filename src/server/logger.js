@@ -1,3 +1,4 @@
+var fs = require('fs');
 var winston = require('winston');
 winston.emitErrs = true;
 
@@ -51,4 +52,30 @@ module.exports.streamDev = {
   write: function (message, encoding) {
     logger.info(message.substring(0, message.length - 1), { type: 'HTTP' });
   }
+};
+
+module.exports.read = function (callback) {
+  fs.readFile('./logs/all-logs.log', 'utf8', function (err, contents) {
+    callback(err, (function (file) {
+      var entries = file
+        .split('\n')
+        .filter(function (x) { return x !== ''; })
+        .map(function (x) { return JSON.parse(x); })
+        .reverse(); 
+
+      return {
+        all: function () { return entries; },
+
+        take: function (amount, from) { return this.all()/* TODO */; },
+
+        ofType: function (type) {
+          return entries.filter(function (x) { return x.level === type; });
+        },
+
+        takeOfType: function (amount, from, type) {
+          return this.ofType(type)/* TODO */;
+        }
+      }
+    }(contents)));
+  });
 };

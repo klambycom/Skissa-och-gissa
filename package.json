@@ -17,6 +17,7 @@
     "express": "^4.13.1",
     "express-session": "^1.11.3",
     "fbgraph": "*",
+    "moment": "^2.10.6",
     "mongoose": "^4.1.0",
     "morgan": "^1.6.1",
     "node-jsx": "^0.13.3",

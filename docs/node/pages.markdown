@@ -8,5 +8,7 @@ User
 
 Passport
 
+Admin
+
 <!-- End src/server/pages.js -->
 

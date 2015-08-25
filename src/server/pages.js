@@ -55,4 +55,22 @@ pages.get('/login/facebook/callback', passport.authenticate('facebook', {
   failureFlash: true
 }));
 
+/*
+ * Admin
+ */
+
+pages.get('/admin', function (req, res) {
+  res.render(req.url, {
+    message: req.flash('message'),
+    user: req.user
+  });
+});
+
+pages.get('/admin/logs', function (req, res) {
+  res.render(req.url, {
+    message: req.flash('message'),
+    user: req.user
+  });
+});
+
 module.exports = pages;

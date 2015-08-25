@@ -1,5 +1,6 @@
 var api = require('express').Router();
 var games = require('./games');
+var logger = require('./logger');
 
 api.get('/', function (req, res) {
   res.send('API root');
@@ -30,6 +31,26 @@ api.get('/games/:uuid', function (req, res) {
 
 api.get('/games', function (req, res) {
   res.json(games.json());
+});
+
+/*!
+ * Admin
+ */
+
+api.get('/logs', function (req, res) {
+  logger.read(function (err, entries) {
+    res.json({
+      nrOfEntries: {
+        total: entries.all().length,
+        debug: entries.ofType('debug').length,
+        verbose: entries.ofType('verbose').length,
+        info: entries.ofType('info').length,
+        warn: entries.ofType('warn').length,
+        error: entries.ofType('error').length
+      },
+      entries: entries.all()
+    });
+  });
 });
 
 module.exports = api;
