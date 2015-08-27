@@ -22,7 +22,7 @@ module.exports = React.createClass({
     // Chat messages
     if (data.event === 'chat' ) {
       if (data.type === 'new-player') {
-        message = 'En ny spelare har gått med i spelet TODO';
+        message = data.data.name + ' har gått med i spelet.';
       } else if (data.type === 'message') {
         player = data.data.player;
         message = data.data.message;
@@ -42,9 +42,9 @@ module.exports = React.createClass({
     // Connection status changed
     else if (data.event === 'connection' && this.state.hasJoined) {
       if (data.type === 'connected') {
-        message = 'Du har gått med i spelet';
+        message = 'Du har gått med i spelet.';
       } else {
-        message = 'Du har lämnat spelet';
+        message = 'Du har lämnat spelet.';
       }
     }
 
