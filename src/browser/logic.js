@@ -29,10 +29,7 @@ var store = Reflux.createStore({
   _connect: function () {
     this.ready = true;
     console.log('connected');
-    // Trigger event if old room is not lobby
-    if (typeof this.room !== 'undefined') { // TODO Move to component
-      this.trigger({ event: 'connection', type: 'connected' });
-    }
+    this.trigger({ event: 'connection', type: 'connected' });
   },
 
   _disconnect: function () {

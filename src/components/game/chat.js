@@ -8,7 +8,7 @@ module.exports = React.createClass({
   mixins: [Reflux.listenTo(Logic.store, 'handleMessage'), State],
 
   getInitialState: function () {
-    return { messages: [] };
+    return { messages: [], game: {}, hasJoined: false };
   },
 
   componentWillMount: function () {
@@ -18,16 +18,9 @@ module.exports = React.createClass({
   handleMessage: function (data) {
     var message, player = 'server', extra = {};
 
-    // Connection status changed
-    if (data.event === 'connection') {
-      if (data.type === 'connected') {
-        message = 'Du har gått med i spelet';
-      } else {
-        message = 'Du har lämnat spelet';
-      }
-    }
+    
     // Chat messages
-    else if (data.event === 'chat' ) {
+    if (data.event === 'chat' ) {
       if (data.type === 'new-player') {
         message = 'En ny spelare har gått med i spelet TODO';
       } else if (data.type === 'message') {
@@ -42,8 +35,17 @@ module.exports = React.createClass({
     }
     // The player joins the room
     else if (data.event === 'join' && data.type === 'game') {
+      this.setState({ hasJoined: true, game: data.data });
       message = 'Du har gått med i spelet "' + data.data.name + '" som just nu har '
         + data.data.rounds + ' runder kvar med ' + data.data.nrOfPlayers + ' aktiva spelare.';
+    }
+    // Connection status changed
+    else if (data.event === 'connection' && this.state.hasJoined) {
+      if (data.type === 'connected') {
+        message = 'Du har gått med i spelet';
+      } else {
+        message = 'Du har lämnat spelet';
+      }
     }
 
     // Print out message
