@@ -1,8 +1,7 @@
 var React = require('react');
 var Layout = require('../pages/layout');
 var api = require('../../browser/api');
-var moment = require('moment');
-require('moment/locale/sv');
+var LogEntry = require('./log_entry.js');
 
 module.exports = React.createClass({
 
@@ -23,20 +22,6 @@ module.exports = React.createClass({
   _updateEntries: function (entries) {
     var data = entries.body().data();
     this.setState({ amount: data.nrOfEntries, entries: data.entries });
-  },
-
-  _renderEntries: function (entry, i) {
-    var timestamp = moment(entry.timestamp).format('dddd, D MMMM YYYY HH:mm:ss');
-
-    return (
-        <div className={entry.level} key={i}>
-          <div className="message">{entry.message}</div>
-          <div className="meta">
-            <span className="timestamp">{timestamp}</span>
-            <span className="level">{entry.level}</span>
-          </div>
-        </div>
-        );
   },
 
   handleSelectLevel: function (type) {
@@ -67,7 +52,16 @@ module.exports = React.createClass({
               Error <span className="amount">{this.state.amount.error}</span></a>
           </div>
 
-          <div id="log-entries">{this.state.entries.slice(0, 20).map(this._renderEntries)}</div>
+          <div id="log-entries">{this.state.entries.slice(0, 20).map(function (x, i) {
+            return (
+                <LogEntry
+                  message={x.message}
+                  level={x.level}
+                  timestamp={x.timestamp}
+                  meta={x.meta}
+                  key={i} />
+                );
+          })}</div>
         </Layout>
         );
   }

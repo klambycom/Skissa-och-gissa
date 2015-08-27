@@ -113,3 +113,83 @@ main p {
   margin-top: 5px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Admin
+#log-levels { padding: 10px 0; }
+
+#log-levels a {
+  padding: 5px;
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+#log-levels a.total { background-color: green; }
+#log-levels a.debug { background-color: #9A9A00; }
+#log-levels a.verbose { background-color: #FF728B; }
+#log-levels a.info { background-color: #3A3ADA; }
+#log-levels a.warn { background-color: red; }
+#log-levels a.error { background-color: #BB5757; }
+
+#log-levels .amount {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1px 5px 0 6px;
+  font-size: .7em;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+#log-levels .total .amount { color: green; }
+#log-levels .debug .amount { color: #9A9A00; }
+#log-levels .verbose .amount { color: #FF728B; }
+#log-levels .info .amount { color: #3A3ADA; }
+#log-levels .warn .amount { color: #FF0000; }
+#log-levels .error .amount { color: #BB5757; }
+
+
+
+#log-entries > div {
+  background-color: rgb(243, 242, 242);
+  margin: 5px 0;
+  padding: 10px 5px;
+}
+
+#log-entries .message {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+#log-entries .meta { color: #777777; }
+
+#log-entries pre {
+  font-family: monospace;
+  margin-bottom: 10px;
+  display: none;
+}
+
+#log-entries .show-more pre { display: block; }
+
+#log-entries .debug { border-left: 10px rgb(152,156,19) solid;  }
+#log-entries .verbose { border-left: 10px rgb(255,114,139) solid;  }
+#log-entries .info { border-left: 10px rgb(70,39,216) solid;  }
+#log-entries .warn { border-left: 10px rgb(247,0,19) solid;  }
+#log-entries .error { border-left: 10px rgb(182,86,88) solid;  }
