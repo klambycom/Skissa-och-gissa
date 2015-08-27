@@ -120,13 +120,18 @@ Player.prototype.disconnect = function () {
 module.exports = {
 
   /**
-   * Get all games as JSON
+   * Get all games as JSON, or just one room
    *
    * @function json
+   * @param {string} roomId Optional room id
    * @returns {array} an array with the JSON of each room
    */
 
-  json: function () {
+  json: function (roomId) {
+    if (typeof roomId !== 'undefined') {
+      return rooms[roomId].toJSON();
+    }
+
     return Object
       .keys(rooms)
       // Create array from the rooms-object

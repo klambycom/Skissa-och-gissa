@@ -74,9 +74,8 @@ module.exports = function (app, socketio) {
 
         // Tell the client of the player that the player have joined the new room
         // by sending room data to the player
-        // TODO Get room JSON from games!!!!!!!
         // TODO Add canvas to the JSON before sending to client!!!!!
-        socket.emit('join', { data: player.room.toJSON() });
+        socket.emit('join', { data: games.json(player.room.id) });
 
         // TODO Surround in try catch and emit error message to client if error
         // joining room

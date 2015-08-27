@@ -44,7 +44,11 @@ describe('Websockets', function () {
       room: { id: 'lobby' },
       json: function () { return this.playerJSON; }.bind(this)
     };
-    this.gamesMock = { createPlayer: sinon.stub().returns(this.player), join: function () {} };
+    this.gamesMock = {
+      createPlayer: sinon.stub().returns(this.player),
+      join: function () {},
+      json: function () {}
+    };
     websockets.__set__('games', this.gamesMock);
   });
 

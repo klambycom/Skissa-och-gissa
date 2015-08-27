@@ -6,9 +6,13 @@
 
 Handle games, and let users join and leave games.
 
-## json()
+## json(roomId)
 
-Get all games as JSON
+Get all games as JSON, or just one room
+
+### Params:
+
+* **string** *roomId* Optional room id
 
 ### Return:
 
