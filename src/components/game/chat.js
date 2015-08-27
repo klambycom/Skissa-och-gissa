@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
 
   handleMessage: function (data) {
-    var message, player = 'server', me = false;
+    var message, player = 'server', extra = {};
 
     // Connection status changed
     if (data.event === 'connection') {
@@ -33,18 +33,23 @@ module.exports = React.createClass({
       } else if (data.type === 'message') {
         player = data.data.player;
         message = data.data.message;
-        me = data.data.me;
+        extra.isThisPlayer = data.data.me;
       }
     }
     // Player updates
     else if (data.event === 'player' && data.type === 'update') {
       console.log(data.data);
     }
+    // The player joins the room
+    else if (data.event === 'join' && data.type === 'game') {
+      message = 'Du har gått med i spelet "' + data.data.name + '" som just nu har '
+        + data.data.rounds + ' runder kvar med ' + data.data.nrOfPlayers + ' aktiva spelare.';
+    }
 
     // Print out message
     if (typeof message !== 'undefined') {
       this.setState({
-        messages: this.state.messages.concat([{ from: player, message: message, me: me }])
+        messages: this.state.messages.concat([{ from: player, message: message, extra: extra }])
       });
     }
   },

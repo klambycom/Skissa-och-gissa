@@ -17,7 +17,8 @@ var store = Reflux.createStore({
   init: function () {
     this.ready = false;
     socket.on('connect', this._connect);
-    socket.on('player', this._setPlayer);
+    socket.on('player', this._player);
+    socket.on('join', this._join);
     socket.on('disconnect', this._disconnect);
     socket.on('error', function (err) { console.log('Socket.io-client ERROR: ', err); });
 
@@ -28,7 +29,10 @@ var store = Reflux.createStore({
   _connect: function () {
     this.ready = true;
     console.log('connected');
-    this.trigger({ event: 'connection', type: 'connected' });
+    // Trigger event if old room is not lobby
+    if (typeof this.room !== 'undefined') { // TODO Move to component
+      this.trigger({ event: 'connection', type: 'connected' });
+    }
   },
 
   _disconnect: function () {
@@ -37,9 +41,14 @@ var store = Reflux.createStore({
     this.trigger({ event: 'connection', type: 'disconnected' });
   },
 
-  _setPlayer: function (data) {
+  _player: function (data) {
     this.player = data;
     this.trigger({ event: 'player', type: 'update', data: data });
+  },
+
+  _join: function (data) {
+    this.room = data;
+    this.trigger({ event: 'join', type: 'game', data: data.data });
   },
 
   _newPlayer: function (data) {
