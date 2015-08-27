@@ -6,9 +6,10 @@ var rename = require('gulp-rename');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
 
 var paths = {
-  js:     'src/components/**/*.js',
+  js:     'src/{components,browser}/**/*.js',
   flux:   'src/flux/**/*.js',
   main:   'src/index.js',
   node:   'src/server/**/*.js',
@@ -16,8 +17,20 @@ var paths = {
   docs:   'docs',
   dist:   'dist',
   public: 'public',
-  assets: 'assets/**/*'
+  assets: 'assets/**/*',
+  css:    'public/stylesheets/screen.css'
 };
+
+/*
+ * CSS
+ */
+
+gulp.task('minify-css', function () {
+  return gulp.src(paths.css)
+    .pipe(minifyCss())
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(gulp.dest(paths.public + '/stylesheets'));
+});
 
 /*
  * Build browser js
@@ -109,5 +122,5 @@ gulp.task('watch', function () {
  * Combined tasks
  */
 
-gulp.task('default', ['uglify', 'assets', 'docs']);
-gulp.task('build', ['uglify', 'assets']);
+gulp.task('default', ['uglify', 'assets', 'docs', 'minify-css']);
+gulp.task('build', ['uglify', 'assets', 'minify-css']);
