@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
 
   handleMessage: function (data) {
-    var message, player = 'server';
+    var message, player = 'server', me = false;
 
     // Connection status changed
     if (data.event === 'connection') {
@@ -33,6 +33,7 @@ module.exports = React.createClass({
       } else if (data.type === 'message') {
         player = data.data.player;
         message = data.data.message;
+        me = data.data.me;
       }
     }
     // Player updates
@@ -43,7 +44,7 @@ module.exports = React.createClass({
     // Print out message
     if (typeof message !== 'undefined') {
       this.setState({
-        messages: this.state.messages.concat([{ from: player, message: message }])
+        messages: this.state.messages.concat([{ from: player, message: message, me: me }])
       });
     }
   },

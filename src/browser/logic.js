@@ -47,7 +47,8 @@ var store = Reflux.createStore({
   },
 
   _chat: function (data) {
-    if (typeof data.player === 'undefined') { data.player = {}; }
+    data.me = typeof data.player === 'undefined';
+    if (typeof data.player === 'undefined') { data.player = this.player; }
     this.trigger({ event: 'chat', type: 'message', data: data });
   },
 
@@ -62,6 +63,7 @@ var store = Reflux.createStore({
     // TODO Do i need to send uuid, or do the server know how is sending the
     // message?
     socket.emit('chat', { player: this.player, message: message });
+    this._chat({ message: message });
   }
 });
 
