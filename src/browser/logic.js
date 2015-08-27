@@ -4,7 +4,6 @@ var socket = { on: function () {}, emit: function () {} };
 if (process && process.browser) {
   socket = require('socket.io-client')('http://localhost:3000');
 }
-console.log('logic');
 
 var actions = Reflux.createActions([
     'join', // Joining a game/room
@@ -28,13 +27,11 @@ var store = Reflux.createStore({
 
   _connect: function () {
     this.ready = true;
-    console.log('connected');
     this.trigger({ event: 'connection', type: 'connected' });
   },
 
   _disconnect: function () {
     this.ready = false;
-    console.log('disconnected');
     this.trigger({ event: 'connection', type: 'disconnected' });
   },
 
@@ -59,7 +56,6 @@ var store = Reflux.createStore({
   },
 
   onJoin: function (roomId) {
-    console.log('Join: ', roomId);
     socket.emit('join', { roomId: roomId });
   },
 

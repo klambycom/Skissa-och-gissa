@@ -31,7 +31,7 @@ module.exports = React.createClass({
     }
     // Player updates
     else if (data.event === 'player' && data.type === 'update') {
-      console.log(data.data);
+      console.log('Player update', data.data);
     }
     // The player joins the room
     else if (data.event === 'join' && data.type === 'game') {
