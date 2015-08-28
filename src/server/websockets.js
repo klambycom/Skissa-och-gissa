@@ -57,7 +57,7 @@ module.exports = function (app, socketio) {
         socket.join(data.roomId);
 
         // Tell the OLD room that the player have left the room
-        socket.broadcast.to(player.room.id).emit('leave', { playerId: player.uuid });
+        socket.broadcast.to(player.room.id).emit('player left', { player: player.json() });
 
         // Player joins the new room
         // TODO Start game if the room have enough players
@@ -99,6 +99,24 @@ module.exports = function (app, socketio) {
           { type: 'websocket', meta: { player: data.player, message: data.message } });
 
       socket.broadcast.emit('chat', data);
+    });
+
+    /**
+     * ## socket.on('disconnect')
+     *
+     * Leave room and tell the other clients in the room that the player have
+     * left the room.
+     */
+
+    socket.on('disconnect', function () {
+      logger.verbose('UUID(%s) disconnected', player.uuid,
+          { type: 'websocket', meta: { player: player.json() } });
+
+      // Leave room (all rooms)
+      games.leave(player);
+
+      // Tell the room that the player have left the room
+      socket.broadcast.emit('player left', { player: player.json() });
     });
   });
 };

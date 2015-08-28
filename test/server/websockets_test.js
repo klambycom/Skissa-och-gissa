@@ -47,6 +47,7 @@ describe('Websockets', function () {
     this.gamesMock = {
       createPlayer: sinon.stub().returns(this.player),
       join: function () {},
+      leave: function () {},
       json: function () {}
     };
     websockets.__set__('games', this.gamesMock);
@@ -117,12 +118,13 @@ describe('Websockets', function () {
     });
 
     it('should tell the old room that the player have left the room', function () {
+      this.player.json = sinon.stub().returns({ uuid: 123 });
       this.broadcastMock.to = sinon.stub().returns(this.broadcastMock);
       this.broadcastMock.emit = sinon.spy();
       runWebsockets(this.socketMock).call('join', this.data);
 
       expect(this.broadcastMock.to).to.have.been.calledWith(this.player.room.id);
-      expect(this.broadcastMock.emit).to.have.been.calledWith('leave', { playerId: this.player.uuid });
+      expect(this.broadcastMock.emit).to.have.been.calledWith('player left', { player: { uuid: 123 } });
     });
 
     it('should tell socket.io to leave the old room', function () {
@@ -167,7 +169,28 @@ describe('Websockets', function () {
     });
   });
 
-  //it('should send a join-event when a new user connects', function () {
-   // websockets(null, socketMock);
-  //});
+  describe('EVENT: disconnect', function () {
+
+    it('should listen to "disconnect', function () {
+      this.socketMock.on = sinon.spy();
+      runWebsockets(this.socketMock);
+
+      expect(this.socketMock.on).to.have.been.calledWith('disconnect');
+    });
+
+    it('should tell the other clients in the new room that a user have left the room', function () {
+      this.player.json = sinon.stub().returns({ uuid: 123 });
+      this.broadcastMock.emit = sinon.spy();
+      runWebsockets(this.socketMock).call('disconnect');
+
+      expect(this.broadcastMock.emit).to.have.been.calledWith('player left', { player: { uuid: 123 } });
+    });
+
+    it('should call games.leave()', function () {
+      this.gamesMock.leave = sinon.spy();
+      runWebsockets(this.socketMock).call('disconnect');
+
+      expect(this.gamesMock.leave).to.have.been.calledWith(this.player);
+    });
+  });
 });

@@ -24,5 +24,10 @@ sucessfully joined the new room, e.g. { room: RoomJSON }.
 
 ## socket.on('chat')
 
+## socket.on('disconnect')
+
+Leave room and tell the other clients in the room that the player have
+left the room.
+
 <!-- End src/server/websockets.js -->
 
