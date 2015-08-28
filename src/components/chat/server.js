@@ -23,6 +23,6 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    return <div className='message server'>{this._message()}</div>;
+    return <div className='server-message'># {this._message()}</div>;
   }
 });
