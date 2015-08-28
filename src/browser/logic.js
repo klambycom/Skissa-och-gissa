@@ -21,7 +21,8 @@ var store = Reflux.createStore({
     socket.on('disconnect', this._disconnect);
     socket.on('error', function (err) { console.log('Socket.io-client ERROR: ', err); });
 
-    socket.on('player joined', this._newPlayer);
+    socket.on('player joined', this._playerJoined);
+    socket.on('player left', this._playerLeft);
     socket.on('chat', this._chat);
   },
 
@@ -45,8 +46,12 @@ var store = Reflux.createStore({
     this.trigger({ event: 'join', type: 'game', data: data.data });
   },
 
-  _newPlayer: function (data) {
-    this.trigger({ event: 'chat', type: 'new-player', data: data });
+  _playerJoined: function (data) {
+    this.trigger({ event: 'otherPlayer', type: 'joined', data: data });
+  },
+
+  _playerLeft: function (data) {
+    this.trigger({ event: 'otherPlayer', type: 'left', data: data });
   },
 
   _chat: function (data) {

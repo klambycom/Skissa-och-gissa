@@ -11,7 +11,7 @@ module.exports = React.createClass({
   },
 
   _message: function () {
-    if (this.props.type === 'new-player') {
+    if (this.props.type === 'joined') {
       return this.props.data.name + ' har gått med i spelet.';
     }
     else if (this.props.type === 'connected') {

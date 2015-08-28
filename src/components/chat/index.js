@@ -26,19 +26,18 @@ module.exports = React.createClass({
   _shouldCreateMessage: function (data) {
     return data.event === 'chat'
       || (data.event === 'connection' && this.state.hasJoined)
-      || (data.event === 'join' && data.type === 'game');
+      || (data.event === 'join' && data.type === 'game')
+      || (data.event === 'otherPlayer' && data.type === 'joined');
+    //this.trigger({ event: 'otherPlayer', type: 'joined', data: data });
   },
 
   _messageTypes: {
     chat: function (key, type, data) {
-      // Chat message from a player
-      if (type === 'message') {
-        return <Message player={data.player} message={data.message} isMe={data.me} key={key} />
-      }
-      // Server message about new player joining the game
-      if (type === 'new-player') {
-        return <Server type={type} data={data} key={key} />
-      }
+      return <Message player={data.player} message={data.message} isMe={data.me} key={key} />
+    },
+
+    otherPlayer: function (key, type, data) {
+      return <Server type={type} data={data} key={key} />
     },
 
     connection: function (key, type) {
