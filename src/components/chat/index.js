@@ -4,7 +4,7 @@ var State = require('react-router').State;
 var Logic = require('../../browser/logic');
 
 // Components
-var Cryons = require('../game/cryons');
+var Crayons = require('../game/crayons');
 var Players = require('../game/players');
 var ProfilePicture = require('../profile_picture');
 
@@ -112,7 +112,7 @@ module.exports = React.createClass({
             </div>
           </div>
 
-          <Cryons />
+          <Crayons />
         </div>
         );
   }

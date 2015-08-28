@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
   render: function () {
     return (
-        <div id="cryons">
+        <div id="crayons">
           <h1>KRITA</h1>
           <ul id="sizes">
             <li className="size-5"><a href="#" data-size="5"></a></li>
