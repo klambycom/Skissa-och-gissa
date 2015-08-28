@@ -25,7 +25,19 @@ module.exports = React.createClass({
     }
 
     return (
-        <div id="login"><a href="/login/facebook">Logga in med Facebook</a></div>
+        <div id="login">
+          <h2><a href="/login/facebook">Logga in med Facebook</a></h2>
+          <ul className="small-text">
+            <li>Dina poäng kommer sparas.</li>
+            <li>Du har möjlighet att komma med i topplistan.</li>
+            <li>Du kan se i vilka spel dina vänner spelar.</li>
+            <li>Du och dina vänner får en egen topplista.</li>
+          </ul>
+
+          <h3>Eller spela utan att logga in</h3>
+          <p className="small-text">Välj ett namn som du vill använda när du spelar.</p>
+          <p><input type="text" placeholder="Ett namn här..." /></p>
+        </div>
         );
   }
 });
