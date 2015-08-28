@@ -1,8 +1,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 var State = require('react-router').State;
-var Cryons = require('../game/cryons');
 var Logic = require('../../browser/logic');
+
+// Components
+var Cryons = require('../game/cryons');
+var ProfilePicture = require('../profile_picture');
 
 // Message types
 var Message = require('./message');
@@ -55,11 +58,15 @@ module.exports = React.createClass({
 
     // Player updates
     if (data.event === 'player' && data.type === 'update') {
-      console.log('Player update', data.data);
+      this.setState({ player: data.data });
     }
     // The player joins the room
     else if (data.event === 'join' && data.type === 'game') {
-      this.setState({ hasJoined: true, game: data.data });
+      this.setState({
+        hasJoined: true,
+        game: data.data,
+        player: Logic.store.player
+      });
     }
   },
 
@@ -83,7 +90,7 @@ module.exports = React.createClass({
             }.bind(this))}</div>
 
             <div id="chat-input">
-              <img src="/placeholder.png" alt="TODO" />
+              <ProfilePicture user={this.props.player} size="small" />
               <input
                 type="text"
                 placeholder="Gissa på ett ord.."

@@ -193,3 +193,9 @@ main p {
 #log-entries .info { border-left: 10px rgb(70,39,216) solid;  }
 #log-entries .warn { border-left: 10px rgb(247,0,19) solid;  }
 #log-entries .error { border-left: 10px rgb(182,86,88) solid;  }
+
+
+// chat
+.message.me p {
+  background-color: rgb(136, 178, 216) !important;
+}

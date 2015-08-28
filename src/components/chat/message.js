@@ -1,4 +1,5 @@
 var React = require('react');
+var ProfilePicture = require('../profile_picture');
 
 module.exports = React.createClass({
   propTypes: {
@@ -17,7 +18,8 @@ module.exports = React.createClass({
 
     return (
         <div className={classes}>
-          {this.props.message}
+          <ProfilePicture user={this.props.player} size="small" />
+          <p>{this.props.message}</p>
         </div>
         );
   }

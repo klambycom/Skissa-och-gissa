@@ -6,7 +6,7 @@ module.exports = React.createClass({
   },
 
   getDefaultProps: function () {
-    return { size: 'small' };
+    return { size: 'small', user: {} };
   },
 
   propTypes: {
