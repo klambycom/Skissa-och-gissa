@@ -5,6 +5,7 @@ var Logic = require('../../browser/logic');
 
 // Components
 var Cryons = require('../game/cryons');
+var Players = require('../game/players');
 var ProfilePicture = require('../profile_picture');
 
 // Message types
@@ -90,9 +91,7 @@ module.exports = React.createClass({
   render: function () {
     return (
         <div id="chat-container">
-          <div id="game-user-info">
-            <div className="players">TODO</div>
-          </div>
+          <Players />
 
           <div id="chat">
             <div id="chat-messages">{this.state.messages.map(function (data, i) {

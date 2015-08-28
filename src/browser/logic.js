@@ -51,7 +51,7 @@ var store = Reflux.createStore({
   },
 
   _playerLeft: function (data) {
-    this.trigger({ event: 'otherPlayer', type: 'left', data: data });
+    this.trigger({ event: 'otherPlayer', type: 'left', data: data.player });
   },
 
   _chat: function (data) {

@@ -95,11 +95,7 @@ describe('Games', function () {
 
       games.join(player, game.id);
 
-      expect(json.players).to.contain({
-        uuid: player.id,
-        name: player.name,
-        fbId: player.fbId
-      });
+      expect(json.players[0]).to.include.keys([ 'UUID', 'name', 'fbId', 'points' ]);
     });
 
     it('should not contain the lobby', function () {

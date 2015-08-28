@@ -46,7 +46,7 @@ Room.prototype.toJSON = function () {
   var players = Object
     .keys(this.players)
     .map(function (x) { return this.players[x]; }.bind(this))
-    .map(function (x) { return { uuid: x.id, name: x.name, fbId: x.fbId }; });
+    .map(function (x) { return x.json(); });
 
   return {
     uuid: this.id,
