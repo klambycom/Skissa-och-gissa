@@ -20,6 +20,9 @@ module.exports = React.createClass({
     else if (this.props.type === 'disconnected') {
       return 'Du har lämnat spelet.';
     }
+    else if (this.props.type === 'alone') {
+      return 'Du är just nu ensam i detta spelet. Vänta en stund så kommer det förhoppningsvis fler spelare.';
+    }
   },
 
   render: function () {

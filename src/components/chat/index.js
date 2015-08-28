@@ -50,6 +50,15 @@ module.exports = React.createClass({
     }
   },
 
+  _checkIfAlone: function (n) {
+    if (n === 1) {
+      var messages = this.state.messages.concat(
+          [{ event: 'connection', type: 'alone' }]);
+
+      this.setState({ messages: messages });
+    }
+  },
+
   handleMessage: function (data) {
     // Create a message if the event should create a message
     if (this._shouldCreateMessage(data)) {
@@ -67,6 +76,8 @@ module.exports = React.createClass({
         game: data.data,
         player: Logic.store.player
       });
+      // Show message if the player is the only player
+      this._checkIfAlone(data.data.nrOfPlayers);
     }
   },
 
