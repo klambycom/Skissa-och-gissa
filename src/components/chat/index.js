@@ -79,6 +79,10 @@ module.exports = React.createClass({
       // Show message if the player is the only player
       this._checkIfAlone(data.data.nrOfPlayers);
     }
+    // Show message if the player is the only player when another player leave
+    else if (data.event === 'otherPlayer' && data.type === 'left') {
+      this._checkIfAlone(Logic.store.room.nrOfPlayers);
+    }
   },
 
   handleChatInput: function (event) {

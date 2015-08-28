@@ -42,7 +42,7 @@ var store = Reflux.createStore({
   },
 
   _join: function (data) {
-    this.room = data;
+    this.room = data.data;
     this.trigger({ event: 'join', type: 'game', data: data.data });
   },
 
