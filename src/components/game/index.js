@@ -1,6 +1,6 @@
 var React = require('react');
 var State = require('react-router').State;
-var Chat = require('./chat');
+var Chat = require('../chat');
 var api = require('../../browser/api');
 
 module.exports = React.createClass({
