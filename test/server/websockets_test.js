@@ -51,6 +51,23 @@ describe('Websockets', function () {
       json: function () {}
     };
     websockets.__set__('games', this.gamesMock);
+
+    // Helper for testing socket.broadcast.to().emit()
+    this.expectSocketEvent = function (socket) {
+      var self = this;
+      var to = {
+        broadcastTo: function (roomId, event, data) {
+          self.broadcastMock.to = sinon.stub().returns(self.broadcastMock);
+          self.broadcastMock.emit = sinon.spy();
+          runWebsockets(self.socketMock).call(socket.event, socket.data);
+
+          expect(self.broadcastMock.to).to.have.been.calledWith(roomId);
+          expect(self.broadcastMock.emit).to.have.been.calledWith(event, data);
+        }
+      };
+
+      return { to: to };
+    };
   });
 
   afterEach(function () {
@@ -119,12 +136,8 @@ describe('Websockets', function () {
 
     it('should tell the old room that the player have left the room', function () {
       this.player.json = sinon.stub().returns({ uuid: 123 });
-      this.broadcastMock.to = sinon.stub().returns(this.broadcastMock);
-      this.broadcastMock.emit = sinon.spy();
-      runWebsockets(this.socketMock).call('join', this.data);
-
-      expect(this.broadcastMock.to).to.have.been.calledWith(this.player.room.id);
-      expect(this.broadcastMock.emit).to.have.been.calledWith('player left', { player: { uuid: 123 } });
+      this.expectSocketEvent({ event: 'join', data: this.data })
+        .to.broadcastTo(this.player.room.id, 'player left', { player: { uuid: 123 } });
     });
 
     it('should tell socket.io to leave the old room', function () {
@@ -143,12 +156,8 @@ describe('Websockets', function () {
 
     it('should tell the clients in the new room that a user have joined the room', function () {
       this.player.json = sinon.stub().returns({ uuid: 123 });
-      this.broadcastMock.to = sinon.stub().returns(this.broadcastMock);
-      this.broadcastMock.emit = sinon.spy();
-      runWebsockets(this.socketMock).call('join', this.data);
-
-      expect(this.broadcastMock.to).to.have.been.calledWith(this.data.roomId);
-      expect(this.broadcastMock.emit).to.have.been.calledWith('player joined', { uuid: 123 });
+      this.expectSocketEvent({ event: 'join', data: this.data })
+        .to.broadcastTo(this.player.room.id, 'player joined', { uuid: 123 });
     });
 
     it('should send room-json to the players client', function () {
@@ -166,6 +175,12 @@ describe('Websockets', function () {
       runWebsockets(this.socketMock);
 
       expect(this.socketMock.on).to.have.been.calledWith('chat');
+    });
+
+    it('should only emit to correct room', function () {
+      var data = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
+      this.expectSocketEvent({ event: 'chat', data: data })
+        .to.broadcastTo(this.player.room.id, 'chat', data);
     });
   });
 
@@ -191,6 +206,12 @@ describe('Websockets', function () {
       runWebsockets(this.socketMock).call('disconnect');
 
       expect(this.gamesMock.leave).to.have.been.calledWith(this.player);
+    });
+
+    it('should only emit to correct room', function () {
+      this.player.json = sinon.stub().returns({ uuid: 123 });
+      this.expectSocketEvent({ event: 'disconnect', data: this.data })
+        .to.broadcastTo(this.player.room.id, 'player left', { player: { uuid: 123 } });
     });
   });
 });

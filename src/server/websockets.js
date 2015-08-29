@@ -98,7 +98,7 @@ module.exports = function (app, socketio) {
           'UUID(%s) wrote "%s"', data.player.UUID, data.message,
           { type: 'websocket', meta: { player: data.player, message: data.message } });
 
-      socket.broadcast.emit('chat', data);
+      socket.broadcast.to(player.room.id).emit('chat', data);
     });
 
     /**
@@ -116,7 +116,7 @@ module.exports = function (app, socketio) {
       games.leave(player);
 
       // Tell the room that the player have left the room
-      socket.broadcast.emit('player left', { player: player.json() });
+      socket.broadcast.to(player.room.id).emit('player left', { player: player.json() });
     });
   });
 };
