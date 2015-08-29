@@ -3,6 +3,10 @@ var Reflux = require('reflux');
 var socket = { on: function () {}, emit: function () {} };
 if (process && process.browser) {
   socket = require('socket.io-client')('http://localhost:3000');
+} else {
+  // TODO MOVE TO TESTS!!!
+  window = {};
+  window.localStorage = { getItem: function () {}, setItem: function () {} };
 }
 
 var actions = Reflux.createActions([
@@ -15,7 +19,13 @@ var store = Reflux.createStore({
   listenables: actions,
 
   init: function () {
+    this.crayon = {
+      color: window.localStorage.getItem('crayonColor') || 'red',
+      size: +window.localStorage.getItem('crayonSize') || 5
+    };
+
     this.ready = false;
+
     socket.on('connect', this._connect);
     socket.on('player', this._player);
     socket.on('join', this._join);
@@ -72,6 +82,18 @@ var store = Reflux.createStore({
     // message?
     socket.emit('chat', { player: this.player, message: message });
     this._chat({ message: message });
+  },
+
+  onSelectCrayon: function (crayon) {
+    if (crayon.color) {
+      this.crayon.color = crayon.color;
+      window.localStorage.setItem('crayonColor', crayon.color);
+    }
+
+    if (crayon.size) {
+      this.crayon.size = crayon.size;
+      window.localStorage.setItem('crayonSize', crayon.size);
+    }
   }
 });
 
