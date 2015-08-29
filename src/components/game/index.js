@@ -53,7 +53,7 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-        <div id="game-wrapper">
+        <div id="game-wrapper" className="draw">
           <Chat />
 
           <div id="gameplan">

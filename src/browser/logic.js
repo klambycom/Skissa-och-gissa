@@ -7,7 +7,8 @@ if (process && process.browser) {
 
 var actions = Reflux.createActions([
     'join', // Joining a game/room
-    'chat'  // New chat-message
+    'chat',  // New chat-message
+    'selectCrayon' // Player select new crayon color and size
 ]);
 
 var store = Reflux.createStore({
