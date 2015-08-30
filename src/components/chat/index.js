@@ -17,11 +17,27 @@ module.exports = React.createClass({
   mixins: [Reflux.listenTo(Logic.store, 'handleMessage'), State],
 
   getInitialState: function () {
-    return { messages: [], game: {}, hasJoined: false };
+    return { messages: [], game: {}, hasJoined: false, isScrolled: false };
   },
 
   componentWillMount: function () {
     Logic.actions.join(this.getParams().uuid);
+  },
+
+  _scrollDown: function () {
+    var node = this.refs.messages.getDOMNode();
+    node.scrollTop = node.scrollHeight;
+  },
+
+  componentWillUpdate: function () {
+    var node = this.refs.messages.getDOMNode();
+    this.shouldScrollToBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+  },
+
+  componentDidUpdate: function () {
+    if (this.shouldScrollToBottom) {
+      this._scrollDown();
+    }
   },
 
   _shouldCreateMessage: function (data) {
@@ -29,7 +45,6 @@ module.exports = React.createClass({
       || (data.event === 'connection' && this.state.hasJoined)
       || (data.event === 'join' && data.type === 'game')
       || (data.event === 'otherPlayer' && data.type === 'joined');
-    //this.trigger({ event: 'otherPlayer', type: 'joined', data: data });
   },
 
   _messageTypes: {
@@ -88,6 +103,7 @@ module.exports = React.createClass({
   handleChatInput: function (event) {
     if (event.which === 13) {
       Logic.actions.chat(event.target.value);
+      this._scrollDown();
       event.target.value = '';
     }
   },
@@ -98,9 +114,11 @@ module.exports = React.createClass({
           <Players />
 
           <div id="chat">
-            <div id="chat-messages">{this.state.messages.map(function (data, i) {
-              return this._messageTypes[data.event](i, data.type, data.data);
-            }.bind(this))}</div>
+            <div id="chat-messages" ref="messages">
+              {this.state.messages.map(function (data, i) {
+                return this._messageTypes[data.event](i, data.type, data.data);
+              }.bind(this))}
+            </div>
 
             <div id="chat-input">
               <ProfilePicture user={this.props.player} size="small" />
