@@ -2,27 +2,11 @@ var React = require('react');
 var Link = require('react-router').Link;
 var Login = require('./sidebar/login');
 var Highscore = require('./sidebar/highscore');
+var Flash = require('../flash');
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    return { message: '' };
-  },
-
-  componentWillMount: function () {
-    if (this.props.message && this.props.message[0]) {
-      this.setState({ message: this.props.message[0] });
-    }
-  },
-
   render: function () {
-    // Display flash messages
-    var message = '';
-    if (this.state.message !== '') {
-      message = <div id="flash-message">{this.state.message}</div>;
-    }
-
     // TODO Rename #games to something better!
-
     return (
         <div>
           <header>
@@ -31,7 +15,7 @@ module.exports = React.createClass({
           </header>
           <main id="main">
             <div id="games">
-              {message}
+              <Flash messages={this.props.message} />
               {this.props.children}
             </div>
             <aside id="sidebar">

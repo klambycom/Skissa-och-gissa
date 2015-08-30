@@ -34,12 +34,21 @@ $crayons_sizes: 5 10 15 20;
 @import "show-image";
 @import "show-all-images";
 
+
 #flash-message {
   background-color: #689C68;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 3px;
   color: white;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#flash-message a {
+  color: white;
+  text-decoration: none;
 }
 
 
