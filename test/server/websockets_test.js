@@ -55,14 +55,24 @@ describe('Websockets', function () {
     // Helper for testing socket.broadcast.to().emit()
     this.expectSocketEvent = function (socket) {
       var self = this;
+      var beforeBroadcast = function () {
+        self.broadcastMock.to = sinon.stub().returns(self.broadcastMock);
+        self.broadcastMock.emit = sinon.spy();
+        runWebsockets(self.socketMock).call(socket.event, socket.data);
+      };
+
       var to = {
         broadcastTo: function (roomId, event, data) {
-          self.broadcastMock.to = sinon.stub().returns(self.broadcastMock);
-          self.broadcastMock.emit = sinon.spy();
-          runWebsockets(self.socketMock).call(socket.event, socket.data);
-
+          beforeBroadcast();
           expect(self.broadcastMock.to).to.have.been.calledWith(roomId);
           expect(self.broadcastMock.emit).to.have.been.calledWith(event, data);
+        },
+        not: {
+          broadcast: function (event) {
+            beforeBroadcast();
+            expect(self.broadcastMock.to).to.not.have.been.calledWith();
+            expect(self.broadcastMock.emit).to.not.have.been.calledWith();
+          }
         }
       };
 
@@ -181,6 +191,16 @@ describe('Websockets', function () {
       var data = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
       this.expectSocketEvent({ event: 'chat', data: data })
         .to.broadcastTo(this.player.room.id, 'chat', data);
+    });
+
+    it('should not emit if message is undefined', function () {
+      var data = { player: { UUID: '' } };
+      this.expectSocketEvent({ event: 'chat', data: data }).to.not.broadcast('chat');
+    });
+
+    it('should not emit if message is an empty string', function () {
+      var data = { player: { UUID: '' }, message: '' };
+      this.expectSocketEvent({ event: 'chat', data: data }).to.not.broadcast('chat');
     });
   });
 

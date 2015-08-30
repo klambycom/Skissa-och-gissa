@@ -101,7 +101,7 @@ module.exports = React.createClass({
   },
 
   handleChatInput: function (event) {
-    if (event.which === 13) {
+    if (event.which === 13 && event.target.value !== '') {
       Logic.actions.chat(event.target.value);
       this._scrollDown();
       event.target.value = '';

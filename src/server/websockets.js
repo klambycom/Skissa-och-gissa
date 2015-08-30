@@ -94,6 +94,8 @@ module.exports = function (app, socketio) {
      */
 
     socket.on('chat', function (data) {
+      if (!data.message) { return; }
+
       logger.verbose(
           'UUID(%s) wrote "%s"', data.player.UUID, data.message,
           { type: 'websocket', meta: { player: data.player, message: data.message } });
