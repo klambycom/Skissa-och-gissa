@@ -11,7 +11,7 @@ module.exports = {
     app.set('view engine', 'js');
     app.set('view', require('react-engine/lib/expressView'));
 
-    app.set('public folder', 'public');
+    app.set('public folder', 'dist/public');
 
     app.set('session secret', process.env.SESSION_SECRET);
     app.set('cookie secret', process.env.COOKIE_SECRET);
@@ -23,6 +23,7 @@ module.exports = {
     app.set('db', 'mongodb://localhost/skissa-och-gissa-test');
 
     app.locals.js_path = '/main.min.js';
+    app.locals.css_path = '/screen.min.css';
 
     process.env.SESSION_SECRET = 'test';
     process.env.COOKIE_SECRET = 'test';
@@ -37,6 +38,8 @@ module.exports = {
     app.set('json spaces', 2);
 
     app.locals.js_path = '/main.js';
+    app.locals.css_path = '/screen.css';
+
 
     app.use(morgan('dev', { stream: logger.streamDev }));
   },
@@ -46,6 +49,7 @@ module.exports = {
     app.set('port', process.env.OPENSHIFT_NODEJS_PORT);
 
     app.locals.js_path = '/main.min.js';
+    app.locals.css_path = '/screen.min.css';
 
     app.use(morgan('combined', {
       stream: logger.stream,

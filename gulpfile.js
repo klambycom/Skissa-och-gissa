@@ -16,9 +16,9 @@ var paths = {
   test:   'test/**/*_test.js',
   docs:   'docs',
   dist:   'dist',
-  public: 'public',
+  public: 'dist/public',
   assets: 'assets/**/*',
-  css:    'public/stylesheets/screen.css'
+  css:    'dist/public/screen.css'
 };
 
 /*
@@ -29,7 +29,7 @@ gulp.task('minify-css', function () {
   return gulp.src(paths.css)
     .pipe(minifyCss())
     .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest(paths.public + '/stylesheets'));
+    .pipe(gulp.dest(paths.public));
 });
 
 /*
