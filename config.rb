@@ -1,11 +1,12 @@
+require 'compass/import-once/activate'
 # Require any additional compass plugins here.
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "public/stylesheets"
-sass_dir = "scss"
-images_dir = "images"
-javascripts_dir = "javascripts"
+css_dir = "dist/public"
+sass_dir = "src/scss"
+images_dir = "assets"
+javascripts_dir = "src/components"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
@@ -21,4 +22,4 @@ javascripts_dir = "javascripts"
 # project again passing --syntax sass, or you can uncomment this:
 # preferred_syntax = :sass
 # and then run:
-# sass-convert -R --from scss --to sass scss scss && rm -rf sass && mv scss sass
+# sass-convert -R --from scss --to sass src/components scss && rm -rf sass && mv scss sass

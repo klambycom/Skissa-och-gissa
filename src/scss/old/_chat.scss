@@ -1,0 +1,198 @@
+#game-wrapper.draw {
+  #chat-container {
+    #crayons {
+      width: 50px;
+      @include transition(all .5s .3s);
+    }
+
+    #chat {
+      right: 50px;
+      @include transition(all .5s .3s);
+    }
+  }
+}
+
+#chat-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+
+  #crayons {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 0px;
+    overflow: hidden;
+    background-color: rgb(229,229,229);
+    @include transition(all .5s .3s);
+
+    h1 {
+      text-align: center;
+      width: 50px;
+      font-weight: bolder;
+      margin-top: 10px;
+      color: rgba(0, 0, 0, .5);
+      font-size: .6em;
+    }
+
+    #sizes {
+      margin-bottom: 30px;
+
+      a {
+        background-color: black;
+        display: block;
+        border-radius: 2px;
+        width: 30px;
+        margin: 10px;
+        @include transition(all .5s);
+
+        &.selected {
+          background-color: $highlight_color;
+          @include transition(all .5s);
+        }
+      }
+
+      @each $s in $crayons_sizes {
+        li.size-#{$s} a { height: #{$s}px; }
+      }
+    }
+
+    #colors {
+      a {
+        width: 30px;
+        height: 30px;
+        display: block;
+        margin: 7px;
+        border: 3px solid rgb(229,229,229);
+        @include transition(all .5s);
+
+        &.selected {
+          border: 3px solid $highlight_color;
+          @include transition(all .5s);
+        }
+      }
+
+      @each $c in $crayons {
+        li.#{$c} a { background-color: #{$c}; }
+      }
+    }
+  }
+
+  #chat {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 50px;
+    background-color: white;
+    @include transition(all .5s .3s);
+
+    #chat-input {
+      bottom: 0;
+      padding: 5px;
+      height: 40px;
+      display: flex;
+
+      img {
+        height: 40px;
+        width: 40px;
+      }
+
+      input {
+        height: 30px;
+        font-size: 25px;
+        padding: 5px;
+        border: 0px;
+        margin: 0;
+        width: 100%;
+        margin-left: 5px;
+
+        background-color: rgb(229, 229, 229);
+        @include transition(all .5s);
+
+        &:focus {
+          outline: 0;
+          background-color: $highlight_color;
+          color: white;
+          @include transition(all .5s);
+
+          @each $v in ':-webkit-input' ':-moz' '-moz' '-ms-input' {
+            &:#{$v}-placeholder { color: white; }
+          }
+        }
+      }
+    }
+
+    #chat-messages {
+      position: absolute;
+      top: 0;
+      bottom: 50px;
+      left: 0;
+      right: 0;
+      overflow: auto;
+
+      .drawing-done {
+        position: relative;
+        margin: 5px;
+
+        .word {
+          background-color: rgba(37, 127, 161, .5);
+          display: inline;
+          color: white;
+          padding: 5px;
+          position: absolute;
+        }
+
+        img.user {
+          width: 50px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+
+        .by {
+          position: absolute;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, .65);
+          left: 55px;
+          right: 0;
+          color: white;
+          padding: 5px;
+        }
+      }
+
+      .message {
+        margin: 10px 5px;
+
+        img {
+          float: left;
+          padding-right: 5px;
+          height: 30px;
+        }
+
+        p {
+          background-color: rgba(128, 128, 128, .05);
+          line-height: 30px;
+          margin-left: 35px;
+          padding: 0px 5px;
+        }
+
+        &.win p {
+          background-color: rgba(0, 255, 0, .15);
+        }
+      }
+
+      .server-message {
+        margin: 10px 5px;
+        font-size: .75em;
+        color: gray;
+        font-weight: lighter;
+
+        text-indent: -10px;
+        padding-left: 10px;
+      }
+    }
+  }
+}
