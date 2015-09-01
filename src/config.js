@@ -24,6 +24,7 @@ module.exports = {
 
     app.locals.js_path = '/main.min.js';
     app.locals.css_path = '/screen.min.css';
+    app.locals.fontAwesome_path = '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
 
     process.env.SESSION_SECRET = 'test';
     process.env.COOKIE_SECRET = 'test';
@@ -39,6 +40,7 @@ module.exports = {
 
     app.locals.js_path = '/main.js';
     app.locals.css_path = '/screen.css';
+    app.locals.fontAwesome_path = '/font-awesome.css';
 
 
     app.use(morgan('dev', { stream: logger.streamDev }));
@@ -50,6 +52,7 @@ module.exports = {
 
     app.locals.js_path = '/main.min.js';
     app.locals.css_path = '/screen.min.css';
+    app.locals.fontAwesome_path = '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
 
     app.use(morgan('combined', {
       stream: logger.stream,
