@@ -1,11 +1,15 @@
 # Skissa och gissa [![Dependencies badge][david-image]][david-url] [![DevDependencies  badge][david-dev-image]][david-dev-url]
 
-Change FB app id in the file `public/javascript.js`. And socket.io url in the
-file `public/browser/game.js`.
+This is not the version on [www.skissaochgissa.se](http://www.skissaochgissa.se).
 
-Run `grunt`.
+## Features
 
-Open `localhost:3000`.
+[x] Isomorphic React
+[x] React-routes
+[x] Reflux
+[x] TDD
+[ ] Websocket (uses Socket.io for the moment)
+[ ] WebRTC
 
 
 ## Testing
@@ -16,7 +20,7 @@ Run tests and lint the code with `gulp test`, and watch tests with
 
 ## Environment variables
 
-The application needs some environment variables to run:
+The application needs these environment variables to run:
 
 * `SESSION_SECRET`
 * `COOKIE_SECRET`
