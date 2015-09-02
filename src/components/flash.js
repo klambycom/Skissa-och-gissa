@@ -24,7 +24,13 @@ module.exports = React.createClass({
 
   componentWillMount: function () {
     if (this.props.messages.length > 0) {
-      this.setState({ currentMessage: { data: this.props.messages[0] } });
+      this.setState({
+        currentMessage: {
+          data: this.props.messages.reduce(function (acc, x) {
+            return acc + ' ' + x;
+          })
+        }
+      });
     }
   },
 
