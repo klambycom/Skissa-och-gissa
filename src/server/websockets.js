@@ -51,7 +51,6 @@ module.exports = function (app, socketio) {
       try {
         // Check if room exists first! And is not full!
         if (!games.canJoinRoom(data.roomId)) {
-          // TODO Check in reflux if room is full or not found.
           try {
             socket.emit('invalid room', games.get(data.roomId).toJSON());
           } catch (e) {

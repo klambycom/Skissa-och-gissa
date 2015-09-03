@@ -1,10 +1,8 @@
 var Reflux = require('reflux');
-// TODO Remove later. And mock socket another way. For tests!
-var socket = { on: function () {}, emit: function () {} };
-if (process && process.browser) {
-  socket = require('socket.io-client')('http://localhost:3000');
-} else {
-  // TODO MOVE TO TESTS!!!
+var socket = require('./websocket');
+
+// TODO MOVE TO TESTS!!!
+if (process && !process.browser) {
   window = {};
   window.localStorage = { getItem: function () {}, setItem: function () {} };
 }
