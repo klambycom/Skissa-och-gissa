@@ -32,6 +32,10 @@ Room.prototype.remove = function (player) {
   delete this.players[player.uuid];
 };
 
+Room.prototype.isFull = function () {
+  return Object.keys(this.players).length >= this.maxPlayers;
+};
+
 Room.prototype.setRules = function (rules) {
   this.time = rules.time;
   this.rounds = rules.rounds;
@@ -244,9 +248,7 @@ module.exports = {
   },
 
   /**
-   * Check if room is found and valid.
-   *
-   * TODO Check if room is not full!
+   * Check if room is found and valid. And check if room is not full!
    *
    * @function isValidRoom
    * @param {string} roomId
@@ -255,6 +257,6 @@ module.exports = {
    */
 
   canJoinRoom: function (roomId) {
-    return typeof rooms[roomId] !== 'undefined';
+    return typeof rooms[roomId] !== 'undefined' && !rooms[roomId].isFull();
   }
 };

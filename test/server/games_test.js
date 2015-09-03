@@ -328,8 +328,13 @@ describe('Games', function () {
     });
 
     it('should return true if room is found', function () {
-      var roomId = Object.keys(rooms)[1];
+      var roomId = Object.keys(rooms)[2];
       expect(games.canJoinRoom(roomId)).to.be.true;
+    });
+
+    it('should return false if room is full', function () {
+      var room = rooms[Object.keys(rooms)[1]];
+      expect(games.canJoinRoom(room.id)).to.be.false;
     });
   });
 });

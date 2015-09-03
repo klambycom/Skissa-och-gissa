@@ -79,9 +79,7 @@ from room and when new image for a room is created
 
 ## isValidRoom(roomId)
 
-Check if room is found and valid.
-
-TODO Check if room is not full!
+Check if room is found and valid. And check if room is not full!
 
 ### Params:
 
