@@ -49,7 +49,17 @@ module.exports = function (app, socketio) {
           { type: 'websocket', meta: { player: player.json(), data: data } });
 
       try {
-        // TODO Check if room exists first! And is not full!
+        // Check if room exists first! And is not full!
+        if (!games.canJoinRoom(data.roomId)) {
+          // TODO Check in reflux if room is full or not found.
+          try {
+            socket.emit('invalid room', games.get(data.roomId).toJSON());
+          } catch (e) {
+            socket.emit('invalid room', undefined);
+          }
+
+          return;
+        }
 
         // Tell socket.io to leave old room and join the new room
         // TODO Should probably not leave room if room is the lobby

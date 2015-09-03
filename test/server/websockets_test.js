@@ -48,7 +48,9 @@ describe('Websockets', function () {
       createPlayer: sinon.stub().returns(this.player),
       join: function () {},
       leave: function () {},
-      json: function () {}
+      json: function () {},
+      canJoinRoom: function () { return true; },
+      get: function () { return { toJSON: function () {} }; }
     };
     websockets.__set__('games', this.gamesMock);
 
@@ -135,6 +137,47 @@ describe('Websockets', function () {
       runWebsockets(this.socketMock);
 
       expect(this.socketMock.on).to.have.been.calledWith('join');
+    });
+
+    describe('invalid room', function () {
+
+      beforeEach(function () {
+        this.gamesMock.canJoinRoom = sinon.stub().returns(false);
+      });
+
+      it('should not join room if the room is not found', function () {
+        this.gamesMock.join = sinon.spy();
+        runWebsockets(this.socketMock).call('join', this.data);
+
+        expect(this.gamesMock.join).to.have.not.been.calledWith();
+      });
+
+      it('should emit room data to client if room is found', function () {
+        this.socketMock.emit = sinon.spy();
+        this.gamesMock.get = sinon.stub().returns({
+          toJSON: sinon.stub().returns({ roomId: '1234'})
+        });
+        runWebsockets(this.socketMock).call('join', this.data);
+
+        expect(this.socketMock.emit).to.have.been.calledWith('invalid room', { roomId: '1234'});
+      });
+
+      it('should emit undefined room data to client if room is not found', function () {
+        this.socketMock.emit = sinon.spy();
+        this.gamesMock.get = sinon.stub().returns({
+          toJSON: sinon.stub().throws('Room not found')
+        });
+        runWebsockets(this.socketMock).call('join', this.data);
+
+        expect(this.socketMock.emit).to.have.been.calledWith('invalid room', undefined);
+      });
+    });
+
+    it('should call games.canJoinRoom with the new room id', function () {
+      this.gamesMock.canJoinRoom = sinon.spy();
+      runWebsockets(this.socketMock).call('join', this.data);
+
+      expect(this.gamesMock.canJoinRoom).to.have.been.calledWith('12345');
     });
 
     it('should call games.join with the new room id', function () {

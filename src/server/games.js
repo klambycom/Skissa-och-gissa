@@ -241,5 +241,20 @@ module.exports = {
         .indexOf(event) < 0) { throw 'Invalid event'; }
 
     return events.on(event, listener);
+  },
+
+  /**
+   * Check if room is found and valid.
+   *
+   * TODO Check if room is not full!
+   *
+   * @function isValidRoom
+   * @param {string} roomId
+   *
+   * @return true if room is found and valid
+   */
+
+  canJoinRoom: function (roomId) {
+    return typeof rooms[roomId] !== 'undefined';
   }
 };

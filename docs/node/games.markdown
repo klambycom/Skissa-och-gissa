@@ -77,5 +77,19 @@ from room and when new image for a room is created
 * **string** *event* 
 * **function** *listener* 
 
+## isValidRoom(roomId)
+
+Check if room is found and valid.
+
+TODO Check if room is not full!
+
+### Params:
+
+* **string** *roomId* 
+
+### Return:
+
+* **** true if room is found and valid
+
 <!-- End src/server/games.js -->
 

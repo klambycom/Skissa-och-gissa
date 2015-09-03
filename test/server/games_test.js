@@ -316,4 +316,20 @@ describe('Games', function () {
           games.createPlayer({ });
         });
   });
+
+  describe('#canJoinRoom', function () {
+
+    it('should be defined', function () {
+      expect(games.canJoinRoom).to.be.a('function');
+    });
+
+    it('should return false if room is not found', function () {
+      expect(games.canJoinRoom('invalidId')).to.be.false;
+    });
+
+    it('should return true if room is found', function () {
+      var roomId = Object.keys(rooms)[1];
+      expect(games.canJoinRoom(roomId)).to.be.true;
+    });
+  });
 });
