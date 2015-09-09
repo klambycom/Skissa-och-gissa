@@ -1,7 +1,8 @@
 var React = require('react');
 var State = require('react-router').State;
-var Chat = require('../chat');
 var api = require('../../browser/api');
+var Chat = require('../chat');
+var GamePlan = require('./game_plan');
 
 module.exports = React.createClass({
   mixins: [ State ],
@@ -55,15 +56,7 @@ module.exports = React.createClass({
     return (
         <div id="game-wrapper" className="draw">
           <Chat />
-
-          <div id="gameplan">
-            <div id="timer">
-              <div id="timer-progress"></div>
-            </div>
-            <div id="artboard-wrapper">
-              <canvas id="artboard" width="800" height="600"></canvas>
-            </div>
-          </div>
+          <GamePlan />
         </div>
         );
   }
