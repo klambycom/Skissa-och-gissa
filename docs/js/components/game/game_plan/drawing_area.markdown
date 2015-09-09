@@ -2,26 +2,6 @@
 
 <!-- Start src/components/game/game_plan/drawing_area.js -->
 
-## Point
-
-Represents a Point.
-
-### Params:
-
-* **** *x* {int} The x cordination.
-* **** *y* {int} The y cordination.
-* **** *dragging* {boolean} True if not the first point.
-* **** *color* {string} The color of the point.
-* **** *size* {int} The size of the point.
-
-## data()
-
-Get all data about the point.
-
-### Return:
-
-* **Object** Returns a object with all data (x, y, color, size, dragging).
-
 ## add(x, y, dragging)
 
 Add a new Point to the drawing.

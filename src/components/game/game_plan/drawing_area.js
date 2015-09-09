@@ -1,46 +1,28 @@
 var React = require('react');
 
-/**
- * Represents a Point.
- *
- * @class Point
- * @constructor
- * @param x {int} The x cordination.
- * @param y {int} The y cordination.
- * @param dragging {boolean} True if not the first point.
- * @param color {string} The color of the point.
- * @param size {int} The size of the point.
- */
-var Point = function (x, y, dragging, color, size) {
-  this.getX = function () { return x; };
-  this.getY = function () { return y; };
-  this.getColor = function () { return color; };
-  this.getSize = function () { return size; };
-  this.getDragging = function () { return dragging; };
-};
-
-/**
- * Get all data about the point.
- *
- * @method data
- * @return {Object} Returns a object with all data (x, y, color, size, dragging).
- */
-
-Point.prototype.data = function () {
-  return {
-    x: this.getX(),
-    y: this.getY(),
-    color: this.getColor(),
-    size: this.getSize(),
-    dragging: this.getDragging()
-  }
-};
-
 var points = (function () {
   var color = '#df4b26';
   var size = 5;
   var points = [];
   var forEach = function (fn, a) { a.forEach(fn); };
+
+  var Point = function (x, y, dragging, color, size) {
+    this.getX = function () { return x; };
+    this.getY = function () { return y; };
+    this.getColor = function () { return color; };
+    this.getSize = function () { return size; };
+    this.getDragging = function () { return dragging; };
+  };
+
+  Point.prototype.data = function () {
+    return {
+      x: this.getX(),
+      y: this.getY(),
+      color: this.getColor(),
+      size: this.getSize(),
+      dragging: this.getDragging()
+    }
+  };
 
   var add = function (x, y, dragging) {
     var p;
