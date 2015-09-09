@@ -4,17 +4,17 @@ This is not the version on [www.skissaochgissa.se](http://www.skissaochgissa.se)
 
 ## Features
 
-[x] Isomorphic React
-[x] React-routes
-[x] Reflux
-[x] TDD
-[ ] Websocket (uses Socket.io for the moment)
-[ ] WebRTC
+- [x] Isomorphic React
+- [x] React-routes
+- [x] Reflux
+- [x] TDD
+- [ ] Websocket (uses Socket.io for the moment)
+- [ ] WebRTC
 
 
 ## Testing
 
-Run tests and lint the code with `gulp test`, and watch tests with
+Run tests and lint the code with `gulp test`, and to watch the tests run
 `gulp watch:test`.
 
 
