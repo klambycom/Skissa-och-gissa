@@ -193,7 +193,7 @@ module.exports = React.createClass({
 		}
 	},
 
-  // former draw()
+  // former draw() TODO Remove this comment!!!!
   _drawLine: function (prev, curr) {
 		if (typeof prev === 'undefined' || prev.color !== curr.color || prev.size !== curr.size) {
 			// Pencil style
