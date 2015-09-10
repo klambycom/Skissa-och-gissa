@@ -117,8 +117,17 @@ var points = (function () {
 }());
 
 module.exports = React.createClass({
+  propTypes: {
+    offsetX: React.PropTypes.number,
+    offsetY: React.PropTypes.number
+  },
+
+  getDefaultProps: function () {
+    return { offsetX: 0, offsetY: 0 };
+  },
+
   getInitialState: function () {
-    return { painting: false, offsetX: 0, offsetY: 0 };
+    return { painting: false };
   },
 
   componentDidMount: function () {
@@ -128,13 +137,6 @@ module.exports = React.createClass({
     // TODO Set on document? No need to select anything?
     this.refs.canvas.getDOMNode().onselectstart = function () { return false; };
     this.refs.canvas.getDOMNode().onmousedown = function () { return false; };
-
-    // Offset if needed
-    var opt = {}; // TODO
-    this.setState({
-      offsetX: opt.x || 0,
-      offsetY: opt.y || 0
-    });
 
     this._clear();
 
@@ -168,8 +170,8 @@ module.exports = React.createClass({
   },
 
   _addPoint: function (x, y, dragging) {
-    var xx = x - this.context.canvas.offsetLeft - this.state.offsetX;
-    var yy = y - this.context.canvas.offsetTop - this.state.offsetY;
+    var xx = x - this.context.canvas.offsetLeft - this.props.offsetX;
+    var yy = y - this.context.canvas.offsetTop - this.props.offsetY;
     var p = points.add(xx, yy, dragging);
 
     // Send points to server
