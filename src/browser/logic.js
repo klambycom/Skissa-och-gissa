@@ -92,6 +92,8 @@ var store = Reflux.createStore({
       this.crayon.size = crayon.size;
       window.localStorage.setItem('crayonSize', crayon.size);
     }
+
+    this.trigger({ event: 'crayon', type: 'update', data: this.crayon });
   }
 });
 

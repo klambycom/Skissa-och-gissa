@@ -1,4 +1,6 @@
 var React = require('react');
+var Reflux = require('reflux');
+var Logic = require('../../../browser/logic');
 
 var points = (function () {
   var color = '#df4b26';
@@ -115,6 +117,8 @@ var points = (function () {
 }());
 
 module.exports = React.createClass({
+  mixins: [Reflux.listenTo(Logic.store, 'handleCrayonUpdate')],
+
   propTypes: {
     offsetX: React.PropTypes.number,
     offsetY: React.PropTypes.number
@@ -135,6 +139,7 @@ module.exports = React.createClass({
     this.context.canvas.onselectstart = function () { return false; };
     this.context.canvas.onmousedown = function () { return false; };
 
+    this._setSizeAndColor(Logic.store.crayon.size, Logic.store.crayon.color);
     this._clear();
 
     this._start(); // TODO Remove!
@@ -144,6 +149,12 @@ module.exports = React.createClass({
     // Need to upadate the context when the component is updated or
     // this.context will be undefined.
     this.context = this.refs.canvas.getDOMNode().getContext('2d');
+  },
+
+  handleCrayonUpdate: function (crayon) {
+    if (crayon.event === 'crayon' && crayon.type === 'update') {
+      this._setSizeAndColor(crayon.data.size, crayon.data.color);
+    }
   },
 
   _start: function () {
@@ -160,6 +171,11 @@ module.exports = React.createClass({
     this.context.canvas.removeEventListener('mousemove', this._drawing);
     this.context.canvas.removeEventListener('mouseleave', this._stopDrawing); // Firefox etc.
     this.context.canvas.removeEventListener('mouseout', this._stopDrawing); // Chrome
+  },
+
+  _setSizeAndColor: function (size, color) {
+    points.setSize(size);
+    points.setColor(color);
   },
 
   _clear: function () {
