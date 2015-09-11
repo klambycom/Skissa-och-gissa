@@ -36,83 +36,83 @@ var points = (function () {
   };
 
   return {
-		/**
-		 * Add a new Point to the drawing.
-		 *
-		 * @method add
-		 * @param x {int} The x cordination.
-		 * @param y {int} The y cordination.
-		 * @param dragging {boolean} True if its not the first point in current line.
-		 * @return Returns the newly created Point.
-		 */
+    /**
+     * Add a new Point to the drawing.
+     *
+     * @method add
+     * @param x {int} The x cordination.
+     * @param y {int} The y cordination.
+     * @param dragging {boolean} True if its not the first point in current line.
+     * @return Returns the newly created Point.
+     */
 
-		add: add,
+    add: add,
 
-		addArray: forEach.bind(null, add),
+    addArray: forEach.bind(null, add),
 
-		nrOfPoints: function () { return points.length; },
+    nrOfPoints: function () { return points.length; },
 
-		/**
-		 * Set the color. All points after the color is changed till its
-		 * changed again will have the same color.
-		 *
-		 * @method setColor
-		 * @param c {string} The new color.
-		 */
+    /**
+     * Set the color. All points after the color is changed till its
+     * changed again will have the same color.
+     *
+     * @method setColor
+     * @param c {string} The new color.
+     */
 
-		setColor: function (c) { color = c; },
+    setColor: function (c) { color = c; },
 
-		/**
-		 * Set the size. All points after the size is changed til its changed
-		 * again will have the same size.
-		 *
-		 * @method setSize
-		 * @param s {int} The new size.
-		 */
+    /**
+     * Set the size. All points after the size is changed til its changed
+     * again will have the same size.
+     *
+     * @method setSize
+     * @param s {int} The new size.
+     */
 
-		setSize: function (s) { size = s; },
+    setSize: function (s) { size = s; },
 
-		/**
-		 * Remove all points.
-		 *
-		 * @method clear
-		 */
+    /**
+     * Remove all points.
+     *
+     * @method clear
+     */
 
-		clear: function () { points = []; },
+    clear: function () { points = []; },
 
-		/**
-		 * Iterate through each point.
-		 *
-		 * @method each
-		 * @param fn {function} Callback function that takes two parameters
-		 *                      (previous and current). Previous is undefined
-		 *                      if its the first point.
-		 */
+    /**
+     * Iterate through each point.
+     *
+     * @method each
+     * @param fn {function} Callback function that takes two parameters
+     *                      (previous and current). Previous is undefined
+     *                      if its the first point.
+     */
 
-		each: function (fn) {
-			var i, previous, current;
-			for (i = 0; i < points.length; i += 1) {
-				previous = points[i - 1] && points[i - 1].data();
-				current = points[i].data();
-				fn(previous, current);
-			}
-		},
+    each: function (fn) {
+      var i, previous, current;
+      for (i = 0; i < points.length; i += 1) {
+        previous = points[i - 1] && points[i - 1].data();
+        current = points[i].data();
+        fn(previous, current);
+      }
+    },
 
-		/**
-		 * Gets the previous and the current point.
-		 *
-		 * @method last
-		 * @param fn {function} Callbakc function that takes two parameters
-		 *                      (previous and current). Previous is undefined
-		 *                      if its the first point.
-		 */
+    /**
+     * Gets the previous and the current point.
+     *
+     * @method last
+     * @param fn {function} Callbakc function that takes two parameters
+     *                      (previous and current). Previous is undefined
+     *                      if its the first point.
+     */
 
-		last: function (fn) {
-			var i = points.length - 1,
-				previous = points[i - 1] && points[i - 1].data(),
-				current = points[i].data();
-			fn(previous, current);
-		}
+    last: function (fn) {
+      var i = points.length - 1,
+      previous = points[i - 1] && points[i - 1].data(),
+      current = points[i].data();
+      fn(previous, current);
+    }
   };
 }());
 
