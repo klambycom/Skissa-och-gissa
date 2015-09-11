@@ -20,8 +20,9 @@ module.exports = React.createClass({
     return { messages: [], game: {}, hasJoined: false, isScrolled: false };
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
     Logic.actions.join(this.getParams().uuid);
+    this.refs.chatInput.getDOMNode().focus();
   },
 
   _scrollDown: function () {
@@ -35,6 +36,8 @@ module.exports = React.createClass({
   },
 
   componentDidUpdate: function () {
+    this.refs.chatInput.getDOMNode().focus();
+
     if (this.shouldScrollToBottom) {
       this._scrollDown();
     }
@@ -126,7 +129,7 @@ module.exports = React.createClass({
                 type="text"
                 placeholder="Gissa på ett ord.."
                 onKeyPress={this.handleChatInput}
-                autofocus />
+                ref="chatInput" />
             </div>
           </div>
 
