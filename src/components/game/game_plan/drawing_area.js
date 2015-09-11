@@ -135,12 +135,18 @@ module.exports = React.createClass({
 
     // Prevent Chrome from selecting the canvas
     // TODO Set on document? No need to select anything?
-    this.refs.canvas.getDOMNode().onselectstart = function () { return false; };
-    this.refs.canvas.getDOMNode().onmousedown = function () { return false; };
+    this.context.canvas.addEventListener('selectstart', function () { return false; });
+    this.context.canvas.addEventListener('mousedown', function () { return false; });
 
     this._clear();
 
     this._start(); // TODO Remove!
+  },
+
+  componentDidUpdate: function () {
+    // Need to upadate the context when the component is updated or
+    // this.context will be undefined.
+    this.context = this.refs.canvas.getDOMNode().getContext('2d');
   },
 
   _start: function () {
