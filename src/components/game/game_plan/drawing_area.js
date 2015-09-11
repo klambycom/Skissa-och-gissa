@@ -35,6 +35,10 @@ var points = (function () {
     return p;
   };
 
+  var getPrevAndCurrPoints = function (i) {
+    return [ points[i - 1] && points[i - 1].data(), points[i].data() ];
+  };
+
   return {
     /**
      * Add a new Point to the drawing.
@@ -90,11 +94,8 @@ var points = (function () {
      */
 
     each: function (fn) {
-      var i, previous, current;
-      for (i = 0; i < points.length; i += 1) {
-        previous = points[i - 1] && points[i - 1].data();
-        current = points[i].data();
-        fn(previous, current);
+      for (var i = 0; i < points.length; i += 1) {
+        fn.apply(null, getPrevAndCurrPoints(i));
       }
     },
 
@@ -108,10 +109,7 @@ var points = (function () {
      */
 
     last: function (fn) {
-      var i = points.length - 1,
-      previous = points[i - 1] && points[i - 1].data(),
-      current = points[i].data();
-      fn(previous, current);
+      fn.apply(null, getPrevAndCurrPoints(points.length - 1));
     }
   };
 }());
