@@ -2,15 +2,28 @@ var React = require('react');
 var DrawingArea = require('./drawing_area');
 
 module.exports = React.createClass({
-  // TODO chat.offsetWidth or gameplan.offsetLeft (+5 border size of
-  // drawingarea)
+  getInitialState: function () {
+    return {
+      offset: { x: 0, y: 0 }
+    };
+  },
+
+  componentDidMount: function () {
+    this.setState({
+      offset: {
+        x: this.refs.gameplan.getDOMNode().offsetLeft + 5, // +5 border size
+        y: 5 // +5 border size
+      }
+    });
+  },
+
   render: function () {
     return (
-        <div id="gameplan">
+        <div id="gameplan" ref="gameplan">
           <div id="timer">
             <div id="timer-progress"></div>
           </div>
-          <DrawingArea offsetX={335} offsetY={5} />
+          <DrawingArea offsetX={this.state.offset.x} offsetY={this.state.offset.y} />
         </div>
         );
   }
