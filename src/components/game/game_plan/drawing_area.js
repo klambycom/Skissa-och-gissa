@@ -134,7 +134,6 @@ module.exports = React.createClass({
     this.context = this.refs.canvas.getDOMNode().getContext('2d');
 
     // Prevent Chrome from selecting the canvas
-    // TODO Set on document? No need to select anything?
     this.context.canvas.addEventListener('selectstart', function () { return false; });
     this.context.canvas.addEventListener('mousedown', function () { return false; });
 
