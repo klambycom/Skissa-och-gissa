@@ -8,37 +8,20 @@ var points = (function () {
   var points = [];
   var forEach = function (fn, a) { a.forEach(fn); };
 
-  var Point = function (x, y, dragging, color, size) {
-    this.getX = function () { return x; };
-    this.getY = function () { return y; };
-    this.getColor = function () { return color; };
-    this.getSize = function () { return size; };
-    this.getDragging = function () { return dragging; };
-  };
-
-  Point.prototype.data = function () {
-    return {
-      x: this.getX(),
-      y: this.getY(),
-      color: this.getColor(),
-      size: this.getSize(),
-      dragging: this.getDragging()
-    }
-  };
-
   var add = function (x, y, dragging) {
     var p;
     if (x instanceof Object) {
-      p = new Point(x.x, x.y, !!x.dragging, x.color, x.size);
+      console.log('TODO Is this used?');
+      p = { x: x.x, y: x.y, color: x.color, size: x.size, dragging: !!x.dragging };
     } else {
-      p = new Point(x, y, !!dragging, color, size);
+      p = { x: x, y: y, color: color, size: size, dragging: !!dragging };
     }
     points.push(p);
     return p;
   };
 
   var getPrevAndCurrPoints = function (i) {
-    return [ points[i - 1] && points[i - 1].data(), points[i].data() ];
+    return [ points[i - 1] && points[i - 1], points[i] ];
   };
 
   return {
