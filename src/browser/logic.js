@@ -23,6 +23,7 @@ var store = Reflux.createStore({
       size: +window.localStorage.getItem('crayonSize') || 5
     };
     this.points = [];
+    socket.on('canvas', this._pointFromServer);
 
     // Init websocket
     this.ready = false;
@@ -103,9 +104,18 @@ var store = Reflux.createStore({
    * CANVAS
    */
 
-  _addPoint: function (x, y, dragging) {
-    var p = { x: x, y: y, color: this.crayon.color, size: this.crayon.size, dragging: !!dragging };
+  _addPoint: function (x, y, dragging, size, color) {
+    if (typeof size === 'undefined') { size = this.crayon.size; }
+    if (typeof color === 'undefined') { color = this.crayon.color; }
+
+    var p = { x: x, y: y, color: color, size: size, dragging: !!dragging };
     this.points.push(p);
+
+    this._triggerCanvas('point', {
+      nrOfPoints: this.points.length,
+      last: this._lastPoint
+    });
+
     return p;
   },
 
@@ -121,6 +131,10 @@ var store = Reflux.createStore({
     for (var i = 0; i < this.points.length; i += 1) {
       fn.apply(null, this._getPrevAndCurrPoints(i));
     }
+  },
+
+  _pointFromServer: function (point) {
+    this._addPoint(point.x, point.y, point.dragging, point.size, point.color);
   },
 
   _triggerCanvas: function (type, data) {
@@ -145,15 +159,7 @@ var store = Reflux.createStore({
   },
 
   onCanvasPoint: function (x, y, dragging) {
-    var p = this._addPoint(x, y, dragging);
-
-    this._triggerCanvas('point', {
-      nrOfPoints: this.points.length,
-      last: this._lastPoint
-    });
-
-    // Send points to server
-    //room.sendPoints(p.data());
+    socket.emit('canvas', this._addPoint(x, y, dragging));
     //addArray: forEach.bind(null, add),
   },
 

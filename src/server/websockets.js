@@ -113,6 +113,19 @@ module.exports = function (app, socketio) {
     });
 
     /**
+     * ## socket.on('canvas')
+     */
+
+    socket.on('canvas', function (data) {
+      logger.verbose(
+          'UUID(%s) sent point', player.uuid,
+          { type: 'websocket', meta: { player: player.json(), point: data } });
+
+      // TODO Only broadcast point if it is the correct player!
+      socket.broadcast.to(player.room.id).emit('canvas', data);
+    });
+
+    /**
      * ## socket.on('disconnect')
      *
      * Leave room and tell the other clients in the room that the player have

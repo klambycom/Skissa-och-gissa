@@ -247,6 +247,22 @@ describe('Websockets', function () {
     });
   });
 
+  describe('EVENT: canvas', function () {
+
+    it('should listen to "canvas', function () {
+      this.socketMock.on = sinon.spy();
+      runWebsockets(this.socketMock);
+
+      expect(this.socketMock.on).to.have.been.calledWith('canvas');
+    });
+
+    it('should only emit to correct room', function () {
+      var data = { x: 267, y: 333, color: 'yellowgreen', size: 5, dragging: true };
+      this.expectSocketEvent({ event: 'canvas', data: data })
+        .to.broadcastTo(this.player.room.id, 'canvas', data);
+    });
+  });
+
   describe('EVENT: disconnect', function () {
 
     it('should listen to "disconnect', function () {
