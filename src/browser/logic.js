@@ -7,59 +7,6 @@ if (process && !process.browser) {
   window.localStorage = { getItem: function () {}, setItem: function () {} };
 }
 
-
-
-
-
-
-
-var points = (function () {
-  var forEach = function (fn, a) { a.forEach(fn); };
-
-  return {
-
-    //addArray: forEach.bind(null, add),
-
-    /**
-     * Remove all points.
-     *
-     * @method clear
-     */
-
-
-
-    /**
-     * Iterate through each point.
-     *
-     * @method each
-     * @param fn {function} Callback function that takes two parameters
-     *                      (previous and current). Previous is undefined
-     *                      if its the first point.
-     */
-
-
-    /**
-     * Gets the previous and the current point.
-     *
-     * @method last
-     * @param fn {function} Callbakc function that takes two parameters
-     *                      (previous and current). Previous is undefined
-     *                      if its the first point.
-     */
-  };
-}());
-
-
-
-
-
-
-
-
-
-
-
-
 var actions = Reflux.createActions({
     'join': {}, // Joining a game/room
     'chat': {},  // New chat-message
@@ -210,6 +157,7 @@ var store = Reflux.createStore({
 
     // Send points to server
     //room.sendPoints(p.data());
+    //addArray: forEach.bind(null, add),
   },
 
   onCanvasClear: function () { this.points = []; }
