@@ -2,7 +2,7 @@ var React = require('react');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { url: '/nopic50.png', alt: 'Profilbild' };
+    return { url: '/assets/nopic50.png', alt: 'Profilbild' };
   },
 
   getDefaultProps: function () {

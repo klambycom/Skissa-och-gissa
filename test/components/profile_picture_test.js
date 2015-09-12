@@ -24,8 +24,8 @@ describe('<ProfilePicture />', function () {
     expect(this.props.id).to.equal('profile-picture');
   });
 
-  it('should have /nopic50.png as default src', function () {
-    expect(this.props.src).to.equal('/nopic50.png');
+  it('should have nopic50.png as default src', function () {
+    expect(this.props.src).to.equal('/assets/nopic50.png');
   });
 
   it('should have src to Facebook if user have signed in with Facebook', function () {

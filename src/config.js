@@ -40,7 +40,7 @@ module.exports = {
 
     app.locals.js_path = '/main.js';
     app.locals.css_path = '/screen.css';
-    app.locals.fontAwesome_path = '/font-awesome.css';
+    app.locals.fontAwesome_path = '/assets/font-awesome.css';
 
 
     app.use(morgan('dev', { stream: logger.streamDev }));

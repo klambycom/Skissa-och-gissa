@@ -21,7 +21,7 @@ module.exports = React.createClass({
     return (
         <article className={'game ' + this.props.game.difficulty}>
           <Link to="game" params={{ uuid: this.props.game.uuid }}>
-            <img src="/placeholder.png" alt={this.props.game.name} />
+            <img src="/assets/placeholder.png" alt={this.props.game.name} />
             <h1>{this.props.game.name}</h1>
             <p className="description">{this.props.game.description} <span className="rounds-left">{this.state.nrOfRoundsLeft}</span> runder kvar att spela.</p>
           </Link>
