@@ -10,7 +10,6 @@ if (process && !process.browser) {
 var actions = Reflux.createActions({
     'join': {}, // Joining a game/room
     'chat': {},  // New chat-message
-    'selectCrayon': {}, // Player select new crayon color and size
     'canvas': { children: [ 'crayon', 'point', 'clear' ] }
 });
 
@@ -111,7 +110,7 @@ var store = Reflux.createStore({
   },
 
   _getPrevAndCurrPoints: function (i) {
-    return [ this.points[i - 1] && this.points[i - 1], this.points[i] ];
+    return [ this.points[i - 1], this.points[i] ];
   },
 
   _lastPoint: function (fn) {
@@ -123,8 +122,6 @@ var store = Reflux.createStore({
       fn.apply(null, this._getPrevAndCurrPoints(i));
     }
   },
-
-  _nrOfPoints: function () { return this.points.length; },
 
   _triggerCanvas: function (type, data) {
     this.trigger({ event: 'canvas', type: type, data: data });
@@ -151,7 +148,7 @@ var store = Reflux.createStore({
     var p = this._addPoint(x, y, dragging);
 
     this._triggerCanvas('point', {
-      nrOfPoints: this._nrOfPoints(),
+      nrOfPoints: this.points.length,
       last: this._lastPoint
     });
 
