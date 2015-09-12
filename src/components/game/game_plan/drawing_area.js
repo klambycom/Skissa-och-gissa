@@ -2,105 +2,8 @@ var React = require('react');
 var Reflux = require('reflux');
 var Logic = require('../../../browser/logic');
 
-var points = (function () {
-  var color = '#df4b26';
-  var size = 5;
-  var points = [];
-  var forEach = function (fn, a) { a.forEach(fn); };
-
-  var add = function (x, y, dragging) {
-    var p;
-    if (x instanceof Object) {
-      console.log('TODO Is this used?');
-      p = { x: x.x, y: x.y, color: x.color, size: x.size, dragging: !!x.dragging };
-    } else {
-      p = { x: x, y: y, color: color, size: size, dragging: !!dragging };
-    }
-    points.push(p);
-    return p;
-  };
-
-  var getPrevAndCurrPoints = function (i) {
-    return [ points[i - 1] && points[i - 1], points[i] ];
-  };
-
-  return {
-    /**
-     * Add a new Point to the drawing.
-     *
-     * @method add
-     * @param x {int} The x cordination.
-     * @param y {int} The y cordination.
-     * @param dragging {boolean} True if its not the first point in current line.
-     * @return Returns the newly created Point.
-     */
-
-    add: add,
-
-    addArray: forEach.bind(null, add),
-
-    nrOfPoints: function () { return points.length; },
-
-    /**
-     * Set the color. All points after the color is changed till its
-     * changed again will have the same color.
-     *
-     * @method setColor
-     * @param c {string} The new color.
-     */
-
-    setColor: function (c) { color = c; },
-
-    /**
-     * Set the size. All points after the size is changed til its changed
-     * again will have the same size.
-     *
-     * @method setSize
-     * @param s {int} The new size.
-     */
-
-    setSize: function (s) { size = s; },
-
-    /**
-     * Remove all points.
-     *
-     * @method clear
-     */
-
-    clear: function () { points = []; },
-
-    /**
-     * Iterate through each point.
-     *
-     * @method each
-     * @param fn {function} Callback function that takes two parameters
-     *                      (previous and current). Previous is undefined
-     *                      if its the first point.
-     */
-
-    each: function (fn) {
-      for (var i = 0; i < points.length; i += 1) {
-        fn.apply(null, getPrevAndCurrPoints(i));
-      }
-    },
-
-    /**
-     * Gets the previous and the current point.
-     *
-     * @method last
-     * @param fn {function} Callbakc function that takes two parameters
-     *                      (previous and current). Previous is undefined
-     *                      if its the first point.
-     */
-
-    last: function (fn) {
-      fn.apply(null, getPrevAndCurrPoints(points.length - 1));
-    }
-  };
-}());
-
 module.exports = React.createClass({
-  mixins: [Reflux.listenTo(Logic.store, 'handleCrayonUpdate')],
+  mixins: [Reflux.listenTo(Logic.store, 'handleCanvasUpdate')],
 
   propTypes: {
     offsetX: React.PropTypes.number,
@@ -122,7 +25,7 @@ module.exports = React.createClass({
     this.context.canvas.onselectstart = function () { return false; };
     this.context.canvas.onmousedown = function () { return false; };
 
-    this._setSizeAndColor(Logic.store.crayon.size, Logic.store.crayon.color);
+    this.setState({ color: Logic.store.crayon.color });
     this._clear();
 
     this._start(); // TODO Remove!
@@ -134,9 +37,16 @@ module.exports = React.createClass({
     this.context = this.refs.canvas.getDOMNode().getContext('2d');
   },
 
-  handleCrayonUpdate: function (crayon) {
-    if (crayon.event === 'crayon' && crayon.type === 'update') {
-      this._setSizeAndColor(crayon.data.size, crayon.data.color);
+  handleCanvasUpdate: function (canvas) {
+    if (canvas.event === 'canvas') {
+      // Change crayon color and/or size
+      if (canvas.type === 'crayon') {
+        this.setState({ color: canvas.data.color });
+      }
+      // Add new point to canvas
+      else if (canvas.type === 'point') {
+        canvas.data.last(this._drawLine);
+      }
     }
   },
 
@@ -158,16 +68,10 @@ module.exports = React.createClass({
     this.setState({ playersTurn: false });
   },
 
-  _setSizeAndColor: function (size, color) {
-    points.setSize(size);
-    points.setColor(color);
-    this.setState({ color: color + '_crayon' });
-  },
-
   _clear: function () {
     this.setState({ painting: false });
     // Remove all points
-    points.clear();
+    Logic.actions.canvas.clear();
     // Clear the canvas
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     // Pencil style
@@ -177,12 +81,7 @@ module.exports = React.createClass({
   _addPoint: function (x, y, dragging) {
     var xx = x - this.context.canvas.offsetLeft - this.props.offsetX;
     var yy = y - this.context.canvas.offsetTop - this.props.offsetY;
-    var p = points.add(xx, yy, dragging);
-
-    // Send points to server
-    //room.sendPoints(p.data());
-    // Start drawing
-    points.last(this._drawLine);
+    Logic.actions.canvas.point(xx, yy, dragging);
   },
 
   _startDrawing: function (e) {
@@ -223,7 +122,7 @@ module.exports = React.createClass({
 	},
 
   _crayonClass: function () {
-    return this.state.playersTurn ? this.state.color : '';
+    return this.state.playersTurn ? this.state.color + '_crayon' : '';
   },
 
   render: function () {

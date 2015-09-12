@@ -7,21 +7,78 @@ if (process && !process.browser) {
   window.localStorage = { getItem: function () {}, setItem: function () {} };
 }
 
-var actions = Reflux.createActions([
-    'join', // Joining a game/room
-    'chat',  // New chat-message
-    'selectCrayon' // Player select new crayon color and size
-]);
+
+
+
+
+
+
+var points = (function () {
+  var forEach = function (fn, a) { a.forEach(fn); };
+
+  return {
+
+    //addArray: forEach.bind(null, add),
+
+    /**
+     * Remove all points.
+     *
+     * @method clear
+     */
+
+
+
+    /**
+     * Iterate through each point.
+     *
+     * @method each
+     * @param fn {function} Callback function that takes two parameters
+     *                      (previous and current). Previous is undefined
+     *                      if its the first point.
+     */
+
+
+    /**
+     * Gets the previous and the current point.
+     *
+     * @method last
+     * @param fn {function} Callbakc function that takes two parameters
+     *                      (previous and current). Previous is undefined
+     *                      if its the first point.
+     */
+  };
+}());
+
+
+
+
+
+
+
+
+
+
+
+
+var actions = Reflux.createActions({
+    'join': {}, // Joining a game/room
+    'chat': {},  // New chat-message
+    'selectCrayon': {}, // Player select new crayon color and size
+    'canvas': { children: [ 'crayon', 'point', 'clear' ] }
+});
 
 var store = Reflux.createStore({
   listenables: actions,
 
   init: function () {
+    // Init canvas
     this.crayon = {
       color: window.localStorage.getItem('crayonColor') || 'red',
       size: +window.localStorage.getItem('crayonSize') || 5
     };
+    this.points = [];
 
+    // Init websocket
     this.ready = false;
 
     socket.on('connect', this._connect);
@@ -94,7 +151,68 @@ var store = Reflux.createStore({
     }
 
     this.trigger({ event: 'crayon', type: 'update', data: this.crayon });
-  }
+  },
+
+  /*!
+   * CANVAS
+   */
+
+  _addPoint: function (x, y, dragging) {
+    var p = { x: x, y: y, color: this.crayon.color, size: this.crayon.size, dragging: !!dragging };
+    this.points.push(p);
+    return p;
+  },
+
+  _getPrevAndCurrPoints: function (i) {
+    return [ this.points[i - 1] && this.points[i - 1], this.points[i] ];
+  },
+
+  _lastPoint: function (fn) {
+    fn.apply(null, this._getPrevAndCurrPoints(this.points.length - 1));
+  },
+
+  _eachPoint: function (fn) {
+    for (var i = 0; i < this.points.length; i += 1) {
+      fn.apply(null, this._getPrevAndCurrPoints(i));
+    }
+  },
+
+  _nrOfPoints: function () { return this.points.length; },
+
+  _triggerCanvas: function (type, data) {
+    this.trigger({ event: 'canvas', type: type, data: data });
+  },
+
+  onCanvas: function () {
+  },
+
+  onCanvasCrayon: function (crayon) {
+    if (crayon.color) {
+      this.crayon.color = crayon.color;
+      window.localStorage.setItem('crayonColor', crayon.color);
+    }
+
+    if (crayon.size) {
+      this.crayon.size = crayon.size;
+      window.localStorage.setItem('crayonSize', crayon.size);
+    }
+
+    this._triggerCanvas('crayon', this.crayon);
+  },
+
+  onCanvasPoint: function (x, y, dragging) {
+    var p = this._addPoint(x, y, dragging);
+
+    this._triggerCanvas('point', {
+      nrOfPoints: this._nrOfPoints(),
+      last: this._lastPoint
+    });
+
+    // Send points to server
+    //room.sendPoints(p.data());
+  },
+
+  onCanvasClear: function () { this.points = []; }
 });
 
 module.exports = { actions: actions, store: store };

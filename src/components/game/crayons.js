@@ -44,7 +44,7 @@ module.exports = React.createClass({
       crayon = { color: e.target.dataset.color };
     }
 
-    Logic.actions.selectCrayon(crayon);
+    Logic.actions.canvas.crayon(crayon);
     this.setState(crayon);
 
     e.preventDefault();
