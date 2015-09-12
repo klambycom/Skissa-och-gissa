@@ -105,7 +105,7 @@ gulp.task('test', ['jasmine', 'lint']);
 
 gulp.task('assets', function () {
   return gulp.src(paths.assets)
-    .pipe(gulp.dest(paths.public));
+    .pipe(gulp.dest(paths.public + '/assets'));
 });
 
 /*

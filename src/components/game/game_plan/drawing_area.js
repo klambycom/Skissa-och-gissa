@@ -112,7 +112,7 @@ module.exports = React.createClass({
   },
 
   getInitialState: function () {
-    return { painting: false };
+    return { painting: false, color: '', playersTurn: false };
   },
 
   componentDidMount: function () {
@@ -146,6 +146,7 @@ module.exports = React.createClass({
     this.context.canvas.addEventListener('mousemove', this._drawing);
     this.context.canvas.addEventListener('mouseleave', this._stopDrawing); // Firefox etc.
     this.context.canvas.addEventListener('mouseout', this._stopDrawing); // Chrome
+    this.setState({ playersTurn: true });
   },
 
   _stop: function () {
@@ -154,11 +155,13 @@ module.exports = React.createClass({
     this.context.canvas.removeEventListener('mousemove', this._drawing);
     this.context.canvas.removeEventListener('mouseleave', this._stopDrawing); // Firefox etc.
     this.context.canvas.removeEventListener('mouseout', this._stopDrawing); // Chrome
+    this.setState({ playersTurn: false });
   },
 
   _setSizeAndColor: function (size, color) {
     points.setSize(size);
     points.setColor(color);
+    this.setState({ color: color + '_crayon' });
   },
 
   _clear: function () {
@@ -219,10 +222,19 @@ module.exports = React.createClass({
 		this.context.stroke();
 	},
 
+  _crayonClass: function () {
+    return this.state.playersTurn ? this.state.color : '';
+  },
+
   render: function () {
     return (
         <div id="artboard-wrapper">
-          <canvas id="artboard" width="800" height="600" ref="canvas"></canvas>
+          <canvas
+            id="artboard"
+            width="800"
+            height="600"
+            ref="canvas"
+            className={this._crayonClass()}></canvas>
         </div>
         );
   }
