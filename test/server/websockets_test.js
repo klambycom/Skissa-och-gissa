@@ -53,7 +53,8 @@ describe('Websockets', function () {
       leave: function () {},
       json: function () {},
       canJoinRoom: function () { return true; },
-      get: function () { return { toJSON: function () {} }; }
+      get: function () { return { toJSON: function () {} }; },
+      guess: function () {}
     };
     websockets.__set__('games', this.gamesMock);
 
@@ -247,6 +248,34 @@ describe('Websockets', function () {
     it('should not emit if message is an empty string', function () {
       var data = { player: { UUID: '' }, message: '' };
       this.expectSocketEvent({ event: 'chat', data: data }).to.not.broadcast('chat');
+    });
+
+    describe('Incorrect word', function () {
+
+      beforeEach(function () {
+        this.gamesMock.guess = sinon.stub().returns(false);
+      });
+
+      it('should set correct to false', function () {
+        var dataIn = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
+        var dataOut = { player: { UUID: '' }, message: 'Ett chatt-meddelande', correct: false };
+        this.expectSocketEvent({ event: 'chat', data: dataIn })
+          .to.broadcastTo(this.player.room.id, 'chat', dataOut);
+      });
+    });
+
+    describe('Correct word', function () {
+
+      beforeEach(function () {
+        this.gamesMock.guess = sinon.stub().returns(true);
+      });
+
+      it('should set correct to true', function () {
+        var dataIn = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
+        var dataOut = { player: { UUID: '' }, message: 'Ett chatt-meddelande', correct: true };
+        this.expectSocketEvent({ event: 'chat', data: dataIn })
+          .to.broadcastTo(this.player.room.id, 'chat', dataOut);
+      });
     });
   });
 

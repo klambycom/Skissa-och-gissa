@@ -108,6 +108,14 @@ module.exports = function (app, socketio) {
           'UUID(%s) wrote "%s"', data.player.UUID, data.message,
           { type: 'websocket', meta: { player: data.player, message: data.message } });
 
+      // Check if word is correct
+      if (games.guess(player.room.id, data.message)) {
+        data.correct = true;
+      } else {
+        data.correct = false;
+      }
+
+      // Send message to clients
       socket.broadcast.to(player.room.id).emit('chat', data);
     });
 
