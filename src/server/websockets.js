@@ -78,13 +78,12 @@ module.exports = function (app, socketio) {
         // TODO Get player JSON from games!!!!!!!
         // TODO Maybe remove and let the rooms listen for lobby updates that
         // concerns that specific room
-        // TODO Can probably remove to(..)!
         socket.broadcast.to(data.roomId).emit('player joined', player.json());
 
         // Tell the client of the player that the player have joined the new room
-        // by sending room data to the player
-        // TODO Add canvas to the JSON before sending to client!!!!!
-        socket.emit('join', { data: games.json(player.room.id) });
+        // by sending room data to the player. And send the canvas points to the
+        // client.
+        socket.emit('join', { data: games.json(player.room.id), points: player.room.canvasPoints });
 
         // TODO Surround in try catch and emit error message to client if error
         // joining room
@@ -122,6 +121,8 @@ module.exports = function (app, socketio) {
           { type: 'websocket', meta: { player: player.json(), point: data } });
 
       // TODO Only broadcast point if it is the correct player!
+
+      player.room.addPoint(data);
       socket.broadcast.to(player.room.id).emit('canvas', data);
     });
 

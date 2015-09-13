@@ -38,10 +38,13 @@ describe('Websockets', function () {
       join: function () {}
     };
     // Mock games.js
-    this.playerJSON = { UUID: 'player1' };
     this.player = {
       uuid: 'player1',
-      room: { id: 'lobby' },
+      room: {
+        id: 'lobby',
+        points: [],
+        addPoint: function () {}
+      },
       json: function () { return this.playerJSON; }.bind(this)
     };
     this.gamesMock = {
@@ -249,6 +252,10 @@ describe('Websockets', function () {
 
   describe('EVENT: canvas', function () {
 
+    beforeEach(function () {
+      this.data = { x: 267, y: 333, color: 'yellowgreen', size: 5, dragging: true };
+    });
+
     it('should listen to "canvas', function () {
       this.socketMock.on = sinon.spy();
       runWebsockets(this.socketMock);
@@ -257,9 +264,15 @@ describe('Websockets', function () {
     });
 
     it('should only emit to correct room', function () {
-      var data = { x: 267, y: 333, color: 'yellowgreen', size: 5, dragging: true };
-      this.expectSocketEvent({ event: 'canvas', data: data })
-        .to.broadcastTo(this.player.room.id, 'canvas', data);
+      this.expectSocketEvent({ event: 'canvas', data: this.data })
+        .to.broadcastTo(this.player.room.id, 'canvas', this.data);
+    });
+
+    it('should add point to the rooms points', function () {
+      this.player.room = { addPoint: sinon.spy() };
+      runWebsockets(this.socketMock).call('canvas', this.data);
+
+      expect(this.player.room.addPoint).to.have.been.calledWith(this.data);
     });
   });
 

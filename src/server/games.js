@@ -22,6 +22,15 @@ var Room = function (id) {
   this.id = id;
   this.players = {};
   this.type = 'lobby';
+  this.canvasPoints = [];
+};
+
+Room.prototype.clearPoints = function () {
+  this.canvasPoints = [];
+};
+
+Room.prototype.addPoint = function (point) {
+  this.canvasPoints.push(point);
 };
 
 Room.prototype.add = function (player) {
