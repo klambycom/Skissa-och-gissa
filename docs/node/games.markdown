@@ -89,5 +89,7 @@ Check if room is found and valid. And check if room is not full!
 
 * **** true if room is found and valid
 
+## guess()
+
 <!-- End src/server/games.js -->
 

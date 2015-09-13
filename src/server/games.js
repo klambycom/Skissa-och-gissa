@@ -21,6 +21,7 @@ var rooms = {};
 var Room = function (id) {
   this.id = id;
   this.players = {};
+  this.queue = [];
   this.type = 'lobby';
   this.canvasPoints = [];
 };
@@ -35,6 +36,7 @@ Room.prototype.addPoint = function (point) {
 
 Room.prototype.add = function (player) {
   this.players[player.uuid] = player;
+  this.queue.push(player.uuid);
 };
 
 Room.prototype.remove = function (player) {
@@ -51,6 +53,12 @@ Room.prototype.setRules = function (rules) {
   this.maxPlayers = rules.maxPlayers;
   this.points = rules.points; // max, one_line, many_lines
   this.words = rules.words;
+};
+
+Room.prototype.rndWord = function () {
+  var index = Math.floor(Math.random() * this.words.length);
+  this.word = this.words[index];
+  this.words.splice(index, 1);
 };
 
 // TODO Return players that are friends with the player
@@ -84,6 +92,9 @@ Room.create = function (type) {
   // Set the rules
   room.type = type;
   room.setRules(dict[type]);
+
+  // Randomize word
+  room.rndWord();
 
   // Save room
   rooms[_uuid] = room;
@@ -267,5 +278,23 @@ module.exports = {
 
   canJoinRoom: function (roomId) {
     return typeof rooms[roomId] !== 'undefined' && !rooms[roomId].isFull();
+  },
+
+  /**
+   * @function guess
+   */
+
+  guess: function (roomId, word) {
+    if (rooms[roomId].word === word) {
+      // Move player to the back of the queue
+      var player = rooms[roomId].queue.shift();
+      rooms[roomId].queue.push(player);
+      // Get new random word
+      rooms[roomId].rndWord();
+
+      return true;
+    }
+
+    return false;
   }
 };

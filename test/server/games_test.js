@@ -337,4 +337,61 @@ describe('Games', function () {
       expect(games.canJoinRoom(room.id)).to.be.false;
     });
   });
+
+  describe('#guess', function () {
+
+    beforeEach(function () {
+      this.sut = rooms[Object.keys(rooms)[1]];
+      this.sut.queue = ['player1', 'player2', 'player3'];
+      this.sut.words = ['tomat', 'gurka', 'morot', 'salat'];
+      this.sut.word = 'correctword';
+      this.uuid = this.sut.id;
+    });
+
+    it('should be defined', function () {
+      expect(games.guess).to.be.a('function');
+    });
+
+    it('should return true if the guess is right', function () {
+      expect(games.guess(this.uuid, 'correctword')).to.be.true;
+    });
+
+    it('should return false if the guess is wrong', function () {
+      expect(games.guess(this.uuid, 'wrongword')).to.be.false;
+    });
+
+    it('should change word if the guess is correct', function () {
+      games.guess(this.uuid, 'correctword');
+      expect(this.sut.word).to.not.equal('correctword');
+    });
+
+    it('should not change word if the guess is correct', function () {
+      games.guess(this.uuid, 'wrongword');
+      expect(this.sut.word).to.equal('correctword');
+    });
+
+    it('should remove the new word from wordlist when the guess is correct', function () {
+      var nrOfWords = this.sut.words.length;
+      games.guess(this.uuid, 'correctword');
+      expect(this.sut.words.length).to.equal(nrOfWords - 1);
+      expect(this.sut.words).to.not.include(this.sut.word);
+    });
+
+    it('should not remove any word from wordlist when the guess is incorrect', function () {
+      var nrOfWords = this.sut.words.length;
+      games.guess(this.uuid, 'wrongword');
+      expect(this.sut.words.length).to.equal(nrOfWords);
+      expect(this.sut.words).to.not.include(this.sut.word); // But current word should still not be in wordlist
+    });
+
+    it('should move player to the back of the queue if guess is correct', function () {
+      games.guess(this.uuid, 'correctword');
+      expect(this.sut.queue).to.deep.equal(['player2', 'player3', 'player1']);
+    });
+
+    it('should not move player to the back of the queue if guess is incorrect', function () {
+      games.guess(this.uuid, 'wrongword');
+      expect(this.sut.queue).to.deep.equal(['player1', 'player2', 'player3']);
+    });
+  });
 });
