@@ -405,4 +405,42 @@ describe('Games', function () {
       expect(this.sut.canvasPoints).to.deep.equal([ { x: 1, y: 1 }, { x: 1, y: 1 } ]);
     });
   });
+
+  describe('#word', function () {
+
+    beforeEach(function () {
+      var sut = rooms[Object.keys(rooms)[1]];
+      sut.word = 'tomat';
+      this.uuid = sut.id;
+    });
+
+    it('should be defined', function () {
+      expect(games.word).to.be.a('function');
+    });
+
+    it('should return the current word', function () {
+      expect(games.word(this.uuid)).to.equal('tomat');
+    });
+  });
+
+  describe('#player', function () {
+
+    beforeEach(function () {
+      var sut = rooms[Object.keys(rooms)[1]];
+      sut.queue = ['player1', 'player2'];
+      this.uuid = sut.id;
+
+      this.player = new Player({});
+      this.player.uuid = 'player1';
+      sut.players = { 'player1': this.player };
+    });
+
+    it('should be defined', function () {
+      expect(games.player).to.be.a('function');
+    });
+
+    it('should return the current word', function () {
+      expect(games.player(this.uuid)).to.deep.equal(this.player.json());
+    });
+  });
 });

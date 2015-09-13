@@ -298,5 +298,21 @@ module.exports = {
     }
 
     return false;
+  },
+
+  /**
+   * @function word
+   */
+
+  word: function (roomId) {
+    return rooms[roomId].word;
+  },
+
+  /**
+   * @function player
+   */
+
+  player: function (roomId) {
+    return rooms[roomId].players[rooms[roomId].queue[0]].json();
   }
 };

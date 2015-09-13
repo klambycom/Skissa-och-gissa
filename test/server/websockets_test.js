@@ -45,6 +45,9 @@ describe('Websockets', function () {
         points: [],
         addPoint: function () {}
       },
+      websocket: {
+        emit: function () {}
+      },
       json: function () { return this.playerJSON; }.bind(this)
     };
     this.gamesMock = {
@@ -54,7 +57,9 @@ describe('Websockets', function () {
       json: function () {},
       canJoinRoom: function () { return true; },
       get: function () { return { toJSON: function () {} }; },
-      guess: function () {}
+      guess: function () {},
+      word: function () {},
+      player: function () {}
     };
     websockets.__set__('games', this.gamesMock);
 
@@ -267,14 +272,28 @@ describe('Websockets', function () {
     describe('Correct word', function () {
 
       beforeEach(function () {
+        this.data = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
         this.gamesMock.guess = sinon.stub().returns(true);
+        this.gamesMock.word = sinon.stub().returns('gurka');
       });
 
       it('should set correct to true', function () {
-        var dataIn = { player: { UUID: '' }, message: 'Ett chatt-meddelande' };
         var dataOut = { player: { UUID: '' }, message: 'Ett chatt-meddelande', correct: true };
-        this.expectSocketEvent({ event: 'chat', data: dataIn })
+        this.expectSocketEvent({ event: 'chat', data: this.data })
           .to.broadcastTo(this.player.room.id, 'chat', dataOut);
+      });
+
+      it('should tell next player that it is that players turn', function () {
+        this.player.websocket.emit = sinon.spy();
+        runWebsockets(this.socketMock).call('chat', this.data);
+
+        expect(this.player.websocket.emit).to.have.been.calledWith('your turn', 'gurka');
+      });
+
+      it('should tell other players that a new round has started', function () {
+        this.gamesMock.player = sinon.stub().returns({ UUID: 'player1' });
+        this.expectSocketEvent({ event: 'chat', data: this.data })
+          .to.broadcastTo(this.player.room.id, 'new round', { UUID: 'player1' });
       });
     });
   });
