@@ -342,6 +342,7 @@ describe('Games', function () {
 
     beforeEach(function () {
       this.sut = rooms[Object.keys(rooms)[1]];
+      this.sut.canvasPoints = [ { x: 1, y: 1 }, { x: 1, y: 1 } ];
       this.sut.queue = ['player1', 'player2', 'player3'];
       this.sut.words = ['tomat', 'gurka', 'morot', 'salat'];
       this.sut.word = 'correctword';
@@ -392,6 +393,16 @@ describe('Games', function () {
     it('should not move player to the back of the queue if guess is incorrect', function () {
       games.guess(this.uuid, 'wrongword');
       expect(this.sut.queue).to.deep.equal(['player1', 'player2', 'player3']);
+    });
+
+    it('should clear the canvas on correct guess', function () {
+      games.guess(this.uuid, 'correctword');
+      expect(this.sut.canvasPoints).to.deep.equal([]);
+    });
+
+    it('should not clear the canvas on incorrect guess', function () {
+      games.guess(this.uuid, 'wrongword');
+      expect(this.sut.canvasPoints).to.deep.equal([ { x: 1, y: 1 }, { x: 1, y: 1 } ]);
     });
   });
 });

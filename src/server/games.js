@@ -291,6 +291,8 @@ module.exports = {
       rooms[roomId].queue.push(player);
       // Get new random word
       rooms[roomId].rndWord();
+      // Clear canvas
+      rooms[roomId].clearPoints();
 
       return true;
     }
