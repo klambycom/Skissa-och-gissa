@@ -170,9 +170,9 @@ var store = Reflux.createStore({
     //addArray: forEach.bind(null, add),
   },
 
-  onCanvasClear: function () {
+  onCanvasClear: function (player) {
     this.points = [];
-    this._triggerCanvas('clear', []);
+    this._triggerCanvas('clear', { playersTurn: player.UUID === this.player.UUID });
   },
 
   /*!
@@ -181,10 +181,11 @@ var store = Reflux.createStore({
 
   _yourRound: function (word) {
     console.log('Your turn:', word);
+    this._triggerCanvas('start', word);
   },
 
   _newRound: function (player) {
-    actions.canvas.clear();
+    actions.canvas.clear(player);
     console.log('This players turn:', player);
   }
 });
