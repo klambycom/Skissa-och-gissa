@@ -7,6 +7,8 @@ module.exports = React.createClass({
   _inGameClass: function () { return this.props.inGame ? 'in-game' : ''; },
 
   render: function () {
+    // TODO <body className="game"> .game should be added later for effect! But
+    // should maybe remove later.
     return (
         <html lang="sv">
           <head>
@@ -15,7 +17,7 @@ module.exports = React.createClass({
             <link rel="stylesheet" href={this.props.css_path} />
             <link rel="stylesheet" href={this.props.fontAwesome_path}/>
           </head>
-          <body>
+          <body className="game">
             <header id="header">
               <div>
                 <div id="header-title"><Link to="index">{this.props.page_title}</Link></div>
