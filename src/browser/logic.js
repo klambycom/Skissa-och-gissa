@@ -23,54 +23,54 @@ var store = Reflux.createStore({
       size: +window.localStorage.getItem('crayonSize') || 5
     };
     this.points = [];
-    socket.on('canvas', this._pointFromServer);
-    socket.on('your turn', this._yourRound);
-    socket.on('new round', this._newRound);
+    socket.on('canvas', this.handlePointFromServer);
+    socket.on('your turn', this.handleYourRound);
+    socket.on('new round', this.handleNewRound);
 
     // Init websocket
     this.ready = false;
 
-    socket.on('connect', this._connect);
-    socket.on('player', this._player);
-    socket.on('join', this._join);
-    socket.on('disconnect', this._disconnect);
+    socket.on('connect', this.handleConnect);
+    socket.on('player', this.handlePlayer);
+    socket.on('join', this.handleJoin);
+    socket.on('disconnect', this.handleDisconnect);
     socket.on('error', function (err) { console.log('Socket.io-client ERROR: ', err); });
 
-    socket.on('player joined', this._playerJoined);
-    socket.on('player left', this._playerLeft);
-    socket.on('chat', this._chat);
+    socket.on('player joined', this.handlePlayerJoined);
+    socket.on('player left', this.handlePlayerLeft);
+    socket.on('chat', this.handleChat);
   },
 
-  _connect: function () {
+  handleConnect: function () {
     this.ready = true;
     this.trigger({ event: 'connection', type: 'connected' });
   },
 
-  _disconnect: function () {
+  handleDisconnect: function () {
     this.ready = false;
     this.trigger({ event: 'connection', type: 'disconnected' });
   },
 
-  _player: function (data) {
+  handlePlayer: function (data) {
     this.player = data;
     this.trigger({ event: 'player', type: 'update', data: data });
   },
 
-  _join: function (data) {
+  handleJoin: function (data) {
     this.room = data.data;
     this.trigger({ event: 'join', type: 'game', data: data.data });
     this._pointsFromServer(data.points);
   },
 
-  _playerJoined: function (data) {
+  handlePlayerJoined: function (data) {
     this.trigger({ event: 'otherPlayer', type: 'joined', data: data });
   },
 
-  _playerLeft: function (data) {
+  handlePlayerLeft: function (data) {
     this.trigger({ event: 'otherPlayer', type: 'left', data: data.player });
   },
 
-  _chat: function (data) {
+  handleChat: function (data) {
     data.me = typeof data.player === 'undefined';
     if (typeof data.player === 'undefined') { data.player = this.player; }
     this.trigger({ event: 'chat', type: 'message', data: data });
@@ -86,7 +86,7 @@ var store = Reflux.createStore({
     // TODO Do i need to send uuid, or do the server know how is sending the
     // message?
     socket.emit('chat', { player: this.player, message: message });
-    this._chat({ message: message });
+    this.handleChat({ message: message });
   },
 
   onSelectCrayon: function (crayon) {
@@ -136,12 +136,12 @@ var store = Reflux.createStore({
     }
   },
 
-  _pointFromServer: function (point) {
+  handlePointFromServer: function (point) {
     this._addPoint(point.x, point.y, point.dragging, point.size, point.color);
   },
 
   _pointsFromServer: function (points) {
-    points.forEach(this._pointFromServer);
+    points.forEach(this.handlePointFromServer);
   },
 
   _triggerCanvas: function (type, data) {
@@ -175,16 +175,12 @@ var store = Reflux.createStore({
     this._triggerCanvas('clear', { playersTurn: player.UUID === this.player.UUID });
   },
 
-  /*!
-   * TURN
-   */
-
-  _yourRound: function (word) {
+  handleYourRound: function (word) {
     console.log('Your turn:', word);
     this._triggerCanvas('start', word);
   },
 
-  _newRound: function (player) {
+  handleNewRound: function (player) {
     actions.canvas.clear(player);
     console.log('This players turn:', player);
   }
