@@ -41,6 +41,7 @@ Room.prototype.add = function (player) {
 
 Room.prototype.remove = function (player) {
   delete this.players[player.uuid];
+  this.queue = this.queue.filter(function (x) { return x !== player.uuid; });
 };
 
 Room.prototype.isFull = function () {

@@ -47,6 +47,11 @@ module.exports = React.createClass({
       else if (canvas.type === 'point') {
         canvas.data.last(this._drawLine);
       }
+      // Clear canvas
+      else if (canvas.type === 'clear') {
+        this._clear();
+        this._stop();
+      }
     }
   },
 
@@ -70,8 +75,6 @@ module.exports = React.createClass({
 
   _clear: function () {
     this.setState({ painting: false });
-    // Remove all points
-    Logic.actions.canvas.clear();
     // Clear the canvas
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     // Pencil style

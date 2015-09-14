@@ -170,7 +170,10 @@ var store = Reflux.createStore({
     //addArray: forEach.bind(null, add),
   },
 
-  onCanvasClear: function () { this.points = []; },
+  onCanvasClear: function () {
+    this.points = [];
+    this._triggerCanvas('clear', []);
+  },
 
   /*!
    * TURN
@@ -181,6 +184,7 @@ var store = Reflux.createStore({
   },
 
   _newRound: function (player) {
+    actions.canvas.clear();
     console.log('This players turn:', player);
   }
 });
