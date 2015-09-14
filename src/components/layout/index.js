@@ -29,7 +29,7 @@ module.exports = React.createClass({
               <img src="http://lorempixel.com/400/200" alt="" />
               <div id="site-information-text">
                 <h1>Vad är skissa och gissa?</h1>
-                <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                <p>{this.props.page_description}</p>
                 <p><span className="bold">Nytt!</span> Sidan har fått ny fräsh layout</p>
               </div>
             </aside>
