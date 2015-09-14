@@ -15,7 +15,6 @@ $header-font-color: white;
 
 #header {
   background-color: #EA7070;
-  margin-bottom: $margin-between-element;
 
   & > div {
     @include center-element();
@@ -64,7 +63,7 @@ $header-font-color: white;
 #site-information {
   @include center-element();
   padding: $content-padding $content-padding 0 $content-padding;
-  margin-bottom: $margin-between-element;
+  margin-top: $margin-between-element;
 
   display: flex;
 
@@ -83,6 +82,7 @@ $header-font-color: white;
 #content {
   @include center-element();
   padding: $content-padding;
+  margin-top: $margin-between-element;
 }
 
 
