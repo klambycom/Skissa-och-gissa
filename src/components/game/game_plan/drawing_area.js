@@ -124,11 +124,7 @@ module.exports = React.createClass({
 
     return (
         <div id="artboard-wrapper">
-          <canvas
-            id="artboard"
-            width="800"
-            height="600"
-            ref="canvas"></canvas>
+          <canvas id="artboard" width="800" height="600" ref="canvas"></canvas>
         </div>
         );
   }
