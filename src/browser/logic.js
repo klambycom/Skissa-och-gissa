@@ -127,12 +127,22 @@ var store = Reflux.createStore({
     fn(this.points[this.points.length - 2], this.points[this.points.length - 1]);
   },
 
+  _triggerCanvas: function (type, data) {
+    this.trigger({ event: 'canvas', type: type, data: data });
+  },
+
   handlePointFromServer: function (point) {
     this._addPoint(point.x, point.y, point.dragging, point.size, point.color);
   },
 
-  _triggerCanvas: function (type, data) {
-    this.trigger({ event: 'canvas', type: type, data: data });
+  handleYourRound: function (word) {
+    console.log('Your turn:', word);
+    this._triggerCanvas('start', word);
+  },
+
+  handleNewRound: function (player) {
+    actions.canvas.clear(player);
+    console.log('This players turn:', player);
   },
 
   onCanvasCrayon: function (crayon) {
@@ -157,16 +167,6 @@ var store = Reflux.createStore({
   onCanvasClear: function (player) {
     this.points = [];
     this._triggerCanvas('clear', { playersTurn: player.UUID === this.player.UUID });
-  },
-
-  handleYourRound: function (word) {
-    console.log('Your turn:', word);
-    this._triggerCanvas('start', word);
-  },
-
-  handleNewRound: function (player) {
-    actions.canvas.clear(player);
-    console.log('This players turn:', player);
   }
 });
 
