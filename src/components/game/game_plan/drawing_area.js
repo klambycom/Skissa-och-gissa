@@ -67,21 +67,6 @@ module.exports = React.createClass({
     Logic.actions.canvas.point(xx, yy, dragging);
   },
 
-  _startDrawing: function (e) {
-    this.setState({ painting: true });
-		this._addPoint(e.pageX, e.pageY);
-	},
-
-  _stopDrawing: function () {
-    this.setState({ painting: false });
-	},
-
-  _drawing: function (e) {
-		if (this.state.painting) {
-			this._addPoint(e.pageX, e.pageY, true);
-		}
-	},
-
   _drawLine: function (prev, curr) {
 		if (typeof prev === 'undefined' || prev.color !== curr.color || prev.size !== curr.size) {
 			// Pencil style
@@ -103,6 +88,21 @@ module.exports = React.createClass({
 		this._ctx().stroke();
 	},
 
+  handleStartDrawing: function (e) {
+    this.setState({ painting: true });
+		this._addPoint(e.pageX, e.pageY);
+	},
+
+  handleStopDrawing: function () {
+    this.setState({ painting: false });
+	},
+
+  handleDrawing: function (e) {
+		if (this.state.painting) {
+			this._addPoint(e.pageX, e.pageY, true);
+		}
+	},
+
   render: function () {
     if (this.state.playersTurn) {
       return (
@@ -112,11 +112,11 @@ module.exports = React.createClass({
               width="800"
               height="600"
               ref="canvas"
-              onMouseDown={this._startDrawing}
-              onMouseUp={this._stopDrawing}
-              onMouseMove={this._drawing}
-              onMouseLeave={this._stopDrawing}
-              onMouseOut={this._stopDrawing}
+              onMouseDown={this.handleStartDrawing}
+              onMouseUp={this.handleStopDrawing}
+              onMouseMove={this.handleDrawing}
+              onMouseLeave={this.handleStopDrawing}
+              onMouseOut={this.handleStopDrawing}
               className={this.state.color + '_crayon'}></canvas>
           </div>
           );
