@@ -19,22 +19,14 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function () {
-    this.context = this.refs.canvas.getDOMNode().getContext('2d');
-
     // Prevent Chrome from selecting the canvas
-    this.context.canvas.onselectstart = function () { return false; };
-    this.context.canvas.onmousedown = function () { return false; };
+    this._ctx().canvas.onselectstart = function () { return false; };
+    this._ctx().canvas.onmousedown = function () { return false; };
 
     this.setState({ color: Logic.store.crayon.color });
     this._clear();
 
-    this._start(); // TODO Remove!
-  },
-
-  componentDidUpdate: function () {
-    // Need to upadate the context when the component is updated or
-    // this.context will be undefined.
-    this.context = this.refs.canvas.getDOMNode().getContext('2d');
+    this.setState({ playersTurn: true }); // TODO Remove!
   },
 
   handleCanvasUpdate: function (canvas) {
@@ -50,40 +42,28 @@ module.exports = React.createClass({
       // Clear canvas
       else if (canvas.type === 'clear') {
         this._clear();
-        this._stop();
+        this.setState({ playersTurn: canvas.data.playersTurn });
+      }
+      // Start drawing
+      else if (canvas.type === 'start') {
+        console.log('start drawing', this.state.playersTurn);
       }
     }
   },
 
-  _start: function () {
-    this.context.canvas.addEventListener('mousedown', this._startDrawing);
-    this.context.canvas.addEventListener('mouseup', this._stopDrawing);
-    this.context.canvas.addEventListener('mousemove', this._drawing);
-    this.context.canvas.addEventListener('mouseleave', this._stopDrawing); // Firefox etc.
-    this.context.canvas.addEventListener('mouseout', this._stopDrawing); // Chrome
-    this.setState({ playersTurn: true });
-  },
-
-  _stop: function () {
-    this.context.canvas.removeEventListener('mousedown', this._startDrawing);
-    this.context.canvas.removeEventListener('mouseup', this._stopDrawing);
-    this.context.canvas.removeEventListener('mousemove', this._drawing);
-    this.context.canvas.removeEventListener('mouseleave', this._stopDrawing); // Firefox etc.
-    this.context.canvas.removeEventListener('mouseout', this._stopDrawing); // Chrome
-    this.setState({ playersTurn: false });
-  },
+  _ctx: function () { return this.refs.canvas.getDOMNode().getContext('2d'); },
 
   _clear: function () {
     this.setState({ painting: false });
     // Clear the canvas
-    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    this._ctx().clearRect(0, 0, this._ctx().canvas.width, this._ctx().canvas.height);
     // Pencil style
-    this.context.lineJoin = 'round';
+    this._ctx().lineJoin = 'round';
   },
 
   _addPoint: function (x, y, dragging) {
-    var xx = x - this.context.canvas.offsetLeft - this.props.offsetX;
-    var yy = y - this.context.canvas.offsetTop - this.props.offsetY;
+    var xx = x - this._ctx().canvas.offsetLeft - this.props.offsetX;
+    var yy = y - this._ctx().canvas.offsetTop - this.props.offsetY;
     Logic.actions.canvas.point(xx, yy, dragging);
   },
 
@@ -102,41 +82,53 @@ module.exports = React.createClass({
 		}
 	},
 
-  // former draw() TODO Remove this comment!!!!
   _drawLine: function (prev, curr) {
 		if (typeof prev === 'undefined' || prev.color !== curr.color || prev.size !== curr.size) {
 			// Pencil style
-			this.context.strokeStyle = curr.color;
-			this.context.lineWidth = curr.size;
+			this._ctx().strokeStyle = curr.color;
+			this._ctx().lineWidth = curr.size;
 		}
 
 		// Drawing
-		this.context.beginPath();
+		this._ctx().beginPath();
 
 		if (curr.dragging) {
-			this.context.moveTo(prev.x, prev.y);
+			this._ctx().moveTo(prev.x, prev.y);
 		} else {
-			this.context.moveTo(curr.x - 0.1, curr.y - 0.1); // Make a dot
+			this._ctx().moveTo(curr.x - 0.1, curr.y - 0.1); // Make a dot
 		}
-		this.context.lineTo(curr.x, curr.y);
+		this._ctx().lineTo(curr.x, curr.y);
 
-		this.context.closePath();
-		this.context.stroke();
+		this._ctx().closePath();
+		this._ctx().stroke();
 	},
 
-  _crayonClass: function () {
-    return this.state.playersTurn ? this.state.color + '_crayon' : '';
-  },
-
   render: function () {
+    if (this.state.playersTurn) {
+      return (
+          <div id="artboard-wrapper">
+            <canvas
+              id="artboard"
+              width="800"
+              height="600"
+              ref="canvas"
+              onMouseDown={this._startDrawing}
+              onMouseUp={this._stopDrawing}
+              onMouseMove={this._drawing}
+              onMouseLeave={this._stopDrawing}
+              onMouseOut={this._stopDrawing}
+              className={this.state.color + '_crayon'}></canvas>
+          </div>
+          );
+    }
+
     return (
         <div id="artboard-wrapper">
           <canvas
             id="artboard"
             width="800"
             height="600"
-            ref="canvas"
-            className={this._crayonClass()}></canvas>
+            ref="canvas"></canvas>
         </div>
         );
   }
