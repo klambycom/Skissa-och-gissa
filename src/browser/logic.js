@@ -130,12 +130,6 @@ var store = Reflux.createStore({
     fn.apply(null, this._getPrevAndCurrPoints(this.points.length - 1));
   },
 
-  _eachPoint: function (fn) {
-    for (var i = 0; i < this.points.length; i += 1) {
-      fn.apply(null, this._getPrevAndCurrPoints(i));
-    }
-  },
-
   handlePointFromServer: function (point) {
     this._addPoint(point.x, point.y, point.dragging, point.size, point.color);
   },
@@ -146,9 +140,6 @@ var store = Reflux.createStore({
 
   _triggerCanvas: function (type, data) {
     this.trigger({ event: 'canvas', type: type, data: data });
-  },
-
-  onCanvas: function () {
   },
 
   onCanvasCrayon: function (crayon) {
