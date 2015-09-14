@@ -1,0 +1,26 @@
+#frontpage {
+  display: flex;
+  justify-content: space-between;
+}
+
+#game-list article {
+  display: flex;
+  margin-bottom: 10px;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  img {
+    width: 200px;
+    margin-right: 10px;
+    border: 2px solid whitesmoke;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}

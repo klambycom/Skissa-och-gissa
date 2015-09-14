@@ -22,14 +22,19 @@ module.exports = React.createClass({
         <article className={'game ' + this.props.game.difficulty}>
           <Link to="game" params={{ uuid: this.props.game.uuid }}>
             <img src="/assets/placeholder.png" alt={this.props.game.name} />
-            <h1>{this.props.game.name}</h1>
-            <p className="description">{this.props.game.description} <span className="rounds-left">{this.state.nrOfRoundsLeft}</span> runder kvar att spela.</p>
           </Link>
 
-          <p className="players">
-            <span className="friends">TODO Friends</span>
-            <span className="nr-of-players">{this.state.nrOfPlayers} spelare just nu</span>
-          </p>
+          <div>
+            <Link to="game" params={{ uuid: this.props.game.uuid }}>
+              <h3>{this.props.game.name}</h3>
+              <p className="description">{this.props.game.description} <span className="rounds-left">{this.state.nrOfRoundsLeft}</span> runder kvar att spela.</p>
+            </Link>
+
+            <p className="players">
+              <span className="friends">TODO Friends</span>
+              <span className="nr-of-players">{this.state.nrOfPlayers} spelare just nu</span>
+            </p>
+          </div>
         </article>
         );
   }

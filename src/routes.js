@@ -4,7 +4,7 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 
 var App = require('./components/app');
-var Index = require('./components/pages/index');
+var Index = require('./components/frontpage/index');
 var Game = require('./components/game/index');
 var Settings = require('./components/pages/settings');
 var Admin = require('./components/admin/index');
