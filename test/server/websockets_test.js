@@ -21,7 +21,8 @@ var on = (function () {
 var runWebsockets = function (socket) {
   // Call io.on('conneciton', function (socket) { ... }) with mocked socket
   var onMock = function (event, cb) { if (event === 'connection') { cb(socket); } };
-  websockets(null, function () { return { on: onMock }; });
+  var toMock = function () { return { emit: function () {} }; };
+  websockets(null, function () { return { on: onMock, to: toMock }; });
   return on;
 };
 

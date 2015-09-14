@@ -122,8 +122,7 @@ module.exports = function (app, socketio) {
             .websocket
             .emit('your turn', games.word(player.room.id));
           // Tell other players it's a new round
-          socket
-            .broadcast
+          io
             .to(player.room.id)
             .emit('new round', games.player(player.room.id));
 
@@ -141,7 +140,9 @@ module.exports = function (app, socketio) {
       } catch (e) {
         logger.error(
             'Error sending chat message "%s"', data.message,
-            { type: 'websocket', meta: { player: player.json(), data: data, error: e } });
+            { type: 'websocket', meta: { player: player.json(), data: data } });
+
+        throw e;
       }
     });
 
