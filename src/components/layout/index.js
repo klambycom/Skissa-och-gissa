@@ -1,8 +1,11 @@
 var React = require('react');
 var Link = require('react-router').Link;
 var Popup = require('../popup');
+var SiteInformation = require('./site_information');
 
 module.exports = React.createClass({
+  _inGameClass: function () { return this.props.inGame ? 'in-game' : ''; },
+
   render: function () {
     return (
         <html lang="sv">
@@ -25,16 +28,9 @@ module.exports = React.createClass({
               </div>
             </header>
 
-            <aside id="site-information">
-              <img src="http://lorempixel.com/400/200" alt="" />
-              <div id="site-information-text">
-                <h1>Vad är skissa och gissa?</h1>
-                <p>{this.props.page_description}</p>
-                <p><span className="bold">Nytt!</span> Sidan har fått ny fräsh layout</p>
-              </div>
-            </aside>
+            <SiteInformation show={!this.props.inGame} text={this.props.page_description} />
 
-            <main id="content">
+            <main id="content" className={this._inGameClass()}>
               {this.props.children}
             </main>
 
