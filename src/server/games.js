@@ -312,7 +312,11 @@ module.exports = {
    * @function player
    */
 
-  player: function (roomId) {
-    return rooms[roomId].players[rooms[roomId].queue[0]].json();
+  player: function (roomId, json) {
+    if (json || typeof json === 'undefined') {
+      return rooms[roomId].players[rooms[roomId].queue[0]].json();
+    }
+
+    return rooms[roomId].players[rooms[roomId].queue[0]];
   }
 };

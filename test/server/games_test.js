@@ -439,8 +439,12 @@ describe('Games', function () {
       expect(games.player).to.be.a('function');
     });
 
-    it('should return the current word', function () {
+    it('should return the current player as json', function () {
       expect(games.player(this.uuid)).to.deep.equal(this.player.json());
+    });
+
+    it('should not return the current player as json', function () {
+      expect(games.player(this.uuid, false)).to.deep.equal(this.player);
     });
   });
 });

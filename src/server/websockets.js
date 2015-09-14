@@ -108,23 +108,41 @@ module.exports = function (app, socketio) {
           'UUID(%s) wrote "%s"', data.player.UUID, data.message,
           { type: 'websocket', meta: { player: data.player, message: data.message } });
 
-      console.log(player.room.word);
+      try {
+        console.log(player.room.word);
 
-      // Check if word is correct
-      if (games.guess(player.room.id, data.message)) {
-        // Tell next player it's his/her turn
-        // TODO Send to correct player with games.player()
-        player.websocket.emit('your turn', games.word(player.room.id));
-        // Tell other players it's a new round
-        socket.broadcast.to(player.room.id).emit('new round', games.player(player.room.id));
+        // Check if word is correct
+        if (games.guess(player.room.id, data.message)) {
+          // TODO move to startNewRound();
 
-        data.correct = true;
-      } else {
-        data.correct = false;
+          // Tell next player it's his/her turn. Get correct player
+          // using games.player()
+          games
+            .player(player.room.id, false)
+            .websocket
+            .emit('your turn', games.word(player.room.id));
+          // Tell other players it's a new round
+          socket
+            .broadcast
+            .to(player.room.id)
+            .emit('new round', games.player(player.room.id));
+
+          data.correct = true;
+        } else {
+          data.correct = false;
+        }
+
+        // Send message to clients
+        socket.broadcast.to(player.room.id).emit('chat', data);
+
+        // TODO Surround in try catch and emit error message to client if error
+        // joining room
+        // socket.emit('error', { type: 'join', message: 'Error joining room!' });
+      } catch (e) {
+        logger.error(
+            'Error sending chat message "%s"', data.message,
+            { type: 'websocket', meta: { player: player.json(), data: data, error: e } });
       }
-
-      // Send message to clients
-      socket.broadcast.to(player.room.id).emit('chat', data);
     });
 
     /**

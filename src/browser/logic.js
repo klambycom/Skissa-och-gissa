@@ -24,6 +24,8 @@ var store = Reflux.createStore({
     };
     this.points = [];
     socket.on('canvas', this._pointFromServer);
+    socket.on('your turn', this._yourRound);
+    socket.on('new round', this._newRound);
 
     // Init websocket
     this.ready = false;
@@ -168,7 +170,19 @@ var store = Reflux.createStore({
     //addArray: forEach.bind(null, add),
   },
 
-  onCanvasClear: function () { this.points = []; }
+  onCanvasClear: function () { this.points = []; },
+
+  /*!
+   * TURN
+   */
+
+  _yourRound: function (word) {
+    console.log('Your turn:', word);
+  },
+
+  _newRound: function (player) {
+    console.log('This players turn:', player);
+  }
 });
 
 module.exports = { actions: actions, store: store };
