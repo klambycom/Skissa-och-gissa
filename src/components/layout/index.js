@@ -23,7 +23,7 @@ module.exports = React.createClass({
                 <div id="header-title"><Link to="index">{this.props.page_title}</Link></div>
                 <nav id="header-nav">
                   <ul>
-                    <li><a href="#">Förstasidan</a></li>
+                    <li><Link to="index">Förstasidan</Link></li>
                     <li><a href="#">Logga in med Facebook</a></li>
                   </ul>
                 </nav>
