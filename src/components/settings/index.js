@@ -1,5 +1,4 @@
 var React = require('react');
-var Layout = require('./layout');
 
 module.exports = React.createClass({
   componentWillMount: function () {
@@ -15,12 +14,12 @@ module.exports = React.createClass({
     }
 
     return (
-        <Layout {...this.props}>
-          <h1>Inställningar</h1>
+        <div>
+          <h2>Inställningar</h2>
           <p>Berätta vad som är skillnaden mellan de olika topplistorna, och berätta även att om användaren väljer att synas i topplistan över alla spelare kan hens profilbild och namn (men inte om användaren har valt att bilden inte ska synas ovan) komma att visas för alla användare, även de som inte är inloggade.</p>
           <p>Berätta var profilbilden syns och varför!</p>
 
-          <h2>Profilbild</h2>
+          <h3>Profilbild</h3>
           <p>
             <ul>
               <li>
@@ -38,7 +37,7 @@ module.exports = React.createClass({
             </ul>
           </p>
 
-          <h2>Highscore</h2>
+          <h3>Highscore</h3>
           <p>
             <ul>
               <li>
@@ -57,13 +56,13 @@ module.exports = React.createClass({
           </p>
 
           <div id="permissions">
-            <h2>Facebook</h2>
+            <h3>Facebook</h3>
             <p>När du loggar in på skissaochgissa.se får vi viss information från Facebook. Denna informationen använder vi för att göra din upplevelse så bra som möjligt.</p>
 
             <div className="permission">
               <i className="fa fa-check-circle-o"></i>
               <div>
-                <h3>Publik användarprofil (obligatorisk)</h3>
+                <h4>Publik användarprofil (obligatorisk)</h4>
                 <p>Denna information skickar Facebook alltid när du loggar in på skissaochgissa.se och är inget du kan välja bort. Vi spara och använder bara den information som du kan se på skissaochgissa.se (ditt namn och din profilbild).</p>
               </div>
             </div>
@@ -71,7 +70,7 @@ module.exports = React.createClass({
             <div className="permission">
               {permissionIcon}
               <div>
-                <h3>Dina vänner (frivillig)</h3>
+                <h4>Dina vänner (frivillig)</h4>
                 <p>När du ger oss tillätelse att se dina vänner kan vi bara se de av dina vänner som också använder skissaochgissa.se. Vi använder denna informationen för att visa i vilka spel dina vänner spelar och vi skapar även en unik highscore för dina vänner där du kan se hur bra det går för dig jämfört med dem. {permissionLink}.</p>
               </div>
             </div>
@@ -83,7 +82,7 @@ module.exports = React.createClass({
               </div>
             </div>
           </div>
-        </Layout>
+        </div>
         );
   }
 });

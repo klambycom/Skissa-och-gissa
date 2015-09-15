@@ -6,7 +6,7 @@ var DefaultRoute = Router.DefaultRoute;
 var App = require('./components/app');
 var Index = require('./components/frontpage/index');
 var Game = require('./components/game/index');
-var Settings = require('./components/pages/settings');
+var Settings = require('./components/settings');
 var Admin = require('./components/admin/index');
 var Logs = require('./components/admin/logs');
 
