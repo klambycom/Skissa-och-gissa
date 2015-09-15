@@ -29,7 +29,7 @@ module.exports = React.createClass({
                 <nav id="header-nav">
                   <ul>
                     <li><Link to="index">Förstasidan</Link></li>
-                    <li><a href="#">Logga in med Facebook</a></li>
+                    <li><a href="/login/facebook">Logga in med Facebook</a></li>
                   </ul>
                 </nav>
               </div>
