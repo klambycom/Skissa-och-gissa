@@ -1,6 +1,5 @@
 var React = require('react');
 var Link = require('react-router').Link;
-var Login = require('./sidebar/login');
 var Highscore = require('./sidebar/highscore');
 var Flash = require('../flash');
 
@@ -19,7 +18,6 @@ module.exports = React.createClass({
               {this.props.children}
             </div>
             <aside id="sidebar">
-              <Login user={this.props.user} />
               <Highscore title="Highscore" />
             </aside>
           </main>

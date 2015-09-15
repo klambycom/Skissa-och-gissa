@@ -2,12 +2,14 @@ var React = require('react');
 var Link = require('react-router').Link;
 var Popup = require('../popup');
 var SiteInformation = require('./site_information');
+var UserLogin = require('./user_login');
 
 module.exports = React.createClass({
   propTypes: {
     inGame: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
+    user: React.PropTypes.object.isRequired,
     css: React.PropTypes.array.isRequired,
     js: React.PropTypes.array.isRequired
   },
@@ -29,7 +31,7 @@ module.exports = React.createClass({
                 <nav id="header-nav">
                   <ul>
                     <li><Link to="index">Förstasidan</Link></li>
-                    <li><a href="/login/facebook">Logga in med Facebook</a></li>
+                    <li><UserLogin user={this.props.user} /></li>
                   </ul>
                 </nav>
               </div>

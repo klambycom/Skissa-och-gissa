@@ -30,7 +30,8 @@ module.exports = React.createClass({
           title={this.props.page_title}
           description={this.props.page_description}
           css={this._cssPaths()}
-          js={this._jsPaths()}>
+          js={this._jsPaths()}
+          user={this.props.user}>
 
           <Flash messages={this.props.message} />
           <RouteHandler {...this.props} />
