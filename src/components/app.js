@@ -12,7 +12,11 @@ module.exports = React.createClass({
   },
 
   _cssPaths: function () {
-    return [this.props.css_path, this.props.fontAwesome_path];
+    return [
+      this.props.css_path,
+      this.props.fontAwesome_path,
+      'https://fonts.googleapis.com/css?family=Lora|Raleway:400,700'
+    ];
   },
 
   _jsPaths: function () {
@@ -22,7 +26,6 @@ module.exports = React.createClass({
   render: function () {
     return (
         <Layout
-          {...this.props}
           inGame={this._testPath()}
           title={this.props.page_title}
           description={this.props.page_description}

@@ -15,7 +15,8 @@ $crayons_path: '/assets/';
 $crayons_sizes: 5 10 15 20;
 
 body {
-  font-size: 1.3em;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2em;
   color: $text_color;
 }
 
@@ -32,6 +33,10 @@ h2 {
 h3 {
   font-size: 1.3em;
   margin-bottom: 10px;
+}
+
+h1, h2, h3, header {
+  font-family: 'Lora', serif;
 }
 
 .bold { font-weight: bold; }
