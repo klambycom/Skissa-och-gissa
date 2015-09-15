@@ -4,7 +4,7 @@ var Popup = require('../popup');
 var SiteInformation = require('./site_information');
 
 module.exports = React.createClass({
-  _inGameClass: function () { return this.props.inGame ? 'in-game' : ''; },
+  _inGameClass: function (name) { return this.props.inGame ? name : ''; },
 
   render: function () {
     // TODO <body className="game"> .game should be added later for effect! But
@@ -17,7 +17,7 @@ module.exports = React.createClass({
             <link rel="stylesheet" href={this.props.css_path} />
             <link rel="stylesheet" href={this.props.fontAwesome_path}/>
           </head>
-          <body className="game">
+          <body className={this._inGameClass('game')}>
             <header id="header">
               <div>
                 <div id="header-title"><Link to="index">{this.props.page_title}</Link></div>
@@ -32,7 +32,7 @@ module.exports = React.createClass({
 
             <SiteInformation show={!this.props.inGame} text={this.props.page_description} />
 
-            <main id="content" className={this._inGameClass()}>
+            <main id="content" className={this._inGameClass('in-game')}>
               {this.props.children}
             </main>
 
