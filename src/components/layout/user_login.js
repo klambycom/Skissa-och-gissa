@@ -15,11 +15,19 @@ module.exports = React.createClass({
     if (typeof this.props.user !== 'undefined') {
       this.setState({ signedIn: true });
     }
+
+    document.addEventListener('click', this._showLess);
   },
 
   handleShowMore: function (e) {
     this.setState({ showMore: !this.state.showMore });
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
+  },
+
+  _showLess: function (e) {
+    this.setState({ showMore: false });
   },
 
   render: function () {
