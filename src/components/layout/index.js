@@ -5,6 +5,8 @@ var SiteInformation = require('./site_information');
 var UserLogin = require('./user_login');
 
 module.exports = React.createClass({
+  displayName: 'Layout',
+
   propTypes: {
     inGame: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,

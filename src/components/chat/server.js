@@ -1,6 +1,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'Server',
+
   propTypes: {
     type: React.PropTypes.string.isRequired,
     data: React.PropTypes.object

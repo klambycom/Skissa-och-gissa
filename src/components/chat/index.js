@@ -14,6 +14,8 @@ var Server = require('./server');
 var Join = require('./join');
 
 module.exports = React.createClass({
+  displayName: 'Chat',
+
   mixins: [Reflux.listenTo(Logic.store, 'handleMessage'), State],
 
   getInitialState: function () {

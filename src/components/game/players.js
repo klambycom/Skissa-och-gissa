@@ -4,6 +4,8 @@ var Logic = require('../../browser/logic');
 var ProfilePicture = require('../profile_picture');
 
 module.exports = React.createClass({
+  displayName: 'Players',
+
   mixins: [Reflux.listenTo(Logic.store, 'handlePlayers')],
 
   getInitialState: function () {

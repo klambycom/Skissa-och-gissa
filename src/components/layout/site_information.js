@@ -1,6 +1,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'SiteInformation',
+
   propTypes: {
     show: React.PropTypes.bool,
     text: React.PropTypes.string

@@ -1,6 +1,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'ProfilePicture',
+
   getInitialState: function () {
     return { url: '/assets/nopic50.png', alt: 'Profilbild' };
   },

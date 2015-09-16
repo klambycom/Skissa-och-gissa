@@ -5,6 +5,8 @@ var Layout = require('./layout');
 var Flash = require('./flash');
 
 module.exports = React.createClass({
+  displayName: 'App',
+
   mixins: [ State ],
 
   _testPath: function () {

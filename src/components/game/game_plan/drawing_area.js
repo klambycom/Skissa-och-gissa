@@ -3,6 +3,8 @@ var Reflux = require('reflux');
 var Logic = require('../../../browser/logic');
 
 module.exports = React.createClass({
+  displayName: 'DrawingArea',
+
   mixins: [Reflux.listenTo(Logic.store, 'handleCanvasUpdate')],
 
   propTypes: {

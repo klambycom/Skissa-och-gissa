@@ -3,6 +3,8 @@ var Reflux = require('reflux');
 var Lobby = require('../browser/lobby');
 
 module.exports = React.createClass({
+  displayName: 'Popup',
+
   mixins: [
     Reflux.connectFilter(Lobby.store, 'currentMessage', function (data) {
       if (data.event === 'alert') { return data.data; }

@@ -3,6 +3,8 @@ var GameListItem = require('./game');
 var Sidebar = require('./sidebar');
 
 module.exports = React.createClass({
+  displayName: 'Frontpage',
+
   getInitialState: function () {
     return { games: [] };
   },

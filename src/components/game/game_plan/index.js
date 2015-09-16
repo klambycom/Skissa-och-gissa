@@ -2,6 +2,8 @@ var React = require('react');
 var DrawingArea = require('./drawing_area');
 
 module.exports = React.createClass({
+  displayName: 'GamePlan',
+
   getInitialState: function () {
     return { offset: { x: 0, y: 0 } };
   },

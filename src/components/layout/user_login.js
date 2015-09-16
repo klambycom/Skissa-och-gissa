@@ -3,6 +3,8 @@ var Link = require('react-router').Link;
 var ProfilePicture = require('../profile_picture');
 
 module.exports = React.createClass({
+  displayName: 'UserLogin',
+
   propTypes: {
     user: React.PropTypes.object.isRequired
   },
