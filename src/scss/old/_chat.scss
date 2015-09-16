@@ -90,6 +90,7 @@
     @include transition(all .5s .3s);
 
     #chat-input {
+      position: absolute;
       bottom: 0;
       padding: 5px;
       height: 40px;
