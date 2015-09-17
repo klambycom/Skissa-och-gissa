@@ -59,8 +59,11 @@ var store = Reflux.createStore({
   handleJoin: function (data) {
     this.room = data.data;
     this.trigger({ event: 'join', type: 'game', data: data.data });
-    // Draw each point to the canvas
-    data.points.forEach(this.handlePointFromServer);
+
+    process.nextTick(function () {
+      // Draw each point to the canvas
+      data.points.forEach(this.handlePointFromServer);
+    }.bind(this));
   },
 
   handlePlayerJoined: function (data) {
