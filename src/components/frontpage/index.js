@@ -1,8 +1,10 @@
 var React = require('react');
-var Layout = require('./layout');
-var GameListItem = require('../game_list_item');
+var GameListItem = require('./game');
+var Sidebar = require('./sidebar');
 
 module.exports = React.createClass({
+  displayName: 'Frontpage',
+
   getInitialState: function () {
     return { games: [] };
   },
@@ -28,12 +30,21 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-        <Layout {...this.props}>
-          {this.renderLoadingGames()}
-          <div id="games">{this.state.games.map(function (game, i) {
-            return <GameListItem game={game} key={i} />;
-          })}</div>
-        </Layout>
+        <div id="frontpage">
+          <div>
+            <h2>Aktiva spel</h2>
+
+            {this.renderLoadingGames()}
+
+            <section id="game-list">
+              {this.state.games.map(function (game, i) {
+                return <GameListItem game={game} key={i} />;
+              })}
+            </section>
+          </div>
+
+          <Sidebar />
+        </div>
         );
   }
 });

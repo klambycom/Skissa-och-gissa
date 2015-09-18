@@ -1,0 +1,114 @@
+$content-padding: 20px;
+$content-width: 1000px;
+$margin-between-element: 20px;
+$header-font-color: white;
+
+@mixin center-element() {
+  width: $content-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@import "_user_login";
+
+
+
+
+
+#header {
+  background-color: #EA7070;
+
+  & > div {
+    @include center-element();
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: $content-padding;
+
+    a {
+      text-decoration: none;
+      color: $header-font-color;
+    }
+  }
+}
+
+#header-title {
+  font-size: 2.4em;
+}
+
+#header-nav {
+  display: table-cell;
+  vertical-align: bottom;
+
+  ul {
+    display: flex;
+
+    li {
+      margin-top: 22px;
+      margin-left: 10px;
+
+      a {
+        padding: 5px 10px;
+        font-size: 1.1em;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+
+
+#site-information {
+  @include center-element();
+  padding: $content-padding $content-padding 0 $content-padding;
+  margin-top: $margin-between-element;
+
+  display: flex;
+
+  img { margin-right: 20px; }
+}
+
+#site-information-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+
+
+#content {
+  @include center-element();
+  padding: $content-padding;
+  margin-top: $margin-between-element;
+
+  &.in-game {
+    position: absolute;
+    top: 86px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+}
+
+
+
+#footer {
+  @include center-element();
+
+  padding: 0 $content-padding;
+  text-align: center;
+  margin-bottom: 20px;
+
+  font-size: .8em;
+  color: gray;
+  a { color: #484747; }
+}

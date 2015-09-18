@@ -7,22 +7,68 @@
 @import "compass/css3";
 
 $highlight_color: rgb(136,178,216);
+$text_color: #2D2D2D;
 
 $crayons: white black red orange yellow yellowgreen green lightskyblue dodgerblue violet pink burlywood saddlebrown brown;
 //$crayons_path: '../gfx/';
 $crayons_path: '/assets/';
 $crayons_sizes: 5 10 15 20;
 
-@import "old/main";
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2em;
+  color: $text_color;
+}
 
-// Front page
-@import "old/games";
-@import "old/sidebar";
-@import "old/footer";
+h1 {
+  font-size: 1.7em;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+h1, h2, h3, h4, header {
+  font-family: 'Lora', serif;
+}
+
+h1, h2, h3, h4 {
+  padding-top: 5px;
+}
+
+p {
+  margin-bottom: 10px;
+  line-height: 1.2em;
+}
+
+.bold { font-weight: bold; }
+
+@import "layout/_index";
+@import "frontpage/_index";
+@import "settings/_index";
+
+//@import "old/main";
+//
+//// Front page
+//@import "old/games";
+//@import "old/sidebar";
+//@import "old/footer";
 
 // Game
 @import "old/game-user-info";
-@import "old/chat";
+@import "chat/_index";
 @import "old/gameplan";
 @import "old/artboard";
 @import "old/timer";
@@ -31,215 +77,177 @@ $crayons_sizes: 5 10 15 20;
 // Popup
 @import "old/popup";
 
-// Image
-@import "old/show-image";
-@import "old/show-all-images";
-
-
-#flash-message {
-  background-color: #689C68;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 3px;
-  color: white;
-
-  display: flex;
-  justify-content: space-between;
-}
-
-#flash-message a {
-  color: white;
-  text-decoration: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-main h1 {
-  font-size: 1.9em;
-  margin-bottom: 10px;
-}
-
-main h2, main h3 {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-main h2 {
-  font-size: 1.5em;
-}
-
-main h3 {
-  font-size: 1.2em;
-}
-
-main p {
-  margin-bottom: 10px;
-}
-
-#permissions {
-  background-color: rgba(128, 128, 128, .1);
-  border-radius: 3px;
-  padding: 5px 10px;
-  margin-top: 30px;
-}
-
-.permission {
-  display: flex;
-  justify-content: space-between;
-}
-
-.permission i.fa.fa-check-circle-o, .permission i.fa.fa-times-circle-o {
-  padding: 5px 7px 0 0;
-  font-size: 2em;
-}
-
-.permission i.fa.fa-check-circle-o { color: green; }
-.permission i.fa.fa-times-circle-o { color: #AF4B4B; }
-
-#revoce-authorization {
-  background-color: #BF3636;
-  border-radius: 3px;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 5px;
-  color: white;
-  cursor: pointer;
-}
-
-#revoce-authorization:hover {
-  background-color: #943030;
-}
-
-#revoce-authorization .confirm {
-  font-size: .7em;
-  margin-top: 5px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Admin
-#log-levels { padding: 10px 0; }
-
-#log-levels a {
-  padding: 5px;
-  margin-right: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-#log-levels a.total { background-color: green; }
-#log-levels a.debug { background-color: #9A9A00; }
-#log-levels a.verbose { background-color: #FF728B; }
-#log-levels a.info { background-color: #3A3ADA; }
-#log-levels a.warn { background-color: red; }
-#log-levels a.error { background-color: #BB5757; }
-
-#log-levels .amount {
-  background-color: white;
-  border-radius: 10px;
-  padding: 1px 5px 0 6px;
-  font-size: .7em;
-  font-weight: bold;
-  margin-left: 2px;
-}
-
-#log-levels .total .amount { color: green; }
-#log-levels .debug .amount { color: #9A9A00; }
-#log-levels .verbose .amount { color: #FF728B; }
-#log-levels .info .amount { color: #3A3ADA; }
-#log-levels .warn .amount { color: #FF0000; }
-#log-levels .error .amount { color: #BB5757; }
-
-
-
-#log-entries > div {
-  background-color: rgb(243, 242, 242);
-  margin: 5px 0;
-  padding: 10px 5px;
-}
-
-#log-entries .message {
-  display: block;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: black;
-}
-
-#log-entries .meta { color: #777777; }
-
-#log-entries pre {
-  font-family: monospace;
-  margin-bottom: 10px;
-  display: none;
-}
-
-#log-entries .show-more pre { display: block; }
-
-#log-entries .debug { border-left: 10px rgb(152,156,19) solid;  }
-#log-entries .verbose { border-left: 10px rgb(255,114,139) solid;  }
-#log-entries .info { border-left: 10px rgb(70,39,216) solid;  }
-#log-entries .warn { border-left: 10px rgb(247,0,19) solid;  }
-#log-entries .error { border-left: 10px rgb(182,86,88) solid;  }
-
-
-// chat
-.message.me p {
-  background-color: rgb(136, 178, 216) !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// login
-#login h2 a {
-  background-color: rgb(69, 97, 157);
-  padding: 5px;
-  color: white;
-}
-
-#login ul {
-  list-style-type: disc;
-  margin-left: 10px;
-  padding: 5px;
-  color: gray;
-  font-size: .9em;
-}
-
-#login input[type="text"] {
-  font-size: 1em;
-  width: 95%;
-  padding: 5px;
-}
+//// Image
+//@import "old/show-image";
+//@import "old/show-all-images";
+//
+//
+//#flash-message {
+//  background-color: #689C68;
+//  margin-bottom: 10px;
+//  padding: 10px;
+//  border-radius: 3px;
+//  color: white;
+//
+//  display: flex;
+//  justify-content: space-between;
+//}
+//
+//#flash-message a {
+//  color: white;
+//  text-decoration: none;
+//}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//main h1 {
+//  font-size: 1.9em;
+//  margin-bottom: 10px;
+//}
+//
+//main h2, main h3 {
+//  margin-top: 5px;
+//  margin-bottom: 5px;
+//}
+//
+//main h2 {
+//  font-size: 1.5em;
+//}
+//
+//main h3 {
+//  font-size: 1.2em;
+//}
+//
+//main p {
+//  margin-bottom: 10px;
+//}
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//// Admin
+//#log-levels { padding: 10px 0; }
+//
+//#log-levels a {
+//  padding: 5px;
+//  margin-right: 10px;
+//  color: white;
+//  text-decoration: none;
+//}
+//
+//#log-levels a.total { background-color: green; }
+//#log-levels a.debug { background-color: #9A9A00; }
+//#log-levels a.verbose { background-color: #FF728B; }
+//#log-levels a.info { background-color: #3A3ADA; }
+//#log-levels a.warn { background-color: red; }
+//#log-levels a.error { background-color: #BB5757; }
+//
+//#log-levels .amount {
+//  background-color: white;
+//  border-radius: 10px;
+//  padding: 1px 5px 0 6px;
+//  font-size: .7em;
+//  font-weight: bold;
+//  margin-left: 2px;
+//}
+//
+//#log-levels .total .amount { color: green; }
+//#log-levels .debug .amount { color: #9A9A00; }
+//#log-levels .verbose .amount { color: #FF728B; }
+//#log-levels .info .amount { color: #3A3ADA; }
+//#log-levels .warn .amount { color: #FF0000; }
+//#log-levels .error .amount { color: #BB5757; }
+//
+//
+//
+//#log-entries > div {
+//  background-color: rgb(243, 242, 242);
+//  margin: 5px 0;
+//  padding: 10px 5px;
+//}
+//
+//#log-entries .message {
+//  display: block;
+//  margin-bottom: 10px;
+//  text-decoration: none;
+//  color: black;
+//}
+//
+//#log-entries .meta { color: #777777; }
+//
+//#log-entries pre {
+//  font-family: monospace;
+//  margin-bottom: 10px;
+//  display: none;
+//}
+//
+//#log-entries .show-more pre { display: block; }
+//
+//#log-entries .debug { border-left: 10px rgb(152,156,19) solid;  }
+//#log-entries .verbose { border-left: 10px rgb(255,114,139) solid;  }
+//#log-entries .info { border-left: 10px rgb(70,39,216) solid;  }
+//#log-entries .warn { border-left: 10px rgb(247,0,19) solid;  }
+//#log-entries .error { border-left: 10px rgb(182,86,88) solid;  }
+//
+//
+//// chat
+//.message.me p {
+//  background-color: rgb(136, 178, 216) !important;
+//}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//// login
+//#login h2 a {
+//  background-color: rgb(69, 97, 157);
+//  padding: 5px;
+//  color: white;
+//}
+//
+//#login ul {
+//  list-style-type: disc;
+//  margin-left: 10px;
+//  padding: 5px;
+//  color: gray;
+//  font-size: .9em;
+//}
+//
+//#login input[type="text"] {
+//  font-size: 1em;
+//  width: 95%;
+//  padding: 5px;
+//}

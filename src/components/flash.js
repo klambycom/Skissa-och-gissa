@@ -3,6 +3,8 @@ var Reflux = require('reflux');
 var Lobby = require('../browser/lobby');
 
 module.exports = React.createClass({
+  displayName: 'Flash',
+
   mixins: [
     Reflux.connectFilter(Lobby.store, 'currentMessage', function (data) {
       if (data.event === 'flash') { return data; }

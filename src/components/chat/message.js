@@ -2,6 +2,8 @@ var React = require('react');
 var ProfilePicture = require('../profile_picture');
 
 module.exports = React.createClass({
+  displayName: 'Message',
+
   propTypes: {
     player: React.PropTypes.object.isRequired,
     message: React.PropTypes.string.isRequired,

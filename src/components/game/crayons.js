@@ -2,6 +2,8 @@ var React = require('react');
 var Logic = require('../../browser/logic');
 
 module.exports = React.createClass({
+  displayName: 'Crayons',
+
   sizes: [5, 10, 15, 20],
 
   colors: [

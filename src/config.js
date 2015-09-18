@@ -5,7 +5,7 @@ var logger = require('./server/logger');
 module.exports = {
   all: function (app) {
     app.locals.page_title = 'Skissa och gissa';
-    app.locals.page_description = 'Lorem ipsum';
+    app.locals.page_description = 'Skissa och gissa är ett spel där en spelare ritar något och de andra spelarna försöker gissa vad det är som ritas. När en spelare har gissat rätt är det nästa spelares tur att rita.';
 
     app.set('views', path.normalize(path.join(__dirname + '/components'))); // Why does this not work?
     app.set('view engine', 'js');

@@ -5,6 +5,8 @@ var Chat = require('../chat');
 var GamePlan = require('./game_plan');
 
 module.exports = React.createClass({
+  displayName: 'Game',
+
   mixins: [ State ],
 
   getInitialState: function () {

@@ -1,6 +1,8 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  displayName: 'Join',
+
   propTypes: {
     room: React.PropTypes.object.isRequired
   },
