@@ -130,11 +130,12 @@ gulp.task('watch', function () {
   gulp.watch([paths.js, paths.flux, paths.node], ['docs']);
   gulp.watch([paths.js, paths.main], ['browserify']);
   gulp.watch([paths.assets], ['assets']);
+  gulp.watch([paths.src], ['babel']);
 });
 
 /*
  * Combined tasks
  */
 
-gulp.task('default', ['uglify', 'assets', 'docs', 'minify-css']);
+gulp.task('default', ['uglify', 'assets', 'docs', 'minify-css', 'babel']);
 gulp.task('build', ['uglify', 'assets', 'minify-css']);
