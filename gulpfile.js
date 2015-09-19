@@ -7,6 +7,7 @@ var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
+var babel = require('gulp-babel');
 
 var paths = {
   js:     'src/{components,browser}/**/*.js',
@@ -18,7 +19,8 @@ var paths = {
   dist:   'dist',
   public: 'dist/public',
   assets: 'assets/**/*',
-  css:    'dist/public/screen.css'
+  css:    'dist/public/screen.css',
+  src:    'src/**/*.js'
 };
 
 /*
@@ -48,6 +50,16 @@ gulp.task('uglify', ['browserify'], function () {
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(paths.public));
+});
+
+/*
+ * Build server js
+ */
+
+gulp.task('babel', function () {
+  return gulp.src(paths.src)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.dist));
 });
 
 /*
