@@ -1,5 +1,3 @@
-require('node-jsx').install();
-
 // Utils
 var logger = require('./src/server/logger');
 var path = require('path');
@@ -7,7 +5,7 @@ var path = require('path');
 var http = require('http');
 var express = require('express');
 var app = express();
-var config = require('./src/config');
+var config = require('./dist/config');
 var ReactEngine = require('react-engine');
 // DB
 var mongoose = require('mongoose');
@@ -23,7 +21,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
 // View engine
-var routes = path.normalize(path.join(__dirname + '/src/routes.js'));
+var routes = path.normalize(path.join(__dirname + '/dist/routes.js'));
 var engine = ReactEngine.server.create({ routes: require(routes), routesFilePath: routes });
 app.engine('.js', engine);
 

@@ -2,7 +2,7 @@ var Reflux = require('reflux');
 var socket = require('./websocket');
 
 // TODO MOVE TO TESTS!!!
-if (process && !process.browser) {
+if (typeof window === 'undefined') {
   window = {};
   window.localStorage = { getItem: function () {}, setItem: function () {} };
 }

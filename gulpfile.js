@@ -8,6 +8,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var babel = require('gulp-babel');
+var replace = require('gulp-replace');
 
 var paths = {
   js:     'src/{components,browser}/**/*.js',
@@ -59,6 +60,7 @@ gulp.task('uglify', ['browserify'], function () {
 gulp.task('babel', function () {
   return gulp.src(paths.src)
     .pipe(babel())
+    .pipe(replace(/require\('(\.\.\/)+browser\/logic'\)/g, '{ actions: {}, store: {} }'))
     .pipe(gulp.dest(paths.dist));
 });
 
