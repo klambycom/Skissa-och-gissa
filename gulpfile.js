@@ -57,7 +57,12 @@ gulp.task('uglify', ['browserify'], function () {
  * Build server js
  */
 
-gulp.task('babel', function () {
+gulp.task('movedictionary', function () {
+  return gulp.src('src/dictionary.json')
+    .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('babel', ['movedictionary'], function () {
   return gulp.src(paths.src)
     .pipe(babel())
     .pipe(replace(/require\('(\.\.\/)+browser\/logic'\)/g, '{ actions: {}, store: {} }'))

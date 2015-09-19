@@ -1,5 +1,5 @@
 // Utils
-var logger = require('./src/server/logger');
+var logger = require('./dist/server/logger');
 var path = require('path');
 // Server
 var http = require('http');
@@ -10,8 +10,8 @@ var ReactEngine = require('react-engine');
 // DB
 var mongoose = require('mongoose');
 // Sub-apps
-var api = require('./src/server/api');
-var pages = require('./src/server/pages');
+var api = require('./dist/server/api');
+var pages = require('./dist/server/pages');
 // Passport
 var passport = require('passport');
 // Middlewares
@@ -46,7 +46,7 @@ mongoose.connect(app.get('db'));
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
-require('./src/passport/init');
+require('./dist/passport/init');
 
 // Mount sub-apps
 app.use('/', pages);
@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
 var server = http.createServer(app);
 
 // WebSocket
-require('./src/server/websockets')(server);
+require('./dist/server/websockets')(server);
 
 // Start server
 if (app.get('env') !== 'test') {
