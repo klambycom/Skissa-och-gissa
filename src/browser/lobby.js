@@ -9,11 +9,11 @@ var actions = Reflux.createActions([
 var store = Reflux.createStore({
   listenables: actions,
 
-  init: function () {
+  init() {
     socket.on('invalid room', this.invalidRoom);
   },
 
-  invalidRoom: function (data) {
+  invalidRoom(data) {
     // TODO Check if room is full or not found.
     // TODO Join room again when connecting after disconnect
     if (typeof data === 'undefined') {
@@ -23,31 +23,18 @@ var store = Reflux.createStore({
     }
   },
 
-  onFlash: function (message) {
+  onFlash(message) {
     this.trigger({ event: 'flash', type: '', data: message });
   },
 
-  onAlert: function (message, title, extra, closeable) {
-    if (typeof title === 'undefined' || title === null) { title = 'Hej!'; }
-    if (typeof extra === 'undefined' || extra === null) { extra = ''; }
-    if (typeof closeable === 'undefined' || closeable === null) { closeable = true; }
-
+  onAlert(message, title = 'Hej!', extra = '', closeable = true) {
     this.trigger({
       event: 'alert',
       type: '',
-      data: {
-        message: message,
-        title: title,
-        extra: extra,
-        closeable: closeable
-      }
+      data: { message, title, extra, closeable }
     });
   }
 });
-
-global._alert = function (message, title, extra) {
-  actions.alert(message, title, extra);
-};
 
 module.exports = actions;
 module.exports.store = store;
