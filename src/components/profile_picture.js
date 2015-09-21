@@ -3,12 +3,12 @@ var React = require('react');
 module.exports = React.createClass({
   displayName: 'ProfilePicture',
 
-  getInitialState: function () {
+  getInitialState() {
     return { url: '/assets/nopic50.png', alt: 'Profilbild' };
   },
 
-  getDefaultProps: function () {
-    return { size: 'small', user: {} };
+  getDefaultProps() {
+    return { size: 'small' };
   },
 
   propTypes: {
@@ -16,30 +16,18 @@ module.exports = React.createClass({
     size: React.PropTypes.oneOf(['small', 'normal', 'album', 'large', 'square'])
   },
 
-  componentWillMount: function () {
+  componentDidMount() {
     // Set src from Facebook
-    if (this.props.user.facebook && this.props.user.facebook.id) {
+    if (this.props.user.provider === 'facebook') {
       // Doc: https://developers.facebook.com/docs/graph-api/reference/v2.4/user/picture
       this.setState({
-        url: 'http://graph.facebook.com/v2.4/' + this.props.user.facebook.id
-          + '/picture?type=' + this.props.size
+        url: `http://graph.facebook.com/v2.4/${this.props.user.id}/picture?type=${this.props.size}`,
+        alt: `Bild på ${this.props.user.name}`
       });
     }
-
-    // Set alt from Facebook
-    if (this.props.user.facebook && this.props.user.facebook.firstName) {
-      this.setState({
-        alt: 'Bild på ' + this.props.user.facebook.firstName
-          + ' ' + this.props.user.facebook.lastName
-      });
-    }
-
-    // TODO Set src from Twitter
-
-    // TODO Set alt from Twitter
   },
 
-  render: function () {
+  render() {
     return <img
       src={this.state.url}
       alt={this.state.alt}

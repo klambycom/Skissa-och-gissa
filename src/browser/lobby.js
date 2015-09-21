@@ -1,15 +1,43 @@
 var Reflux = require('reflux');
 var socket = require('./websocket');
 
-var actions = Reflux.createActions([
-    'flash', // Flash-messages
-    'alert' // PopUp-dialog
-]);
+var createAnonymousUser = function (data) {
+  return {
+    provider: 'anonymous'
+  }
+};
+
+var createFacebookUser = function (data) {
+  return {
+    provider: 'facebook',
+    id: data.facebook.id,
+    access_token: data.facebook.access_token,
+    name: `${data.facebook.firstName} ${data.facebook.lastName}`,
+    firstName: data.facebook.firstName,
+    friends: data.facebook.friends,
+    permissions: data.facebook.permissions
+  };
+};
+
+var createUser = function (data) {
+  if (typeof data.facebook !== 'undefined') {
+    return createFacebookUser(data);
+  }
+
+  return createAnonymousUser(data);
+};
+
+var actions = Reflux.createActions({
+    flash: {}, // Flash-messages
+    alert: {}, // PopUp-dialog
+    user: { children: [ 'login', 'logout' ] }
+});
 
 var store = Reflux.createStore({
   listenables: actions,
 
   init() {
+    this.user = createUser({});
     socket.on('invalid room', this.invalidRoom);
   },
 
@@ -33,6 +61,22 @@ var store = Reflux.createStore({
       type: '',
       data: { message, title, extra, closeable }
     });
+  },
+
+  /*!
+   * USER
+   */
+
+  _triggerUser: function (type, data) {
+    this.trigger({ event: 'user', type, data });
+  },
+
+  onUserLogin: function (user) {
+    this.user = createUser(user);
+    this._triggerUser('login', this.user);
+  },
+
+  onUserLogout: function () {
   }
 });
 
