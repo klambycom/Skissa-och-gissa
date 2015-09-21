@@ -9,26 +9,22 @@ module.exports = React.createClass({
 
   mixins: [UserMixin],
 
-  getInitialState: function () {
+  getInitialState() {
     return { showMore: false };
   },
 
-  componentDidMount: function () {
-    document.addEventListener('click', this._showLess);
+  componentDidMount() {
+    document.addEventListener('click', () => this.setState({ showMore: false }));
   },
 
-  handleShowMore: function (e) {
+  handleShowMore(e) {
     this.setState({ showMore: !this.state.showMore });
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
   },
 
-  _showLess: function (e) {
-    this.setState({ showMore: false });
-  },
-
-  render: function () {
+  render() {
     if (!this.isSignedIn()) {
       return (
           <div id="user-login">
