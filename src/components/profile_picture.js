@@ -18,7 +18,7 @@ module.exports = React.createClass({
 
   componentDidMount() {
     // Set src from Facebook
-    if (this.props.user.provider === 'facebook') {
+    if (this.props.user && this.props.user.provider === 'facebook') {
       // Doc: https://developers.facebook.com/docs/graph-api/reference/v2.4/user/picture
       this.setState({
         url: `http://graph.facebook.com/v2.4/${this.props.user.id}/picture?type=${this.props.size}`,
