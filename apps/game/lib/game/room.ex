@@ -8,15 +8,18 @@ defmodule Game.Room do
     # Create and/or set a id
     id = opts[:id] || UUID.uuid4()
 
+    # Set first word and the rest of the words
+    {word, words} = if opts[:word] do
+      {opts[:word], words}
+    else
+      Game.Logic.random(words)
+    end
+
     # Create the room
     {:ok, pid} = GenServer.start_link(
       __MODULE__,
-      %{id: id, words: words, word: ""}
+      %{id: id, words: words, word: word}
     )
-
-    # Set first word
-    word = opts[:word] || random(pid)
-    set_word(pid, word)
 
     {:ok, pid}
   end
@@ -46,11 +49,6 @@ defmodule Game.Room do
       true
   """
   def guess(room, word), do: GenServer.call(room, {:guess, word})
-
-  @doc """
-  Get random word from the word list
-  """
-  def random(room), do: GenServer.call(room, :random)
 
   @doc """
   Set new word and remove the word from the list of words
@@ -94,9 +92,6 @@ defmodule Game.Room do
   def handle_call(:words, _, state), do: {:reply, state.words, state}
 
   def handle_call(:word, _, state), do: {:reply, state.word, state}
-
-  def handle_call(:random, _, state),
-    do: {:reply, Enum.random(state.words), state}
 
   def handle_cast({:set_word, word}, state) do
     state = Map.put(state, :word, word)
