@@ -1,6 +1,10 @@
 defmodule Game.Room do
   use GenServer
 
+  @moduledoc """
+  The room handles words, guesses and players.
+  """
+
   @doc """
   Create a new room and set a random word
   """
