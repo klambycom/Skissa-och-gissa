@@ -87,7 +87,7 @@ defmodule Game.Room do
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
   def handle_call({:guess, word}, _, state),
-    do: {:reply, state.word == word, state}
+    do: {:reply, Game.Logic.guess(state.word, word), state}
 
   def handle_call(:words, _, state), do: {:reply, state.words, state}
 
