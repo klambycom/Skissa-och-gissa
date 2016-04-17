@@ -55,25 +55,6 @@ defmodule Game.Room do
   def guess(room, word), do: GenServer.call(room, {:guess, word})
 
   @doc """
-  Set new word and remove the word from the list of words
-
-  ## Example
-
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"], %{word: ""})
-      ...> :ok = Game.Room.set_word(room, "bar")
-      ...> Game.Room.word(room)
-      "bar"
-
-  The new word is removed from the list.
-
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"], %{word: ""})
-      ...> :ok = Game.Room.set_word(room, "bar")
-      ...> Game.Room.words(room)
-      ["foo", "baz"]
-  """
-  def set_word(room, word), do: GenServer.cast(room, {:set_word, word})
-
-  @doc """
   Return all words
   """
   def words(room), do: GenServer.call(room, :words)
@@ -111,10 +92,4 @@ defmodule Game.Room do
   def handle_call(:word, _, state), do: {:reply, state.word, state}
 
   def handle_call(:rounds, _, state), do: {:reply, state.rounds, state}
-
-  def handle_cast({:set_word, word}, state) do
-    state = Map.put(state, :word, word)
-    state = Map.put(state, :words, List.delete(state.words, word))
-    {:noreply, state}
-  end
 end
