@@ -6,14 +6,15 @@ defmodule Game.Room do
   """
 
   @doc """
-  Create a new room and set a random word
+  Create a new room and set a random word. The number of rounds is set,
+  default is 20 but can never be more than the number of words.
   """
   def new(words, opts \\ %{}) do
     # Create and/or set a id
     id = opts[:id] || UUID.uuid4()
 
     # Set number of rounds left
-    rounds = opts[:rounds] || 20
+    rounds = Enum.min([opts[:rounds] || 20, length(words)])
 
     # Set first word and the rest of the words
     {word, words} = if opts[:word] do

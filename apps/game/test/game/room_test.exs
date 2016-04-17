@@ -15,6 +15,13 @@ defmodule Game.RoomTest do
     assert Room.word(room) != ""
   end
 
+  test "Game.Room.new should set rounds to no more than words", %{room: room} do
+    assert Room.rounds(room) == 3
+
+    {:ok, room} = Game.Room.new(["foo", "bar", "baz"], rounds: 10)
+    assert Room.rounds(room) == 3
+  end
+
   test "Game.Room.guess should change nr of rounds if the guess is correct" do
     {:ok, room} = Game.Room.new(["foo", "bar", "baz"], rounds: 2)
     Game.Room.guess(room, Game.Room.word(room))
