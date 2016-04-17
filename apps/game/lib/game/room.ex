@@ -32,7 +32,7 @@ defmodule Game.Room do
 
   ## Example
 
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"], %{id: "unique_id"})
+      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"], id: "unique_id")
       ...> Game.Room.id(room)
       "unique_id"
   """
