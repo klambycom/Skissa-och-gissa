@@ -79,10 +79,7 @@ defmodule Game.Room do
   """
   def word(room), do: GenServer.call(room, :word)
 
-  def init(opts) do
-    state = %{id: opts.id, words: opts.words, word: opts.word}
-    {:ok, state}
-  end
+  def init(state), do: {:ok, state}
 
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
