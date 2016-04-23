@@ -1,4 +1,4 @@
-defmodule Game.Room do
+defmodule Game.Server do
   use GenServer
 
   @moduledoc """
@@ -37,8 +37,8 @@ defmodule Game.Room do
 
   ## Example
 
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"], id: "unique_id")
-      ...> Game.Room.id(room)
+      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"], id: "unique_id")
+      ...> Game.Server.id(room)
       "unique_id"
   """
   def id(room), do: GenServer.call(room, :id)
@@ -49,12 +49,12 @@ defmodule Game.Room do
 
   ## Example
 
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"])
-      ...> Game.Room.guess(room, "wrong")
+      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"])
+      ...> Game.Server.guess(room, "wrong")
       false
 
-      iex> {:ok, room} = Game.Room.new(["foo", "bar", "baz"])
-      ...> Game.Room.guess(room, Game.Room.word(room))
+      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"])
+      ...> Game.Server.guess(room, Game.Server.word(room))
       true
   """
   def guess(room, word), do: GenServer.call(room, {:guess, word})
