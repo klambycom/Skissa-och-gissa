@@ -16,10 +16,10 @@ defmodule Game.ServerTest do
   end
 
   test "Game.Room.new should set rounds to no more than words", %{room: room} do
-    assert Server.rounds(room) == 3
+    assert Server.rounds(room) == 2
 
     {:ok, room} = Game.Server.new(["foo", "bar", "baz"], rounds: 10)
-    assert Server.rounds(room) == 3
+    assert Server.rounds(room) == 2
   end
 
   test "Game.Room.guess should change nr of rounds if the guess is correct" do
