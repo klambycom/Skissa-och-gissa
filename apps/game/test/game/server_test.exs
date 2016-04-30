@@ -6,34 +6,34 @@ defmodule Game.ServerTest do
   doctest Server
 
   setup do
-    {:ok, room} = Server.new(words: ["foo", "bar", "baz"])
+    {:ok, room} = GenServer.start_link(Server, words: ["foo", "bar", "baz"])
 
     {:ok, room: room}
   end
 
-  test "Game.Room.new should set a random word", %{room: room} do
+  test "Game.Server.new should set a random word", %{room: room} do
     assert Server.word(room) != ""
   end
 
-  test "Game.Room.new should set rounds to no more than words", %{room: room} do
+  test "Game.Server.new should set rounds to no more than words", %{room: room} do
     assert Server.rounds(room) == 2
 
-    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 10)
+    {:ok, room} = GenServer.start_link(Server, words: ["foo", "bar", "baz"], rounds: 10)
     assert Server.rounds(room) == 2
   end
 
-  test "Game.Room.guess should change nr of rounds if the guess is correct" do
-    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 2)
-    Game.Server.guess(room, Game.Server.word(room))
+  test "Game.Server.guess should change nr of rounds if the guess is correct" do
+    {:ok, room} = GenServer.start_link(Server, words: ["foo", "bar", "baz"], rounds: 2)
+    Server.guess(room, Server.word(room))
 
-    assert Game.Server.rounds(room) == 1
+    assert Server.rounds(room) == 1
   end
 
-  test "Game.Room.guess should select a new word if the guess is correct" do
-    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 2)
-    first_word = Game.Server.word(room)
-    Game.Server.guess(room, first_word)
+  test "Game.Server.guess should select a new word if the guess is correct" do
+    {:ok, room} = GenServer.start_link(Server, words: ["foo", "bar", "baz"], rounds: 2)
+    first_word = Server.word(room)
+    Server.guess(room, first_word)
 
-    assert first_word != Game.Server.word(room)
+    assert first_word != Server.word(room)
   end
 end

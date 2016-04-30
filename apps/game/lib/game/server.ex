@@ -6,18 +6,15 @@ defmodule Game.Server do
   """
 
   @doc """
-  Create a new room and set a random word. The number of rounds is set,
-  default is 20 but can never be more than the number of words.
-  """
-  def new(opts),
-    do: GenServer.start_link(__MODULE__, opts)
-
-  @doc """
   Get the id of the room
 
   ## Example
 
-      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], id: "unique_id")
+      iex> {:ok, room} = GenServer.start_link(
+      ...>   Game.Server,
+      ...>   words: ["foo", "bar", "baz"],
+      ...>   id: "unique_id"
+      ...> )
       ...> Game.Server.id(room)
       "unique_id"
   """
@@ -29,11 +26,11 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"])
+      iex> {:ok, room} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
       ...> Game.Server.guess(room, "wrong")
       false
 
-      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"])
+      iex> {:ok, room} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
       ...> Game.Server.guess(room, Game.Server.word(room))
       true
   """
