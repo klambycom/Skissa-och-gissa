@@ -3,7 +3,8 @@ defmodule Game.Mixfile do
 
   def project do
     [app: :game,
-     version: "0.0.1",
+     version: "0.1.0-dev",
+     name: "SoG Logic",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -37,6 +38,8 @@ defmodule Game.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev},
       {:uuid, "~> 1.1"}
     ]
   end
