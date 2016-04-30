@@ -34,7 +34,10 @@ defmodule Game.State do
   """
   def new_word(state) do
     {word, words} = get_random(state.words)
-    %__MODULE__{state | word: word, words: words, rounds_left: length(words)}
+
+    %__MODULE__{
+      state | word: word, words: words, rounds_left: state.rounds_left - 1
+    }
   end
 
   defp get_id(id), do: id || UUID.uuid4()

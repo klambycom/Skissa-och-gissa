@@ -60,4 +60,11 @@ defmodule Game.StateTest do
   test "Game.State.new_word should change nr of rounds left", %{state: state} do
     assert State.new_word(state).rounds_left == 2
   end
+
+  test "Game.State.new_word should remove 1 from rounds left" do
+    state = State.new(words: ["a", "b", "c", "d", "e"], word: "x", rounds_left: 3)
+    state = State.new_word(state)
+
+    assert state.rounds_left == 2
+  end
 end
