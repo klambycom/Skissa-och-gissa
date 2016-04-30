@@ -2,54 +2,58 @@ defmodule Game.Server do
   use GenServer
 
   @moduledoc """
-  The room handles words, guesses and players.
+  The server handles the game and its players.
   """
 
   @doc """
-  Get the id of the room
+  Get the id of the server
 
   ## Example
 
-      iex> {:ok, room} = GenServer.start_link(
+      iex> {:ok, server} = GenServer.start_link(
       ...>   Game.Server,
       ...>   words: ["foo", "bar", "baz"],
       ...>   id: "unique_id"
       ...> )
-      ...> Game.Server.id(room)
+      ...> Game.Server.id(server)
       "unique_id"
   """
-  def id(room), do: GenServer.call(room, :id)
+  def id(server), do: GenServer.call(server, :id)
 
   @doc """
-  Guess what the current word is. A new rounds will start if the guess is
+  Guess what the current word is. A new round will start if the guess is
   correct, and a new word will be selected.
 
   ## Example
 
-      iex> {:ok, room} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
-      ...> Game.Server.guess(room, "wrong")
+      iex> {:ok, pid} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
+      ...> Game.Server.guess(pid, "wrong")
       false
 
-      iex> {:ok, room} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
-      ...> Game.Server.guess(room, Game.Server.word(room))
+      iex> {:ok, pid} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
+      ...> Game.Server.guess(pid, Game.Server.word(pid))
       true
   """
-  def guess(room, word), do: GenServer.call(room, {:guess, word})
+  def guess(server, word), do: GenServer.call(server, {:guess, word})
 
   @doc """
   Return all words
   """
-  def words(room), do: GenServer.call(room, :words)
+  def words(server), do: GenServer.call(server, :words)
 
   @doc """
   Return the current word
   """
-  def word(room), do: GenServer.call(room, :word)
+  def word(server), do: GenServer.call(server, :word)
 
   @doc """
   Return number of rounds left
   """
-  def rounds(room), do: GenServer.call(room, :rounds)
+  def rounds(server), do: GenServer.call(server, :rounds)
+
+  ###
+  # GenServer API
+  ###
 
   def init(opts), do: {:ok, Game.State.new(opts)}
 
