@@ -9,15 +9,15 @@ defmodule Game.Server do
   Create a new room and set a random word. The number of rounds is set,
   default is 20 but can never be more than the number of words.
   """
-  def new(words, opts \\ %{}),
-    do: GenServer.start_link(__MODULE__, init_state(words, opts))
+  def new(opts),
+    do: GenServer.start_link(__MODULE__, opts)
 
   @doc """
   Get the id of the room
 
   ## Example
 
-      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"], id: "unique_id")
+      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], id: "unique_id")
       ...> Game.Server.id(room)
       "unique_id"
   """
@@ -29,11 +29,11 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"])
+      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"])
       ...> Game.Server.guess(room, "wrong")
       false
 
-      iex> {:ok, room} = Game.Server.new(["foo", "bar", "baz"])
+      iex> {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"])
       ...> Game.Server.guess(room, Game.Server.word(room))
       true
   """
@@ -54,7 +54,10 @@ defmodule Game.Server do
   """
   def rounds(room), do: GenServer.call(room, :rounds)
 
-  def init(state), do: {:ok, state}
+  def init(opts) do
+    state = init_state(opts)
+    {:ok, state}
+  end
 
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
@@ -78,12 +81,12 @@ defmodule Game.Server do
 
   def handle_call(:rounds, _, state), do: {:reply, state.rounds, state}
 
-  defp init_state(words, opts) do
+  defp init_state(opts) do
     # Set first word and the rest of the words
     {word, words} = if opts[:word] do
-      {opts[:word], words}
+      {opts[:word], opts[:words]}
     else
-      Game.Logic.random(words)
+      Game.Logic.random(opts[:words])
     end
 
     %{

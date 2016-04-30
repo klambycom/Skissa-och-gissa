@@ -6,7 +6,7 @@ defmodule Game.ServerTest do
   doctest Server
 
   setup do
-    {:ok, room} = Server.new(["foo", "bar", "baz"])
+    {:ok, room} = Server.new(words: ["foo", "bar", "baz"])
 
     {:ok, room: room}
   end
@@ -18,19 +18,19 @@ defmodule Game.ServerTest do
   test "Game.Room.new should set rounds to no more than words", %{room: room} do
     assert Server.rounds(room) == 2
 
-    {:ok, room} = Game.Server.new(["foo", "bar", "baz"], rounds: 10)
+    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 10)
     assert Server.rounds(room) == 2
   end
 
   test "Game.Room.guess should change nr of rounds if the guess is correct" do
-    {:ok, room} = Game.Server.new(["foo", "bar", "baz"], rounds: 2)
+    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 2)
     Game.Server.guess(room, Game.Server.word(room))
 
     assert Game.Server.rounds(room) == 1
   end
 
   test "Game.Room.guess should select a new word if the guess is correct" do
-    {:ok, room} = Game.Server.new(["foo", "bar", "baz"], rounds: 2)
+    {:ok, room} = Game.Server.new(words: ["foo", "bar", "baz"], rounds: 2)
     first_word = Game.Server.word(room)
     Game.Server.guess(room, first_word)
 
