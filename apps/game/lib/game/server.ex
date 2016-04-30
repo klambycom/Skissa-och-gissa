@@ -54,22 +54,13 @@ defmodule Game.Server do
   """
   def rounds(room), do: GenServer.call(room, :rounds)
 
-  def init(opts) do
-    state = init_state(opts)
-    {:ok, state}
-  end
+  def init(opts), do: {:ok, Game.State.new(opts)}
 
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
   def handle_call({:guess, word}, _, state) do
     if Game.Logic.guess(word, state.word) do
-      {word, words} = Game.Logic.random(state.words)
-
-      state = Map.put(state, :word, word)
-      state = Map.put(state, :words, words)
-      state = Map.put(state, :rounds, state.rounds - 1)
-
-      {:reply, true, state}
+      {:reply, true, Game.State.new_word(state)}
     else
       {:reply, false, state}
     end
@@ -79,21 +70,5 @@ defmodule Game.Server do
 
   def handle_call(:word, _, state), do: {:reply, state.word, state}
 
-  def handle_call(:rounds, _, state), do: {:reply, state.rounds, state}
-
-  defp init_state(opts) do
-    # Set first word and the rest of the words
-    {word, words} = if opts[:word] do
-      {opts[:word], opts[:words]}
-    else
-      Game.Logic.random(opts[:words])
-    end
-
-    %{
-      id: opts[:id] || UUID.uuid4(),
-      rounds: Enum.min([opts[:rounds] || 20, length(words)]),
-      words: words,
-      word: word
-    }
-  end
+  def handle_call(:rounds, _, state), do: {:reply, state.rounds_left, state}
 end
