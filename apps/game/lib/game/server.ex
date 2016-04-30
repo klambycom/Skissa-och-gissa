@@ -12,11 +12,10 @@ defmodule Game.Server do
 
       iex> {:ok, server} = GenServer.start_link(
       ...>   Game.Server,
-      ...>   words: ["foo", "bar", "baz"],
-      ...>   id: "unique_id"
+      ...>   words: ["foo", "bar", "baz"]
       ...> )
-      ...> Game.Server.id(server)
-      "unique_id"
+      ...> Game.Server.id(server) != nil
+      true
   """
   def id(server), do: GenServer.call(server, :id)
 
@@ -55,7 +54,7 @@ defmodule Game.Server do
   # GenServer API
   ###
 
-  def init(opts), do: {:ok, Game.State.new(opts)}
+  def init(opts), do: {:ok, Game.State.new(opts[:words])}
 
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
