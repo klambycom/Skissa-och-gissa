@@ -59,7 +59,7 @@ defmodule Game.Server do
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
   def handle_call({:guess, word}, _, state) do
-    if Game.Logic.guess(word, state.word) do
+    if Game.Word.compare(word, state.word) do
       {:reply, true, Game.State.new_word(state)}
     else
       {:reply, false, state}
