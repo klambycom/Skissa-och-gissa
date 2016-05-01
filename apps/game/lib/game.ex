@@ -5,6 +5,7 @@ defmodule Game do
     import Supervisor.Spec, warn: false
 
     children = [
+      supervisor(Game.Repo, []),
       supervisor(Game.Supervisor, [])
     ]
 

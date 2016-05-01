@@ -28,3 +28,13 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :game,
+  ecto_repos: [Game.Repo]
+
+config :game, Game.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "christian",
+  username: "christian",
+  password: "",
+  hostname: "localhost"
