@@ -1,6 +1,8 @@
 defmodule Game.SupervisorTest do
   use ExUnit.Case
 
+  doctest Game.Supervisor
+
   setup do
     on_exit fn ->
       Enum.each Game.Supervisor.servers, fn(server) ->

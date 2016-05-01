@@ -54,6 +54,7 @@ defmodule Game.Server do
   # GenServer API
   ###
 
+  @doc false
   def start_link(opts), do: GenServer.start_link(__MODULE__, opts)
 
   def init(opts), do: {:ok, Game.State.new(opts[:words])}
