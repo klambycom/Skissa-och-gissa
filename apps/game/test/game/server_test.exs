@@ -16,14 +16,6 @@ defmodule Game.ServerTest do
     assert Server.word(room) != ""
   end
 
-  test "Game.Server.new should set rounds to no more than words", %{room: room} do
-    assert Server.rounds(room) == 2
-
-    state = Game.State.new(["foo", "bar", "baz"], 10)
-    {:ok, room} = Server.start_link(state)
-    assert Server.rounds(room) == 2
-  end
-
   test "Game.Server.guess should change nr of rounds if the guess is correct",
     %{state: state} do
       {:ok, room} = Server.start_link(%{state | rounds_left: 2})
