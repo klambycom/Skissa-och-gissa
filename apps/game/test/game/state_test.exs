@@ -47,11 +47,6 @@ defmodule Game.StateTest do
     assert state.rounds_left == 2
   end
 
-  test "Game.State.new should never set more rounds left than nr of words" do
-    state = State.new(["foo", "bar", "baz"], 10)
-    assert state.rounds_left == 2
-  end
-
   test "Game.State.new should set players to a empty array", %{state: state} do
     assert state.players == []
   end
@@ -69,10 +64,10 @@ defmodule Game.StateTest do
   end
 
   test "Game.State.new_word should remove 1 from rounds left" do
-    state = State.new(["a", "b", "c", "d", "e"], 3)
+    state = State.new(["a", "b", "c", "d", "e"])
     state = State.new_word(state)
 
-    assert state.rounds_left == 2
+    assert state.rounds_left == 3
   end
 
   test "Game.State.from_category should set words", %{category: category} do
