@@ -10,8 +10,11 @@ defmodule Game.SupervisorTest do
       end
     end
 
-    {:ok, server1} = Game.Supervisor.add_server(words: ["ett", "tva", "tre"])
-    {:ok, server2} = Game.Supervisor.add_server(words: ["foo", "bar", "baz"])
+    state1 = Game.State.new(["ett", "tva", "tre"])
+    state2 = Game.State.new(["foo", "bar", "baz"])
+
+    {:ok, server1} = Game.Supervisor.add_server(state1)
+    {:ok, server2} = Game.Supervisor.add_server(state2)
 
     id1 = Game.Server.id(server1)
     id2 = Game.Server.id(server2)

@@ -6,22 +6,24 @@ defmodule Game.Supervisor do
   use Supervisor
 
   @doc """
-  Add a new server. Options are words and (TODO).
+  Add a new server from a game state.
 
   ## Example
 
-      iex> {:ok, server} = Game.Supervisor.add_server(words: ["foo", "bar"])
+      iex> state = Game.State.new(["foo", "bar"])
+      ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> is_pid(server)
       true
   """
-  def add_server(opts), do: Supervisor.start_child(__MODULE__, [opts])
+  def add_server(state), do: Supervisor.start_child(__MODULE__, [state])
 
   @doc """
   Find a server by its id.
 
   ## Example
 
-      iex> {:ok, server} = Game.Supervisor.add_server(words: ["foo", "bar"])
+      iex> state = Game.State.new(["foo", "bar"])
+      ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> server = Game.Supervisor.find_server(id)
       ...> is_pid(server)
@@ -40,7 +42,8 @@ defmodule Game.Supervisor do
 
   By id:
 
-      iex> {:ok, server} = Game.Supervisor.add_server(words: ["foo", "bar"])
+      iex> state = Game.State.new(["foo", "bar"])
+      ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> Game.Supervisor.delete_server(id)
       ...> Game.Supervisor.find_server(id)
@@ -48,7 +51,8 @@ defmodule Game.Supervisor do
 
   By pid:
 
-      iex> {:ok, server} = Game.Supervisor.add_server(words: ["foo", "bar"])
+      iex> state = Game.State.new(["foo", "bar"])
+      ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> Game.Supervisor.delete_server(server)
       ...> Game.Supervisor.find_server(id)
