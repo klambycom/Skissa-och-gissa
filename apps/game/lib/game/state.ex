@@ -54,7 +54,7 @@ defmodule Game.State do
   """
   def from_category(category) do
     words = Enum.map(category.words, fn(%{word: word}) -> word end)
-    new("tmp", "tmp", words)
+    new(category.name, category.description, words)
   end
 
   defp random_word(words) do

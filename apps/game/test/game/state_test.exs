@@ -20,6 +20,7 @@ defmodule Game.StateTest do
     }
 
     category = %Game.Database.Category{
+      name: "Test",
       description: "Test-category",
       id: 1,
       words: [
@@ -86,5 +87,15 @@ defmodule Game.StateTest do
   test "Game.State.from_category should set random word", %{category: category} do
     state = State.from_category(category)
     assert state.word == "word1" || state.word == "word2"
+  end
+
+  test "Game.State.from_category should set name", %{category: category} do
+    state = State.from_category(category)
+    assert state.name == "Test"
+  end
+
+  test "Game.State.from_category should set description", %{category: category} do
+    state = State.from_category(category)
+    assert state.description == "Test-category"
   end
 end
