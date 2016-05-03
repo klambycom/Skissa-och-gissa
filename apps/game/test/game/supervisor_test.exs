@@ -10,8 +10,8 @@ defmodule Game.SupervisorTest do
       end
     end
 
-    state1 = Game.State.new(["ett", "tva", "tre"])
-    state2 = Game.State.new(["foo", "bar", "baz"])
+    state1 = Game.State.new("Game", ["ett", "tva", "tre"])
+    state2 = Game.State.new("Game", ["foo", "bar", "baz"])
 
     {:ok, server1} = Game.Supervisor.add_server(state1)
     {:ok, server2} = Game.Supervisor.add_server(state2)
