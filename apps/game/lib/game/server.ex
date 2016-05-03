@@ -10,7 +10,7 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> state = Game.State.new("Game", ["foo", "bar", "baz"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar", "baz"])
       ...> {:ok, server} = Game.Server.start_link(state)
       ...> Game.Server.id(server) != nil
       true
@@ -23,12 +23,12 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> state = Game.State.new("Game", ["foo", "bar", "baz"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar", "baz"])
       ...> {:ok, pid} = Game.Server.start_link(state)
       ...> Game.Server.guess(pid, "wrong")
       false
 
-      iex> state = Game.State.new("Game", ["foo", "bar", "baz"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar", "baz"])
       ...> {:ok, pid} = Game.Server.start_link(state)
       ...> Game.Server.guess(pid, Game.Server.word(pid))
       true

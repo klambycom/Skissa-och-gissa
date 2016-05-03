@@ -6,7 +6,7 @@ defmodule Game.StateTest do
   doctest State
 
   setup do
-    state = State.new("Game1", ["ett", "två", "tre"])
+    state = State.new("Game1", "Description", ["ett", "två", "tre"])
 
     state2 = %State{
       id: 1,
@@ -39,6 +39,10 @@ defmodule Game.StateTest do
     assert state.name == "Game1"
   end
 
+  test "Game.State.new should set description", %{state: state} do
+    assert state.description == "Description"
+  end
+
   test "Game.State.new should set words", %{state: state} do
     assert length(state.words) == 2
   end
@@ -68,7 +72,7 @@ defmodule Game.StateTest do
   end
 
   test "Game.State.new_word should remove 1 from rounds left" do
-    state = State.new("Game", ["a", "b", "c", "d", "e"])
+    state = State.new("Game", "Description", ["a", "b", "c", "d", "e"])
     state = State.new_word(state)
 
     assert state.rounds_left == 3

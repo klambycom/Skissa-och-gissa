@@ -6,7 +6,7 @@ defmodule Game.ServerTest do
   doctest Server
 
   setup do
-    state = Game.State.new("Game", ["foo", "bar", "baz"])
+    state = Game.State.new("Game", "", ["foo", "bar", "baz"])
     {:ok, room} = Server.start_link(state)
 
     {:ok, room: room, state: state}

@@ -10,7 +10,7 @@ defmodule Game.Supervisor do
 
   ## Example
 
-      iex> state = Game.State.new("Game", ["foo", "bar"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar"])
       ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> is_pid(server)
       true
@@ -22,7 +22,7 @@ defmodule Game.Supervisor do
 
   ## Example
 
-      iex> state = Game.State.new("Game", ["foo", "bar"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar"])
       ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> server = Game.Supervisor.find_server(id)
@@ -42,7 +42,7 @@ defmodule Game.Supervisor do
 
   By id:
 
-      iex> state = Game.State.new("Game", ["foo", "bar"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar"])
       ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> Game.Supervisor.delete_server(id)
@@ -51,7 +51,7 @@ defmodule Game.Supervisor do
 
   By pid:
 
-      iex> state = Game.State.new("Game", ["foo", "bar"])
+      iex> state = Game.State.new("Game", "", ["foo", "bar"])
       ...> {:ok, server} = Game.Supervisor.add_server(state)
       ...> id = Game.Server.id(server)
       ...> Game.Supervisor.delete_server(server)

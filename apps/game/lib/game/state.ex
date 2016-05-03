@@ -3,7 +3,13 @@ defmodule Game.State do
   The state of a game/server.
   """
 
-  defstruct id: nil, name: nil, rounds_left: 0, words: nil, word: nil, players: []
+  defstruct id: nil,
+            name: nil,
+            description: nil,
+            rounds_left: 0,
+            words: nil,
+            word: nil,
+            players: []
 
   @max_rounds 20
 
@@ -12,12 +18,13 @@ defmodule Game.State do
   of rounds to default or nr of words. A ID is generated and a random word
   is set from the words.
   """
-  def new(name, words) do
+  def new(name, description, words) do
     {word, words} = random_word(words)
 
     %__MODULE__{
       id: UUID.uuid4(),
       name: name,
+      description: description,
       words: words,
       word: word,
       rounds_left: Enum.min([@max_rounds, length(words)])
@@ -29,7 +36,7 @@ defmodule Game.State do
 
   ## Example
 
-      iex> state = Game.State.new("Game", ["moon", "TV", "sword"])
+      iex> state = Game.State.new("Game", "", ["moon", "TV", "sword"])
       ...> state = Game.State.new_word(state)
       ...> state.word in state.words
       false
@@ -47,7 +54,7 @@ defmodule Game.State do
   """
   def from_category(category) do
     words = Enum.map(category.words, fn(%{word: word}) -> word end)
-    new("tmp", words)
+    new("tmp", "tmp", words)
   end
 
   defp random_word(words) do
