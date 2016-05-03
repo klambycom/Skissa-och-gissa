@@ -10,10 +10,8 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> {:ok, server} = GenServer.start_link(
-      ...>   Game.Server,
-      ...>   words: ["foo", "bar", "baz"]
-      ...> )
+      iex> state = Game.State.new(["foo", "bar", "baz"])
+      ...> {:ok, server} = Game.Server.start_link(state)
       ...> Game.Server.id(server) != nil
       true
   """
@@ -25,11 +23,13 @@ defmodule Game.Server do
 
   ## Example
 
-      iex> {:ok, pid} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
+      iex> state = Game.State.new(["foo", "bar", "baz"])
+      ...> {:ok, pid} = Game.Server.start_link(state)
       ...> Game.Server.guess(pid, "wrong")
       false
 
-      iex> {:ok, pid} = GenServer.start_link(Game.Server, words: ["foo", "bar", "baz"])
+      iex> state = Game.State.new(["foo", "bar", "baz"])
+      ...> {:ok, pid} = Game.Server.start_link(state)
       ...> Game.Server.guess(pid, Game.Server.word(pid))
       true
   """
@@ -55,9 +55,9 @@ defmodule Game.Server do
   ###
 
   @doc false
-  def start_link(opts), do: GenServer.start_link(__MODULE__, opts)
+  def start_link(state), do: GenServer.start_link(__MODULE__, state)
 
-  def init(opts), do: {:ok, Game.State.new(opts[:words])}
+  def init(state), do: {:ok, state}
 
   def handle_call(:id, _, state), do: {:reply, state.id, state}
 
