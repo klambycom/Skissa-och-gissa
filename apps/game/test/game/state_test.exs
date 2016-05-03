@@ -19,7 +19,16 @@ defmodule Game.StateTest do
       ]
     }
 
-    {:ok, state: state, state2: state2}
+    category = %Game.Database.Category{
+      description: "Test-category",
+      id: 1,
+      words: [
+        %Game.Database.Word{category_id: 1, difficulty: :medium, id: 2, word: "word1"},
+        %Game.Database.Word{category_id: 1, difficulty: :easy, id: 3, word: "word2"}
+      ]
+    }
+
+    {:ok, state: state, state2: state2, category: category}
   end
 
   test "Game.State.new should set id", %{state: state} do
@@ -64,5 +73,15 @@ defmodule Game.StateTest do
     state = State.new_word(state)
 
     assert state.rounds_left == 2
+  end
+
+  test "Game.State.from_category should set words", %{category: category} do
+    state = State.from_category(category)
+    assert state.words == ["word1"] || state.words == ["word2"]
+  end
+
+  test "Game.State.from_category should set random word", %{category: category} do
+    state = State.from_category(category)
+    assert state.word == "word1" || state.word == "word2"
   end
 end

@@ -43,6 +43,14 @@ defmodule Game.State do
     }
   end
 
+  @doc """
+  Create new state from a `%Game.Database.Category{}`.
+  """
+  def from_category(category) do
+    words = Enum.map(category.words, fn(%{word: word}) -> word end)
+    new(words)
+  end
+
   defp random_word(words) do
     word = Enum.random(words)
     {word, List.delete(words, word)}
