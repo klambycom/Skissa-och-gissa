@@ -20,7 +20,12 @@
           <ul>
             <li><a href="#">Spel</a></li>
             <li><a href="#">Topplista</a></li>
-            <li><a href="#" class="signin">Logga in</a></li>
+            <li>
+              <a href="#" class="signin">
+                <span>Logga in</span>
+                <%= icon(:sign_in) %>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
