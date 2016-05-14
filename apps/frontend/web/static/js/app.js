@@ -3,4 +3,4 @@ import "phoenix_html"
 
 import "../css/app.less";
 
-alert("webpack compiled me.");
+//alert("webpack compiled me.");
