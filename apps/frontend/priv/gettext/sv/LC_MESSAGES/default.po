@@ -1,0 +1,57 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: sv\n"
+
+#: web/templates/layout/app.html.eex:21
+msgid "Games"
+msgstr "Spel"
+
+#: web/templates/layout/app.html.eex:25
+msgid "Sign in"
+msgstr "Logga in"
+
+#: web/templates/layout/app.html.eex:10 web/templates/page/index.html.eex:3
+msgid "Skissa och gissa"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:17
+msgid "Skissaochgissa.se"
+msgstr ""
+
+#: web/templates/page/toplist_item.html.eex:9
+msgid "1 point"
+msgid_plural "%{count} points"
+msgstr[0] "1 poäng"
+msgstr[1] "%{count} poäng"
+
+#: web/templates/layout/app.html.eex:22 web/templates/page/index.html.eex:17
+msgid "Highscore"
+msgstr "Topplista"
+
+#: web/templates/page/game.html.eex:21
+msgid "Join the game"
+msgstr "Gå med i spelet"
+
+#: web/templates/page/index.html.eex:13
+msgid "Load more games..."
+msgstr "Ladda fler spel..."
+
+#: web/templates/page/index.html.eex:27
+msgid "See more players and points"
+msgstr "Se fler spelare och poäng"
+
+#: web/templates/page/index.html.eex:5
+msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what you are painting. Both the player who is painting and the player who guessed the correct word gets points. Whe have differenct games in different categories."
+msgstr "Skissa och gissa är ett spel där spelarna turas om att rita medans de andra spelarna försöker gissa vad det ska förställa. Både spelaren som ritar och spelaren som gissade rätt ord får poäng. Det finns olika spel med ord i olika kategorier."
+
+#: web/templates/page/index.html.eex:26
+msgid "The highscore is based on the points from the last 30 days."
+msgstr "Topplistan är baserad på poängen från de senaste 30 dagarna."

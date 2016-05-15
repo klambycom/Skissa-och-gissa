@@ -2,8 +2,9 @@ defmodule Frontend.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
-  By using [Gettext](http://hexdocs.pm/gettext),
-  your module gains a set of macros for translations, for example:
+  See the [Gettext Docs](http://hexdocs.pm/gettext) for detailed usage.
+
+  ## Example:
 
       import Frontend.Gettext
 
@@ -18,7 +19,21 @@ defmodule Frontend.Gettext do
       # Domain-based translation
       dgettext "errors", "Here is the error message to translate"
 
-  See the [Gettext Docs](http://hexdocs.pm/gettext) for detailed usage.
+  ## Mix tasks
+
+  When the text is translated it is important to run:
+
+      mix gettext.extract
+
+  To get new text to translate run:
+
+      mix gettext.extract
+      mix gettext.merge priv/gettext
+
+  Or:
+
+      mix gettext.extract --merge
   """
+
   use Gettext, otp_app: :frontend
 end

@@ -18,7 +18,7 @@
           <%= icon(:users) %>
           <%= @game.players %>
         </div>
-        <a href="#">Gå med i spelet</a>
+        <a href="#"><%= gettext "Join the game" %></a>
       </div>
     </div>
   </div>

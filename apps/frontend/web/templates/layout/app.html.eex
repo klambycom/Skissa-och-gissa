@@ -7,22 +7,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Frontend!</title>
+    <title><%= gettext "Skissa och gissa" %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <header id="site-header">
       <div class="wrapper">
-        <a href="#" class="logo">Skissaochgissa.com</a>
+        <a href="#" class="logo"><%= gettext "Skissaochgissa.se" %></a>
 
         <nav role="navigation">
           <ul>
-            <li><a href="#">Spel</a></li>
-            <li><a href="#">Topplista</a></li>
+            <li><a href="#"><%= gettext "Games" %></a></li>
+            <li><a href="#"><%= gettext "Highscore" %></a></li>
             <li>
               <a href="#" class="signin">
-                <span>Logga in</span>
+                <span><%= gettext "Sign in" %></span>
                 <%= icon(:sign_in) %>
               </a>
             </li>

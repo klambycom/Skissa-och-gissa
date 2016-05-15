@@ -5,6 +5,8 @@
   </div>
   <div>
     <div class="name"><%= @player.name %></div>
-    <div class="score"><%= @player.score %> poäng</div>
+    <div class="score">
+      <%= ngettext "1 point", "%{count} points", @player.score %>
+    </div>
   </div>
 </li>

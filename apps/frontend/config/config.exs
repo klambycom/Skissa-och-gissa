@@ -14,6 +14,10 @@ config :frontend, Frontend.Endpoint,
   pubsub: [name: Frontend.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Configure gettext
+config :frontend, Frontend.Gettext,
+  default_locale: "sv"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -1,8 +1,8 @@
 <section id="lobby">
   <header>
-    <h1>Skissa och gissa</h1>
+    <h1><%= gettext "Skissa och gissa" %></h1>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what you are painting. Both the player who is painting and the player who guessed the correct word gets points. Whe have differenct games in different categories." %>
     </p>
   </header>
 
@@ -10,11 +10,11 @@
     <%= render "game.html", game: game %>
   <% end %>
 
-  <a href="#" class="load-more">Ladda fler...</a>
+  <a href="#" class="load-more"><%= gettext "Load more games..." %></a>
 </section>
 
 <aside id="toplist">
-  <h2>Topplista</h2>
+  <h2><%= gettext "Highscore" %></h2>
 
   <ul>
     <%= for player <- @toplist do %>
@@ -23,6 +23,7 @@
   </ul>
 
   <small>
-    Topplistan är baserad på poängen från de senaste 30 dagarna. <a href="#">Se fler spelare och poäng</a>.
+    <%= gettext "The highscore is based on the points from the last 30 days." %>
+    <a href="#"><%= gettext "See more players and points" %></a>.
   </small>
 </aside>
