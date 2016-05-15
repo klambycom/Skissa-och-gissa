@@ -1,0 +1,10 @@
+<li class="player">
+  <div class="image">
+    <span class="position"><%= @player.position %></span>
+    <img src="<%= @player.avatar %>" alt="">
+  </div>
+  <div>
+    <div class="name"><%= @player.name %></div>
+    <div class="score"><%= @player.score %> poäng</div>
+  </div>
+</li>

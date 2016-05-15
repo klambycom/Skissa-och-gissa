@@ -1,0 +1,52 @@
+#toplist {
+	margin-left: 40px;
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		width: 200px;
+	}
+
+	li.player {
+		display: flex;
+		margin-bottom: 10px;
+
+		.image {
+			position: relative;
+			background-color: @image-color;
+			display: inline-block;
+			width: 65px;
+			height: 60px;
+			margin-right: 10px;
+
+			img {
+				width: 65px;
+				height: 60px;
+			}
+
+			span {
+				position: absolute;
+				top: -1px;
+				left: -1px;
+
+				background-color: @score-color;
+				color: white;
+
+				padding: 3px 7px;
+				border-radius: 100%;
+
+				font-size: .7em;
+				font-weight: bolder;
+			}
+		}
+	}
+
+	.name {
+		padding-bottom: 5px;
+	}
+
+	.score {
+		font-size: 1.2em;
+	}
+}
