@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= locale %>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta name="description" content="<%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted." %>">
+    <meta name="author" content="Christian Nilsson">
+    <meta property="og:title" content="<%= gettext "Skissa och gissa" %>">
+    <meta property="og:description" content="<%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted." %>">
+    <meta property="og:site_name" content="<%= gettext "Skissa och gissa" %>">
     <title><%= gettext "Skissa och gissa" %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
