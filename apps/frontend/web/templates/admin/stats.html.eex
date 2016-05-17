@@ -1,0 +1,43 @@
+<h2><%= dgettext "admin", "Players" %></h2>
+<p>
+  <%=
+    dngettext(
+      "admin",
+      "Skissa och gissa have one active visitor at the moment.",
+      "Skissa och gissa have %{visitors} active visitors and all of them are active in a game at the moment.",
+      23,
+      visitors: 23,
+      players: 23
+    )
+  %>
+  <%=
+    dngettext(
+      "admin",
+      "The most popular game right now is \"%{most_popular_game}\" with one player.",
+      "The most popular game right now is \"%{most_popular_game}\" with %{players} players.",
+      8,
+      most_popular_game: "Allmän",
+      players: 8
+    )
+  %>
+</p>
+<p>
+  <%=
+    dngettext(
+      "admin",
+      "We have had one visitor today.",
+      "We have had %{visitors} visitors today.",
+      103,
+      visitors: 103
+    )
+  %>
+  <%=
+    dngettext(
+      "admin",
+      "Yesterday we had only one visitor.",
+      "Yesterday we had a total of %{visitors} visitors.",
+      232,
+      visitors: 232
+    )
+  %>
+</p>

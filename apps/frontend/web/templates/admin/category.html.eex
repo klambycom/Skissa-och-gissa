@@ -1,0 +1,37 @@
+<article>
+  <div class="information">
+    <h2>Allmän</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p><a href="#"><%= dgettext "admin", "Edit" %></a></p>
+  </div>
+
+  <div class="status">
+    <ul>
+      <li>
+        <%= icon(:users) %>
+        <%=
+          dngettext(
+            "admin",
+            "%{players} player",
+            "%{players} players",
+            8,
+            players: 8
+          )
+        %>
+      </li>
+      <li>
+        <%= icon(:gamepad) %>
+        <%=
+          dngettext(
+            "admin",
+            "%{games} active game",
+            "%{games} active games",
+            2,
+            games: 2
+          )
+        %>
+      </li>
+    </ul>
+    <a href="#"><%= dgettext "admin", "Start a new game" %></a>
+  </div>
+</article>

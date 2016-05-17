@@ -16,12 +16,26 @@
   <body>
     <header id="site-header">
       <div class="wrapper">
-        <a href="#" class="logo"><%= gettext "Skissaochgissa.se" %></a>
+        <%=
+          link(
+            gettext("Skissaochgissa.se"),
+            to: page_path(@conn, :index),
+            class: "logo"
+          )
+        %>
 
         <nav role="navigation">
           <ul>
-            <li><a href="#"><%= gettext "Games" %></a></li>
+            <li><%= link gettext("Games"), to: page_path(@conn, :index) %></li>
             <li><a href="#"><%= gettext "Highscore" %></a></li>
+            <li>
+              <%=
+                link(
+                  gettext("Manage categories"),
+                  to: admin_path(@conn, :index)
+                )
+              %>
+            </li>
             <li>
               <a href="#" class="signin">
                 <span><%= gettext "Sign in" %></span>

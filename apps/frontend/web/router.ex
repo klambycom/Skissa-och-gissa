@@ -17,6 +17,7 @@ defmodule Frontend.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/admin", AdminController, :index
   end
 
   # Other scopes may use custom stacks.

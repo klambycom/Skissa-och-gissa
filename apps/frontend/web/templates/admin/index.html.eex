@@ -1,0 +1,18 @@
+<div>
+  <section id="stats">
+    <%= render "stats.html" %>
+  </section>
+
+  <section id="categories">
+    <%= render "category.html" %>
+    <%= render "category.html" %>
+
+    <a href="#" id="create-new-category">
+      <%= dgettext "admin", "Create a new category..." %>
+    </a>
+  </section>
+</div>
+
+<section id="add-word">
+  <%= render "add_word.html" %>
+</section>

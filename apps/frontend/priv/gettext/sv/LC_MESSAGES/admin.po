@@ -1,0 +1,79 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: sv\n"
+
+#: web/templates/admin/category.html.eex:24
+msgid "%{games} active game"
+msgid_plural "%{games} active games"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/category.html.eex:13
+msgid "%{players} player"
+msgid_plural "%{players} players"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/stats.html.eex:4
+msgid "Skissa och gissa have one active visitor at the moment."
+msgid_plural "Skissa och gissa have %{visitors} active visitors and all of them are active in a game at the moment."
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/stats.html.eex:14
+msgid "The most popular game right now is \"%{most_popular_game}\" with one player."
+msgid_plural "The most popular game right now is \"%{most_popular_game}\" with %{players} players."
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/stats.html.eex:26
+msgid "We have had one visitor today."
+msgid_plural "We have had %{visitors} visitors today."
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/stats.html.eex:35
+msgid "Yesterday we had only one visitor."
+msgid_plural "Yesterday we had a total of %{visitors} visitors."
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/admin/add_word.html.eex:1
+msgid "Add a new word"
+msgstr ""
+
+#: web/templates/admin/add_word.html.eex:9
+msgid "Category"
+msgstr ""
+
+#: web/templates/admin/index.html.eex:11
+msgid "Create a new category..."
+msgstr ""
+
+#: web/templates/admin/category.html.eex:5
+msgid "Edit"
+msgstr ""
+
+#: web/templates/admin/stats.html.eex:1
+msgid "Players"
+msgstr ""
+
+#: web/templates/admin/add_word.html.eex:17
+msgid "Save"
+msgstr ""
+
+#: web/templates/admin/category.html.eex:34
+msgid "Start a new game"
+msgstr ""
+
+#: web/templates/admin/add_word.html.eex:4
+msgid "Word"
+msgstr ""
