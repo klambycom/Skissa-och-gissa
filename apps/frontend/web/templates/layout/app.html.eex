@@ -10,7 +10,7 @@
     <meta property="og:description" content="<%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted." %>">
     <meta property="og:site_name" content="<%= gettext "Skissa och gissa" %>">
     <title><%= gettext "Skissa och gissa" %></title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= css_path(@conn) %>">
   </head>
 
   <body>
@@ -54,6 +54,6 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= js_path(@conn) %>"></script>
   </body>
 </html>

@@ -52,6 +52,7 @@ defmodule Frontend.Web do
       import Frontend.Router.Helpers
       import Frontend.ErrorHelpers
       import Frontend.IconHelpers
+      import Frontend.StaticHelpers
       import Frontend.Gettext
     end
   end

@@ -3,10 +3,13 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   devtool: "source-map",
-  entry: "./web/static/js/app.js",
+  entry: {
+    app: "./web/static/js/app.js",
+    admin: "./web/static/js/admin.js"
+  },
   output: {
     path: "./priv/static",
-    filename: "js/app.js"
+    filename: "js/[name].js"
   },
   module: {
     loaders: [
@@ -31,7 +34,7 @@ module.exports = {
     modulesDirectories: ["node_modules", __dirname + "/web/static/js"]
   },
   plugins: [
-    new ExtractTextPlugin("css/app.css"),
+    new ExtractTextPlugin("css/[name].css"),
     new CopyWebpackPlugin([{from: "./web/static/assets"}])
   ]
 };
