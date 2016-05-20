@@ -10,10 +10,10 @@
     <%= render "game.html", game: game %>
   <% end %>
 
-  <a href="#" class="load-more"><%= gettext "Load more games..." %></a>
+  <a href="#" class="big-btn"><%= gettext "Load more games..." %></a>
 </section>
 
-<aside id="toplist">
+<aside id="toplist" class="sidebar">
   <h2><%= gettext "Highscore" %></h2>
 
   <ul>
