@@ -1,17 +1,19 @@
-<h2><%= dgettext "admin", "Add a new word" %></h2>
+<section id="add-word">
+  <h2><%= dgettext "admin", "Add a new word" %></h2>
 
-<label>
-  <%= dgettext "admin", "Word" %>
-  <input type="text">
-</label>
+  <label>
+    <%= dgettext "admin", "Word" %>
+    <input type="text">
+  </label>
 
-<label>
-  <%= dgettext "admin", "Category" %>
-  <select>
-    <option value="">Kategori 1</option>
-    <option value="">Kategori 2</option>
-    <option value="">Kategori 3</option>
-  </select>
-</label>
+  <label>
+    <%= dgettext "admin", "Category" %>
+    <select>
+      <option value="">Kategori 1</option>
+      <option value="">Kategori 2</option>
+      <option value="">Kategori 3</option>
+    </select>
+  </label>
 
-<input type="submit" value="<%= dgettext "admin", "Save" %>">
+  <input type="submit" value="<%= dgettext "admin", "Save" %>">
+</section>
