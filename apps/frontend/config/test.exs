@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :frontend, Frontend.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "christian",
+  password: "",
   database: "frontend_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
