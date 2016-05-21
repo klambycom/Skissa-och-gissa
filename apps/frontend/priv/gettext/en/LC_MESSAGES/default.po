@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: web/templates/layout/app.html.eex:23
+#: web/templates/layout/app.html.eex:29
 msgid "Games"
 msgstr ""
 
-#: web/templates/layout/app.html.eex:27
+#: web/templates/layout/app.html.eex:41
 msgid "Sign in"
 msgstr ""
 
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Skissa och gissa"
 msgstr ""
 
-#: web/templates/layout/app.html.eex:19
+#: web/templates/layout/app.html.eex:21
 msgid "Skissaochgissa.se"
 msgstr ""
 
@@ -33,7 +33,7 @@ msgid_plural "%{count} points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/layout/app.html.eex:24 web/templates/page/index.html.eex:17
+#: web/templates/layout/app.html.eex:30 web/templates/page/index.html.eex:17
 msgid "Highscore"
 msgstr ""
 
@@ -59,4 +59,8 @@ msgstr ""
 
 #: web/templates/layout/app.html.eex:7 web/templates/layout/app.html.eex:10
 msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted."
+msgstr ""
+
+#: web/templates/layout/app.html.eex:34
+msgid "Manage categories"
 msgstr ""

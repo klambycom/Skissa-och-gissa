@@ -10,17 +10,17 @@ msgid ""
 msgstr ""
 "Language: sv\n"
 
-#: web/templates/admin/category.html.eex:24
+#: web/templates/admin/category.html.eex:25
 msgid "%{games} active game"
 msgid_plural "%{games} active games"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ett aktivt spel"
+msgstr[1] "%{games} aktiva spel"
 
 #: web/templates/admin/category.html.eex:13
 msgid "%{players} player"
 msgid_plural "%{players} players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "En spelare"
+msgstr[1] "%{players} spelare"
 
 #: web/templates/admin/stats.html.eex:4
 msgid "Skissa och gissa have one active visitor at the moment."
@@ -46,34 +46,38 @@ msgid_plural "Yesterday we had a total of %{visitors} visitors."
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/admin/add_word.html.eex:1
+#: web/templates/admin/add_word.html.eex:2
 msgid "Add a new word"
-msgstr ""
+msgstr "Lägg till ett nytt ord"
 
-#: web/templates/admin/add_word.html.eex:9
+#: web/templates/admin/add_word.html.eex:10
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #: web/templates/admin/index.html.eex:11
 msgid "Create a new category..."
-msgstr ""
+msgstr "Skapa en ny kategori..."
 
 #: web/templates/admin/category.html.eex:5
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 #: web/templates/admin/stats.html.eex:1
 msgid "Players"
-msgstr ""
+msgstr "Spelare"
 
-#: web/templates/admin/add_word.html.eex:17
+#: web/templates/admin/add_word.html.eex:18
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
-#: web/templates/admin/category.html.eex:34
+#: web/templates/admin/category.html.eex:35
 msgid "Start a new game"
-msgstr ""
+msgstr "Starta nytt spel"
 
-#: web/templates/admin/add_word.html.eex:4
+#: web/templates/admin/add_word.html.eex:5
 msgid "Word"
-msgstr ""
+msgstr "Ord"
+
+#: web/templates/admin/index.html.eex:20
+msgid "Added words can be removed from the settings for a category. Just click on the edit-link for a category"
+msgstr "När ett ord har lagts till kan det bli borttaget i inställningarna för kategorin. Klicka redigera på en kategori."

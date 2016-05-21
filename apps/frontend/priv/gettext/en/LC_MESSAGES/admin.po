@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: web/templates/admin/category.html.eex:24
+#: web/templates/admin/category.html.eex:25
 msgid "%{games} active game"
 msgid_plural "%{games} active games"
 msgstr[0] ""
@@ -46,11 +46,11 @@ msgid_plural "Yesterday we had a total of %{visitors} visitors."
 msgstr[0] ""
 msgstr[1] ""
 
-#: web/templates/admin/add_word.html.eex:1
+#: web/templates/admin/add_word.html.eex:2
 msgid "Add a new word"
 msgstr ""
 
-#: web/templates/admin/add_word.html.eex:9
+#: web/templates/admin/add_word.html.eex:10
 msgid "Category"
 msgstr ""
 
@@ -66,14 +66,18 @@ msgstr ""
 msgid "Players"
 msgstr ""
 
-#: web/templates/admin/add_word.html.eex:17
+#: web/templates/admin/add_word.html.eex:18
 msgid "Save"
 msgstr ""
 
-#: web/templates/admin/category.html.eex:34
+#: web/templates/admin/category.html.eex:35
 msgid "Start a new game"
 msgstr ""
 
-#: web/templates/admin/add_word.html.eex:4
+#: web/templates/admin/add_word.html.eex:5
 msgid "Word"
+msgstr ""
+
+#: web/templates/admin/index.html.eex:20
+msgid "Added words can be removed from the settings for a category. Just click on the edit-link for a category"
 msgstr ""
