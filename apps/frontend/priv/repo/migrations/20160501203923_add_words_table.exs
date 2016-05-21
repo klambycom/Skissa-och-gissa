@@ -1,4 +1,4 @@
-defmodule Game.Repo.Migrations.AddWordsTable do
+defmodule Frontend.Repo.Migrations.AddWordsTable do
   use Ecto.Migration
 
   def up do
