@@ -1,5 +1,10 @@
 defmodule Frontend.Category do
-  use Ecto.Schema
+  @moduledoc """
+  Categories is what the games is created from. A category have a name,
+  description and words.
+  """
+
+  use Frontend.Web, :model
 
   import Ecto.Query, only: [from: 2]
 
@@ -10,6 +15,22 @@ defmodule Frontend.Category do
 
     timestamps
   end
+
+  @required_fields ~w(name description)
+  @optional_fields ~w()
+
+  @doc """
+  Creates a changeset. Required fields is name and description.
+  """
+  def changeset(model, params \\ :empty) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
+  end
+
+  @doc """
+  Create new empty category
+  """
+  def new, do: %__MODULE__{}
 
   # TODO Only categories with more than some words
   def with_words do
