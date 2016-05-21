@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="<%= locale %>">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted." %>">
+    <meta name="author" content="Christian Nilsson">
+    <meta property="og:title" content="<%= gettext "Skissa och gissa" %>">
+    <meta property="og:description" content="<%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted." %>">
+    <meta property="og:site_name" content="<%= gettext "Skissa och gissa" %>">
+    <title><%= gettext "Skissa och gissa" %></title>
+    <link rel="stylesheet" href="<%= css_path(@conn) %>">
+  </head>
+
+  <body>
+    <header id="site-header">
+      <div class="wrapper">
+        <%=
+          link(
+            gettext("Skissaochgissa.se"),
+            to: page_path(@conn, :index),
+            class: "logo"
+          )
+        %>
+
+        <nav role="navigation">
+          <ul>
+            <li><%= link gettext("Games"), to: page_path(@conn, :index) %></li>
+            <li><a href="#"><%= gettext "Highscore" %></a></li>
+            <li>
+              <%=
+                link(
+                  gettext("Manage categories"),
+                  to: admin_path(@conn, :index)
+                )
+              %>
+            </li>
+            <li>
+              <a href="#" class="signin">
+                <span><%= gettext "Sign in" %></span>
+                <%= icon(:sign_in) %>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+
+    <script src="<%= js_path(@conn) %>"></script>
+  </body>
+</html>

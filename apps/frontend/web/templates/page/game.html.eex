@@ -1,0 +1,25 @@
+<article class="game">
+  <div class="canvas">
+    <img src="">
+  </div>
+  <div class="information">
+    <h3><%= @game.name %></h3>
+    <p><%= @game.description %></p>
+    <div class="status">
+      <div class="friends">
+        <%= for friend <- @game.friends do %>
+          <div class="player">
+            <img src="<%= friend.avatar %>" alt="<%= friend.name %>">
+          </div>
+        <% end %>
+      </div>
+      <div class="start-game">
+        <div class="players">
+          <%= icon(:users) %>
+          <%= @game.players %>
+        </div>
+        <a href="#" class="btn"><%= gettext "Join the game" %></a>
+      </div>
+    </div>
+  </div>
+</article>

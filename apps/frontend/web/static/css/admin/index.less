@@ -1,0 +1,67 @@
+@import "../layout/index";
+
+section#stats, section#categories article, section#add-word {
+  border-radius: 3px;
+  padding: 10px 20px 20px 20px;
+}
+
+section#stats, section#categories article {
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+section#categories article {
+  display: flex;
+
+  .status {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: .8em;
+
+    li { margin-bottom: 10px; }
+  }
+}
+
+section#add-word {
+  background-color: @word-color;
+  color: white;
+
+  label {
+    margin: 15px 0;
+    display: block;
+  }
+
+  input, select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 3px;
+    color: @word-color;
+    padding: 10px;
+    margin-top: 5px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type=submit] {
+    margin-top: 10px;
+    border: 2px solid white;
+    background-color: @word-color;
+    color: white;
+  }
+}
+
+.sidebar small {
+  margin-top: 10px;
+  text-align: center;
+}

@@ -1,0 +1,26 @@
+<div>
+  <section id="stats">
+    <%= render "stats.html" %>
+  </section>
+
+  <section id="categories">
+    <%= render "category.html" %>
+    <%= render "category.html" %>
+
+    <a href="#" class="big-btn">
+      <%= dgettext "admin", "Create a new category..." %>
+    </a>
+  </section>
+</div>
+
+<div class="sidebar">
+  <%= render "add_word.html" %>
+  <small>
+    <%=
+      dgettext(
+        "admin",
+        "Added words can be removed from the settings for a category. Just click on the edit-link for a category"
+      )
+    %>
+  </small>
+</div>

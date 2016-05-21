@@ -1,0 +1,29 @@
+<section id="lobby">
+  <header>
+    <h1><%= gettext "Skissa och gissa" %></h1>
+    <p>
+      <%= gettext "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what you are painting. Both the player who is painting and the player who guessed the correct word gets points. Whe have differenct games in different categories." %>
+    </p>
+  </header>
+
+  <%= for game <- @games do %>
+    <%= render "game.html", game: game %>
+  <% end %>
+
+  <a href="#" class="big-btn"><%= gettext "Load more games..." %></a>
+</section>
+
+<aside id="toplist" class="sidebar">
+  <h2><%= gettext "Highscore" %></h2>
+
+  <ul>
+    <%= for player <- @toplist do %>
+      <%= render "toplist_item.html", player: player %>
+    <% end %>
+  </ul>
+
+  <small>
+    <%= gettext "The highscore is based on the points from the last 30 days." %>
+    <a href="#"><%= gettext "See more players and points" %></a>.
+  </small>
+</aside>

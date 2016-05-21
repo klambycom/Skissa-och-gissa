@@ -1,0 +1,67 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/layout/app.html.eex:29
+msgid "Games"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:41
+msgid "Sign in"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:9 web/templates/layout/app.html.eex:11
+#: web/templates/layout/app.html.eex:12 web/templates/page/index.html.eex:3
+msgid "Skissa och gissa"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:21
+msgid "Skissaochgissa.se"
+msgstr ""
+
+#: web/templates/page/toplist_item.html.eex:9
+msgid "1 point"
+msgid_plural "%{count} points"
+msgstr[0] ""
+msgstr[1] ""
+
+#: web/templates/layout/app.html.eex:30 web/templates/page/index.html.eex:17
+msgid "Highscore"
+msgstr ""
+
+#: web/templates/page/game.html.eex:21
+msgid "Join the game"
+msgstr ""
+
+#: web/templates/page/index.html.eex:13
+msgid "Load more games..."
+msgstr ""
+
+#: web/templates/page/index.html.eex:27
+msgid "See more players and points"
+msgstr ""
+
+#: web/templates/page/index.html.eex:5
+msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what you are painting. Both the player who is painting and the player who guessed the correct word gets points. Whe have differenct games in different categories."
+msgstr ""
+
+#: web/templates/page/index.html.eex:26
+msgid "The highscore is based on the points from the last 30 days."
+msgstr ""
+
+#: web/templates/layout/app.html.eex:7 web/templates/layout/app.html.eex:10
+msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted."
+msgstr ""
+
+#: web/templates/layout/app.html.eex:34
+msgid "Manage categories"
+msgstr ""
