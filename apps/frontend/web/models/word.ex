@@ -19,7 +19,7 @@ defmodule Frontend.Word do
   @doc """
   Creates a changeset. The only required field is word.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ :invalid) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end

@@ -1,7 +1,10 @@
 defmodule Frontend.AdminController do
   use Frontend.Web, :controller
 
+  alias Frontend.Category
+
   def index(conn, _params) do
-    render conn, "index.html", %{}
+    categories = Repo.all(Category)
+    render conn, "index.html", categories: categories
   end
 end

@@ -18,6 +18,7 @@ defmodule Frontend.Router do
 
     get "/", PageController, :index
     get "/admin", AdminController, :index
+    resources "/admin/categories", CategoryController, except: [:index, :show]
   end
 
   # Other scopes may use custom stacks.

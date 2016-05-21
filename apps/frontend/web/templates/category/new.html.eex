@@ -1,0 +1,7 @@
+<div class="new-category">
+  <h1><%= dgettext "admin", "New category" %></h1>
+
+  <%= render "form.html", changeset: @changeset,
+                          action: category_path(@conn, :create),
+                          conn: @conn %>
+</div>

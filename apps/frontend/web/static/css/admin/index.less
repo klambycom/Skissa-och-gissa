@@ -12,6 +12,7 @@ section#stats, section#categories article {
 
 section#categories article {
   display: flex;
+	justify-content: space-between;
 
   .status {
     margin-left: 20px;
@@ -27,6 +28,12 @@ section#categories article {
 
     li { margin-bottom: 10px; }
   }
+
+	.actions {
+		display: flex;
+		a { margin-right: 20px; }
+		form a { color: red; }
+	}
 }
 
 section#add-word {

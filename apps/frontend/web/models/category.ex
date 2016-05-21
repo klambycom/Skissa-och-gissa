@@ -22,7 +22,7 @@ defmodule Frontend.Category do
   @doc """
   Creates a changeset. Required fields is name and description.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ :invalid) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
