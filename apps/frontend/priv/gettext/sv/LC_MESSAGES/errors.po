@@ -11,36 +11,36 @@ msgstr ""
 "Language: sv\n"
 
 msgid "can't be blank"
-msgstr ""
+msgstr "kan inte vara tom"
 
 msgid "has already been taken"
-msgstr ""
+msgstr "är upptagen"
 
 msgid "is invalid"
-msgstr ""
+msgstr "är ogiltig"
 
 msgid "has invalid format"
-msgstr ""
+msgstr "har ogiltigt format"
 
 msgid "has an invalid entry"
-msgstr ""
+msgstr "har en ogiltig post"
 
 msgid "is reserved"
-msgstr ""
+msgstr "är reserverad"
 
 msgid "does not match confirmation"
-msgstr ""
+msgstr "matchar inte bekräftelsen"
 
 msgid "is still associated to this entry"
-msgstr ""
+msgstr "är fortfarande associerat till denna post"
 
 msgid "are still associated to this entry"
-msgstr ""
+msgstr "är fortfarande associerat till denna post"
 
 msgid "should be %{count} character(s)"
 msgid_plural "should be %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ska vara %{count} tecken"
+msgstr[1] "ska vara %{count} tecken"
 
 msgid "should have %{count} item(s)"
 msgid_plural "should have %{count} item(s)"
