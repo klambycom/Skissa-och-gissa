@@ -11,7 +11,7 @@ defmodule Frontend.Category do
   schema "categories" do
     field :name, :string
     field :description, :string
-    has_many :words, Frontend.Word
+    has_many :words, Frontend.Word, on_delete: :delete_all
 
     timestamps
   end
