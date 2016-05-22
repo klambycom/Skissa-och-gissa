@@ -11,6 +11,7 @@ defmodule Frontend.StaticHelpers do
   end
 
   defp namespace(:"Elixir.Frontend.AdminController"), do: :admin
+  defp namespace(:"Elixir.Frontend.CategoryController"), do: :admin
   defp namespace(_), do: :app
 
   defp static_path(%Plug.Conn{private: private}, path) do
