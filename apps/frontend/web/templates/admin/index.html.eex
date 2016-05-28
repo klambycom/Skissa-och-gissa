@@ -19,7 +19,9 @@
 </div>
 
 <div class="sidebar">
-  <%= render "add_word.html" %>
+  <%= render "add_word.html", categories: @categories,
+                              changeset: @changeset,
+                              conn: @conn %>
   <small>
     <%=
       dgettext(
