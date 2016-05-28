@@ -1,0 +1,19 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: sv\n"
+
+#: web/views/layout_view.ex:5
+msgid "Skissa och gissa"
+msgstr "Skissa och gissa"
+
+#: web/views/layout_view.ex:6
+msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted."
+msgstr "Skissa och gissa är ett spel där spelarna turas om att rita medans de andra spelarna försöker gissa vad det är som ritas."

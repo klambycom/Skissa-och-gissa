@@ -18,12 +18,11 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: web/templates/layout/app.html.eex:9 web/templates/layout/app.html.eex:11
-#: web/templates/layout/app.html.eex:12 web/templates/page/index.html.eex:3
+#: web/templates/layout/app.html.eex:5 web/templates/page/index.html.eex:3
 msgid "Skissa och gissa"
 msgstr ""
 
-#: web/templates/layout/app.html.eex:21
+#: web/templates/layout/app.html.eex:14
 msgid "Skissaochgissa.se"
 msgstr ""
 
@@ -56,10 +55,6 @@ msgstr ""
 
 #: web/templates/page/index.html.eex:26
 msgid "The highscore is based on the points from the last 30 days."
-msgstr ""
-
-#: web/templates/layout/app.html.eex:7 web/templates/layout/app.html.eex:10
-msgid "Skissa och gissa is a game where the players takes turn painting while the other players try to guess what are being painted."
 msgstr ""
 
 #: web/templates/layout/navigation.html.eex:8
