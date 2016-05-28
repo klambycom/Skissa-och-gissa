@@ -4,9 +4,6 @@ defmodule Frontend.WordControllerTest do
   alias Frontend.Word
   alias Frontend.Category
 
-  @valid_attrs %{difficulty: 42, word: "some content"}
-  @invalid_attrs %{}
-
   test "lists all entries on index", %{conn: conn} do
     category = Repo.insert! %Category{}
     conn = get conn, category_word_path(conn, :index, category)
