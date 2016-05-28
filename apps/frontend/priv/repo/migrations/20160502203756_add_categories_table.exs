@@ -1,4 +1,4 @@
-defmodule Game.Repo.Migrations.AddCategoriesTable do
+defmodule Frontend.Repo.Migrations.AddCategoriesTable do
   use Ecto.Migration
 
   def up do

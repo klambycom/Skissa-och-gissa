@@ -1,4 +1,4 @@
-defmodule Game.Repo.Migrations.AddReferenceToCategoryFromWord do
+defmodule Frontend.Repo.Migrations.AddReferenceToCategoryFromWord do
   use Ecto.Migration
 
   def up do

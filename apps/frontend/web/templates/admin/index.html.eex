@@ -4,17 +4,24 @@
   </section>
 
   <section id="categories">
-    <%= render "category.html" %>
-    <%= render "category.html" %>
+    <%= for category <- @categories do %>
+      <%= render "category.html", category: category, conn: @conn %>
+    <% end %>
 
-    <a href="#" class="big-btn">
-      <%= dgettext "admin", "Create a new category..." %>
-    </a>
+    <%=
+      link(
+        dgettext("admin", "Create a new category..."),
+        to: category_path(@conn, :new),
+        class: "big-btn"
+      )
+    %>
   </section>
 </div>
 
 <div class="sidebar">
-  <%= render "add_word.html" %>
+  <%= render "add_word.html", categories: @categories,
+                              changeset: @changeset,
+                              conn: @conn %>
   <small>
     <%=
       dgettext(

@@ -1,4 +1,4 @@
-defmodule Game.Database.Difficulty do
+defmodule Frontend.Difficulty do
   @moduledoc """
   Ecto type for difficulty atom.
   """

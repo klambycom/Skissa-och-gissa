@@ -1,0 +1,7 @@
+<div id="edit-category">
+  <h1><%= dgettext "admin", "Edit category" %></h1>
+
+  <%= render "form.html", changeset: @changeset,
+                          action: category_path(@conn, :update, @category),
+                          conn: @conn %>
+</div>

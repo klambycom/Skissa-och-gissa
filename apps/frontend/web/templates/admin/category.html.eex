@@ -1,8 +1,29 @@
 <article>
   <div class="information">
-    <h2>Allmän</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    <p><a href="#"><%= dgettext "admin", "Edit" %></a></p>
+    <h2><%= @category.name %></h2>
+    <p><%= @category.description %></p>
+    <div class="actions">
+      <%=
+        link(
+          dgettext("admin", "Edit"),
+          to: category_path(@conn, :edit, @category)
+        )
+      %>
+      <%=
+        link(
+          dgettext("admin", "Words"),
+          to: category_word_path(@conn, :index, @category)
+        )
+      %>
+      <%=
+        link(
+          dgettext("admin", "Delete"),
+          to: category_path(@conn, :delete, @category),
+          method: :delete,
+          data: [confirm: dgettext("admin", "Are you sure?")]
+        )
+      %>
+    </div>
   </div>
 
   <div class="status">

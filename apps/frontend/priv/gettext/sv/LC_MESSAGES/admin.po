@@ -10,13 +10,13 @@ msgid ""
 msgstr ""
 "Language: sv\n"
 
-#: web/templates/admin/category.html.eex:25
+#: web/templates/admin/category.html.eex:40
 msgid "%{games} active game"
 msgid_plural "%{games} active games"
 msgstr[0] "Ett aktivt spel"
 msgstr[1] "%{games} aktiva spel"
 
-#: web/templates/admin/category.html.eex:13
+#: web/templates/admin/category.html.eex:28
 msgid "%{players} player"
 msgid_plural "%{players} players"
 msgstr[0] "En spelare"
@@ -54,11 +54,11 @@ msgstr "Lägg till ett nytt ord"
 msgid "Category"
 msgstr "Kategori"
 
-#: web/templates/admin/index.html.eex:11
+#: web/templates/admin/index.html.eex:13
 msgid "Create a new category..."
 msgstr "Skapa en ny kategori..."
 
-#: web/templates/admin/category.html.eex:5
+#: web/templates/admin/category.html.eex:8
 msgid "Edit"
 msgstr "Redigera"
 
@@ -70,7 +70,7 @@ msgstr "Spelare"
 msgid "Save"
 msgstr "Spara"
 
-#: web/templates/admin/category.html.eex:35
+#: web/templates/admin/category.html.eex:50
 msgid "Start a new game"
 msgstr "Starta nytt spel"
 
@@ -78,6 +78,54 @@ msgstr "Starta nytt spel"
 msgid "Word"
 msgstr "Ord"
 
-#: web/templates/admin/index.html.eex:20
+#: web/templates/admin/index.html.eex:25
 msgid "Added words can be removed from the settings for a category. Just click on the edit-link for a category"
 msgstr "När ett ord har lagts till kan det bli borttaget i inställningarna för kategorin. Klicka redigera på en kategori."
+
+#: web/templates/admin/category.html.eex:17
+msgid "Are you sure?"
+msgstr "Är du saker?"
+
+#: web/templates/category/form.html.eex:28
+msgid "Back"
+msgstr "Tillbaka"
+
+#: web/controllers/category_controller.ex:19
+msgid "Category created successfully."
+msgstr "Kategorin skapades."
+
+#: web/controllers/category_controller.ex:54
+msgid "Category deleted successfully."
+msgstr "Kategorin togs bort."
+
+#: web/controllers/category_controller.ex:39
+msgid "Category updated successfully."
+msgstr "Kategorin uppdaterades."
+
+#: web/templates/admin/category.html.eex:14
+msgid "Delete"
+msgstr "Ta bort"
+
+#: web/templates/category/form.html.eex:22
+msgid "Description:"
+msgstr "Beskrivning:"
+
+#: web/templates/category/edit.html.eex:2
+msgid "Edit category"
+msgstr "Redigera kategorin"
+
+#: web/templates/category/form.html.eex:16
+msgid "Name:"
+msgstr "Namn:"
+
+#: web/templates/category/new.html.eex:2
+msgid "New category"
+msgstr "Skapa en ny kategori"
+
+#: web/templates/category/form.html.eex:6
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr "Något gick fel! Kolla felmeddelanden i formuläret."
+
+#: web/templates/category/form.html.eex:29
+msgid "Submit"
+msgstr "Spara"

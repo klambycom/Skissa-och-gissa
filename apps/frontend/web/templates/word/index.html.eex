@@ -1,0 +1,37 @@
+<div>
+  <h2>
+    <%= dgettext "admin", "Listing words in: %{category}", category: @category.name %>
+  </h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= dgettext "admin", "Word" %></th>
+        <th><%= dgettext "admin", "Difficulty" %></th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for word <- @words do %>
+        <tr>
+          <td><%= word.word %></td>
+          <td><%= word.difficulty %></td>
+
+          <td class="text-right">
+            <%=
+              link(
+                dgettext("admin", "Delete"),
+                to: category_word_path(@conn, :delete, @category, word),
+                method: :delete,
+                data: [confirm: dgettext("admin", "Are you sure?")]
+              )
+            %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><%= link "Show category", to: category_path(@conn, :edit, @category) %></p>
+</div>

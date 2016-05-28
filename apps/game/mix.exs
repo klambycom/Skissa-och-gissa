@@ -19,7 +19,7 @@ defmodule Game.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :postgrex, :ecto],
+    [applications: [:logger],
      mod: {Game, []}]
   end
 
@@ -40,9 +40,7 @@ defmodule Game.Mixfile do
     [
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev},
-      {:uuid, "~> 1.1"},
-      {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.0.0-beta"}
+      {:uuid, "~> 1.1"}
     ]
   end
 end
