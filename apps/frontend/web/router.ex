@@ -19,7 +19,9 @@ defmodule Frontend.Router do
     get "/", PageController, :index
     get "/admin", AdminController, :index
     post "/admin", AdminController, :add_word
-    resources "/admin/categories", CategoryController, except: [:index, :show]
+    resources "/admin/categories", CategoryController, except: [:index, :show] do
+      resources "/words", WordController, only: [:index, :delete]
+    end
   end
 
   # Other scopes may use custom stacks.

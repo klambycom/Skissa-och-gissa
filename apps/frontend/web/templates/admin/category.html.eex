@@ -11,6 +11,12 @@
       %>
       <%=
         link(
+          dgettext("admin", "Words"),
+          to: category_word_path(@conn, :index, @category)
+        )
+      %>
+      <%=
+        link(
           dgettext("admin", "Delete"),
           to: category_path(@conn, :delete, @category),
           method: :delete,
