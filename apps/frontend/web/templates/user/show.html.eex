@@ -1,0 +1,5 @@
+<div class="full-width">
+  <h1><%= @user.name %></h1>
+
+  <%= link gettext("Edit settings"), to: user_path(@conn, :edit, @user) %>
+</div>

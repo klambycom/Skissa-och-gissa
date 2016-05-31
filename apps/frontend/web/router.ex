@@ -14,18 +14,16 @@ defmodule Frontend.Router do
   end
 
   scope "/", Frontend do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser]
 
     get "/", PageController, :index
+
     get "/admin", AdminController, :index
     post "/admin", AdminController, :add_word
     resources "/admin/categories", CategoryController, except: [:index, :show] do
       resources "/words", WordController, only: [:index, :delete]
     end
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Frontend do
-  #   pipe_through :api
-  # end
+    resources "/users", UserController
+  end
 end

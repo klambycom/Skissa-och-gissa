@@ -1,0 +1,28 @@
+<div class="full-width">
+  <h1><%= dgettext("admin", "Listing users") %></h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= dgettext("admin", "Name") %></th>
+        <th><%= dgettext("admin", "Email") %></th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for user <- @users do %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+
+        <td class="text-right">
+          <%= link dgettext("admin", "Show"), to: user_path(@conn, :show, user) %>
+          <%= link dgettext("admin", "Edit"), to: user_path(@conn, :edit, user) %>
+          <%= link dgettext("admin", "Delete"), to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+</div>
