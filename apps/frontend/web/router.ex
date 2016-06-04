@@ -25,10 +25,10 @@ defmodule Frontend.Router do
 
     get "/", PageController, :index
 
-    get "/sign_in", SessionController, :new
-    post "/sign_in", SessionController, :create
+    get "/login", SessionController, :new, as: :login
+    post "/login", SessionController, :create, as: :login
 
-    delete "/sign_out", SessionController, :delete
+    delete "/logout", SessionController, :delete, as: :logout
 
     get "/admin", AdminController, :index
     post "/admin", AdminController, :add_word

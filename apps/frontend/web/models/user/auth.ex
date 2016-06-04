@@ -13,11 +13,10 @@ defmodule Frontend.User.Auth do
     changeset = User.login_changeset(%User{}, user_params)
 
     if changeset.valid? do
-      user =
-        changeset.changes.email
-        |> User.find_by_email
-        |> Repo.one
-        |> check_password(changeset)
+      changeset.changes.email
+      |> User.find_by_email
+      |> Repo.one
+      |> check_password(changeset)
     else
       {:error, changeset} # Invalid changeset
     end
@@ -28,10 +27,10 @@ defmodule Frontend.User.Auth do
       user && checkpw(changeset.changes.password, user.password_digest) ->
         {:ok, user}
       user ->
-        {:error, changeset} # Bad password
+        {:error, Ecto.Changeset.add_error(changeset, :login, "bad password")}
       true ->
         dummy_checkpw
-        {:error, changeset} # Not found
+        {:error, Ecto.Changeset.add_error(changeset, :login, "not found")}
     end
   end
 end

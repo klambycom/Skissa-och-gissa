@@ -23,7 +23,7 @@
         <%=
           link(
             gettext("Sign out"),
-            to: session_path(@conn, :delete),
+            to: logout_path(@conn, :delete),
             method: :delete
           )
         %>

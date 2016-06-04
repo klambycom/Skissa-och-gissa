@@ -12,7 +12,7 @@
     </li>
     <%= unless current_user(@conn) do %>
       <li>
-        <a href="<%= session_path @conn, :new %>" class="signin">
+        <a href="<%= login_path @conn, :new %>" class="signin">
           <span><%= gettext "Sign in" %></span>
           <%= icon(:sign_in) %>
         </a>
