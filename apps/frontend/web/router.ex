@@ -9,14 +9,26 @@ defmodule Frontend.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :browser_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Frontend do
-    pipe_through [:browser]
+    pipe_through [:browser, :browser_session]
 
     get "/", PageController, :index
+
+    get "/sign_in", SessionController, :new
+    post "/sign_in", SessionController, :create
+
+    delete "/sign_out", SessionController, :delete
 
     get "/admin", AdminController, :index
     post "/admin", AdminController, :add_word

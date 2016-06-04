@@ -31,3 +31,13 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :guardian, Guardian,
+  issuer: "SkissaOchGissa",
+  ttl: {30, :days},
+  secret_key: "3yFBcitXtnF1myAfVyK6LdB/irH8Mv9+z/axGx9wsmZH58xS7ZrWty3VGx7ff6Fp",
+  serializer: Frontend.User.Serializer,
+  permissions: %{
+    default: [:write_profile],
+    admin: [:handle_categories, :handle_users]
+  }

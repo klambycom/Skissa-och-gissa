@@ -9,17 +9,29 @@ defmodule Frontend.User.Auth do
   @doc """
   Find user by email and verify that the password is correct.
   """
-  def verify(email, password) do
-    account = Repo.one(User.find_by_email(email))
+  def verify(user_params) do
+    changeset = User.login_changeset(%User{}, user_params)
 
+    if changeset.valid? do
+      user =
+        changeset.changes.email
+        |> User.find_by_email
+        |> Repo.one
+        |> check_password(changeset)
+    else
+      {:error, changeset} # Invalid changeset
+    end
+  end
+
+  defp check_password(user, changeset) do
     cond do
-      account && checkpw(password, account.password_digest) ->
-        {:ok, account}
-      account ->
-        {:error, :bad_password}
+      user && checkpw(changeset.changes.password, user.password_digest) ->
+        {:ok, user}
+      user ->
+        {:error, changeset} # Bad password
       true ->
         dummy_checkpw
-        {:error, :not_found}
+        {:error, changeset} # Not found
     end
   end
 end

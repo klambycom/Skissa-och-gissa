@@ -1,7 +1,8 @@
 defmodule Frontend.PageController do
   use Frontend.Web, :controller
+  use Guardian.Phoenix.Controller
 
-  def index(conn, _params) do
+  def index(conn, _params, user, _claims) do
     toplist = [
       %{name: "Christian Nilsson", score: 1000, avatar: "", position: 1},
       %{name: "Foo Bar",           score: 950,  avatar: "", position: 2},
@@ -39,6 +40,6 @@ defmodule Frontend.PageController do
       }
     ]
 
-    render conn, "index.html", %{toplist: toplist, games: games}
+    render conn, "index.html", toplist: toplist, games: games, user: user
   end
 end

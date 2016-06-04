@@ -53,4 +53,9 @@ defmodule Frontend.LayoutView do
 
   def meta_tag(%{property: property, content: content}),
     do: tag :meta, property: property, content: content
+
+  @doc """
+  Get the current user.
+  """
+  def current_user(conn), do: Guardian.Plug.current_resource(conn)
 end

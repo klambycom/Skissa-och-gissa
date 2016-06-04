@@ -14,6 +14,9 @@ defmodule Frontend.User do
   @required_fields ~w(name email password)
   @optional_fields ~w()
 
+  @required_login_fields ~w(email password)
+  @optional_login_fields ~w()
+
   @doc """
   Create user and hash the password
   """
@@ -21,6 +24,14 @@ defmodule Frontend.User do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> put_pass_hash
+  end
+
+  @doc """
+  Create login changeset with just email and password
+  """
+  def login_changeset(model, params \\ :invalid) do
+    model
+    |> cast(params, @required_login_fields, @optional_login_fields)
   end
 
   @doc """
@@ -32,7 +43,6 @@ defmodule Frontend.User do
   end
 
   defp put_pass_hash(changeset) do
-    #IEx.pry
     if Map.has_key?(changeset.changes, :password) do
       password = changeset.changes.password
       put_change(changeset, :password_digest, Comeonin.Bcrypt.hashpwsalt(password))

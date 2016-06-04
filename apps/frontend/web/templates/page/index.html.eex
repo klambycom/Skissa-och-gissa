@@ -14,6 +14,23 @@
 </section>
 
 <aside id="toplist" class="sidebar">
+  <%= if @user do %>
+    <h2><%= link @user.name, to: user_path(@conn, :show, @user) %></h2>
+
+    <ul>
+      <li><%= link gettext("Settings"), to: user_path(@conn, :edit, @user) %></li>
+      <li>
+        <%=
+          link(
+            gettext("Sign out"),
+            to: session_path(@conn, :delete),
+            method: :delete
+          )
+        %>
+      </li>
+    </ul>
+  <% end %>
+
   <h2><%= gettext "Highscore" %></h2>
 
   <ul>

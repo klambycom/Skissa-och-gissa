@@ -2,6 +2,13 @@ defmodule Frontend.UserController do
   use Frontend.Web, :controller
 
   alias Frontend.User
+  alias Frontend.SessionController
+
+  plug Guardian.Plug.EnsureAuthenticated,
+    %{on_failure: {SessionController, :new}} when not action in [:new, :create]
+
+  plug Guardian.Plug.EnsurePermissions,
+    %{on_failure: {__MODULE__, :forbidden}, default: [:write_profile]} when action in [:edit, :update]
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -19,9 +26,10 @@ defmodule Frontend.UserController do
     changeset = User.changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
-      {:ok, _user} ->
+      {:ok, user} ->
         conn
         |> put_flash(:info, gettext("Welcome new user."))
+        |> Guardian.Plug.sign_in(user, :token, perms: %{default: [:write_profile]})
         |> redirect(to: user_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -62,6 +70,12 @@ defmodule Frontend.UserController do
 
     conn
     |> put_flash(:info, gettext("User deleted successfully."))
+    |> redirect(to: user_path(conn, :index))
+  end
+
+  def forbidden(conn, _) do
+    conn
+    |> put_flash(:error, gettext("Forbidden"))
     |> redirect(to: user_path(conn, :index))
   end
 end
