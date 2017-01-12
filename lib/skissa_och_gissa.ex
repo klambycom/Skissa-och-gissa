@@ -14,6 +14,8 @@ defmodule SkissaOchGissa do
       supervisor(SkissaOchGissa.Endpoint, []),
       # Start your own worker by calling: SkissaOchGissa.Worker.start_link(arg1, arg2, arg3)
       # worker(SkissaOchGissa.Worker, [arg1, arg2, arg3]),
+      # Start Presence
+      supervisor(SkissaOchGissa.Presence, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
