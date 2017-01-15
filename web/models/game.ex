@@ -21,4 +21,9 @@ defmodule SkissaOchGissa.Game do
     struct
     |> cast(params, [:started_at, :ended_at])
   end
+
+  def latest(n \\ 10) do
+    from g in __MODULE__,
+      limit: ^n
+  end
 end

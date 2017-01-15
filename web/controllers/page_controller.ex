@@ -1,11 +1,17 @@
 defmodule SkissaOchGissa.PageController do
   use SkissaOchGissa.Web, :controller
 
-  alias SkissaOchGissa.GameType
+  alias SkissaOchGissa.{Game, GameType}
 
   def index(conn, _params),
     do: render(conn, "index.html")
 
-  def admin(conn, _params),
-    do: render(conn, "admin.html", game_types: Repo.all(GameType))
+  def admin(conn, _params) do
+    game_types =
+      Repo.all(GameType)
+      |> Repo.preload(games: Game.latest)
+
+    conn
+    |> render("admin.html", game_types: game_types)
+  end
 end

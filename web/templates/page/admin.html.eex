@@ -6,10 +6,19 @@
     <%= for game_type <- @game_types do %>
       <li class="admin__page__game_types__item">
         <h3><%= link game_type.title, to: game_type_path(@conn, :edit, game_type) %></h3>
-        <p>
-          <%= game_type.description %>
-          <%= link dgettext("admin", "New game"), to: game_type_game_path(@conn, :create, game_type) %>
-        </p>
+        <p><%= game_type.description %></p>
+        <ul>
+          <%= for game <- game_type.games do %>
+            <li>
+              Created at: <%= game.created_at %>
+              Started at: <%= game.started_at %>
+              Ended at: <%= game.ended_at %>
+            </li>
+          <% end %>
+          <li>
+            <%= link dgettext("admin", "Create a new game"), to: game_type_game_path(@conn, :create, game_type) %>
+          </li>
+        </ul>
       </li>
     <% end %>
 

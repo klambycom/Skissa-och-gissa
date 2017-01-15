@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :skissa_och_gissa, SkissaOchGissa.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "christian.nilsson",
-  password: "",
-  database: "christian.nilsson",
+  username: "christian",
+  password: "christian",
+  database: "christian",
   hostname: "localhost",
   pool_size: 10
