@@ -1,0 +1,7 @@
+<div class="admin__page">
+  <h1><%= dgettext "admin", "New game type" %></h1>
+
+  <%= render "form.html", changeset: @changeset,
+                          action: game_type_path(@conn, :create),
+                          conn: @conn %>
+</div>

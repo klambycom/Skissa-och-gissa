@@ -1,0 +1,17 @@
+<div class="admin__page">
+  <h1><%= dgettext "admin", "Admin" %></h1>
+
+  <h2><%= dgettext "admin", "Game types" %></h2>
+  <ul class="admin__page__game_types">
+    <%= for game_type <- @game_types do %>
+      <li class="admin__page__game_types__item">
+        <h3><%= link game_type.title, to: game_type_path(@conn, :edit, game_type) %></h3>
+        <p><%= game_type.description %></p>
+      </li>
+    <% end %>
+
+    <li class="admin__page__game_types__new">
+      <%= link dgettext("admin", "New game type"), to: game_type_path(@conn, :new) %>
+    </li>
+  </ul>
+</div>
