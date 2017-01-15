@@ -1,7 +1,7 @@
 defmodule SkissaOchGissa.GameType do
   use SkissaOchGissa.Web, :model
 
-  alias SkissaOchGissa.WordList
+  alias SkissaOchGissa.{WordList, Game}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -12,7 +12,9 @@ defmodule SkissaOchGissa.GameType do
     field :words, WordList, default: []
     field :lang_code, :string, default: "sv"
 
-    timestamps
+    has_many :games, Game
+
+    timestamps()
   end
 
   @doc """
