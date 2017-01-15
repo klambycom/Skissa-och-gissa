@@ -7,29 +7,44 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello SkissaOchGissa!</title>
+    <title><%= gettext "Skissa och gissa" %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, static_file(@conn, :css)) %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+    <header class="site_header">
+      <div class="site_header__wrapper">
+        <%=
+          link(
+            gettext("Skissaochgissa.se"),
+            to: page_path(@conn, :index),
+            class: "site_header__logo"
+          )
+        %>
+
+        <nav class="site_header__nav">
+          <ul>
+            <li><%= link gettext("Games"), to: page_path(@conn, :index) %></li>
+            <li><a href="#"><%= gettext "Highscore" %></a></li>
+            <li><%= link gettext("Admin"), to: page_path(@conn, :admin) %></li>
+            <li>
+              <a class="site_header__nav__signin" href="">
+                <span><%= gettext "Sign in" %></span>
+                <%= icon(:sign_in) %>
+              </a>
+            </li>
           </ul>
         </nav>
-        <span class="logo"></span>
-      </header>
+      </div>
+    </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= flash_element @conn, :info, class: "alert alert--info", role: "alert" %>
+    <%= flash_element @conn, :error, class: "alert alert--danger", role: "alert" %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main" class="page">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, static_file(@conn, :js)) %>"></script>
   </body>
 </html>

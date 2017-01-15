@@ -51,6 +51,7 @@ defmodule SkissaOchGissa.Web do
 
       import SkissaOchGissa.Router.Helpers
       import SkissaOchGissa.ErrorHelpers
+      import SkissaOchGissa.IconHelpers
       import SkissaOchGissa.Gettext
     end
   end
