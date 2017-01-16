@@ -41,9 +41,7 @@
     <%= flash_element @conn, :info, class: "alert alert--info", role: "alert" %>
     <%= flash_element @conn, :error, class: "alert alert--danger", role: "alert" %>
 
-    <main role="main" class="page">
-      <%= render @view_module, @view_template, assigns %>
-    </main>
+    <%= render @view_module, @view_template, assigns %>
 
     <script src="<%= static_path(@conn, static_file(@conn, :js)) %>"></script>
   </body>

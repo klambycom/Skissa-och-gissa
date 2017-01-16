@@ -1,15 +1,17 @@
-<div class="page__main">
-  <h1><%= gettext "Skissa och gissa" %></h1>
+<main role="main" class="page">
+  <div class="page__main">
+    <h1><%= gettext "Skissa och gissa" %></h1>
 
-  <p><%= gettext "Skissa och gissa är ett spel där spelarna turas om att rita en bild medans de spelarna andra gissar vad bilden föreställer. Spelaren som ska rita får ett ord från en av kategorierna sport, jobb och allmänt som spelaren måste förmedla med sin bild." %></p>
-</div>
+    <p><%= gettext "Skissa och gissa är ett spel där spelarna turas om att rita en bild medans de spelarna andra gissar vad bilden föreställer. Spelaren som ska rita får ett ord från en av kategorierna sport, jobb och allmänt som spelaren måste förmedla med sin bild." %></p>
+  </div>
 
-<div class="page__sidebar">
-  <h2><%= gettext "Highscore" %></h2>
+  <div class="page__sidebar">
+    <h2><%= gettext "Highscore" %></h2>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
 
-<div class="row">
-  <div id="react-root"></div>
-</div>
+  <div class="row">
+    <div id="react-root"></div>
+  </div>
+</main>
