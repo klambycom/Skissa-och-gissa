@@ -2,7 +2,7 @@ defmodule SkissaOchGissa.RoomChannel do
   use SkissaOchGissa.Web, :channel
 
   alias SkissaOchGissa.Presence
-  alias SkissaOchGissa.Game
+  alias SkissaOchGissa.{Game, MessageView}
 
   def join("room:" <> id, _params, socket) do
     case Repo.get(Game, id) do
@@ -27,11 +27,7 @@ defmodule SkissaOchGissa.RoomChannel do
   end
 
   def handle_in("message:new", message, socket) do
-    broadcast! socket, "message:new", %{
-      user: socket.assigns.user,
-      body: message,
-      timestamp: :os.system_time(:milli_seconds)
-    }
+    broadcast! socket, "message:new", MessageView.render("message.json", message, socket)
     {:noreply, socket}
   end
 end
