@@ -22,4 +22,7 @@ defmodule SkissaOchGissa.GameController do
         |> redirect(to: page_path(conn, :admin))
     end
   end
+
+  def game(conn, %{"id" => id}),
+    do: render(conn, "game.html", game: Repo.get!(Game, id))
 end

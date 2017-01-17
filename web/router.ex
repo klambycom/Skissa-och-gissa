@@ -22,6 +22,8 @@ defmodule SkissaOchGissa.Router do
     resources "/admin/game_types", GameTypeController, except: [:index, :show] do
       get "/new", GameController, :create
     end
+
+    get "/games/:id", GameController, :game
   end
 
   # Other scopes may use custom stacks.
