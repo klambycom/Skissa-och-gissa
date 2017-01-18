@@ -15,8 +15,13 @@ class Game extends React.Component {
     };
 
     this.handleMessage = this.handleMessage.bind(this);
+  }
 
-    this.initialize(`Anonymous-${Math.floor(Math.random() * 1000)}`, "room:lobby");
+  componentDidMount() {
+    this.initialize(
+      `Anonymous-${Math.floor(Math.random() * 1000)}`,
+      `room:${this.props.id}`
+    );
   }
 
   initialize(user, roomName) {
@@ -59,10 +64,10 @@ class Game extends React.Component {
 
   render() {
     return (
-      <div className="game">
-        <div className="chat col-md-8">
+      <main role="main" className="page">
+        <div className="page__sidebar chat">
           <h2>Messages</h2>
-          <ul id="message-list" className="list-unstyled">
+          <ul className="chat__messages">
             {this.state.messages.map((x, i) => (
               <li key={i}>
                 <ChatMessage user={x.user} body={x.body} timestamp={x.timestamp} />
@@ -71,10 +76,10 @@ class Game extends React.Component {
           </ul>
           <ChatInput onMessage={this.handleMessage} />
         </div>
-        <div className="col-md-4">
+        <div className="page__main">
           <UserList users={this.presencesList()} />
         </div>
-      </div>
+      </main>
     );
   }
 }

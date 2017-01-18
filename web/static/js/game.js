@@ -5,10 +5,8 @@ import ReactDOM from "react-dom";
 
 import Game from "./components/game";
 
-//let chat = new Chat("room:lobby");
-//chat.initialize();
+import "layout/index.less";
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById("react-root")
-);
+const root = document.getElementById("game-root");
+
+ReactDOM.render(<Game id={root.dataset.gameId} />, root);
