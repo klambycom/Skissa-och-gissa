@@ -2,7 +2,33 @@
   <div class="page__main">
     <h1><%= gettext "Skissa och gissa" %></h1>
 
-    <p><%= gettext "Skissa och gissa är ett spel där spelarna turas om att rita en bild medans de spelarna andra gissar vad bilden föreställer. Spelaren som ska rita får ett ord från en av kategorierna sport, jobb och allmänt som spelaren måste förmedla med sin bild." %></p>
+    <p style="margin-bottom: 50px;"><%= gettext "Skissa och gissa är ett spel där spelarna turas om att rita en bild medans de spelarna andra gissar vad bilden föreställer. Spelaren som ska rita får ett ord från en av kategorierna sport, jobb och allmänt som spelaren måste förmedla med sin bild." %></p>
+
+    <%= for game <- @games do %>
+      <article class="game">
+        <div class="game__canvas"><img src="" alt=""></div>
+
+        <div class="game__information">
+          <h3><%= game.game_type.title %></h3>
+          <p><%= game.game_type.description %></p>
+
+          <div class="game__information__status">
+            <div class="friends">
+              <%= for friend <- [] do %>
+                <div class="player">
+                  <img src="<%= friend.avatar %>" alt="<%= friend.name %>">
+                </div>
+              <% end %>
+            </div>
+
+            <div class="start-game">
+              <div class="players"><%= icon(:users) %> 3</div>
+              <%= link gettext("Join the game"), to: game_path(@conn, :game, game), class: "btn" %>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% end %>
   </div>
 
   <div class="page__sidebar">

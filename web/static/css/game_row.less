@@ -1,0 +1,60 @@
+@import "layout/settings";
+
+.game {
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.27);
+
+  &__canvas {
+    background-color: @image-color;
+    margin-right: 10px;
+
+    img {
+      width: 200px;
+      height: 100%;
+    }
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    h3 {
+      margin: 0;
+      margin-top: 10px;
+    }
+
+    &__status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .friends {
+        .player {
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          overflow: hidden;
+          background-color: @image-color;
+          margin: 0;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+
+      .start-game {
+        display: flex;
+        align-items: center;
+
+        .players { margin-right: 10px; }
+      }
+    }
+  }
+}

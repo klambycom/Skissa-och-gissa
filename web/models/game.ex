@@ -26,4 +26,10 @@ defmodule SkissaOchGissa.Game do
     from g in __MODULE__,
       limit: ^n
   end
+
+  def active do
+    from g in __MODULE__,
+      where: is_nil(g.ended_at),
+      order_by: g.created_at
+  end
 end

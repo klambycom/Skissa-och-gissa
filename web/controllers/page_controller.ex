@@ -4,7 +4,7 @@ defmodule SkissaOchGissa.PageController do
   alias SkissaOchGissa.{Game, GameType}
 
   def index(conn, _params),
-    do: render(conn, "index.html")
+    do: render(conn, "index.html", games: Repo.all(Game.active) |> Repo.preload(:game_type))
 
   def admin(conn, _params) do
     game_types =
