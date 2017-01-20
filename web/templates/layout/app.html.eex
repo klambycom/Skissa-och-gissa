@@ -43,6 +43,15 @@
 
     <%= render @view_module, @view_template, assigns %>
 
+    <footer>
+      <%=
+        raw gettext(
+          "Skissa och gissa is <a href='#'>open-source software</a> created by <a href='#'>Christian Nilsson</a>." <>
+          "<small>The site use &#x1F36A; cookies, for better user experience, when you join a game or signs in.</small>"
+        )
+      %>
+    </footer>
+
     <script src="<%= static_path(@conn, static_file(@conn, :js)) %>"></script>
   </body>
 </html>
