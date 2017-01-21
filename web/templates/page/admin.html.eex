@@ -1,29 +1,26 @@
-<div class="admin__page">
-  <h1><%= dgettext "admin", "Admin" %></h1>
+<main role="main" class="page">
+  <div class="page__main">
+    <h1><%= dgettext "admin", "Admin" %></h1>
 
-  <h2><%= dgettext "admin", "Game types" %></h2>
-  <ul class="admin__page__game_types">
+    <h2><%= dgettext "admin", "Game types" %></h2>
+
     <%= for game_type <- @game_types do %>
-      <li class="admin__page__game_types__item">
+      <div class="game_type">
         <h3><%= link game_type.title, to: game_type_path(@conn, :edit, game_type) %></h3>
         <p><%= game_type.description %></p>
-        <ul>
-          <%= for game <- game_type.games do %>
-            <li>
-              Created at: <%= game.created_at %>
-              Started at: <%= game.started_at %>
-              Ended at: <%= game.ended_at %>
-            </li>
-          <% end %>
-          <li>
-            <%= link dgettext("admin", "Create a new game"), to: game_type_game_path(@conn, :create, game_type) %>
-          </li>
-        </ul>
-      </li>
+
+        <div class="game_type__games">
+          <%= render "games.html", conn: @conn,
+                                   game_type: game_type,
+                                   games: game_type.games %>
+        </div>
+
+      </div>
     <% end %>
 
-    <li class="admin__page__game_types__new">
-      <%= link dgettext("admin", "New game type"), to: game_type_path(@conn, :new) %>
-    </li>
-  </ul>
-</div>
+    <p>
+      <%= link dgettext("admin", "New game type"), to: game_type_path(@conn, :new),
+                                                   class: "btn" %>
+    </p>
+  </div>
+</main>
