@@ -28,10 +28,15 @@
             <li><a href="#"><%= gettext "Highscore" %></a></li>
             <li><%= link gettext("Admin"), to: page_path(@conn, :admin) %></li>
             <li>
-              <a class="site_header__nav__signin" href="">
-                <span><%= gettext "Sign in" %></span>
-                <%= icon(:sign_in) %>
-              </a>
+              <%= if @current_user do %>
+                <%= link gettext("Sign out"), to: session_path(@conn, :delete, @current_user),
+                                              method: "delete" %>
+              <% else %>
+                <a class="site_header__nav__signin" href="<%= session_path(@conn, :new) %>">
+                  <span><%= gettext "Sign in" %></span>
+                  <%= icon(:sign_in) %>
+                </a>
+              <% end %>
             </li>
           </ul>
         </nav>

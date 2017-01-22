@@ -1,0 +1,10 @@
+<main role="main" class="page">
+  <div class="page__main">
+    <h1><%= @user.email %></h1>
+
+    <ul>
+      <li>Inserted at: <%= @user.inserted_at %></li>
+      <li>Updated at: <%= @user.updated_at %></li>
+    </ul>
+  </div>
+</main>
