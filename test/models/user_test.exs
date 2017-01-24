@@ -1,18 +1,18 @@
-defmodule SkissaOchGissa.Authentication.EmailTest do
+defmodule SkissaOchGissa.UserTest do
   use SkissaOchGissa.ModelCase
 
-  alias SkissaOchGissa.Authentication.Email
+  alias SkissaOchGissa.User
 
   @valid_attrs %{email: "some content", password_hash: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Email.changeset(%Email{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Email.changeset(%Email{}, @invalid_attrs)
+    changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

@@ -1,22 +1,18 @@
 defmodule SkissaOchGissa.UserController do
   use SkissaOchGissa.Web, :controller
 
-  alias SkissaOchGissa.{Authentication, Auth}
+  alias SkissaOchGissa.{User, Auth}
 
   plug :authenticate when action in [:show]
 
   def show(conn, %{"id" => id}),
-    do: render(conn, "show.html", user: Repo.get(Authentication.Email, id))
+    do: render(conn, "show.html", user: Repo.get(User, id))
 
-  def new(conn, _params) do
-    changeset = Authentication.Email.changeset(%Authentication.Email{}, :register)
-    render(conn, "new.html", changeset: changeset)
-  end
+  def new(conn, _params),
+    do: render(conn, "new.html", changeset: User.changeset(%User{}, :register))
 
-  def create(conn, %{"email" => email_params}) do
-    changeset =
-      %Authentication.Email{}
-      |> Authentication.Email.changeset(:register, email_params)
+  def create(conn, %{"user" => user_params}) do
+    changeset = User.changeset(%User{}, :register, user_params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->

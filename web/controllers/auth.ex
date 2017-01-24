@@ -2,13 +2,13 @@ defmodule SkissaOchGissa.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  alias SkissaOchGissa.{Repo, Authentication}
+  alias SkissaOchGissa.{Repo, User}
 
   def init(opts), do: Keyword.fetch!(opts, :repo)
 
   def call(conn, repo) do
     user_id = get_session(conn, :user_id)
-    user = user_id && repo.get(Authentication.Email, user_id)
+    user = user_id && repo.get(User, user_id)
     assign(conn, :current_user, user)
   end
 
@@ -24,7 +24,7 @@ defmodule SkissaOchGissa.Auth do
   end
 
   def login_by_email(conn, email, password) do
-    user = Repo.get_by(Authentication.Email, email: email)
+    user = Repo.get_by(User, email: email)
 
     cond do
       user && checkpw(password, user.password_hash) ->

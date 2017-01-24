@@ -1,7 +1,10 @@
-defmodule SkissaOchGissa.Authentication.Email do
+defmodule SkissaOchGissa.User do
   use SkissaOchGissa.Web, :model
 
-  schema "email_authentications" do
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
+  schema "user_auths" do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -10,7 +13,7 @@ defmodule SkissaOchGissa.Authentication.Email do
   end
 
   @doc """
-  Builds a changeset based on the `struct` and `params`.
+  Builds a changeset for register a new user with email and password.
   """
   def changeset(struct, :register, params \\ %{}) do
     struct
