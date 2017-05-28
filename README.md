@@ -1,8 +1,4 @@
-# Skissa och gissa
+# SkissaOchGissa
 
-Rewriting the game in Elixir and (probably) React.
+**TODO: Add description**
 
-
-## License
-
-Licensed under the [MIT license](LICENSE).
