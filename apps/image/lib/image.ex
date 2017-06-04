@@ -15,4 +15,9 @@ defmodule Image do
   def hello do
     :world
   end
+
+  def test do
+    File.read!("test/images/basn0g01.png")
+    |> Image.PNG.process
+  end
 end
