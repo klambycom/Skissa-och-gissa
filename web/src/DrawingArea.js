@@ -35,6 +35,8 @@ class DrawingArea extends Component {
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}
+        height="500"
+        width="700"
       />
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
+import PropTypes from "prop-types";
 
 class Canvas extends Component {
   constructor(props) {
@@ -72,9 +73,19 @@ class Canvas extends Component {
         onMouseUp={this.props.onMouseUp}
         onMouseOut={this.props.onMouseUp}
         onMouseMove={(e) => this.props.onMouseMove(this.getCursorPosition(e))}
+        width={this.props.width}
+        height={this.props.height}
       ></canvas>
     );
   }
 }
+
+Canvas.propTypes = {
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  width: PropTypes.number,
+  height: PropTypes.number
+};
 
 export default Canvas;
