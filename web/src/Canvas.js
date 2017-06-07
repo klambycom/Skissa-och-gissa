@@ -22,8 +22,8 @@ class Canvas extends Component {
     this.context.lineJoin = "round";
   }
 
-  set color(color) {
-    this.context.strokeStyle = color;
+  set color({r, g, b}) {
+    this.context.strokeStyle = `rgb(${r}, ${g}, ${b})`;
   }
 
   set size(size) {

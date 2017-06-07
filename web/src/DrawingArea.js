@@ -1,15 +1,32 @@
 import React, { Component } from "react";
+
 import Canvas from "./Canvas";
+import Pencil from "./Pencil";
+
+const colors = [
+  {r: 0, g: 0, b: 0},
+  {r: 255, g: 255, b: 255},
+  {r: 255, g: 0, b: 0},
+  {r: 255, g: 165, b: 0},
+  {r: 255, g: 255, b: 0},
+  {r: 154, g: 205, b: 50},
+  {r: 0, g: 128, b: 0},
+  {r: 135, g: 206, b: 250},
+  {r: 30, g: 144, b: 255},
+  {r: 238, g: 130, b: 238},
+  {r: 255, g: 192, b: 203},
+  {r: 222, g: 184, b: 135},
+  {r: 139, g: 69, b: 19},
+  {r: 165, g: 42, b: 42}
+];
+
+const sizes = [5, 10, 15, 20];
 
 class DrawingArea extends Component {
   constructor(props) {
     super(props);
 
     this.is_drawing = false;
-
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
   }
 
   handleMouseDown(point) {
@@ -28,16 +45,29 @@ class DrawingArea extends Component {
     }
   }
 
+  handlePencil(color, size) {
+    this.canvas.color = color;
+    this.canvas.size = size;
+  }
+
   render() {
     return (
-      <Canvas
-        ref={(ref) => this.canvas = ref}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-        onMouseMove={this.handleMouseMove}
-        height="500"
-        width="700"
-      />
+      <div>
+        <Canvas
+          ref={(ref) => this.canvas = ref}
+          onMouseDown={(point) => this.handleMouseDown(point)}
+          onMouseUp={() => this.handleMouseUp()}
+          onMouseMove={(point) => this.handleMouseMove(point)}
+          height={500}
+          width={700}
+        />
+
+        <Pencil
+          colors={colors}
+          sizes={sizes}
+          onChange={(color, size) => this.handlePencil(color, size)}
+        />
+      </div>
     );
   }
 }
