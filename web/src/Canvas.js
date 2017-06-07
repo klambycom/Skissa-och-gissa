@@ -5,16 +5,11 @@ class Canvas extends Component {
   constructor(props) {
     super(props);
 
-    this.current = {x: 0, y: 0};
-    this.is_drawing = false;
+    this.previous = {x: 0, y: 0};
 
     this.start = this.start.bind(this);
-    this.draw = this.draw.bind(this);
     this.line = this.line.bind(this);
-    this.freeHand = this.freeHand.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.continue = this.continue.bind(this);
     this.getCursorPosition = this.getCursorPosition.bind(this);
 
     //this.context.clearRect(0, 0, canvas.width, canvas.height);
@@ -38,41 +33,30 @@ class Canvas extends Component {
     return this.context.canvas.toDataURL();
   }
 
+  /**
+   * Save current position. It's needed if we are free-hand drawing.
+   */
   start({x, y}) {
-    this.current = {x: x - 0.1, y: y - 0.1};
-    this.freeHand({x, y});
+    this.previous = {x: x - 0.1, y: y - 0.1};
   }
 
-  draw(point) {
-    this.freeHand(point);
+  /**
+   * Draw a line between previous point and the current point.
+   */
+  continue(point) {
+    this.line(this.previous, point);
+    this.previous = point;
   }
 
-  freeHand(point) {
-    this.line(this.current, point);
-    this.current = point;
-  }
-
+  /**
+   * Draw a line between two points.
+   */
   line(from, to) {
     this.context.beginPath();
     this.context.moveTo(from.x, from.y);
     this.context.lineTo(to.x, to.y);
     this.context.closePath();
     this.context.stroke();
-  }
-
-  handleMouseDown(point) {
-    this.is_drawing = true;
-    this.start(this.getCursorPosition(point));
-  }
-
-  handleMouseUp(e) {
-    this.is_drawing = false;
-  }
-
-  handleMouseMove(point) {
-    if (this.is_drawing) {
-      this.draw(this.getCursorPosition(point));
-    }
   }
 
   getCursorPosition(e) {
@@ -84,10 +68,10 @@ class Canvas extends Component {
     return (
       <canvas
         ref={(ref) => this.canvasRef = ref}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-        onMouseOut={this.handleMouseUp}
-        onMouseMove={this.handleMouseMove}
+        onMouseDown={(e) => this.props.onMouseDown(this.getCursorPosition(e))}
+        onMouseUp={this.props.onMouseUp}
+        onMouseOut={this.props.onMouseUp}
+        onMouseMove={(e) => this.props.onMouseMove(this.getCursorPosition(e))}
       ></canvas>
     );
   }
