@@ -1,4 +1,4 @@
-defmodule Api.Web.ErrorHelpers do
+defmodule Api.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -21,9 +21,9 @@ defmodule Api.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Api.Web.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(Api.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Api.Web.Gettext, "errors", msg, opts)
+      Gettext.dgettext(Api.Gettext, "errors", msg, opts)
     end
   end
 end

@@ -1,7 +1,7 @@
-defmodule Api.Web.Endpoint do
+defmodule Api.Endpoint do
   use Phoenix.Endpoint, otp_app: :api
 
-  socket "/socket", Api.Web.UserSocket
+  socket "/socket", Api.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -36,7 +36,7 @@ defmodule Api.Web.Endpoint do
     key: "_api_key",
     signing_salt: "otMseU4w"
 
-  plug Api.Web.Router
+  plug Api.Router
 
   @doc """
   Dynamically loads configuration from the system environment

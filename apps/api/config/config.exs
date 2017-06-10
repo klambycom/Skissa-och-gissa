@@ -10,10 +10,10 @@ config :api,
   namespace: Api
 
 # Configures the endpoint
-config :api, Api.Web.Endpoint,
+config :api, Api.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "EhGQYOUYTaUPth7qaTJODmbjyLDySs4XduOSOk9C86M83UEWdo1RmAo4x7wp0y2o",
-  render_errors: [view: Api.Web.ErrorView, accepts: ~w(json)],
+  render_errors: [view: Api.ErrorView, accepts: ~w(json)],
   pubsub: [name: Api.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
