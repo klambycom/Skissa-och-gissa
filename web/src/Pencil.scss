@@ -1,0 +1,24 @@
+@import "./shared.scss";
+
+.Pencil {
+  display: flex;
+  justify-content: space-between;
+
+  &__headline {
+    display: block;
+    padding-bottom: 5px;
+    font-size: .6em;
+    font-weight: lighter;
+    color: gray;
+  }
+
+  &__colors {
+    width: $color-size * $nr-of-colors / 2;
+  }
+
+  &__sizes, &__colors {
+    background-color: #eceaea;
+    padding: 10px;
+    border-radius: 3px;
+  }
+}

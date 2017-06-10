@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import bem from "bem-cn";
 
 import Canvas from "./Canvas";
 import Pencil from "./Pencil";
+
+import "./DrawingArea.css";
+
+const b = bem("DrawingArea");
 
 const colors = [
   {r: 0, g: 0, b: 0},
@@ -52,7 +57,7 @@ class DrawingArea extends Component {
 
   render() {
     return (
-      <div>
+      <div className={b}>
         <Canvas
           ref={(ref) => this.canvas = ref}
           onMouseDown={(point) => this.handleMouseDown(point)}

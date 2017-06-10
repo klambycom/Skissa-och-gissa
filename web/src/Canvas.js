@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
 import PropTypes from "prop-types";
+import bem from "bem-cn";
+
+import "./Canvas.css";
 
 class Canvas extends Component {
   constructor(props) {
@@ -68,6 +71,7 @@ class Canvas extends Component {
   render() {
     return (
       <canvas
+        className={bem("Canvas")}
         ref={(ref) => this.canvasRef = ref}
         onMouseDown={(e) => this.props.onMouseDown(this.getCursorPosition(e))}
         onMouseUp={this.props.onMouseUp}

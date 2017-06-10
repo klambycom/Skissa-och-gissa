@@ -1,0 +1,13 @@
+@import "./shared.scss";
+
+$border-width: 5px;
+
+.Color {
+  border: $border-width solid transparent;
+  width: $color-size;
+  height: $color-size;
+
+  &--selected {
+    border: $border-width solid $highlight-color;
+  }
+}

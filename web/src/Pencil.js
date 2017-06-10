@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import bem from "bem-cn";
+
+import "./Pencil.css";
 
 import Color from "./Color";
 import Size from "./Size";
+
+const b = bem("Pencil");
 
 class Pencil extends Component {
   constructor(props) {
@@ -25,24 +30,29 @@ class Pencil extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.colors.map((rgb, i) => (
-          <Color
-            key={i}
-            color={rgb}
-            onClick={(color) => this.handleClick(color, this.state.size)}
-            selected={this.state.color === rgb}
-          />
-        ))}
-        |
-        {this.props.sizes.map((size, i) => (
-          <Size
-            key={i}
-            size={size}
-            onClick={(size) => this.handleClick(this.state.color, size)}
-            selected={this.state.size === size}
-          />
-        ))}
+      <div className={b}>
+        <div className={b("colors")}>
+          <span className={b("headline")}>Colors</span>
+          {this.props.colors.map((rgb, i) => (
+            <Color
+              key={i}
+              color={rgb}
+              onClick={(color) => this.handleClick(color, this.state.size)}
+              selected={this.state.color === rgb}
+            />
+          ))}
+        </div>
+
+        <div className={b("sizes")}>
+          {this.props.sizes.map((size, i) => (
+            <Size
+              key={i}
+              size={size}
+              onClick={(size) => this.handleClick(this.state.color, size)}
+              selected={this.state.size === size}
+            />
+          ))}
+        </div>
       </div>
     );
   }
