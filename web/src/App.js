@@ -4,7 +4,7 @@ import "./App.css";
 
 import DrawingArea from "./DrawingArea";
 import Chat from "./Chat";
-import UserList from "./UserList";
+import Message from "./Message";
 import Websocket from "./Websocket";
 
 class App extends Component {
@@ -14,22 +14,33 @@ class App extends Component {
     this.state = {
       user: `Christian (${Math.random()})`,
       users: [],
-      messages: [
-        {body: "foo"},
-        {body: "bar"},
-        {body: "baz"}
-      ]
+      messages: []
     };
   }
 
   handleMessage(type, message) {
     switch(type) {
       case "message:new":
-        this.setState({messages: this.state.messages.concat([message])});
+        this.setState({messages: this.state.messages.concat([Message.Text(message)])});
         break;
 
       default:
         // Nothing
+    }
+  }
+
+  handleInput(message) {
+    switch(message) {
+      case "/users":
+        this.setState({
+          messages: this.state.messages.concat([
+            Message.Users({type: "users", body: "All users", users: this.state.users})
+          ])
+        });
+        break;
+
+      default:
+        this.ws.send("message:new", message);
     }
   }
 
@@ -39,6 +50,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+          <div>{this.state.users.length} user online</div>
         </div>
         <div className="App-intro">
           <Websocket
@@ -50,10 +62,9 @@ class App extends Component {
             onMessage={(type, msg) => this.handleMessage(type, msg)}
             onPresence={(users) => this.setState({users})}
           />
-          <UserList users={this.state.users} />
           <Chat
             messages={this.state.messages}
-            onMessage={(text) => this.ws.send("message:new", text)}
+            onMessage={(text) => this.handleInput(text)}
           />
           <DrawingArea />
         </div>

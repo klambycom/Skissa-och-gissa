@@ -10,7 +10,7 @@ function Chat(props) {
   return (
     <div className={b}>
       <div className={b("messages")}>
-      {props.messages.map((message, i) => <div key={i}>{message.body}</div>)}
+        {props.messages.map((message, i) => <div key={i}>{message}</div>)}
       </div>
 
       <Input onEnter={(e) => props.onMessage(e)} />
