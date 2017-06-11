@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import {Socket, Presence} from "phoenix";
 import logo from "./logo.svg";
 import "./App.css";
 
 import DrawingArea from "./DrawingArea";
 import Chat from "./Chat";
 import UserList from "./UserList";
+import Websocket from "./Websocket";
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class App extends Component {
 
     this.state = {
       user: `Christian (${Math.random()})`,
-      presences: {},
+      users: [],
       messages: [
         {body: "foo"},
         {body: "bar"},
@@ -22,48 +22,15 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    // Set up the websocket connection
-    this.socket = new Socket("ws://localhost:4000/socket", {params: {user: this.state.user}});
-    this.socket.connect();
+  handleMessage(type, message) {
+    switch(type) {
+      case "message:new":
+        this.setState({messages: this.state.messages.concat([message])});
+        break;
 
-    // Set up room
-    this.room = this.socket.channel("room:lobby");
-
-    // Sync presence state
-    this.room.on("presence_state", state => {
-      this.setState({presences: Presence.syncState(this.state.presences, state)});
-    });
-
-    this.room.on("presence_diff", state => {
-      this.setState({presences: Presence.syncDiff(this.state.presences, state)});
-    });
-
-    // Set up new message handler
-    this.room.on("message:new", this.handleMessage.bind(this));
-
-    // Join the room
-    this.room.join();
-  }
-
-  formatTimestamp(timestamp) {
-    let date = new Date(timestamp);
-    return date.toLocaleTimeString();
-  }
-
-  formatPresences(presences) {
-    return Presence.list(presences, (user, {metas}) => {
-      return {
-        user: user,
-        onlineAt: this.formatTimestamp(metas[0].online_at)
-      };
-    });
-  }
-
-  handleMessage(message) {
-    console.log(this);
-    console.log(message);
-    this.setState({messages: this.state.messages.concat([message])});
+      default:
+        // Nothing
+    }
   }
 
   render() {
@@ -74,10 +41,19 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div className="App-intro">
-          <UserList users={this.formatPresences(this.state.presences)} />
+          <Websocket
+            ref={(ref) => this.ws = ref}
+            url="ws://localhost:4000/socket"
+            room="room:lobby"
+            types={["message:new"]}
+            user={this.state.user}
+            onMessage={(type, msg) => this.handleMessage(type, msg)}
+            onPresence={(users) => this.setState({users})}
+          />
+          <UserList users={this.state.users} />
           <Chat
             messages={this.state.messages}
-            onMessage={(text) => this.room.push("message:new", text)}
+            onMessage={(text) => this.ws.send("message:new", text)}
           />
           <DrawingArea />
         </div>
