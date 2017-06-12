@@ -26,7 +26,7 @@ class App extends Component {
   handleMessage(type, message) {
     switch(type) {
       case "message:new":
-        this.addMessage(Message.Text(message));
+        this.addMessage(<Message.Text {...message} />);
         break;
 
       default:
