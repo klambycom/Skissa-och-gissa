@@ -18,29 +18,29 @@ class App extends Component {
     };
   }
 
+  addMessage(message) {
+    this.setState({messages: this.state.messages.concat([message])});
+  }
+
   handleMessage(type, message) {
     switch(type) {
       case "message:new":
-        this.setState({messages: this.state.messages.concat([Message.Text(message)])});
+        this.addMessage(Message.Text(message));
         break;
 
       default:
-        // Nothing
+        // Do nothing!
     }
   }
 
-  handleInput(message) {
-    switch(message) {
-      case "/users":
-        this.setState({
-          messages: this.state.messages.concat([
-            Message.Users({type: "users", body: "All users", users: this.state.users})
-          ])
-        });
+  handleCommand(command, text) {
+    switch(command) {
+      case "users":
+        this.addMessage(<Message.Users body="All users" users={this.state.users} />);
         break;
 
       default:
-        this.ws.send("message:new", message);
+        this.addMessage(<Message.MissingCommand command={command} text={text} />);
     }
   }
 
@@ -64,7 +64,8 @@ class App extends Component {
           />
           <Chat
             messages={this.state.messages}
-            onMessage={(text) => this.handleInput(text)}
+            onMessage={(text) => this.ws.send("message:new", text)}
+            onCommand={(command, text) => this.handleCommand(command, text)}
           />
           <DrawingArea />
         </div>

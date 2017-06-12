@@ -6,6 +6,20 @@ import Input from "./Input";
 
 const b = bem("Chat");
 
+function handleInput(props) {
+  return (message) => {
+    if (message.charAt(0) === "/") {
+      let command = message.split(" ")[0];
+      let rest = message.substr(message.indexOf(" ") + 1);
+
+      props.onCommand(command.substring(1), rest);
+    }
+    else {
+      props.onMessage(message);
+    }
+  };
+}
+
 function Chat(props) {
   return (
     <div className={b}>
@@ -13,7 +27,7 @@ function Chat(props) {
         {props.messages.map((message, i) => <div key={i}>{message}</div>)}
       </div>
 
-      <Input onEnter={(e) => props.onMessage(e)} />
+      <Input onEnter={handleInput(props)} />
     </div>
   );
 }
@@ -24,6 +38,7 @@ Chat.defaultProps = {
 
 Chat.propTypes = {
   onMessage: PropTypes.func.isRequired,
+  onCommand: PropTypes.func.isRequired,
   messages: PropTypes.array
 };
 

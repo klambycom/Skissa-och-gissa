@@ -22,4 +22,8 @@ function Users(props) {
   );
 }
 
-export default {Text, Users};
+function MissingCommand(props) {
+  return (<div>The command '{props.command}' was not recognised.</div>);
+}
+
+export default {Text, Users, MissingCommand};
