@@ -1,0 +1,10 @@
+.Chat {
+  display: flex;
+  //height: calc(100vh - 70px - 20px);
+  flex-direction: column;
+
+  &__messages {
+    flex: 1;
+    overflow: scroll;
+  }
+}

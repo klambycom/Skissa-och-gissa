@@ -2,7 +2,7 @@ defmodule Api.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Api.RoomChannel
+  channel "room:*", Api.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -19,9 +19,9 @@ defmodule Api.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
-  end
+
+  def connect(%{"user" => user}, socket), do: {:ok, assign(socket, :user, user)}
+  def connect(_params, _socket), do: :error
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #

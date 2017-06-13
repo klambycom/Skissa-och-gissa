@@ -4,6 +4,8 @@ import bem from "bem-cn";
 
 import Input from "./Input";
 
+import "./Chat.css";
+
 const b = bem("Chat");
 
 function handleInput(props) {

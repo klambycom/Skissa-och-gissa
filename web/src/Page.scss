@@ -1,4 +1,16 @@
-.Page > div {
-  padding-left: 40px;
-  padding-right: 40px;
+.Page {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  &__content {
+    flex: 1;
+    background-color: #ececec;
+    padding-bottom: 50px;
+  }
+
+  &__content > div, &__footer > div {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }

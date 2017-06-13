@@ -1,0 +1,22 @@
+.Game {
+  &__playfield {
+    //display: flow-root;
+    display: flex;
+    flex-wrap: wrap;
+
+    &__left {
+      width: 300px;
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    &__left, &__right {
+      display: flex;
+    }
+  }
+}

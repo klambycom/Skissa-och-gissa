@@ -1,0 +1,12 @@
+.Information {
+  color: #505050;
+  padding-bottom: 40px;
+  text-align: center;
+
+  h1 { font-size: 1.5em; }
+
+  &__text {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
