@@ -8,8 +8,6 @@
   &__messages {
     flex: 1;
     overflow: scroll;
-
-    & > div:not(:first-of-type) { margin-top: 25px; }
   }
 
   input {

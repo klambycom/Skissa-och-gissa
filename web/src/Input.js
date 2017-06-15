@@ -8,7 +8,7 @@ class Input extends Component {
   }
 
   handleKeyPress(e) {
-    if (this.props.onEnter && e.key === "Enter") {
+    if (this.props.onEnter && e.key === "Enter" && this.state.value !== "") {
       this.props.onEnter(this.state.value);
       this.setState({value: ""});
     }

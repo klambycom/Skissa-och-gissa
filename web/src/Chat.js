@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import bem from "bem-cn";
 
 import Input from "./Input";
+import MessageList from "./MessageList";
 
 import "./Chat.css";
 
@@ -26,7 +27,7 @@ function Chat(props) {
   return (
     <div className={b}>
       <div className={b("messages")}>
-        {props.messages.map((message, i) => <div key={i}>{message}</div>)}
+        <MessageList messages={props.messages} />
       </div>
 
       <Input onEnter={handleInput(props)} />
