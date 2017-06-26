@@ -10,25 +10,25 @@ class MessageList extends Component {
     this.state = {isAtBottom: true};
   }
 
-  scrollToBottom() {
-    this.messagesEnd.scrollIntoView({behavior: "smooth"});
+  get maxScrollTop() {
+    return this.messagesContainer.offsetHeight - this.messagesContainer.parentNode.offsetHeight;
   }
 
-  // TODO This do not work? It only works when window is to small.
-  isAtBottom() {
-    const end = this.messagesEnd.getBoundingClientRect();
-    const container = this.messagesContainer.parentElement;
+  get scrollTop() {
+    return this.messagesContainer.parentNode.scrollTop;
+  }
 
-    return end.bottom < container.clientHeight;
+  set scrollTop(value) {
+    this.messagesContainer.parentNode.scrollTop = value;
   }
 
   componentWillReceiveProps() {
-    this.setState({isAtBottom: this.isAtBottom()});
+    this.setState({isAtBottom: this.maxScrollTop <= this.scrollTop});
   }
 
   componentDidUpdate() {
     if (this.state.isAtBottom) {
-      this.scrollToBottom();
+      this.scrollTop = this.maxScrollTop;
     }
   }
 
@@ -37,12 +37,8 @@ class MessageList extends Component {
     const {messages} = this.props;
 
     return (
-      <div
-        className={b}
-        ref={(ref) => this.messagesContainer = ref}
-      >
+      <div className={b} ref={(ref) => this.messagesContainer = ref}>
         {messages.map((message, i) => <div key={i}>{message}</div>)}
-        <div ref={(ref) => this.messagesEnd = ref}></div>
       </div>
     );
   }
