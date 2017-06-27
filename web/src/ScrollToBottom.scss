@@ -1,0 +1,14 @@
+.ScrollToBottom {
+  text-align: center;
+  position: sticky;
+  width: 100%;
+  bottom: 0;
+
+  button {
+    background-color: #438a52;
+    border: 0;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 3px;
+  }
+}
