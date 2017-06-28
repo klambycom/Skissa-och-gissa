@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import "./App.css";
 
@@ -7,7 +9,7 @@ import Game from "./Game";
 
 const user = `Christian (${Math.random()})`;
 
-function App(props) {
+function App(): React.Element<any> {
   return (
     <Page>
       <Header />

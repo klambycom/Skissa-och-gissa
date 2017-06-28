@@ -1,5 +1,6 @@
+// @flow
+
 import React from "react";
-import PropTypes from "prop-types";
 import bem from "bem-cn";
 
 import Input from "./Input";
@@ -9,11 +10,17 @@ import "./Chat.css";
 
 const b = bem("Chat");
 
-function handleInput(props) {
-  return (message) => {
+type Props = {
+  onMessage(message: string): void,
+  onCommand(command: string, rest: string): void,
+  messages: Array<React.Element<any>>
+}
+
+function handleInput(props: Props): Function {
+  return (message: string) => {
     if (message.charAt(0) === "/") {
-      let command = message.split(" ")[0];
-      let rest = message.substr(message.indexOf(" ") + 1);
+      let command: string = message.split(" ")[0];
+      let rest: string = message.substr(message.indexOf(" ") + 1);
 
       props.onCommand(command.substring(1), rest);
     }
@@ -23,7 +30,7 @@ function handleInput(props) {
   };
 }
 
-function Chat(props) {
+function Chat(props: Props): React.Element<any> {
   return (
     <div className={b}>
       <div className={b("messages")}>
@@ -34,15 +41,5 @@ function Chat(props) {
     </div>
   );
 }
-
-Chat.defaultProps = {
-  messages: []
-};
-
-Chat.propTypes = {
-  onMessage: PropTypes.func.isRequired,
-  onCommand: PropTypes.func.isRequired,
-  messages: PropTypes.array
-};
 
 export default Chat;

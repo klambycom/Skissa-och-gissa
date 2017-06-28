@@ -1,53 +1,54 @@
+// @flow
+
 import React, { Component } from "react";
-import { findDOMNode } from "react-dom";
-import PropTypes from "prop-types";
 import bem from "bem-cn";
 
 import "./Canvas.css";
 
+type Point = {x: number, y: number};
+type RGB = {r: number, g: number, b: number};
+
 class Canvas extends Component {
-  constructor(props) {
-    super(props);
+  props: {
+    onMouseDown(point: Point): void,
+    onMouseUp(): void,
+    onMouseMove(point: Point): void,
+    width: number,
+    height: number
+  };
 
-    this.previous = {x: 0, y: 0};
-
-    this.start = this.start.bind(this);
-    this.line = this.line.bind(this);
-    this.continue = this.continue.bind(this);
-    this.getCursorPosition = this.getCursorPosition.bind(this);
-
-    //this.context.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  previous: Point = {x: 0, y: 0};
+  canvasRef: any; //HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
 
   componentDidMount() {
-    this.canvas = findDOMNode(this.canvasRef);
-    this.context = this.canvas.getContext("2d");
+    this.context = this.canvasRef.getContext("2d");
     this.context.lineJoin = "round";
   }
 
-  set color({r, g, b}) {
+  set color({r, g, b}: RGB) {
     this.context.strokeStyle = `rgb(${r}, ${g}, ${b})`;
   }
 
-  set size(size) {
+  set size(size: number) {
     this.context.lineWidth = size;
   }
 
-  get base64() {
+  get base64(): string {
     return this.context.canvas.toDataURL();
   }
 
   /**
    * Save current position. It's needed if we are free-hand drawing.
    */
-  start({x, y}) {
+  start({x, y}: Point): void {
     this.previous = {x: x - 0.1, y: y - 0.1};
   }
 
   /**
    * Draw a line between previous point and the current point.
    */
-  continue(point) {
+  continue(point: Point): void {
     this.line(this.previous, point);
     this.previous = point;
   }
@@ -55,7 +56,7 @@ class Canvas extends Component {
   /**
    * Draw a line between two points.
    */
-  line(from, to) {
+  line(from: Point, to: Point): void {
     this.context.beginPath();
     this.context.moveTo(from.x, from.y);
     this.context.lineTo(to.x, to.y);
@@ -63,7 +64,7 @@ class Canvas extends Component {
     this.context.stroke();
   }
 
-  getCursorPosition(e) {
+  getCursorPosition(e: Object): Point {
     const {top, left} = this.context.canvas.getBoundingClientRect();
     return {x: e.clientX - left, y: e.clientY - top};
   }
@@ -83,13 +84,5 @@ class Canvas extends Component {
     );
   }
 }
-
-Canvas.propTypes = {
-  onMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  onMouseMove: PropTypes.func,
-  width: PropTypes.number,
-  height: PropTypes.number
-};
 
 export default Canvas;

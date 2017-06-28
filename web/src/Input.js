@@ -1,20 +1,21 @@
+// @flow
+
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ""};
-  }
+  props: {onEnter(value: string): void};
+  state: {value: string};
 
-  handleKeyPress(e) {
-    if (this.props.onEnter && e.key === "Enter" && this.state.value !== "") {
+  state = {value: ""};
+
+  handleKeyPress(e: Event): void {
+    if (e.key === "Enter" && this.state.value !== "") {
       this.props.onEnter(this.state.value);
       this.setState({value: ""});
     }
   }
 
-  render() {
+  render(): React.Element<any> {
     return (
       <input
         type="text"
@@ -25,9 +26,5 @@ class Input extends Component {
     );
   }
 }
-
-Input.propTypes = {
-  onEnter: PropTypes.func
-};
 
 export default Input;

@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import bem from "bem-cn";
 
@@ -12,22 +14,20 @@ import "./Game.css";
 const b = bem("Game");
 
 class Game extends Component {
-  constructor(props) {
-    super(props);
+  state: {users: Array<any>, messages: Array<React.Element<any>>};
+  props: {user: string}
 
-    this.state = {
-      users: [],
-      messages: []
-    };
-  }
+  ws: Object;
 
-  addMessage(message) {
+  state = {users: [], messages: []};
+
+  addMessage(message: React.Element<any>): void {
     this.setState({messages: this.state.messages.concat([message])});
   }
 
-  handleMessage(type, message) {
+  handleMessage(type: string, message: Object): void {
     switch(type) {
-      case "message:new":
+      case Websocket.Type.MESSAGE:
         this.addMessage(<Message.Text {...message} />);
         break;
 
@@ -36,7 +36,7 @@ class Game extends Component {
     }
   }
 
-  handleCommand(command, text) {
+  handleCommand(command: string, text: string): void {
     switch(command) {
       case "users":
         this.addMessage(<Message.Users body="All users" users={this.state.users} />);
@@ -47,14 +47,14 @@ class Game extends Component {
     }
   }
 
-  render() {
+  render(): React.Element<any> {
     return (
       <div className={b}>
         <Websocket
           ref={(ref) => this.ws = ref}
           url="ws://localhost:4000/socket"
           room="room:lobby"
-          types={["message:new"]}
+          types={[Websocket.Type.MESSAGE]}
           user={this.props.user}
           onMessage={(type, msg) => this.handleMessage(type, msg)}
           onPresence={(users) => this.setState({users})}

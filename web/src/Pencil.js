@@ -1,5 +1,6 @@
+// @flow
+
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import bem from "bem-cn";
 
 import "./Pencil.css";
@@ -9,8 +10,18 @@ import Size from "./Size";
 
 const b = bem("Pencil");
 
+type RGB = {r: number, g: number, b: number};
+
+type Props = {
+  onChange(color: RGB, size: number): void,
+  colors: Array<RGB>,
+  sizes: Array<number>
+};
+
 class Pencil extends Component {
-  constructor(props) {
+  state: {color: RGB, size: number};
+
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -23,12 +34,12 @@ class Pencil extends Component {
     this.props.onChange(this.state.color, this.state.size);
   }
 
-  handleClick(color, size) {
+  handleClick(color: RGB, size: number): void {
     this.props.onChange(color, size);
     this.setState({color, size});
   }
 
-  render() {
+  render(): React.Element<any> {
     return (
       <div className={b}>
         <div className={b("colors")}>
@@ -57,11 +68,5 @@ class Pencil extends Component {
     );
   }
 }
-
-Pencil.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  colors: PropTypes.array.isRequired,
-  sizes: PropTypes.array.isRequired
-};
 
 export default Pencil;

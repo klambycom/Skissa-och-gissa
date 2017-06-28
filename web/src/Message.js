@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import bem from "bem-cn";
 
@@ -7,7 +9,7 @@ import "./Message.css";
 
 const b = bem("Message");
 
-function Text(props) {
+function Text(props: {body: string, user: string}): React.Element<any> {
   return (
     <div className={b("Text")}>
       <div className={b("Text", "body")}>{props.body}</div>
@@ -16,7 +18,7 @@ function Text(props) {
   );
 }
 
-function Users(props) {
+function Users(props: {body: string, users: Array<any>}): React.Element<any> {
   return (
     <div className={b("Users")}>
       <div>{props.body}</div>
@@ -27,7 +29,7 @@ function Users(props) {
   );
 }
 
-function MissingCommand(props) {
+function MissingCommand(props: {command: string}): React.Element<any> {
   return (
     <div className={b("MissingCommand")}>
       The command '{props.command}' was not recognised.

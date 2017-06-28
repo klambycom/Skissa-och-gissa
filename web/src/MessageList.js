@@ -1,5 +1,6 @@
+// @flow
+
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import bem from "bem-cn";
 
 import ScrollToBottom from "./ScrollToBottom";
@@ -7,20 +8,23 @@ import ScrollToBottom from "./ScrollToBottom";
 import "./MessageList.css";
 
 class MessageList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {isAtBottom: true, isScrollingDown: false};
-  }
+  props: {messages: Array<React.Element<any>>};
+  state: {isAtBottom: boolean, isScrollingDown: boolean};
 
-  get maxScrollTop() {
+  messagesContainer: Object;
+
+  static defaultProps = {messages: []};
+  state = {isAtBottom: true, isScrollingDown: false};
+
+  get maxScrollTop(): number {
     return this.messagesContainer.offsetHeight - this.messagesContainer.parentNode.offsetHeight;
   }
 
-  get scrollTop() {
+  get scrollTop(): number {
     return this.messagesContainer.parentNode.scrollTop;
   }
 
-  set scrollTop(value) {
+  set scrollTop(value: number) {
     this.messagesContainer.parentNode.scrollTop = value;
   }
 
@@ -34,18 +38,13 @@ class MessageList extends Component {
     }
   }
 
-  scrollToBottom() {
-    this.setState({isAtBottom: true, isScrollingDown: false});
-    this.scrollTop = this.maxScrollTop;
-  }
-
-  handleWheel(e) {
+  handleWheel(e: any): void {
     if (e.deltaY > 0) {
       this.setState({isScrollingDown: true});
     }
   }
 
-  render() {
+  render(): React.Element<any> {
     const b = bem("MessageList");
     const {messages} = this.props;
 
@@ -61,19 +60,11 @@ class MessageList extends Component {
           text="Se nya meddelanden"
           isAtBottom={this.state.isAtBottom}
           isScrollingDown={this.state.isScrollingDown}
-          onClick={() => this.scrollToBottom()}
+          onClick={() => this.setState({isAtBottom: true, isScrollingDown: false})}
         />
       </div>
     );
   }
 }
-
-MessageList.defaultProps = {
-  messages: []
-};
-
-MessageList.propTypes = {
-  messages: PropTypes.array
-};
 
 export default MessageList;

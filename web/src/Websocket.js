@@ -1,14 +1,40 @@
+// @flow
+
 import React, { Component } from "react";
-import {Socket, Presence} from "phoenix";
+import {Socket, Presence, Channel} from "phoenix";
+
+type User = {
+  user: string,
+  onlineAt: string
+};
+
+type ChatMessage = {
+  body: string,
+  timestamp: number,
+  user: string
+};
+
+type Message = ChatMessage;
 
 class Websocket extends Component {
-  constructor(props) {
-    super(props);
+  props: {
+    url: string,
+    user: string,
+    room: string,
+    types: Array<string>,
+    onPresence(users: Array<User>): void,
+    onMessage(type: string, message: Message): void
+  };
+  state: {presences: Object};
 
-    this.state = {
-      presences: {}
-    };
-  }
+  socket: Socket;
+  room: Channel;
+
+  static Type = Object.freeze({
+    MESSAGE: "message:new"
+  });
+
+  state = {presences: {}};
 
   componentDidMount() {
     // Set up the websocket connection
@@ -36,16 +62,16 @@ class Websocket extends Component {
     this.room.join();
   }
 
-  handleMessage(type) {
-    return (message) => this.props.onMessage(type, message);
+  handleMessage(type: string): Function {
+    return (message: Message) => this.props.onMessage(type, message);
   }
 
-  formatTimestamp(timestamp) {
+  formatTimestamp(timestamp: string): string {
     let date = new Date(timestamp);
     return date.toLocaleTimeString();
   }
 
-  formatPresences(presences) {
+  formatPresences(presences: Object): Array<User> {
     return Presence.list(presences, (user, {metas}) => {
       return {
         user: user,
@@ -54,7 +80,7 @@ class Websocket extends Component {
     });
   }
 
-  send(type, message) {
+  send(type: string, message: string): void {
     this.room.push(type, message);
   }
 

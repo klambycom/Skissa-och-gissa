@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+// @flow
+
+import React from "react";
 import bem from "bem-cn";
 
 import Canvas from "./Canvas";
@@ -8,7 +10,10 @@ import "./DrawingArea.css";
 
 const b = bem("DrawingArea");
 
-const colors = [
+type RGB = {r: number, g: number, b: number};
+type Point = {x: number, y: number};
+
+const colors: Array<RGB> = [
   {r: 0, g: 0, b: 0},
   {r: 255, g: 255, b: 255},
   {r: 255, g: 0, b: 0},
@@ -25,56 +30,51 @@ const colors = [
   {r: 165, g: 42, b: 42}
 ];
 
-const sizes = [5, 10, 15, 20];
+const sizes: Array<number> = [5, 10, 15, 20];
 
-class DrawingArea extends Component {
-  constructor(props) {
-    super(props);
+function DrawingArea(): React.Element<any> {
+  let canvas: Canvas;
+  let is_drawing: boolean = false;
 
-    this.is_drawing = false;
-  }
+  const handleMouseDown = (point: Point) => {
+    is_drawing = true;
+    canvas.start(point);
+    canvas.continue(point);
+  };
 
-  handleMouseDown(point) {
-    this.is_drawing = true;
-    this.canvas.start(point);
-    this.canvas.continue(point);
-  }
+  const handleMouseUp = () => {
+    is_drawing = false;
+  };
 
-  handleMouseUp(e) {
-    this.is_drawing = false;
-  }
-
-  handleMouseMove(point) {
-    if (this.is_drawing) {
-      this.canvas.continue(point);
+  const handleMouseMove = (point: Point) => {
+    if (is_drawing) {
+      canvas.continue(point);
     }
   }
 
-  handlePencil(color, size) {
-    this.canvas.color = color;
-    this.canvas.size = size;
+  const handlePencil = (color: RGB, size: number) => {
+    canvas.color = color;
+    canvas.size = size;
   }
 
-  render() {
-    return (
-      <div className={b}>
-        <Canvas
-          ref={(ref) => this.canvas = ref}
-          onMouseDown={(point) => this.handleMouseDown(point)}
-          onMouseUp={() => this.handleMouseUp()}
-          onMouseMove={(point) => this.handleMouseMove(point)}
-          height={500}
-          width={700}
-        />
+  return (
+    <div className={b}>
+      <Canvas
+        ref={(ref) => canvas = ref}
+        onMouseDown={(point) => handleMouseDown(point)}
+        onMouseUp={() => handleMouseUp()}
+        onMouseMove={(point) => handleMouseMove(point)}
+        height={500}
+        width={700}
+      />
 
-        <Pencil
-          colors={colors}
-          sizes={sizes}
-          onChange={(color, size) => this.handlePencil(color, size)}
-        />
-      </div>
-    );
-  }
+      <Pencil
+        colors={colors}
+        sizes={sizes}
+        onChange={(color, size) => handlePencil(color, size)}
+      />
+    </div>
+  );
 }
 
 export default DrawingArea;

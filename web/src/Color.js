@@ -1,9 +1,19 @@
+// @flow
+
 import React from "react";
-import PropTypes from "prop-types";
 import bem from "bem-cn";
+
 import "./Color.css";
 
-function Color(props) {
+type RGB = {r: number, g: number, b: number};
+
+type Props = {
+  onClick(color: RGB): void,
+  color: RGB,
+  selected: boolean
+};
+
+function Color(props: Props) {
   const {r, g, b} = props.color;
 
   return (
@@ -15,11 +25,5 @@ function Color(props) {
     </button>
   );
 }
-
-Color.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  color: PropTypes.object.isRequired,
-  selected: PropTypes.bool.isRequired
-};
 
 export default Color;

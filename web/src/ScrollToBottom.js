@@ -1,9 +1,18 @@
+// @flow
+
 import React from "react";
 import bem from "bem-cn";
 
 import "./ScrollToBottom.css";
 
-function ScrollToBottom(props) {
+type Props = {
+  text: string,
+  onClick: Function,
+  isAtBottom: boolean,
+  isScrollingDown: boolean
+};
+
+function ScrollToBottom(props: Props): ?React.Element<any> {
   if (props.isAtBottom || (!props.isAtBottom && props.isScrollingDown)) {
     return null;
   }

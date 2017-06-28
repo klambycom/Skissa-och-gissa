@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import bem from "bem-cn";
 
@@ -5,7 +7,7 @@ import "./Footer.css";
 
 const b = bem("Footer");
 
-function Footer(props) {
+function Footer(): React.Element<any> {
   return (
     <div className={b}>
       <div className={b("about")}>

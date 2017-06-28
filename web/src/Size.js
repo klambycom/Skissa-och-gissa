@@ -1,20 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+// @flow
 
-function Size(props) {
+import React from "react";
+
+function Size(props: {onClick(size: number): void, size: number, selected: boolean}): React.Element<any> {
   return (
-    <button
-      onClick={() => props.onClick(props.size)}
-    >
+    <button onClick={() => props.onClick(props.size)}>
       {props.selected ? "Selected" : `${props.size}px`}
     </button>
   );
 }
-
-Size.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  size: PropTypes.number.isRequired,
-  selected: PropTypes.bool.isRequired
-};
 
 export default Size;
