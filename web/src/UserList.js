@@ -1,16 +1,12 @@
 // @flow
 
 import React from "react";
-
-type User = {
-  onlineAt: string,
-  user: string
-};
+import User from "./User";
 
 function UserList(props: {users: Array<User>}): React.Element<any> {
   return (
     <div>
-      {props.users.map(({user, onlineAt}, i) => <div key={i}>{user}</div>)}
+      {props.users.map((user, i) => <div key={i}>{user.name}</div>)}
     </div>
   );
 }

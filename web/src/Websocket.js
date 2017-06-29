@@ -2,11 +2,7 @@
 
 import React, { Component } from "react";
 import {Socket, Presence, Channel} from "phoenix";
-
-type User = {
-  user: string,
-  onlineAt: string
-};
+import User, {create_user} from "./User";
 
 type ChatMessage = {
   body: string,
@@ -66,18 +62,8 @@ class Websocket extends Component {
     return (message: Message) => this.props.onMessage(type, message);
   }
 
-  formatTimestamp(timestamp: string): string {
-    let date = new Date(timestamp);
-    return date.toLocaleTimeString();
-  }
-
   formatPresences(presences: Object): Array<User> {
-    return Presence.list(presences, (user, {metas}) => {
-      return {
-        user: user,
-        onlineAt: this.formatTimestamp(metas[0].online_at)
-      };
-    });
+    return Presence.list(presences, create_user);
   }
 
   send(type: string, message: string): void {

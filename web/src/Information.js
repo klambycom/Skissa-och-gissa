@@ -2,15 +2,11 @@
 
 import React from "react";
 import bem from "bem-cn";
+import User from "./User";
 
 import "./Information.css";
 
 const b = bem("Information");
-
-type User = {
-  user: string,
-  onlineAt: string
-};
 
 function Information(props: {title: string, text: string, users: Array<User>}): React.Element<any> {
   return (
