@@ -58,6 +58,10 @@ class Websocket extends Component {
     this.room.join();
   }
 
+  componentWillUnmount() {
+    this.socket.disconnect();
+  }
+
   handleMessage(type: string): Function {
     return (message: Message) => this.props.onMessage(type, message);
   }

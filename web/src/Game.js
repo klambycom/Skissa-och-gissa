@@ -12,10 +12,10 @@ import Information from "./Information";
 import "./Game.css";
 
 const b = bem("Game");
+const user = `Christian (${Math.random()})`;
 
 class Game extends Component {
   state: {users: Array<any>, messages: Array<React.Element<any>>};
-  props: {user: string}
 
   ws: Object;
 
@@ -53,9 +53,9 @@ class Game extends Component {
         <Websocket
           ref={(ref) => this.ws = ref}
           url="ws://localhost:4000/socket"
-          room="room:lobby"
+          room={`room:${this.props.match.params.id}`}
           types={[Websocket.Type.MESSAGE]}
-          user={this.props.user}
+          user={user}
           onMessage={(type, msg) => this.handleMessage(type, msg)}
           onPresence={(users) => this.setState({users})}
         />
