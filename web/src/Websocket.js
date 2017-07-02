@@ -27,7 +27,8 @@ class Websocket extends Component {
   room: Channel;
 
   static Type = Object.freeze({
-    MESSAGE: "message:new"
+    MESSAGE: "message:new",
+    PAINT: "paint:point"
   });
 
   state = {presences: {}};

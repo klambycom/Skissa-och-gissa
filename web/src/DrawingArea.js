@@ -32,7 +32,12 @@ const colors: Array<RGB> = [
 
 const sizes: Array<number> = [5, 10, 15, 20];
 
-function DrawingArea(): React.Element<any> {
+type Props = {
+  onPaint(point: Point, start: boolean): void,
+  canvas(canvas: Canvas): any // I don't know why void don't work here
+};
+
+function DrawingArea(props: Props): React.Element<any> {
   let canvas: Canvas;
   let is_drawing: boolean = false;
 
@@ -40,6 +45,7 @@ function DrawingArea(): React.Element<any> {
     is_drawing = true;
     canvas.start(point);
     canvas.continue(point);
+    props.onPaint(point, true);
   };
 
   const handleMouseUp = () => {
@@ -49,6 +55,7 @@ function DrawingArea(): React.Element<any> {
   const handleMouseMove = (point: Point) => {
     if (is_drawing) {
       canvas.continue(point);
+      props.onPaint(point, false);
     }
   }
 
@@ -60,7 +67,10 @@ function DrawingArea(): React.Element<any> {
   return (
     <div className={b}>
       <Canvas
-        ref={(ref) => canvas = ref}
+        ref={(ref) => {
+          canvas = ref;
+          props.canvas(canvas);
+        }}
         onMouseDown={(point) => handleMouseDown(point)}
         onMouseUp={() => handleMouseUp()}
         onMouseMove={(point) => handleMouseMove(point)}

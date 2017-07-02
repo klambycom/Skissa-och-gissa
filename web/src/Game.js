@@ -8,16 +8,20 @@ import DrawingArea from "./DrawingArea";
 import Chat from "./Chat";
 import Message from "./Message";
 import Information from "./Information";
+import Canvas from "./Canvas";
 
 import "./Game.css";
 
 const b = bem("Game");
 const user = `Christian (${Math.random()})`;
 
+type Point = {x: number, y: number};
+
 class Game extends Component {
   state: {users: Array<any>, messages: Array<React.Element<any>>};
 
   ws: Object;
+  canvas: Canvas;
 
   state = {users: [], messages: []};
 
@@ -29,6 +33,13 @@ class Game extends Component {
     switch(type) {
       case Websocket.Type.MESSAGE:
         this.addMessage(<Message.Text {...message} />);
+        break;
+
+      case Websocket.Type.PAINT:
+        if (message.start) {
+          this.canvas.start(message.point);
+        }
+        this.canvas.continue(message.point);
         break;
 
       default:
@@ -54,7 +65,7 @@ class Game extends Component {
           ref={(ref) => this.ws = ref}
           url="ws://localhost:4000/socket"
           room={`room:${this.props.match.params.id}`}
-          types={[Websocket.Type.MESSAGE]}
+          types={[Websocket.Type.MESSAGE, Websocket.Type.PAINT]}
           user={user}
           onMessage={(type, msg) => this.handleMessage(type, msg)}
           onPresence={(users) => this.setState({users})}
@@ -70,12 +81,15 @@ class Game extends Component {
           <div className={b("playfield", "left")}>
             <Chat
               messages={this.state.messages}
-              onMessage={(text) => this.ws.send("message:new", text)}
+              onMessage={(text) => this.ws.send(Websocket.Type.MESSAGE, text)}
               onCommand={(command, text) => this.handleCommand(command, text)}
             />
           </div>
           <div className={b("playfield", "right")}>
-            <DrawingArea />
+            <DrawingArea
+              canvas={(canvas: Canvas) => this.canvas = canvas}
+              onPaint={(point: Point, start: boolean) => this.ws.send(Websocket.Type.PAINT, {point, start})}
+            />
           </div>
         </div>
       </div>
