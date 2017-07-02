@@ -21,8 +21,8 @@ function Text(props: {body: string, user: string}): React.Element<any> {
 function Users(props: {body: string, users: Array<any>}): React.Element<any> {
   return (
     <div className={b("Users")}>
-      <div>{props.body}</div>
-      <div>
+      <div className={b("Users", "body")}>{props.body}</div>
+      <div className={b("Users", "list")}>
         <UserList users={props.users} />
       </div>
     </div>

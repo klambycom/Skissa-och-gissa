@@ -1,0 +1,9 @@
+.UserList {
+  &__user {
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 2px 0;
+  }
+}

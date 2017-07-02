@@ -11,6 +11,16 @@
   }
 }
 
+.Message__Users {
+  background-color: white;
+  padding: 10px;
+  border-radius: 3px;
+
+  &__body {
+    margin-bottom: 10px;
+  }
+}
+
 .Message__MissingCommand {
   color: red;
   font-size: .8em;
