@@ -28,7 +28,8 @@ class Websocket extends Component {
 
   static Type = Object.freeze({
     MESSAGE: "message:new",
-    PAINT: "paint:point"
+    PAINT: "paint:point",
+    PENCIL: "paint:pencil"
   });
 
   state = {presences: {}};

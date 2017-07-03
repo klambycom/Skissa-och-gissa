@@ -16,6 +16,7 @@ const b = bem("Game");
 const user = `Christian (${Math.random()})`;
 
 type Point = {x: number, y: number};
+type Color = {r: number, g: number, b: number};
 
 class Game extends Component {
   state: {users: Array<any>, messages: Array<React.Element<any>>};
@@ -42,6 +43,11 @@ class Game extends Component {
         this.canvas.continue(message.point);
         break;
 
+      case Websocket.Type.PENCIL:
+        this.canvas.color = message.color;
+        this.canvas.size = message.size;
+        break;
+
       default:
         // Do nothing!
     }
@@ -65,7 +71,7 @@ class Game extends Component {
           ref={(ref) => this.ws = ref}
           url="ws://localhost:4000/socket"
           room={`room:${this.props.match.params.id}`}
-          types={[Websocket.Type.MESSAGE, Websocket.Type.PAINT]}
+          types={[Websocket.Type.MESSAGE, Websocket.Type.PAINT, Websocket.Type.PENCIL]}
           user={user}
           onMessage={(type, msg) => this.handleMessage(type, msg)}
           onPresence={(users) => this.setState({users})}
@@ -89,6 +95,7 @@ class Game extends Component {
             <DrawingArea
               canvas={(canvas: Canvas) => this.canvas = canvas}
               onPaint={(point: Point, start: boolean) => this.ws.send(Websocket.Type.PAINT, {point, start})}
+              onPencil={(color: Color, size: number) => this.ws.send(Websocket.Type.PENCIL, {color, size})}
             />
           </div>
         </div>

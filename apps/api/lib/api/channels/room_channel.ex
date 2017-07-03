@@ -3,10 +3,15 @@ defmodule Api.RoomChannel do
 
   alias Api.Presence
 
-  def join("room:lobby", _params, socket) do
+  def join("room:" <> _id, _params, socket) do
     send self(), :after_join
     {:ok, socket}
   end
+
+  #def join("room:lobby", _params, socket) do
+  #  send self(), :after_join
+  #  {:ok, socket}
+  #end
 
   def join(_other, _params, socket), do: {:error, "Room does not exist."}
 
@@ -24,6 +29,16 @@ defmodule Api.RoomChannel do
       body: message,
       timestamp: :os.system_time(:milli_seconds)
     }
+    {:noreply, socket}
+  end
+
+  def handle_in("paint:point", data, socket) do
+    broadcast! socket, "paint:point", data
+    {:noreply, socket}
+  end
+
+  def handle_in("paint:pencil", data, socket) do
+    broadcast! socket, "paint:pencil", data
     {:noreply, socket}
   end
 end

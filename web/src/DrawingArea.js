@@ -34,6 +34,7 @@ const sizes: Array<number> = [5, 10, 15, 20];
 
 type Props = {
   onPaint(point: Point, start: boolean): void,
+  onPencil(color: RGB, size: number): void,
   canvas(canvas: Canvas): any // I don't know why void don't work here
 };
 
@@ -62,6 +63,7 @@ function DrawingArea(props: Props): React.Element<any> {
   const handlePencil = (color: RGB, size: number) => {
     canvas.color = color;
     canvas.size = size;
+    props.onPencil(color, size);
   }
 
   return (
